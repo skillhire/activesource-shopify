@@ -1,0 +1,25 @@
+@font-face {
+  font-family: "Benton Sans";
+  src: url("BentonSansComp-Medium.woff2") format("woff2"),
+    url("BentonSansComp-Medium.woff") format("woff"),
+    url("BentonSansComp-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Benton Sans";
+  src: url("BentonSansComp-Regular.woff2") format("woff2"),
+    url("BentonSansComp-Regular.woff") format("woff"),
+    url("BentonSansComp-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Chamelton";
+  src: url("Chamelton10Display-Regular.woff2") format("woff2"),
+    url("Chamelton10Display-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
