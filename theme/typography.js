@@ -56,11 +56,6 @@ export default {
     fontSize: 10,
     lineHeight: "120%",
   },
-  button: {
-    fontFamily: "Poppins",
-    fontSize: 14,
-    lineHeight: "120%",
-  },
   footer: {
     fontFamily: "Poppins",
     fontSize: 16,
