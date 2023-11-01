@@ -4,82 +4,87 @@ export default {
     fontFamily: "Poppins",
     fontWeight: 600,
     fontSize: 60,
-    "@media (max-width: 600px)": {
-      fontSize: 45,
-    },
+    lineHeight: "133%", /* 79.8px */
+    letterSpacing: "-0.9px",
   },
   h2: {
     fontFamily: "Poppins",
     fontWeight: 600,
     fontSize: 45,
+    lineHeight: "133%", /* 59.85px */
     "@media (max-width: 600px)": {
       fontSize: 35,
+      lineHeight: "120%",
     },
   },
   h3: {
     fontFamily: "Poppins",
     fontWeight: 600,
     fontSize: 35,
-    "@media (max-width: 600px)": {
-      fontSize: 30,
-    },
+    lineHeight: "120%", /* 42px */
   },
   h4: {
     fontFamily: "Poppins",
     fontWeight: 600,
     fontSize: 30,
-    "@media (max-width: 600px)": {
-      fontSize: 20,
-    },
+    lineHeight: "133%", /* 39.9px */
   },
-  h5: {
+  body1: {
     fontFamily: "Poppins",
     fontSize: 20,
-    fontWeight: 600,
+    fontWeight: 500,
+    lineHeight: "120%",
   },
-  h6: {
+  body2: {
     fontFamily: "Poppins",
     fontSize: 16,
-    fontWeight: 600,
+    fontWeight: 500,
+    lineHeight: "120%",
+    "@media (max-width: 600px)": {
+      fontSize: 14,
+    },
   },
-  bodySm: {
+  body3: {
     fontFamily: "Poppins",
     fontWeight: 500,
     fontSize: 13,
-    // lineHeight: "1.5em",
+    lineHeight: "120%",
   },
-  bodyMd: {
+  body4: {
     fontFamily: "Poppins",
-    fontSize: 16,
     fontWeight: 500,
-    // lineHeight: "1.5em",
-  },
-  bodyLg: {
-    fontFamily: "Poppins",
-    fontSize: 20,
-    fontWeight: 500,
-    // lineHeight: "1.5em",
+    fontSize: 10,
+    lineHeight: "120%",
   },
   button: {
     fontFamily: "Poppins",
     fontSize: 14,
-    letterSpacing: "0.05em",
+    lineHeight: "120%",
+  },
+  footer: {
+    fontFamily: "Poppins",
+    fontSize: 16,
+    fontWeight: 500,
+    lineHeight: "200%",
     "@media (max-width: 600px)": {
-      fontSize: 16,
+      fontSize: 14,
     },
   },
+  // TODO: check if needed
   caption: {
     fontFamily: "Poppins",
     fontSize: 12,
     fontWeight: 500,
     letterSpacing: "0.33px",
-    // lineHeight: "15px",
+    lineHeight: "120%",
+    textTransform: "uppercase",
   },
   overline: {
     fontFamily: "Poppins",
     fontSize: 14,
     fontWeight: 500,
     letterSpacing: "0.33px",
-    // lineHeight: "15px",
+    lineHeight: "120%",
+    textTransform: "uppercase",
   },
 };
