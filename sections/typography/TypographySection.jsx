@@ -16,8 +16,8 @@ const TypographySection = () => {
         <Typography variant="body1">Big Body Copy (Regular) 20/120</Typography>
         <Typography variant="body2">Body Copy (Regular) 16/120</Typography>
         {/* <Typography variant="body2">Mobile Body Copy 14/120</Typography> */}
-        <Typography variant="body3">Small Body (Regular) 13/120</Typography>
-        <Typography variant="body4">Mini Body (Regular) 10/120</Typography>
+        <Typography variant="overline">Small Body (Regular) 13/120</Typography>
+        <Typography variant="caption">Mini Body (Regular) 10/120</Typography>
       </Box>
 
       <Box sx={sx.item}>

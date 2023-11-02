@@ -29,57 +29,55 @@ export default {
     fontSize: 30,
     lineHeight: "133%", /* 39.9px */
   },
+  subtitle1: {
+    fontFamily: "Poppins",
+    fontSize: 16,
+    fontWeight: 600,
+    lineHeight: "120%",
+  },
+  subtitle2: {
+    fontFamily: "Poppins",
+    fontSize: 16,
+    fontWeight: 500,
+    lineHeight: "120%",
+  },
   body1: {
     fontFamily: "Poppins",
     fontSize: 20,
-    fontWeight: 500,
+    fontWeight: 400,
     lineHeight: "120%",
   },
   body2: {
     fontFamily: "Poppins",
     fontSize: 16,
-    fontWeight: 500,
+    fontWeight: 400,
     lineHeight: "120%",
     "@media (max-width: 600px)": {
       fontSize: 14,
     },
   },
-  body3: {
+  overline: {
     fontFamily: "Poppins",
-    fontWeight: 500,
+    fontWeight: 400,
     fontSize: 13,
     lineHeight: "120%",
+    textTransform: "uppercase",
   },
-  body4: {
+  caption: {
     fontFamily: "Poppins",
-    fontWeight: 500,
+    fontWeight: 400,
     fontSize: 10,
     lineHeight: "120%",
+    textTransform: "uppercase",
   },
+  // custom:
   footer: {
     fontFamily: "Poppins",
     fontSize: 16,
-    fontWeight: 500,
+    fontWeight: 400,
     lineHeight: "200%",
     "@media (max-width: 600px)": {
       fontSize: 14,
     },
-  },
-  // TODO: check if needed
-  caption: {
-    fontFamily: "Poppins",
-    fontSize: 12,
-    fontWeight: 500,
-    letterSpacing: "0.33px",
-    lineHeight: "120%",
-    textTransform: "uppercase",
-  },
-  overline: {
-    fontFamily: "Poppins",
-    fontSize: 14,
-    fontWeight: 500,
-    letterSpacing: "0.33px",
-    lineHeight: "120%",
-    textTransform: "uppercase",
   },
 };
