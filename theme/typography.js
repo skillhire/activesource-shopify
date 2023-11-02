@@ -1,103 +1,79 @@
 export default {
   fontFamily: ["Poppins"],
+  // Big Heading (SemiBold) 60/133
   h1: {
-    fontFamily: "Poppins",
-    fontWeight: 400,
-    fontSize: 32,
-    "@media (max-width:600px)": {
-      fontSize: 26,
-    },
+    fontSize: 60,
+    fontWeight: 600,
+    lineHeight: "133%", /* 79.8px */
+    letterSpacing: "-0.9px",
   },
+  // Heading (SemiBold) 45/133
   h2: {
-    fontFamily: "Poppins",
-    fontWeight: 500,
-    fontSize: 28,
-    "@media (max-width:600px)": {
-      fontSize: 22,
+    fontSize: 45,
+    fontWeight: 600,
+    lineHeight: "133%", /* 59.85px */
+    // Mobile Heading 25/120
+    "@media (max-width: 600px)": {
+      fontSize: 35,
+      lineHeight: "120%",
     },
   },
+  // Title (SemiBold) 35/120
   h3: {
-    fontFamily: "Poppins",
-    fontWeight: 500,
-    textIndent: 0,
-    fontSize: 32,
-    "@media (max-width:600px)": {
-      fontSize: 24,
-    },
+    fontSize: 35,
+    fontWeight: 600,
+    lineHeight: "120%", /* 42px */
   },
+  // Small Title (SemiBold) 30/133
   h4: {
-    fontFamily: "Poppins",
-    fontWeight: 500,
-    fontSize: 28,
-    "@media (max-width:600px)": {
-      fontSize: 32,
-    },
-  },
-  h5: {
-    fontFamily: "Poppins",
-    fontSize: 24,
-    fontWeight: 500,
-  },
-  h6: {
-    fontFamily: "Poppins",
-    fontSize: 20,
-    fontWeight: 500,
-  },
-  subtitle1: {
-    fontFamily: "Poppins",
-    fontSize: 22,
+    fontSize: 30,
     fontWeight: 600,
-    lineHeight: "1.5em",
-    "@media (max-width:600px)": {
-      fontSize: 15,
-    },
+    lineHeight: "133%", /* 39.9px */
   },
-  subtitle2: {
-    fontFamily: "Poppins",
+  subtitle1: { // Header Menu (SemiBold) 16/120
     fontSize: 16,
-    lineHeight: "28px",
     fontWeight: 600,
-    "@media (max-width:600px)": {
-      fontSize: 15,
+    lineHeight: "120%",
+  },
+  subtitle2: { // Form Title (Medium) 16/120
+    fontSize: 16,
+    fontWeight: 500,
+    lineHeight: "120%",
+  },
+  body1: { // Big Body Copy (Regular) 20/120
+    fontSize: 20,
+    fontWeight: 400,
+    lineHeight: "120%",
+  },
+  body2: { // Body Copy (Regular) 16/120
+    fontSize: 16,
+    fontWeight: 400,
+    lineHeight: "120%",
+    // Mobile Body Copy 14/120
+    "@media (max-width: 600px)": {
+      fontSize: 14,
     },
   },
-  body1: {
-    fontFamily: "Poppins",
+  overline: { // Small Body (Regular) 13/120
+    fontSize: 13,
     fontWeight: 400,
-    fontSize: 15,
-    lineHeight: "1.5em",
-    letterSpacing: "auto",
+    lineHeight: "120%",
+    textTransform: "uppercase",
   },
-  body2: {
-    fontFamily: "Poppins",
-    fontSize: 14,
+  caption: { // Mini Body (Regular) 10/120
+    fontSize: 10,
     fontWeight: 400,
-    lineHeight: "1.5em",
-    textDecoration: "none",
-    letterSpacing: "auto",
+    lineHeight: "120%",
+    textTransform: "uppercase",
   },
-  button: {
-    fontFamily: "Poppins",
-    fontSize: 14,
-    letterSpacing: "0.05em",
-    "@media (max-width:600px)": {
-      fontSize: 16,
+  // custom:
+  footer: { // Footer Menu 16/200
+    fontSize: 16,
+    fontWeight: 400,
+    lineHeight: "200%",
+    // Mobile Footer Menu 14/200
+    "@media (max-width: 600px)": {
+      fontSize: 14,
     },
-  },
-  caption: {
-    fontFamily: "Poppins",
-    fontSize: 12,
-    fontWeight: 500,
-    letterSpacing: "0.33px",
-    lineHeight: "15px",
-    textTransform: "uppercase",
-  },
-  overline: {
-    fontFamily: "Poppins",
-    fontSize: 14,
-    fontWeight: 500,
-    letterSpacing: "0.33px",
-    lineHeight: "15px",
-    textTransform: "uppercase",
   },
 };
