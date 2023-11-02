@@ -1,5 +1,5 @@
-import { Heading, ProductCollection } from "components";
-import { Box, Button, Container } from "@mui/material";
+import { ProductCollection } from "components";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 
 const SectionFeaturedCollection = (props) => {
@@ -12,20 +12,20 @@ const SectionFeaturedCollection = (props) => {
 
   return (
     <Container maxWidth="xl">
-      <Box sx={sx.container}>
-        <Heading my={8}>Featured Products</Heading>
-        {featuredCollection && (
-          <ProductCollection
-            handle={featuredCollection.handle}
-            title={featuredCollection.title}
-          />
-        )}
-        <Box sx={sx.button}>
-          <Button variant="outlined" onClick={handleClick}>
-            Shop All
-          </Button>
-        </Box>
+      <Box sx={sx.header}>
+        <Typography variant="h4" my={8} maxWidth={633}>
+          Personalize for your brand, explore our diverse range of products.
+        </Typography>
+        <Button variant="outlined" onClick={handleClick}>
+          Explore Products
+        </Button>
       </Box>
+      {featuredCollection && (
+        <ProductCollection
+          handle={featuredCollection.handle}
+          title={featuredCollection.title}
+        />
+      )}
     </Container>
   );
 };
@@ -33,13 +33,9 @@ const SectionFeaturedCollection = (props) => {
 export default SectionFeaturedCollection;
 
 const sx = {
-  container: {
-    mb: 6,
-  },
-  button: {
-    width: "100%",
+  header: {
     display: "flex",
-    justifyContent: "center",
-    mt: 4,
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 };
