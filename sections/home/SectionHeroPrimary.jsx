@@ -11,20 +11,22 @@ const SectionHeroPrimary = (props) => {
   };
 
   return (
-    <Container maxWidth="lg" sx={sx.root}>
-      <Stack sx={sx.container} spacing={2}>
-        <Typography variant="h2" maxWidth={500} color="primary.contrastText">
-          {home?.title}
-        </Typography>
-        <Typography variant="body1" color="primary.contrastText">
-          {home?.subtitle}
-        </Typography>
-        <Box>
-          <Button
-            variant="contained" color="secondary">Explore Products</Button>
-        </Box>
-      </Stack>
-    </Container>
+    <Box sx={sx.root}>
+      <Container maxWidth="lg">
+        <Stack sx={sx.container} spacing={2}>
+          <Typography variant="h2" maxWidth={500} color="primary.contrastText">
+            {home?.title}
+          </Typography>
+          <Typography variant="body1" color="primary.contrastText">
+            {home?.subtitle}
+          </Typography>
+          <Box>
+            <Button
+              variant="contained" color="secondary">Explore Products</Button>
+          </Box>
+        </Stack>
+      </Container>
+    </Box>
   );
 };
 
