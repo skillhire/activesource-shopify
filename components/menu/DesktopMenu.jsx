@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Hidden, Toolbar } from "@mui/material";
 import {
   Logo,
+  MenuToggleButton,
   CartButton,
   SearchModal,
   DesktopMenuItem,
@@ -16,6 +17,7 @@ const DesktopMenu = ({ logo, handleClick, ...props }) => {
       <Toolbar sx={sx.toolbar}>
         <Box sx={sx.root}>
           <Box sx={sx.leftColumn}>
+            <MenuToggleButton />
             <Logo />
             <Hidden mdDown>
               {DESKTOP_MENU.map((menuItem, index) => (
