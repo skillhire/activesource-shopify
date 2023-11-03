@@ -13,6 +13,7 @@ export const MOBILE_MENU = [
 
 export const DESKTOP_MENU = [
   { label: "Products", value: "/shop/all" },
+  { label: "Enterprise Solutions", value: "/solutions" },
   { label: "Need help?", value: "/" },
 ];
 
