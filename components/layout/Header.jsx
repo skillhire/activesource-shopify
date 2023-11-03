@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { AppBar, Box } from "@mui/material";
+import { AppBar } from "@mui/material";
 import { DesktopMenu, MobileMenu } from "components";
 
 const Header = ({ styles = {}, ...props }) => {

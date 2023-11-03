@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { Box, Hidden, Toolbar } from "@mui/material";
 import {
   Logo,
-  MenuToggleButton,
   CartButton,
   SearchModal,
   DesktopMenuItem,
 } from "components";
-import { ExpandMore, ExpandLess } from "@mui/icons-material";
 import { DESKTOP_MENU } from "constants/navigation";
 
 const DesktopMenu = ({ logo, handleClick, ...props }) => {
@@ -19,7 +16,6 @@ const DesktopMenu = ({ logo, handleClick, ...props }) => {
       <Toolbar sx={sx.toolbar}>
         <Box sx={sx.root}>
           <Box sx={sx.leftColumn}>
-            <MenuToggleButton />
             <Logo />
             <Hidden mdDown>
               {DESKTOP_MENU.map((menuItem, index) => (
