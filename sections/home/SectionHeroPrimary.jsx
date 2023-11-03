@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Box, Typography, Button, Container } from "@mui/material";
+import { Stack, Typography, Button, Box, Container } from "@mui/material";
 
 const SectionHeroPrimary = (props) => {
   const { home } = props;
@@ -12,11 +12,13 @@ const SectionHeroPrimary = (props) => {
 
   return (
     <Container maxWidth="xl">
-      <Box sx={sx.root}>
+      <Stack sx={sx.root} spacing={2}>
         <Typography variant="h2" maxWidth={500}>{home?.title}</Typography>
-        <Typography variant="body1" my={2}>{home?.subtitle}</Typography>
-        <Button variant="contained" color="secondary">Explore Products</Button>
-      </Box>
+        <Typography variant="body1">{home?.subtitle}</Typography>
+        <Box>
+          <Button variant="contained" color="secondary">Explore Products</Button>
+        </Box>
+      </Stack>
     </Container>
   );
 };

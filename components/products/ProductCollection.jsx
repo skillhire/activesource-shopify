@@ -50,5 +50,7 @@ ProductCollection.propTypes = {
 export default ProductCollection;
 
 const sx = {
-  root: {},
+  root: {
+    py: 2,
+  },
 };
