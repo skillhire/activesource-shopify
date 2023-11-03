@@ -11,22 +11,15 @@ const SectionHeroPrimary = (props) => {
   };
 
   return (
-    <Box sx={sx.root}>
-      <Container maxWidth="lg">
-        <Stack sx={sx.container} spacing={2}>
-          <Typography variant="h2" maxWidth={500} color="primary.contrastText">
-            {home?.title}
-          </Typography>
-          <Typography variant="body1" color="primary.contrastText">
-            {home?.subtitle}
-          </Typography>
-          <Box>
-            <Button
-              variant="contained" color="secondary">Explore Products</Button>
-          </Box>
-        </Stack>
-      </Container>
-    </Box>
+    <Container maxWidth="xl">
+      <Stack sx={sx.root} spacing={2}>
+        <Typography variant="h2" maxWidth={500}>{home?.title}</Typography>
+        <Typography variant="body1">{home?.subtitle}</Typography>
+        <Box>
+          <Button variant="contained" color="secondary">Explore Products</Button>
+        </Box>
+      </Stack>
+    </Container>
   );
 };
 
@@ -34,14 +27,7 @@ export default SectionHeroPrimary;
 
 const sx = {
   root: {
-    backgroundColor: "primary.main",
-    minHeight: {
-      sm: "calc(100vh - 64px)",
-      xs: "calc(100vh - 50px)",
-    },
-  },
-  container: {
-    py: {
+    mt: {
       sm: "80px",
       xs: 0,
     },

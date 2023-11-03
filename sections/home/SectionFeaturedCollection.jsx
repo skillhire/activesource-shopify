@@ -11,7 +11,7 @@ const SectionFeaturedCollection = (props) => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <Box sx={sx.header}>
         <Typography variant="h4" my={8} maxWidth={633}>
           Personalize for your brand, explore our diverse range of products.
