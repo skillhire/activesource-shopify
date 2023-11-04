@@ -27,15 +27,26 @@ export default {
   variants: [
     {
       props: { size: "large" },
-      style: { fontSize: 20, lineHeight: "120%", }
+      style: {
+        fontSize: 20,
+        lineHeight: "120%",
+        height: 64,
+        padding: '20px 52px',
+      },
     },
     {
       props: { size: "medium" },
-      style: { fontSize: 16, lineHeight: "120%", }
+      style: {
+        fontSize: 16,
+        lineHeight: "120%",
+      }
     },
     {
       props: { size: "small" },
-      style: { fontSize: 14, lineHeight: "120%" }
+      style: {
+        fontSize: 14,
+        lineHeight: "120%"
+      }
     }
   ]
 };

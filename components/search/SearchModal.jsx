@@ -175,7 +175,7 @@ const sx = {
     maxWidth: "670px",
   },
   iconButton: {
-    mt: "6px",
+    display: "flex",
   },
   closeButton: {
     mt: 3,

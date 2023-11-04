@@ -1,6 +1,9 @@
 import React from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { Stack, Typography, Button, Box, Container } from "@mui/material";
+
+import HeroImage from "assets/hero-image@2x.png";
 
 const SectionHeroPrimary = (props) => {
   const { home } = props;
@@ -13,21 +16,24 @@ const SectionHeroPrimary = (props) => {
   return (
     <Box sx={sx.root}>
       <Container maxWidth="lg">
-        <Stack spacing={2}>
-          <Typography variant="h2" maxWidth={500} color="primary.contrastText">
-            {home?.title}
-          </Typography>
-          <Typography variant="body1" color="primary.contrastText">
-            {home?.subtitle}
-          </Typography>
-          <Box>
-            <Button variant="contained" color="secondary">
-              Explore Products
-            </Button>
-          </Box>
-        </Stack>
-      </Container>
-    </Box>
+        <Box sx={sx.container}>
+          <Stack spacing={3}>
+            <Typography variant="h2" maxWidth={500} color="primary.contrastText">
+              {home?.title}
+            </Typography>
+            <Typography variant="body1" color="primary.contrastText">
+              {home?.subtitle}
+            </Typography>
+            <Box sx={sx.actions}>
+              <Button variant="contained" color="secondary" size="large" sx={sx.button}>
+                Explore Products
+              </Button>
+            </Box>
+          </Stack>
+          <Image src={HeroImage} width={450} />
+        </Box>
+      </Container >
+    </Box >
   );
 };
 
@@ -43,5 +49,25 @@ const sx = {
       sm: "calc(100vh - 64px)",
       xs: "calc(100vh - 50px)",
     },
+    textAlign: {
+      sm: "left",
+      xs: "center",
+    },
   },
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    py: {
+      sm: 12,
+      xs: 6,
+    },
+    flexWrap: 'wrap',
+  },
+  button: {
+    width: {
+      sm: 'auto',
+      xs: '100%',
+    },
+  }
 };
