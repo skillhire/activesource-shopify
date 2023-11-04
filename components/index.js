@@ -37,7 +37,6 @@ export { default as DesktopMenuItem } from "components/menu/DesktopMenuItem";
 export { default as Drawer } from "components/Drawer";
 export { default as Footer } from "components/layout/Footer";
 export { default as FooterMenuItem } from "components/menu/FooterMenuItem";
-export { default as Heading } from "components/typography/Heading";
 export { default as Header } from "components/layout/Header";
 export { default as Hero } from "components/Hero";
 export { default as Image } from "components/images/Image";

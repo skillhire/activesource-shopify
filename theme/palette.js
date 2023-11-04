@@ -1,19 +1,20 @@
 export default {
   primary: {
-    main: "#000000",
+    main: "#2E2E2E",
+    contrastText: "#FFFFFF",
   },
   secondary: {
     main: "#8044FD",
     contrastText: "#FFFFFF",
   },
   tertiary: {
-    contrastText: "#FFFFFF",
     main: "#FCB524",
+    contrastText: "#FFFFFF",
   },
   tonalOffset: 0.2,
   error: {
-    contrastText: "#FFFFFF",
     main: "#F93943",
+    contrastText: "#FFFFFF",
   },
   text: {
     primary: "#231D18",

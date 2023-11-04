@@ -1,7 +1,8 @@
 import React from "react";
-import { Button } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { Button, Box } from "@mui/material";
+
 import LOGO from "assets/logo.svg";
 
 const Logo = ({ height = 120, width = 120, white = false, ...props }) => {
@@ -12,9 +13,11 @@ const Logo = ({ height = 120, width = 120, white = false, ...props }) => {
   };
 
   return (
-    <Button disableRipple onClick={handleClick} sx={sx.root}>
-      <Image responsive src={LOGO?.src} alt={"Logo"} height={30} width={240} />
-    </Button>
+    <Box sx={sx.root}>
+      <Button disableRipple onClick={handleClick} sx={sx.button}>
+        <Image responsive src={LOGO?.src} alt={"Logo"} height={30} width={240} />
+      </Button>
+    </Box>
   );
 };
 
@@ -22,7 +25,13 @@ export default Logo;
 
 const sx = {
   root: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  button: {
     width: "100%",
+    padding: 0,
     maxWidth: "332px",
   },
   image: {

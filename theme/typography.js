@@ -66,6 +66,9 @@ export default {
     lineHeight: "120%",
     textTransform: "uppercase",
   },
+  button: {
+    textTransform: 'none'
+  },
   // custom:
   footer: { // Footer Menu 16/200
     fontSize: 16,
