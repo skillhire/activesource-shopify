@@ -13,7 +13,20 @@ export const MOBILE_MENU = [
   },
   { label: "Enterprise Solutions", value: ENTERPRISE_SOLUTIONS_URL, divider: false },
   { label: "Need Help?", value: SUPPORT_URL, divider: false },
+];
+
+export const UNLOGGED_MENU = [
   { label: "Login", value: "/login", divider: false },
+];
+
+export const LOGGED_MENU = [
+  {
+    label: "Account", value: "/account", divider: false, hasSubmenu: true,
+    submenu: [
+      { label: "My Account", value: "/account/me", divider: false },
+      { label: "Order History", value: "/account/orders", divider: false },
+    ]
+  }
 ];
 
 export const DESKTOP_MENU = [

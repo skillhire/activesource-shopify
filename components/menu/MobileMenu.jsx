@@ -5,9 +5,9 @@ import { ShopContext } from "context";
 import { useRouter } from "next/router";
 import { Close } from "@mui/icons-material";
 
-import { MOBILE_MENU } from "constants/navigation";
+import { MOBILE_MENU, LOGGED_MENU, UNLOGGED_MENU } from "constants/navigation";
 
-const MobileMenu = () => {
+const MobileMenu = ({ isLogged }) => {
   const router = useRouter();
   const [currentSubmenu, setCurrentSubmenu] = useState(undefined);
   const { menuOpen, setMenuOpen } = useContext(ShopContext);
@@ -25,6 +25,20 @@ const MobileMenu = () => {
     }
   };
 
+  const renderMenu = (menu) => menu.map((menuItem, i) => (
+    <>
+      <MobileMenuItem key={i} menuItem={menuItem} handleClick={() => handleClick(menuItem)} isSubmenuOpen={currentSubmenu === menuItem.value} />
+      {menuItem.hasSubmenu && menuItem.value === currentSubmenu && (menuItem.submenu.map((menuItem, i) => (
+        <MobileMenuItem
+          key={i}
+          menuItem={menuItem}
+          handleClick={() => handleClick(menuItem)}
+          isSubItem
+        />
+      )))}
+    </>
+  ))
+
   return (
     <Fade in={menuOpen}>
       <Box sx={{ ...sx.drawer }}>
@@ -34,24 +48,14 @@ const MobileMenu = () => {
           </ListItem>
         </List>
         <List>
-          {MOBILE_MENU.map((menuItem, i) => (
-            <>
-              <MobileMenuItem key={i} menuItem={menuItem} handleClick={() => handleClick(menuItem)} isSubmenuOpen={currentSubmenu === menuItem.value} />
-              {menuItem.hasSubmenu && menuItem.value === currentSubmenu && (menuItem.submenu.map((menuItem, i) => (
-                <MobileMenuItem
-                  key={i}
-                  menuItem={menuItem}
-                  handleClick={() => handleClick(menuItem)}
-                  isSubItem
-                />
-              )))}
-            </>
-          ))}
+          {renderMenu(MOBILE_MENU)}
+          {isLogged && renderMenu(LOGGED_MENU)}
+          {!isLogged && renderMenu(UNLOGGED_MENU)}
         </List>
       </Box>
     </Fade>
   );
-};
+}
 
 export default MobileMenu;
 
