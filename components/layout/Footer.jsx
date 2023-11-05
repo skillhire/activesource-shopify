@@ -13,9 +13,9 @@ import {
 import { useRouter } from "next/router";
 
 import { Logo, FooterMenuItem } from "components";
-import { FOOTER_MENU } from "constants/navigation";
+import { FOOTER_MENU, LEGAL_MENU } from "constants/navigation";
 
-const Footer = ({ logo, shop, styles, ...props }) => {
+const Footer = ({ styles }) => {
   const router = useRouter();
 
   const handleClick = (url) => {
@@ -25,75 +25,37 @@ const Footer = ({ logo, shop, styles, ...props }) => {
   return (
     <Box sx={{ ...sx.root, ...styles }}>
       <Container maxWidth="lg">
-        <Box sx={sx.footer}>
-          <Box sx={{ ...sx.footerItem, ...sx.footerItemStart }}>
+        <Grid container sx={sx.footer}>
+          <Grid item xs={12} sm={12} md={6}>
             <Logo />
-          </Box>
-          <Box sx={sx.footerItem}>
-            <Grid container spacing={1} sx={sx.footerItemEnd}>
-              <Grid item xs={12} sm={12} md={4}>
-                <List dense disablePadding>
-                  <ListItem disableGutters>
-                    <ListItemText
-                      primary={
-                        <Typography variant="subtitle1" color="primary.contrastText">
-                          Products
-                        </Typography>
-                      }
-                    />
-                  </ListItem>
-                  {FOOTER_MENU["products"].map((menuItem, i) => (
-                    <FooterMenuItem
-                      key={i}
-                      menuItem={menuItem}
-                      handleClick={handleClick}
-                    />
-                  ))}
-                </List>
-              </Grid>
-              <Grid item xs={12} sm={12} md={4}>
-                <List dense disablePadding>
-                  <ListItem disableGutters>
-                    <ListItemText
-                      primary={
-                        <Typography variant="subtitle1" color="primary.contrastText">
-                          Services
-                        </Typography>
-                      }
-                    />
-                  </ListItem>
-                  {FOOTER_MENU["services"].map((menuItem, i) => (
-                    <FooterMenuItem
-                      key={i}
-                      menuItem={menuItem}
-                      handleClick={handleClick}
-                    />
-                  ))}
-                </List>
-              </Grid>
-              <Grid item xs={12} sm={12} md={4}>
-                <List dense disablePadding>
-                  <ListItem disableGutters>
-                    <ListItemText
-                      primary={
-                        <Typography variant="subtitle1" color="primary.contrastText">
-                          Need Help?
-                        </Typography>
-                      }
-                    />
-                  </ListItem>
-                  {FOOTER_MENU["support"].map((menuItem, i) => (
-                    <FooterMenuItem
-                      key={i}
-                      menuItem={menuItem}
-                      handleClick={handleClick}
-                    />
-                  ))}
-                </List>
-              </Grid>
+          </Grid>
+          <Grid item xs={12} sm={12} md={6}>
+            <Grid container spacing={1}>
+              {Object.keys(FOOTER_MENU).map(footerMenuKey => (
+                <Grid item xs={12} sm={12} md={4}>
+                  <List dense disablePadding>
+                    <ListItem disableGutters>
+                      <ListItemText
+                        primary={(
+                          <Typography
+                            variant="subtitle1"
+                            color="primary.contrastText"
+                            sx={{ textTransform: 'capitalize' }}
+                          >
+                            {footerMenuKey}
+                          </Typography>
+                        )}
+                      />
+                    </ListItem>
+                    {FOOTER_MENU[footerMenuKey].map((menuItem, i) => (
+                      <FooterMenuItem key={i} menuItem={menuItem} handleClick={handleClick} />
+                    ))}
+                  </List>
+                </Grid>
+              ))}
             </Grid>
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
       </Container>
       <Divider light />
       <Container maxWidth="lg">
@@ -130,19 +92,6 @@ const sx = {
   },
   footer: {
     pb: 6,
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  footerItem: {
-    flex: 1,
-    display: 'flex',
-    alignItems: 'flex-start',
-  },
-  footerItemStart: {
-    justifyContent: 'flex-start',
-  },
-  footerItemEnd: {
-    justifyContent: 'flex-end',
   },
   button: {
     color: "common.white",

@@ -30,7 +30,7 @@ const MobileMenuItem = ({
             size={"small"}
             onClick={() => handleClick(menuItem)}
           >
-            {!isSubmenuOpen ? <Add sx={{ color: "primary.main" }} /> : <Remove sx={{ color: "primary.main" }} />}
+            {!isSubmenuOpen ? <Add sx={sx.icon} /> : <Remove sx={sx.icon} />}
           </IconButton>
         )
       }
@@ -63,4 +63,7 @@ const sx = {
   noDivider: {
     borderBottom: "none",
   },
+  icon: {
+    color: "primary.main",
+  }
 };
