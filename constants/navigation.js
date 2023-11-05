@@ -1,23 +1,25 @@
-export const SHOP_ALL_URL = "/collections/home";
+export const SUPPORT_URL = "/support"
+export const SHOP_ALL_URL = "/collections/home"
+export const ENTERPRISE_SOLUTIONS_URL = "/enterprise-solutions"
 
 export const MOBILE_MENU = [
-  { label: "Shop all", value: SHOP_ALL_URL, submenu: true, divider: false },
-  { label: "Entreprise Solutions", value: "/solutions", divider: false },
-  { label: "Our Story", value: "/our-story", divider: false },
-  { label: "Need Help?", value: "/support", divider: false },
+  {
+    label: "Shop all", value: SHOP_ALL_URL, divider: false, hasSubmenu: true,
+    submenu: [
+      { label: "Men", value: "/collections/men", divider: false },
+      { label: "Women", value: "/collections/women", divider: false },
+      { label: "Accesories", value: "/collections/accesories", divider: false },
+    ]
+  },
+  { label: "Enterprise Solutions", value: ENTERPRISE_SOLUTIONS_URL, divider: false },
+  { label: "Need Help?", value: SUPPORT_URL, divider: false },
   { label: "Login", value: "/login", divider: false },
-];
-
-export const SHOP_ALL_MENU = [
-  { label: "Men", value: "/collections/men", divider: false },
-  { label: "Women", value: "/collections/women", divider: false },
-  { label: "Accesories", value: "/collections/accesories", divider: false },
 ];
 
 export const DESKTOP_MENU = [
   { label: "Shop all", value: SHOP_ALL_URL },
-  { label: "Enterprise Solutions", value: "/solutions" },
-  { label: "Need help?", value: "/support" },
+  { label: "Enterprise Solutions", value: ENTERPRISE_SOLUTIONS_URL },
+  { label: "Need help?", value: SUPPORT_URL },
 ];
 
 export const FOOTER_MENU = {

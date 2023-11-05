@@ -4,19 +4,23 @@ import { Fade, Box, List } from "@mui/material";
 import { ShopContext } from "context";
 import { useRouter } from "next/router";
 
-import { MOBILE_MENU, SHOP_ALL_MENU, SHOP_ALL_URL } from "constants/navigation";
+import { MOBILE_MENU } from "constants/navigation";
 
 const MobileMenu = () => {
   const router = useRouter();
-  const [showShopAll, setShowShopAll] = useState(false);
+  const [currentSubmenu, setCurrentSubmenu] = useState(undefined);
   const { menuOpen, setMenuOpen } = useContext(ShopContext);
 
   const handleClick = (menuItem) => {
-    if (menuItem.value !== SHOP_ALL_URL) {
+    if (!menuItem.hasSubmenu) {
       router.push(menuItem.value);
       setMenuOpen(false);
-    } else if (menuItem?.value === SHOP_ALL_URL) {
-      setShowShopAll(!showShopAll);
+    } else if (menuItem.hasSubmenu) {
+      if (menuItem.value !== currentSubmenu) {
+        setCurrentSubmenu(menuItem.value);
+      } else {
+        setCurrentSubmenu(undefined);
+      }
     }
   };
 
@@ -26,16 +30,15 @@ const MobileMenu = () => {
         <List sx={sx.list}>
           {MOBILE_MENU.map((menuItem, i) => (
             <>
-              <MobileMenuItem key={i} menuItem={menuItem} handleClick={() => handleClick(menuItem)} isSubMenuOpen={showShopAll} />
-              {menuItem.value === SHOP_ALL_URL && SHOP_ALL_MENU.map((menuItem, i) => (
+              <MobileMenuItem key={i} menuItem={menuItem} handleClick={() => handleClick(menuItem)} isSubmenuOpen={currentSubmenu === menuItem.value} />
+              {menuItem.hasSubmenu && menuItem.value === currentSubmenu && (menuItem.submenu.map((menuItem, i) => (
                 <MobileMenuItem
                   key={i}
                   menuItem={menuItem}
-                  isSubItem
                   handleClick={() => handleClick(menuItem)}
-                  hide={!showShopAll}
+                  isSubItem
                 />
-              ))}
+              )))}
             </>
           ))}
         </List>

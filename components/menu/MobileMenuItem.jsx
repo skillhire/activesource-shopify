@@ -11,13 +11,10 @@ import { Add, Remove } from "@mui/icons-material";
 const MobileMenuItem = ({
   menuItem,
   handleClick,
-  submenu = false,
-  hide = false,
   isSubItem = false,
-  isSubMenuOpen = false,
+  isSubmenuOpen = false,
   ...props
 }) => {
-  if (hide) { return null; }
   return (
     <ListItem
       disablePadding
@@ -27,12 +24,12 @@ const MobileMenuItem = ({
         ...(menuItem?.divider == false && sx.noDivider),
       }}
       secondaryAction={
-        menuItem?.submenu == true && (
+        menuItem?.hasSubmenu == true && (
           <IconButton
             size={"small"}
             onClick={() => handleClick(menuItem)}
           >
-            {!isSubMenuOpen ? <Add sx={sx.icon} /> : <Remove sx={sx.icon} />}
+            {!isSubmenuOpen ? <Add sx={sx.icon} /> : <Remove sx={sx.icon} />}
           </IconButton>
         )
       }
