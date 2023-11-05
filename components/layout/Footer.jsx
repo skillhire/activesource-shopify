@@ -105,8 +105,7 @@ const Footer = ({ logo, shop, styles, ...props }) => {
           </Box>
           <Box sx={sx.copyRightsText}>
             <Box sx={sx.legalMenuItems}>
-              {/* TODO: dettach legal footer */}
-              {FOOTER_MENU["legal"].map((menuItem, i) => (
+              {LEGAL_MENU.map((menuItem, i) => (
                 <Button key={i} sx={sx.button} onClick={() => handleClick(menuItem.value)}>
                   <Typography variant="overline" sx={{ textTransform: "none" }}>
                     {menuItem.label}
