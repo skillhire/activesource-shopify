@@ -60,6 +60,12 @@ export default {
     fontSize: 13,
     fontWeight: 400,
     lineHeight: "120%",
+    // Mobile Footer Menu 14/200
+    "@media (max-width: 600px)": { // Mini Body (Regular) 10/120
+      fontSize: 10,
+      fontWeight: 400,
+      lineHeight: "120%",
+    },
   },
   caption: { // Mini Body (Regular) 10/120
     fontSize: 10,
