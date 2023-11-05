@@ -1,100 +1,44 @@
 import React, { useState, useContext } from "react";
 import { MobileMenuItem } from "components";
-import {
-  Fade,
-  Box,
-  Button,
-  IconButton,
-  Typography,
-  SwipeableDrawer,
-  List,
-} from "@mui/material";
+import { Fade, Box, List } from "@mui/material";
 import { ShopContext } from "context";
 import { useRouter } from "next/router";
-import { MOBILE_MENU } from "constants/navigation";
-import { MENU_TRY_ON_IMG } from "constants/shop";
-import { ChevronLeft } from "@mui/icons-material";
-import Image from "next/image";
 
-const MobileMenu = (props) => {
+import { MOBILE_MENU, SHOP_ALL_MENU, SHOP_ALL_URL } from "constants/navigation";
+
+const MobileMenu = () => {
   const router = useRouter();
-  const [showTryOn, setShowTryOn] = useState(false);
+  const [showShopAll, setShowShopAll] = useState(false);
   const { menuOpen, setMenuOpen } = useContext(ShopContext);
 
-  const handleClick = (value) => {
-    if (value == "/try-on") {
-      setShowTryOn(true);
-    } else {
-      setShowTryOn(false);
+  const handleClick = (menuItem) => {
+    if (menuItem.value !== SHOP_ALL_URL) {
+      router.push(menuItem.value);
       setMenuOpen(false);
-      router.push(value);
+    } else if (menuItem?.value === SHOP_ALL_URL) {
+      setShowShopAll(!showShopAll);
     }
-  };
-
-  const handleTryOnClick = () => {
-    setShowTryOn(false);
-    setMenuOpen(false);
-    router.push("/try-on");
   };
 
   return (
     <Fade in={menuOpen}>
-      <Box
-        sx={{
-          ...sx.drawer,
-        }}
-      >
-        {!showTryOn ? (
-          <List sx={sx.list}>
-            {MOBILE_MENU.map((menuItem, i) => (
-              <MobileMenuItem
-                key={i}
-                menuItem={menuItem}
-                handleClick={handleClick}
-              />
-            ))}
-          </List>
-        ) : (
-          <Box sx={sx.modal}>
-            <Box sx={sx.header}>
-              <Box sx={sx.spacer}>
-                <IconButton onClick={() => setShowTryOn(false)}>
-                  <ChevronLeft sx={sx.icon} />
-                </IconButton>
-              </Box>
-              <Typography variant="h5" sx={sx.title}>
-                PICK 5 BANDS TO TRY ON AT HOME
-              </Typography>
-              <Box sx={sx.spacer} />
-            </Box>
-            <Box sx={sx.image}>
-              <Image
-                src={MENU_TRY_ON_IMG}
-                alt="Home Try-On"
-                width={350}
-                height={222}
-              />
-            </Box>
-            <Box sx={sx.buttons}>
-              <Box sx={sx.buttons}>
-                <Button
-                  sx={sx.button}
-                  variant="outlined"
-                  onClick={() => handleClick("/collections/wedding-bands")}
-                >
-                  Try 5 Bands
-                </Button>
-                <Button
-                  sx={sx.button}
-                  onClick={handleTryOnClick}
-                  variant="outlined"
-                >
-                  How It Works
-                </Button>
-              </Box>
-            </Box>
-          </Box>
-        )}
+      <Box sx={{ ...sx.drawer }}>
+        <List sx={sx.list}>
+          {MOBILE_MENU.map((menuItem, i) => (
+            <>
+              <MobileMenuItem key={i} menuItem={menuItem} handleClick={() => handleClick(menuItem)} isSubMenuOpen={showShopAll} />
+              {menuItem.value === SHOP_ALL_URL && SHOP_ALL_MENU.map((menuItem, i) => (
+                <MobileMenuItem
+                  key={i}
+                  menuItem={menuItem}
+                  isSubItem
+                  handleClick={() => handleClick(menuItem)}
+                  hide={!showShopAll}
+                />
+              ))}
+            </>
+          ))}
+        </List>
       </Box>
     </Fade>
   );
@@ -137,25 +81,6 @@ const sx = {
   },
   spacer: {
     width: "40px",
-  },
-  buttons: {
-    my: 2,
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "20px",
-  },
-  button: {
-    borderColor: "common.white",
-    backgroundColor: "transparent",
-    color: "common.white",
-    "&:hover": {
-      borderColor: "common.white",
-      color: "common.white",
-      backgroundColor: "transparent",
-    },
   },
   icon: {
     color: "common.white",

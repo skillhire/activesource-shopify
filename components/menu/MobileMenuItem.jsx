@@ -6,14 +6,18 @@ import {
   ListItemText,
   ListItemButton,
 } from "@mui/material";
-import { ChevronRight } from "@mui/icons-material";
+import { Add, Remove } from "@mui/icons-material";
 
 const MobileMenuItem = ({
   menuItem,
   handleClick,
   submenu = false,
+  hide = false,
+  isSubItem = false,
+  isSubMenuOpen = false,
   ...props
 }) => {
+  if (hide) { return null; }
   return (
     <ListItem
       disablePadding
@@ -26,17 +30,17 @@ const MobileMenuItem = ({
         menuItem?.submenu == true && (
           <IconButton
             size={"small"}
-            onClick={() => handleClick(menuItem.value)}
+            onClick={() => handleClick(menuItem)}
           >
-            <ChevronRight sx={sx.icon} />
+            {!isSubMenuOpen ? <Add sx={sx.icon} /> : <Remove sx={sx.icon} />}
           </IconButton>
         )
       }
     >
-      <ListItemButton onClick={() => handleClick(menuItem.value)}>
+      <ListItemButton onClick={() => handleClick(menuItem)}>
         <ListItemText
           primary={
-            <Typography variant="h6" sx={sx.link}>
+            <Typography variant={!isSubItem ? 'subtitle1' : 'body2'} sx={sx.link}>
               {menuItem.label}
             </Typography>
           }

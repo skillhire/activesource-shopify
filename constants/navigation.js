@@ -1,20 +1,23 @@
+export const SHOP_ALL_URL = "/collections/home";
+
 export const MOBILE_MENU = [
-  { label: "Bands", value: "/collections/wedding-bands", divider: null },
-  { label: "Home Try-On", value: "/try-on", submenu: true, divider: null },
-  { label: "Our Customization", value: "/our-customization", divider: null },
-  { label: "Our Story", value: "/our-story", divider: null },
-  { label: "Fit Guide", value: "/fit-guide", divider: true },
-  {
-    label: "Support",
-    value: "https://activesourcelabs.gorgias.help/en-US",
-    divider: false,
-  },
+  { label: "Shop all", value: SHOP_ALL_URL, submenu: true, divider: false },
+  { label: "Entreprise Solutions", value: "/solutions", divider: false },
+  { label: "Our Story", value: "/our-story", divider: false },
+  { label: "Need Help?", value: "/support", divider: false },
+  { label: "Login", value: "/login", divider: false },
+];
+
+export const SHOP_ALL_MENU = [
+  { label: "Men", value: "/collections/men", divider: false },
+  { label: "Women", value: "/collections/women", divider: false },
+  { label: "Accesories", value: "/collections/accesories", divider: false },
 ];
 
 export const DESKTOP_MENU = [
-  { label: "Products", value: "/shop/all" },
+  { label: "Shop all", value: SHOP_ALL_URL },
   { label: "Enterprise Solutions", value: "/solutions" },
-  { label: "Need help?", value: "/" },
+  { label: "Need help?", value: "/support" },
 ];
 
 export const FOOTER_MENU = {
