@@ -42,8 +42,8 @@ export const FOOTER_MENU = {
     ...SHOP_ALL_MENU,
     ...PRODUCTS_MENU
   ],
-  support: SUPPORT_MENU,
   services: SERVICES_MENU,
+  support: SUPPORT_MENU,
 };
 
 export const LEGAL_MENU = [
