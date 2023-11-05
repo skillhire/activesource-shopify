@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { MobileMenuItem } from "components";
-import { Fade, Box, List, ListItem } from "@mui/material";
+import { Fade, Box, List, ListItem, IconButton } from "@mui/material";
 import { ShopContext } from "context";
 import { useRouter } from "next/router";
 import { Close } from "@mui/icons-material";
@@ -44,7 +44,9 @@ const MobileMenu = ({ isLogged }) => {
       <Box sx={{ ...sx.drawer }}>
         <List sx={sx.header}>
           <ListItem sx={sx.header} onClick={() => setMenuOpen(false)}>
-            <Close sx={{ color: "primary.main" }} />
+            <IconButton size={"small"}>
+              <Close sx={{ color: "primary.main" }} />
+            </IconButton>
           </ListItem>
         </List>
         <List>
