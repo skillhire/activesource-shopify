@@ -62,6 +62,5 @@ export const FOOTER_MENU = {
     ...PRODUCTS_MENU
   ],
   support: SUPPORT_MENU,
-  legal: LEGAL_MENU,
   services: SERVICES_MENU,
 };
