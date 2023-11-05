@@ -25,12 +25,12 @@ const Footer = ({ styles }) => {
   return (
     <Box sx={{ ...sx.root, ...styles }}>
       <Container maxWidth="lg">
-        <Grid container sx={sx.footer}>
+        <Grid container spacing={4}>
           <Grid item xs={12} sm={12} md={6}>
             <Logo />
           </Grid>
-          <Grid item xs={12} sm={12} md={6}>
-            <Grid container spacing={1}>
+          <Grid item xs={12} sm={12} md={6} spacing={4}>
+            <Grid container spacing={2} mb={2}>
               {Object.keys(FOOTER_MENU).map(footerMenuKey => (
                 <Grid item xs={12} sm={12} md={4}>
                   <List dense disablePadding>
@@ -87,11 +87,7 @@ export default Footer;
 const sx = {
   root: {
     backgroundColor: "primary.main",
-    pt: 10,
-    pb: 6,
-  },
-  footer: {
-    pb: 6,
+    pt: { md: 10, sm: 6 },
   },
   button: {
     color: "common.white",
@@ -99,8 +95,10 @@ const sx = {
   },
   copyRights: {
     display: "flex",
+    alignItems: "center",
     justifyContent: "space-between",
-    pt: 4,
+    pt: 6,
+    pb: { md: 6, sm: 6, xs: 6 }
   },
   copyRightsText: {
     display: "flex",
