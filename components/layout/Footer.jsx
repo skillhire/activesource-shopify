@@ -48,7 +48,7 @@ const Footer = ({ logo, shop, styles, ...props }) => {
 
   return (
     <Box sx={{ ...sx.root, ...styles }}>
-      <Container maxWidth="xl">
+      <Container maxWidth="lg">
         <Box sx={sx.content}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12} md={6}>

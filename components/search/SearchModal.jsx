@@ -14,7 +14,6 @@ import { ShopContext } from "context";
 import { useProducts, useSegment } from "hooks";
 import { Close } from "@mui/icons-material";
 import { Search } from "lucide-react";
-import Image from "next/image";
 
 const SearchModal = ({ styles, ...props }) => {
   const MIN_ANALYTICS_CHARS = 5; // Minimum number of characters to track analytics
@@ -175,7 +174,7 @@ const sx = {
     maxWidth: "670px",
   },
   iconButton: {
-    mt: "6px",
+    display: "flex",
   },
   closeButton: {
     mt: 3,
