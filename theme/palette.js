@@ -1,10 +1,13 @@
 export default {
   primary: {
-    main: "#2E2E2E",
+    main: "#231D18",
     contrastText: "#FFFFFF",
   },
   secondary: {
     main: "#8044FD",
+    dark: "#9C6CFF",
+    light: "#E0DBEB",
+    faded: "#D6D1E0",
     contrastText: "#FFFFFF",
   },
   tertiary: {

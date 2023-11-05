@@ -13,13 +13,14 @@ const MobileMenuItem = ({
   handleClick,
   isSubItem = false,
   isSubmenuOpen = false,
-  ...props
 }) => {
   return (
     <ListItem
       disablePadding
       sx={{
         ...sx.listItem,
+        ...(isSubItem == true && sx.faded),
+        ...(isSubmenuOpen == true && sx.faded),
         ...(menuItem?.divider == true && sx.divider),
         ...(menuItem?.divider == false && sx.noDivider),
       }}
@@ -29,7 +30,7 @@ const MobileMenuItem = ({
             size={"small"}
             onClick={() => handleClick(menuItem)}
           >
-            {!isSubmenuOpen ? <Add sx={sx.icon} /> : <Remove sx={sx.icon} />}
+            {!isSubmenuOpen ? <Add sx={{ color: "primary.main" }} /> : <Remove sx={{ color: "primary.main" }} />}
           </IconButton>
         )
       }
@@ -37,7 +38,7 @@ const MobileMenuItem = ({
       <ListItemButton onClick={() => handleClick(menuItem)}>
         <ListItemText
           primary={
-            <Typography variant={!isSubItem ? 'subtitle1' : 'body2'} sx={sx.link}>
+            <Typography variant={!isSubItem ? 'subtitle1' : 'body2'}>
               {menuItem.label}
             </Typography>
           }
@@ -53,19 +54,13 @@ const sx = {
   listItem: {
     borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
   },
+  faded: {
+    backgroundColor: "secondary.faded",
+  },
   divider: {
     borderBottom: "1px solid rgba(255, 255, 255, 0.8)",
   },
   noDivider: {
     borderBottom: "none",
-  },
-  link: {
-    color: "common.white",
-  },
-  submenuListItem: {
-    pl: 2,
-  },
-  icon: {
-    color: "common.white",
   },
 };

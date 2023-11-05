@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 import { MobileMenuItem } from "components";
-import { Fade, Box, List } from "@mui/material";
+import { Fade, Box, List, ListItem } from "@mui/material";
 import { ShopContext } from "context";
 import { useRouter } from "next/router";
+import { Close } from "@mui/icons-material";
 
 import { MOBILE_MENU } from "constants/navigation";
 
@@ -27,7 +28,12 @@ const MobileMenu = () => {
   return (
     <Fade in={menuOpen}>
       <Box sx={{ ...sx.drawer }}>
-        <List sx={sx.list}>
+        <List sx={sx.header}>
+          <ListItem sx={sx.header} onClick={() => setMenuOpen(false)}>
+            <Close sx={{ color: "primary.main" }} />
+          </ListItem>
+        </List>
+        <List>
           {MOBILE_MENU.map((menuItem, i) => (
             <>
               <MobileMenuItem key={i} menuItem={menuItem} handleClick={() => handleClick(menuItem)} isSubmenuOpen={currentSubmenu === menuItem.value} />
@@ -52,40 +58,15 @@ export default MobileMenu;
 const sx = {
   drawer: {
     zIndex: (theme) => theme.zIndex.drawer,
-    width: "100vw",
     position: "fixed",
-    top: "50px",
-    height: "calc(100vh - 50px)",
     left: 0,
+    height: "100vh",
     width: "100vw",
-    backgroundColor: "primary.main",
-  },
-  list: {
-    p: 2,
-  },
-  modal: {
-    width: "100vw",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "secondary.light",
   },
   header: {
-    my: 2,
-    px: 2,
-    width: "100%",
     display: "flex",
-    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
-  },
-  title: {
-    color: "common.white",
-  },
-  spacer: {
-    width: "40px",
-  },
-  icon: {
-    color: "common.white",
+    justifyContent: "flex-end",
   },
 };
