@@ -14,7 +14,6 @@ import { ShopContext } from "context";
 import { useProducts, useSegment } from "hooks";
 import { Close } from "@mui/icons-material";
 import { Search } from "lucide-react";
-import Image from "next/image";
 
 const SearchModal = ({ styles, ...props }) => {
   const MIN_ANALYTICS_CHARS = 5; // Minimum number of characters to track analytics
