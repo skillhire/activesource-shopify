@@ -58,13 +58,11 @@ export default {
     fontSize: 13,
     fontWeight: 400,
     lineHeight: "120%",
-    textTransform: "uppercase",
   },
   caption: { // Mini Body (Regular) 10/120
     fontSize: 10,
     fontWeight: 400,
     lineHeight: "120%",
-    textTransform: "uppercase",
   },
   button: {
     textTransform: 'none'
