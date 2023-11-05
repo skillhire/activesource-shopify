@@ -12,28 +12,8 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 
-import { EmailSubscribe, Logo, FooterMenuItem } from "components";
-// import { INSTAGRAM_URL } from "constants/shop";
+import { Logo, FooterMenuItem } from "components";
 import { FOOTER_MENU } from "constants/navigation";
-
-// const FooterInstagram = ({ handleClick }) => {
-//   return (
-//     <Button sx={sx.button} onClick={() => handleClick(INSTAGRAM_URL)}>
-//       @Active Source Lab
-//     </Button>
-//   );
-// };
-
-// const FooterEmail = () => {
-//   return (
-//     <Box sx={sx.emailSubscribe}>
-//       <Typography mt={"18px"} variant="footer" color="primary.contrastText">
-//         Subscribe
-//       </Typography>
-//       <EmailSubscribe />
-//     </Box>
-//   );
-// };
 
 const Footer = ({ logo, shop, styles, ...props }) => {
   const router = useRouter();
@@ -115,7 +95,7 @@ const Footer = ({ logo, shop, styles, ...props }) => {
           </Box>
         </Box>
       </Container>
-      <Divider />
+      <Divider light />
       <Container maxWidth="lg">
         <Box sx={sx.copyRights}>
           <Box>
@@ -165,30 +145,14 @@ const sx = {
   footerItemEnd: {
     justifyContent: 'flex-end',
   },
-  header: {
+  button: {
     color: "common.white",
-    mb: {
-      xs: 0,
-      sm: "50px",
-    },
+    textTransform: "none",
   },
   copyRights: {
     display: "flex",
     justifyContent: "space-between",
     pt: 4,
-  },
-  logo: {
-    objectFit: "contain",
-  },
-  button: {
-    color: "common.white",
-    textTransform: "none",
-  },
-  emailSubscribe: {
-    px: {
-      sm: 2,
-      xs: 0,
-    },
   },
   copyRightsText: {
     display: "flex",
@@ -203,32 +167,5 @@ const sx = {
     justifyContent: "flex-end",
     alignItems: "center",
     gap: "20px",
-  },
-  instaIcon: {
-    marginBottom: "5px", // not sx
-  },
-  footerLogo: {
-    width: "100%",
-    textAlign: "center",
-    pb: {
-      xs: 5,
-      sm: 0,
-    },
-  },
-  divider: {
-    display: {
-      xs: "block",
-      sm: "none",
-    },
-    borderTop: "1px solid",
-    borderColor: "rgb(255,255,255,0.2)",
-    height: "10px",
-  },
-  container: {
-    width: "100%",
-    px: {
-      sm: 2,
-      xs: 0,
-    },
   },
 };
