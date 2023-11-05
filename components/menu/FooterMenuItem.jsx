@@ -26,7 +26,7 @@ const FooterMenuItem = ({
       >
         <ListItemText
           primary={
-            <Typography sx={sx.text} variant="button">
+            <Typography sx={sx.text} variant="footer">
               {menuItem?.label}
             </Typography>
           }

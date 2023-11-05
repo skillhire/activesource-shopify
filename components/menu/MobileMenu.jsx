@@ -5,7 +5,7 @@ import { ShopContext } from "context";
 import { useRouter } from "next/router";
 import { Close } from "@mui/icons-material";
 
-import { MOBILE_MENU, LOGGED_MENU, UNLOGGED_MENU } from "constants/navigation";
+import { NAVIGATION_MENU, LOGGED_MENU, UNLOGGED_MENU } from "constants/navigation";
 
 const MobileMenu = ({ isLogged }) => {
   const router = useRouter();
@@ -50,7 +50,7 @@ const MobileMenu = ({ isLogged }) => {
           </ListItem>
         </List>
         <List>
-          {renderMenu(MOBILE_MENU)}
+          {renderMenu(NAVIGATION_MENU)}
           {isLogged && renderMenu(LOGGED_MENU)}
           {!isLogged && renderMenu(UNLOGGED_MENU)}
         </List>

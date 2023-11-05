@@ -7,7 +7,7 @@ import {
   SearchModal,
   DesktopMenuItem,
 } from "components";
-import { DESKTOP_MENU } from "constants/navigation";
+import { NAVIGATION_MENU } from "constants/navigation";
 
 const DesktopMenu = ({ logo, handleClick, ...props }) => {
   return (
@@ -16,7 +16,7 @@ const DesktopMenu = ({ logo, handleClick, ...props }) => {
         <Box sx={sx.root}>
           <Box sx={sx.item}>
             <Logo />
-            {DESKTOP_MENU.map((menuItem, index) => (
+            {NAVIGATION_MENU.map((menuItem, index) => (
               <DesktopMenuItem
                 key={index}
                 menuItem={menuItem}
