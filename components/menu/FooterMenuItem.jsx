@@ -9,28 +9,15 @@ const FooterMenuItem = ({
   menuItem,
   handleClick,
   submenu = false,
-  ...props
 }) => {
   return (
     <ListItem
       disableGutters
       disablePadding
-      sx={{
-        ...sx.listItem,
-        ...(submenu && sx.submenuListItem),
-      }}
+      sx={{ ...sx.listItem, ...(submenu && sx.submenuListItem) }}
     >
-      <ListItemButton
-        sx={sx.listItemButton}
-        onClick={() => handleClick(menuItem?.value)}
-      >
-        <ListItemText
-          primary={
-            <Typography sx={sx.text} variant="footer">
-              {menuItem?.label}
-            </Typography>
-          }
-        />
+      <ListItemButton sx={sx.listItemButton} onClick={() => handleClick(menuItem?.value)}>
+        <ListItemText primary={(<Typography sx={sx.text} variant="footer">{menuItem?.label}</Typography>)} />
       </ListItemButton>
     </ListItem>
   );

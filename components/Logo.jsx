@@ -27,12 +27,10 @@ const sx = {
   root: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
   button: {
-    width: "100%",
     padding: 0,
-    maxWidth: "332px",
   },
   image: {
     cursor: "pointer",

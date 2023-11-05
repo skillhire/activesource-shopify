@@ -1,3 +1,5 @@
+import { capitalize } from "@mui/material";
+
 export default {
   fontFamily: ["Poppins"],
   // Big Heading (SemiBold) 60/133
@@ -65,7 +67,7 @@ export default {
     lineHeight: "120%",
   },
   button: {
-    textTransform: 'none'
+    textTransform: "capitalize",
   },
   // custom:
   footer: { // Footer Menu 16/200
