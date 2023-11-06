@@ -29,8 +29,8 @@ const Footer = ({ styles }) => {
           <Grid item xs={12} sm={12} md={6}>
             <Logo />
           </Grid>
-          <Grid item xs={12} sm={12} md={6} spacing={4}>
-            <Grid container mb={2} spacing={4}>
+          <Grid item xs={12} sm={12} md={6} spacing={4} sx={sx.footerMenu}>
+            <Grid container spacing={4}>
               {Object.keys(FOOTER_MENU).map(footerMenuKey => (
                 <Grid item xs={12} sm={12} md={4}>
                   <Box display="flex" justifyContent={{ md: "flex-end" }}>
@@ -60,13 +60,13 @@ const Footer = ({ styles }) => {
       </Container>
       <Divider light />
       <Container maxWidth="lg">
-        <Box sx={sx.copyRights}>
+        <Box sx={sx.subfooter}>
           <Box>
             <Typography variant="overline" sx={sx.copyRightLabel}>
               © 2023 Active Source Lab LLC. All rights reserved.
             </Typography>
           </Box>
-          <Box sx={sx.copyRightsText}>
+          <Box sx={sx.subfooterText}>
             <Box sx={sx.legalMenuItems}>
               {LEGAL_MENU.map((menuItem, i) => (
                 <Button key={i} sx={sx.button} onClick={() => handleClick(menuItem.value)}>
@@ -88,7 +88,10 @@ export default Footer;
 const sx = {
   root: {
     backgroundColor: "primary.main",
-    pt: { md: 10, sm: 6 },
+    pt: { md: 10, sm: 6, xs: 4 },
+  },
+  footerMenu: {
+    pb: { md: 6, sm: 4, xs: 3 },
   },
   footerHeader: {
     color: "primary.contrastText",
@@ -98,14 +101,14 @@ const sx = {
     color: "common.white",
     textTransform: "none",
   },
-  copyRights: {
+  subfooter: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    pt: 6,
-    pb: { md: 6, sm: 6, xs: 6 }
+    pt: { lg: 6, md: 6, sm: 4, xs: 3 },
+    pb: { lg: 6, md: 6, sm: 4, xs: 4 }
   },
-  copyRightsText: {
+  subfooterText: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-end",
