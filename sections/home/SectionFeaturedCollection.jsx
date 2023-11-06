@@ -8,10 +8,10 @@ const SectionFeaturedCollection = (props) => {
     <Container maxWidth="lg">
       <Box py={12}>
         <Box sx={sx.header} mb={5}>
-          <Typography variant="h4" maxWidth={633}>
+          <Typography variant="h4" maxWidth={633} mr={2}>
             Personalize for your brand, explore our diverse range of products.
           </Typography>
-          <Link href={`/collections/${featuredCollection?.handle}`} variant="link">
+          <Link href={`/collections/${featuredCollection?.handle}`} variant="link" py={2} sx={{ whiteSpace: "nowrap" }}>
             Explore Products
           </Link>
         </Box>
@@ -32,6 +32,20 @@ const sx = {
   header: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    flexWrap: {
+      xs: "wrap",
+      sm: "nowrap",
+      md: "nowrap",
+    },
+    justifyContent: {
+      xs: "center",
+      sm: "space-between",
+      md: "space-between",
+    },
+    textAlign: {
+      xs: "center",
+      sm: "left",
+      md: "left",
+    },
   },
 };
