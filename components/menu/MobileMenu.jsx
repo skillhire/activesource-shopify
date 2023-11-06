@@ -26,17 +26,23 @@ const MobileMenu = ({ isLogged }) => {
   };
 
   const renderMenu = (menu) => menu.map((menuItem, i) => (
-    <>
-      <MobileMenuItem key={i} menuItem={menuItem} handleClick={() => handleClick(menuItem)} isSubmenuOpen={currentSubmenu === menuItem.value} />
+    <Box key={`${menu}-menu-item-${menuItem.value}`}>
+      <MobileMenuItem
+        menuItem={menuItem}
+        handleClick={() => handleClick(menuItem)}
+        /** */
+        isSubmenuOpen={currentSubmenu === menuItem.value}
+      />
       {menuItem.hasSubmenu && menuItem.value === currentSubmenu && (menuItem.submenu.map((menuItem, i) => (
         <MobileMenuItem
-          key={i}
+          key={`${menu}-submenu-item-${menuItem.value}`}
           menuItem={menuItem}
           handleClick={() => handleClick(menuItem)}
+          /** */
           isSubItem
         />
       )))}
-    </>
+    </Box>
   ))
 
   return (
