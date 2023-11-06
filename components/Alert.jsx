@@ -18,7 +18,7 @@ const Alert = ({ ...props }) => {
 
   return (
     <Snackbar
-      open={Boolean(alert)}
+      open={!!alert && Object.keys(alert).length !== 0}
       onClose={handleClose}
       TransitionComponent={TransitionUp}
       autoHideDuration={2500}
