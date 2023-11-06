@@ -3,6 +3,7 @@ import { Layout } from "components";
 import { useHome } from "hooks";
 import SectionHeroPrimary from "sections/home/SectionHeroPrimary";
 import SectionFeaturedCollection from "sections/home/SectionFeaturedCollection";
+import SectionEnterpriseSolutions from "sections/home/SectionEnterpriseSolutions";
 
 const Home = () => {
   const { home, featuredCollection, fetchHome } = useHome();
@@ -20,6 +21,7 @@ const Home = () => {
     <Layout title={metaFields.title} metaDescription={metaFields.description}>
       <SectionHeroPrimary home={home} />
       <SectionFeaturedCollection featuredCollection={featuredCollection} />
+      <SectionEnterpriseSolutions />
     </Layout>
   );
 };
