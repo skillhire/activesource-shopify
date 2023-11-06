@@ -263,7 +263,7 @@ const sx = {
   stickyBar: {
     p: 0,
     display: "none",
-    top: "46px",
+    top: "64px",
     backgroundColor: "common.white",
   },
   stickyBarVisible: {

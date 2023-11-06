@@ -2,18 +2,54 @@ export const SUPPORT_URL = "/support"
 export const SHOP_ALL_URL = "/collections/home"
 export const ENTERPRISE_SOLUTIONS_URL = "/enterprise-solutions"
 
-export const MOBILE_MENU = [
-  {
-    label: "Shop all", value: SHOP_ALL_URL, divider: false, hasSubmenu: true,
-    submenu: [
-      { label: "Men", value: "/collections/men", divider: false },
-      { label: "Women", value: "/collections/women", divider: false },
-      { label: "Accesories", value: "/collections/accesories", divider: false },
-    ]
-  },
+export const PRODUCTS_MENU = [
+  { label: "Men", value: "/collections/men", divider: false },
+  { label: "Women", value: "/collections/women", divider: false },
+  { label: "Accesories", value: "/collections/accesories", divider: false },
+]
+
+export const SUPPORT_MENU = [
+  { label: "Help Center", value: "/help-center", divider: false },
+  { label: "Contact Us", value: "/contact-us", divider: false },
+]
+
+export const SHOP_ALL_MENU = [
+  { label: "All Products", value: SHOP_ALL_URL, divider: false, hasSubmenu: true, submenu: PRODUCTS_MENU },
+]
+
+export const ENTERPRISE_SOLUTIONS_MENU = [
   { label: "Enterprise Solutions", value: ENTERPRISE_SOLUTIONS_URL, divider: false },
-  { label: "Need Help?", value: SUPPORT_URL, divider: false },
+]
+
+export const NEED_HELP_MENU = [
+  { label: "Need Help?", value: SUPPORT_URL, divider: false, hasSubmenu: true, submenu: SUPPORT_MENU },
+]
+
+export const SERVICES_MENU = [
+  ...ENTERPRISE_SOLUTIONS_MENU,
+  { label: "Hire an Expert", value: "/hire-an-expert", divider: false },
+  { label: "About us", value: "/about-us", divider: false },
+]
+
+export const NAVIGATION_MENU = [
+  ...SHOP_ALL_MENU,
+  ...ENTERPRISE_SOLUTIONS_MENU,
+  ...NEED_HELP_MENU,
 ];
+
+export const FOOTER_MENU = {
+  products: [
+    ...SHOP_ALL_MENU,
+    ...PRODUCTS_MENU
+  ],
+  services: SERVICES_MENU,
+  support: SUPPORT_MENU,
+};
+
+export const LEGAL_MENU = [
+  { label: "Privacy Policy", value: "/privacy-policy", divider: false },
+  { label: "Terms of Use", value: "/terms-of-use", divider: false },
+]
 
 export const UNLOGGED_MENU = [
   { label: "Login", value: "/login", divider: false },
@@ -28,32 +64,3 @@ export const LOGGED_MENU = [
     ]
   }
 ];
-
-export const DESKTOP_MENU = [
-  { label: "Shop all", value: SHOP_ALL_URL },
-  { label: "Enterprise Solutions", value: ENTERPRISE_SOLUTIONS_URL },
-  { label: "Need help?", value: SUPPORT_URL },
-];
-
-export const FOOTER_MENU = {
-  products: [
-    { label: "Link 1", value: "/" },
-    { label: "Link 2", value: "/" },
-    { label: "Link 3", value: "/" },
-  ],
-  support: [
-    { label: "Link 1", value: "/" },
-    { label: "Link 2", value: "/" },
-    { label: "Link 3", value: "/" },
-  ],
-  legal: [
-    { label: "Link 1", value: "/" },
-    { label: "Link 2", value: "/" },
-    { label: "Link 3", value: "/" },
-  ],
-  "use-cases": [
-    { label: "Link 1", value: "/" },
-    { label: "Link 2", value: "/" },
-    { label: "Link 3", value: "/" },
-  ],
-};
