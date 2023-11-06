@@ -63,7 +63,7 @@ const Footer = ({ styles }) => {
         <Box sx={sx.copyRights}>
           <Box>
             <Typography variant="overline" sx={sx.copyRightLabel}>
-              © 2023 Active Source Lab
+              © 2023 Active Source Lab LLC. All rights reserved.
             </Typography>
           </Box>
           <Box sx={sx.copyRightsText}>
