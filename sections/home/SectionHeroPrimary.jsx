@@ -12,7 +12,7 @@ const SectionHeroPrimary = (props) => {
       <Container maxWidth="lg">
         <Box sx={sx.container}>
           <Stack spacing={3}>
-            <Typography variant="h2" maxWidth={500} color="primary.contrastText">
+            <Typography variant="h2" component="h1" maxWidth={500} color="primary.contrastText">
               {home?.title}
             </Typography>
             <Typography variant="body1" color="primary.contrastText">
