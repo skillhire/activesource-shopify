@@ -76,6 +76,12 @@ export default {
     textTransform: "capitalize",
   },
   // custom:
+  link: {
+    fontSize: 20,
+    fontWeight: 600,
+    lineHeight: "120%",
+    textDecoration: "underline",
+  },
   footer: { // Footer Menu 16/200
     fontSize: 16,
     fontWeight: 400,

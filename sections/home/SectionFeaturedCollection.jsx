@@ -1,24 +1,20 @@
 import { ProductCollection } from "components";
-import { Box, Button, Container, Typography } from "@mui/material";
-import { useRouter } from "next/router";
+import { Link } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 
 const SectionFeaturedCollection = (props) => {
   const { featuredCollection } = props || {};
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push(`/collections/${featuredCollection.handle}`);
-  };
-
   return (
     <Container maxWidth="lg">
       <Box sx={sx.header}>
         <Typography variant="h4" my={8} maxWidth={633}>
           Personalize for your brand, explore our diverse range of products.
         </Typography>
-        <Button variant="outlined" onClick={handleClick}>
-          Explore Products
-        </Button>
+        {featuredCollection && (
+          <Link href={`/collections/${featuredCollection.handle}`} variant="link">
+            Explore Products
+          </Link>
+        )}
       </Box>
       {featuredCollection && (
         <ProductCollection
