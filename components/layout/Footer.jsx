@@ -13,7 +13,7 @@ import {
 import { useRouter } from "next/router";
 
 import { Logo, FooterMenuItem } from "components";
-import { FOOTER_MENU, LEGAL_MENU } from "constants/navigation";
+import { NAVIGATION_MENU, LEGAL_MENU } from "constants/navigation";
 
 const Footer = ({ styles }) => {
   const router = useRouter();
@@ -31,7 +31,7 @@ const Footer = ({ styles }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} spacing={4} sx={sx.footerMenu}>
             <Grid container spacing={4}>
-              {Object.keys(FOOTER_MENU).map(footerMenuKey => (
+              {NAVIGATION_MENU.map(navItem => (
                 <Grid item xs={12} sm={12} md={4}>
                   <Box display="flex" justifyContent={{ md: "flex-end" }}>
                     <List dense disablePadding>
@@ -42,12 +42,12 @@ const Footer = ({ styles }) => {
                               variant="subtitle1"
                               sx={sx.footerHeader}
                             >
-                              {footerMenuKey}
+                              {navItem.label}
                             </Typography>
                           )}
                         />
                       </ListItem>
-                      {FOOTER_MENU[footerMenuKey].map((menuItem, i) => (
+                      {navItem.submenu.map((menuItem, i) => (
                         <FooterMenuItem key={i} menuItem={menuItem} handleClick={handleClick} />
                       ))}
                     </List>

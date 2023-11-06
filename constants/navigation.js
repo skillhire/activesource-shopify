@@ -1,50 +1,42 @@
 export const SUPPORT_URL = "/support"
+export const SERVICES_URL = "/services"
 export const SHOP_ALL_URL = "/collections/home"
-export const ENTERPRISE_SOLUTIONS_URL = "/enterprise-solutions"
 
-export const PRODUCTS_MENU = [
+export const PRODUCTS_SUBMENU = [
+  { label: "All Products", value: "/collections/home", divider: false },
   { label: "Men", value: "/collections/men", divider: false },
   { label: "Women", value: "/collections/women", divider: false },
   { label: "Accesories", value: "/collections/accesories", divider: false },
 ]
 
-export const SUPPORT_MENU = [
+export const SUPPORT_SUBMENU = [
   { label: "Help Center", value: "/help-center", divider: false },
   { label: "Contact Us", value: "/contact-us", divider: false },
 ]
 
-export const SHOP_ALL_MENU = [
-  { label: "All Products", value: SHOP_ALL_URL, divider: false, hasSubmenu: true, submenu: PRODUCTS_MENU },
-]
-
-export const ENTERPRISE_SOLUTIONS_MENU = [
-  { label: "Enterprise Solutions", value: ENTERPRISE_SOLUTIONS_URL, divider: false },
-]
-
-export const NEED_HELP_MENU = [
-  { label: "Need Help?", value: SUPPORT_URL, divider: false, hasSubmenu: true, submenu: SUPPORT_MENU },
-]
-
-export const SERVICES_MENU = [
-  ...ENTERPRISE_SOLUTIONS_MENU,
+export const SERVICES_SUBMENU = [
+  { label: "Enterprise Solution", value: "/enterprise-solution", divider: false },
   { label: "Hire an Expert", value: "/hire-an-expert", divider: false },
-  { label: "About us", value: "/about-us", divider: false },
+  { label: "About Us", value: "/about-us", divider: false },
+]
+
+export const PRODUCTS_MENU = [
+  { label: "Products", value: SHOP_ALL_URL, divider: false, hasSubmenu: true, submenu: PRODUCTS_SUBMENU },
+]
+
+export const SERVICES = [
+  { label: "Services", value: SERVICES_URL, divider: false, hasSubmenu: true, submenu: SERVICES_SUBMENU },
+]
+
+export const SUPPORT_MENU = [
+  { label: "Need Help?", value: SUPPORT_URL, divider: false, hasSubmenu: true, submenu: SUPPORT_SUBMENU },
 ]
 
 export const NAVIGATION_MENU = [
-  ...SHOP_ALL_MENU,
-  ...ENTERPRISE_SOLUTIONS_MENU,
-  ...NEED_HELP_MENU,
+  ...PRODUCTS_MENU,
+  ...SERVICES,
+  ...SUPPORT_MENU,
 ];
-
-export const FOOTER_MENU = {
-  products: [
-    ...SHOP_ALL_MENU,
-    ...PRODUCTS_MENU
-  ],
-  services: SERVICES_MENU,
-  support: SUPPORT_MENU,
-};
 
 export const LEGAL_MENU = [
   { label: "Privacy Policy", value: "/privacy-policy", divider: false },
