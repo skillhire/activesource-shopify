@@ -1,5 +1,4 @@
 import React from "react";
-import { useRouter } from "next/router";
 import Image from "next/image";
 import { Stack, Typography, Button, Box, Container } from "@mui/material";
 
@@ -7,11 +6,6 @@ import HeroImage from "assets/hero-image@2x.png";
 
 const SectionHeroPrimary = (props) => {
   const { home } = props;
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push("/browse");
-  };
 
   return (
     <Box sx={sx.root}>
@@ -24,7 +18,7 @@ const SectionHeroPrimary = (props) => {
             <Typography variant="body1" color="primary.contrastText">
               {home?.subtitle}
             </Typography>
-            <Box sx={sx.actions}>
+            <Box pt={2}>
               <Button variant="contained" color="secondary" size="large" sx={sx.button}>
                 Explore Products
               </Button>
@@ -32,8 +26,8 @@ const SectionHeroPrimary = (props) => {
           </Stack>
           <Image src={HeroImage} width={450} />
         </Box>
-      </Container >
-    </Box >
+      </Container>
+    </Box>
   );
 };
 
