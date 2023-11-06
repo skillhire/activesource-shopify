@@ -44,4 +44,7 @@ export default {
     highlight: "#EBEEFA",
   },
   divider: "#DDE2F1",
+  gradient: {
+    main: "linear-gradient(96deg, #AEDCFF 15.87%, #C7ACFF 65.05%)",
+  },
 };

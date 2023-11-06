@@ -9,7 +9,7 @@ const SectionFeaturedSolutions = () => {
   };
 
   return (
-    <Box sx={sx.root}>
+    <Box py={16} sx={{ background: (theme) => theme.palette.gradient.main }}>
       <Container maxWidth="lg">
         <Stack spacing={2} alignItems="center" textAlign="center">
           <Typography variant="h3">
@@ -30,11 +30,6 @@ const SectionFeaturedSolutions = () => {
 };
 
 const sx = {
-  root: {
-    py: 16,
-    // TODO: move colors to palette
-    background: "linear-gradient(96deg, #AEDCFF 15.87%, #C7ACFF 65.05%)",
-  },
   button: {
     width: {
       sm: 'auto',
