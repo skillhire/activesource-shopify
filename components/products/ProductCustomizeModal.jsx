@@ -74,7 +74,7 @@ const ProductCustomizeModal = ({
               objectFit: "contain",
               width: "100%",
             }}
-            responsive
+            responsive="true"
           />
         </Grid>
         <Grid item xs={12} sm={4}>

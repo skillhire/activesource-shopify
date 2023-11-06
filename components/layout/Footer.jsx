@@ -29,10 +29,10 @@ const Footer = ({ styles }) => {
           <Grid item xs={12} sm={12} md={6}>
             <Logo />
           </Grid>
-          <Grid item xs={12} sm={12} md={6} spacing={4} sx={sx.footerMenu}>
+          <Grid item xs={12} sm={12} md={6} sx={sx.footerMenu}>
             <Grid container spacing={4}>
               {NAVIGATION_MENU.map(navItem => (
-                <Grid item xs={12} sm={12} md={4}>
+                <Grid item xs={12} sm={12} md={4} key={navItem.label}>
                   <Box display="flex" justifyContent={{ md: "flex-end" }}>
                     <List dense disablePadding>
                       <ListItem disableGutters>

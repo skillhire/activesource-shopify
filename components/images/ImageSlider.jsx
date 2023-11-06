@@ -53,7 +53,7 @@ const ImageSlider = ({
                 height={500}
                 style={sx.image}
                 alt={activeImage?.altText}
-                responsive
+                responsive="true"
               />
             </Zoom>
           )}

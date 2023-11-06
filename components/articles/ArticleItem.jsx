@@ -21,7 +21,7 @@ const ArticleItem = ({ article, ...props }) => {
         <ListItemIcon>
           <Image
             src={article?.image?.url}
-            responsive
+            responsive="true"
             height={100}
             width={100}
             style={sx.image}

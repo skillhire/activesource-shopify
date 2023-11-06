@@ -18,7 +18,7 @@ const OrderLineItem = ({ styles, lineItem, ...props }) => {
         {lineItem?.variant?.image?.src && (
           <Badge badgeContent={lineItem.quantity} color="primary">
             <Image
-              responsive
+              responsive="true"
               height={100}
               width={100}
               style={{

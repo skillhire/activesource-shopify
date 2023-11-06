@@ -55,7 +55,7 @@ const ImageCarousel = ({
                 style={{
                   objectFit: "contain",
                 }}
-                responsive
+                responsive="true"
                 alt={image?.altText}
               />
             </CardActionArea>
