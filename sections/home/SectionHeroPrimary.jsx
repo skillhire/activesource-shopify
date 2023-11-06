@@ -35,9 +35,9 @@ export default SectionHeroPrimary;
 
 const sx = {
   root: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "primary.main",
     minHeight: {
       sm: "calc(100vh - 64px)",
@@ -49,19 +49,26 @@ const sx = {
     },
   },
   container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    py: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: {
+      lg: "space-between",
+      sm: "center",
+    },
+    pt: {
+      sm: 6,
+      xs: 6,
+    },
+    pb: {
       sm: 12,
       xs: 6,
     },
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
   },
   button: {
     width: {
-      sm: 'auto',
-      xs: '100%',
+      sm: "auto",
+      xs: "100%",
     },
   }
 };

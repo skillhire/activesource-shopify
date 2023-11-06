@@ -6,7 +6,7 @@ const ProductTabs = ({ product }) => {
   const [tab, setTab] = useState(0);
 
   const handleTabChange = (e, newValue) => {
-    console.log("newValue", newValue, e);
+    // console.log("newValue", newValue, e);
     setTab(newValue);
   };
 

@@ -16,8 +16,6 @@ const ProductCard = ({ product, handleClick }) => {
 
   useEffect(() => {
     if (product) {
-      console.log("product", product)
-      console.log("product", product.options[0].values.map)
     }
   }, [product]);
 
@@ -53,7 +51,7 @@ const ProductCard = ({ product, handleClick }) => {
           <ColorOption
             key={i}
             color={color}
-            size={20}
+            size={12}
             handleClick={handleColorClick}
           />
         ))}
