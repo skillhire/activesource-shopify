@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useClickOrDrag } from "hooks";
-import { Box, CardActionArea, Typography } from "@mui/material";
-import { Image } from "components";
+import { Box, CardActionArea, Typography, Stack } from "@mui/material";
+
 import { truncate, formatCurrency } from "utils";
+import { Image } from "components";
 import ColorOption from "components/variants/ColorOption";
-import { color } from "framer-motion";
 
 const ProductCard = ({ product, handleClick }) => {
   const [image, setImage] = useState(null);
@@ -40,15 +40,12 @@ const ProductCard = ({ product, handleClick }) => {
         sx={sx.contentActionArea}
       >
         {image && (
-          <Image src={image} alt={product.title} fill sizes="100%" />
+          <Image src={image} alt={product.title} objectFit="cover" />
         )}
       </CardActionArea>
-      <Box sx={sx.content}>
-        <Typography variant="body1" color="textPrimary" sx={sx.title}>
+      <Stack px={2} py={1} spacing={1}>
+        <Typography variant="subtitle1" size="small" color="textPrimary" sx={sx.title}>
           {truncate(product?.title)}
-        </Typography>
-        <Typography variant="button" color="textPrimary" sx={sx.price}>
-          {formatCurrency(product?.priceRange?.minVariantPrice?.amount)}
         </Typography>
         {colors?.map((color, i) => (
           <ColorOption
@@ -58,7 +55,10 @@ const ProductCard = ({ product, handleClick }) => {
             handleClick={handleColorClick}
           />
         ))}
-      </Box>
+        <Typography variant="button" color="textPrimary" sx={sx.price}>
+          {formatCurrency(product?.priceRange?.minVariantPrice?.amount)}
+        </Typography>
+      </Stack>
     </Box>
   );
 };
@@ -69,21 +69,14 @@ const sx = {
   root: {
     width: "100%",
     minHeight: 300,
+    borderRadius: '10px',
+    overflow: 'hidden',
     backgroundColor: "background.paper",
-  },
-  content: {
-    p: 1,
-    px: 2,
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-  },
-  image: {
-    cursor: "pointer",
   },
   contentActionArea: {
     cursor: "pointer",
     overflow: "hidden",
+    borderRadius: 0,
     ".MuiCardActionArea-focusHighlight": {
       background: "transparent",
     },

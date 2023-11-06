@@ -1,6 +1,7 @@
 export default {
   styleOverrides: {
     root: {
+      fontWeight: 600,
       boxShadow: "none",
       "&:hover": {
         boxShadow: "none",

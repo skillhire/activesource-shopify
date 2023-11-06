@@ -45,6 +45,7 @@ export default {
     black: "#23263B",
     divider: "#DDE2F1",
     highlight: "#EBEEFA",
+    grey: "#B4B4B4",
   },
   divider: "#DDE2F1",
   gradient: {

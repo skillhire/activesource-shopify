@@ -2,15 +2,13 @@ import { capitalize } from "@mui/material";
 
 export default {
   fontFamily: ["Poppins"],
-  // Big Heading (SemiBold) 60/133
-  h1: {
+  h1: { // Big Heading (SemiBold) 60/133
     fontSize: 60,
     fontWeight: 600,
     lineHeight: "133%", /* 79.8px */
     letterSpacing: "-0.9px",
   },
-  // Heading (SemiBold) 45/133
-  h2: {
+  h2: { // Heading (SemiBold) 45/133
     fontSize: 45,
     fontWeight: 600,
     lineHeight: "133%", /* 59.85px */
@@ -20,14 +18,12 @@ export default {
       lineHeight: "120%",
     },
   },
-  // Title (SemiBold) 35/120
-  h3: {
+  h3: { // Title (SemiBold) 35/120
     fontSize: 35,
     fontWeight: 600,
     lineHeight: "120%", /* 42px */
   },
-  // Small Title (SemiBold) 30/133
-  h4: {
+  h4: {  // Small Title (SemiBold) 30/133
     fontSize: 30,
     fontWeight: 600,
     lineHeight: "133%", /* 39.9px */
@@ -56,6 +52,12 @@ export default {
       fontSize: 14,
     },
   },
+  button: { /* Header Menu (SemiBold) */
+    fontSize: 16,
+    fontWeight: 600,
+    lineHeight: "120%",
+    textTransform: "capitalize",
+  },
   overline: { // Small Body (Regular) 13/120
     fontSize: 13,
     fontWeight: 400,
@@ -71,9 +73,6 @@ export default {
     fontSize: 10,
     fontWeight: 400,
     lineHeight: "120%",
-  },
-  button: {
-    textTransform: "capitalize",
   },
   // custom:
   link: {
