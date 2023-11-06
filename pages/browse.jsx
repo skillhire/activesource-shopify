@@ -3,7 +3,7 @@ import { Container, Grid, Box, Typography } from "@mui/material";
 import {
   CoverImage,
   Layout,
-  ProductItem,
+  ProductCard,
   FilterButton,
   PriceFilterButton,
   NoSearchResults,
@@ -124,7 +124,7 @@ const Browse = (props) => {
           <Grid container spacing={1}>
             {products?.map((product, index) => (
               <Grid item xs={6} sm={6} md={3} lg={3} key={index}>
-                <ProductItem
+                <ProductCard
                   product={product}
                   handleClick={handleProductClick}
                 />

@@ -6,7 +6,7 @@ import { truncate, formatCurrency } from "utils";
 import ColorOption from "components/variants/ColorOption";
 import { color } from "framer-motion";
 
-const ProductItem = ({ product, handleClick }) => {
+const ProductCard = ({ product, handleClick }) => {
   const [image, setImage] = useState(null);
   const [colors, setColors] = useState();
 
@@ -63,7 +63,7 @@ const ProductItem = ({ product, handleClick }) => {
   );
 };
 
-export default ProductItem;
+export default ProductCard;
 
 const sx = {
   root: {

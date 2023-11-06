@@ -59,7 +59,7 @@ export { default as OrderLineItem } from "components/orders/OrderLineItem";
 export { default as OrderSkeleton } from "components/skeletons/OrderSkeleton";
 export { default as Page } from "components/layout/Page";
 export { default as Placeholder } from "components/Placeholder";
-export { default as ProductItem } from "components/products/ProductItem";
+export { default as ProductCard } from "components/products/ProductCard";
 export { default as ProductCarousel } from "components/products/ProductCarousel";
 export { default as ProductCollection } from "components/products/ProductCollection";
 export { default as ProductDetails } from "components/products/ProductDetails";

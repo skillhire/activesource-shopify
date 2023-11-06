@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import {
   CarouselRightArrow,
   CarouselLeftArrow,
-  ProductItem,
+  ProductCard,
   ProductSkeleton,
 } from "components";
 import Carousel from "react-multi-carousel";
@@ -53,7 +53,7 @@ const ProductCarousel = ({
         >
           {products.map((product) => (
             <Box sx={sx.item} key={product.id}>
-              <ProductItem product={product} handleClick={handleClick} />
+              <ProductCard product={product} handleClick={handleClick} />
             </Box>
           ))}
         </Carousel>
