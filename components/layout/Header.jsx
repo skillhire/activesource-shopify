@@ -15,7 +15,7 @@ const Header = ({ styles = {}, ...props }) => {
       <AppBar sx={sx.appBar} position="fixed" elevation={0}>
         <DesktopMenu handleClick={handleClick} />
       </AppBar>
-      <MobileMenu handleClick={handleClick} />
+      <MobileMenu handleClick={handleClick} isLogged={false} />
     </>
   );
 };
