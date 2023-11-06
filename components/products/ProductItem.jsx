@@ -19,7 +19,7 @@ const ProductItem = ({ product, handleClick }) => {
     }
   }, [product]);
 
-  const handleColorClick = (color) => {};
+  const handleColorClick = (color) => { };
 
   useEffect(() => {
     if (product) {
@@ -40,15 +40,7 @@ const ProductItem = ({ product, handleClick }) => {
         sx={sx.contentActionArea}
       >
         {image && (
-          <Image
-            fill
-            alt={product.title}
-            src={image}
-            styles={{
-              maxWidth: "100%",
-              objectFit: "contain",
-            }}
-          />
+          <Image src={image} alt={product.title} fill sizes="100%" />
         )}
       </CardActionArea>
       <Box sx={sx.content}>

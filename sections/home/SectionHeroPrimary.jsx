@@ -24,7 +24,7 @@ const SectionHeroPrimary = (props) => {
               </Button>
             </Box>
           </Stack>
-          <Image src={HeroImage} alt="Hero Image" width={450} />
+          <Image src={HeroImage} alt="Hero Image" priority width={450} />
         </Box>
       </Container>
     </Box>
