@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useClickOrDrag, useInstagram } from "hooks";
-import { Box, Typography, CardActionArea } from "@mui/material";
+import { Typography, CardActionArea } from "@mui/material";
 import { Section, Carousel } from "components";
 import Image from "next/image";
 import { INSTA_CAROUSEL_RESPONSIVE } from "constants/shop";
@@ -27,7 +27,7 @@ const InstagramImage = (props) => {
         alt="Instagram Image"
         height={356}
         width={356}
-        responsive
+        responsive="true"
         style={{
           width: "100%",
           objectFit: "cover",
