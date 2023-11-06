@@ -16,6 +16,8 @@ const ProductCard = ({ product, handleClick }) => {
 
   useEffect(() => {
     if (product) {
+      console.log("product", product)
+      console.log("product", product.options[0].values.map)
     }
   }, [product]);
 
@@ -55,6 +57,16 @@ const ProductCard = ({ product, handleClick }) => {
             handleClick={handleColorClick}
           />
         ))}
+        {product && product.options && product.options[0] && product.options[0].values.length > 0 && (
+          <Typography variant="caption" color="grey" sx={sx.price}>
+            {product.options[0].values.map((option, i) => (
+              <Box component="span" sx={{ display: "inline" }}>
+                {option}
+                {i < product.options[0].values.length - 1 && " - "}
+              </Box>
+            ))}
+          </Typography>
+        )}
         {product && (
           <Typography variant="button" color="textPrimary" sx={sx.price}>
             {formatPrice(product.priceRange?.minVariantPrice.amount, product.priceRange?.maxVariantPrice.amount)}
@@ -71,8 +83,8 @@ const sx = {
   root: {
     width: "100%",
     minHeight: 300,
-    borderRadius: '10px',
-    overflow: 'hidden',
+    borderRadius: "10px",
+    overflow: "hidden",
     backgroundColor: "background.paper",
   },
   contentActionArea: {
