@@ -50,5 +50,9 @@ const sx = {
   color: {
     height: "24px",
     width: "24px",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "common.disabled",
+    borderRadius: "100%",
   },
 };

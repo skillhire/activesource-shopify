@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import {
   Layout,
-  ProductItem,
+  ProductCard,
   FilterButton,
   NoSearchResults,
   SearchTags,
@@ -226,7 +226,7 @@ const Collection = (props) => {
             {products &&
               products?.map((product, index) => (
                 <Grid item xs={6} sm={6} md={3} lg={3} key={index}>
-                  <ProductItem
+                  <ProductCard
                     product={product}
                     handleClick={() => handleProductClick(product)}
                   />

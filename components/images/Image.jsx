@@ -10,6 +10,7 @@ const NextImage = ({
   objectFit = "contain",
   alt,
   styles = {}, // next/image style object (not sx)
+  ...props
 }) => {
   const fastlyLoader = ({ src, width, quality }) => {
     let extension = src.split(".").pop();
@@ -35,6 +36,7 @@ const NextImage = ({
           objectFit: objectFit,
           ...styles,
         }}
+        {...props}
       />
     </Box>
   );

@@ -42,10 +42,10 @@ const sx = {
   listItem: {
     border: "1px solid",
     borderColor: "divider",
-    borderRadius: "30px",
+    borderRadius: 6,
     mb: 1,
     "& .MuiListItemButton-root": {
-      borderRadius: "30px",
+      borderRadius: 6,
     },
   },
   secondaryAction: {

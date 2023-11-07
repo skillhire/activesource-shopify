@@ -5,10 +5,7 @@ import ProductDescription from "./ProductDescription";
 const ProductTabs = ({ product }) => {
   const [tab, setTab] = useState(0);
 
-  const handleTabChange = (e, newValue) => {
-    console.log("newValue", newValue, e);
-    setTab(newValue);
-  };
+  const handleTabChange = (e, newValue) => setTab(newValue);
 
   return (
     <Box sx={sx.root}>

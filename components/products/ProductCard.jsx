@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useClickOrDrag } from "hooks";
-import { Box, CardActionArea, Typography } from "@mui/material";
-import { Image } from "components";
-import { truncate, formatCurrency } from "utils";
-import ColorOption from "components/variants/ColorOption";
-import { color } from "framer-motion";
+import { Box, CardActionArea, Typography, Stack } from "@mui/material";
 
-const ProductItem = ({ product, handleClick }) => {
+import { truncate, formatPriceRange } from "utils";
+import { Image } from "components";
+import ColorOption from "components/variants/ColorOption";
+
+const ProductCard = ({ product, handleClick }) => {
   const [image, setImage] = useState(null);
   const [colors, setColors] = useState();
 
@@ -19,7 +19,7 @@ const ProductItem = ({ product, handleClick }) => {
     }
   }, [product]);
 
-  const handleColorClick = (color) => {};
+  const handleColorClick = (color) => { };
 
   useEffect(() => {
     if (product) {
@@ -40,60 +40,60 @@ const ProductItem = ({ product, handleClick }) => {
         sx={sx.contentActionArea}
       >
         {image && (
-          <Image
-            fill
-            alt={product.title}
-            src={image}
-            styles={{
-              maxWidth: "100%",
-              objectFit: "contain",
-            }}
-          />
+          <Image src={image} alt={product.title} objectFit="contain" />
         )}
       </CardActionArea>
-      <Box sx={sx.content}>
-        <Typography variant="body1" color="textPrimary" sx={sx.title}>
+      <Stack px={2} py={2} spacing={0.5}>
+        <Typography variant="subtitle1" size="small" color="textPrimary" sx={sx.title}>
           {truncate(product?.title)}
-        </Typography>
-        <Typography variant="button" color="textPrimary" sx={sx.price}>
-          {formatCurrency(product?.priceRange?.minVariantPrice?.amount)}
         </Typography>
         {colors?.map((color, i) => (
           <ColorOption
             key={i}
             color={color}
-            size={20}
+            size={12}
             handleClick={handleColorClick}
           />
         ))}
-      </Box>
+        {product?.options[0].values.length > 0 && (
+          <Typography variant="caption" color="disabled">
+            {product.options[0].values.map((option, i) => (
+              <Box component="span" sx={sx.option}>
+                {option}
+                {i < product.options[0].values.length - 1 && " - "}
+              </Box>
+            ))}
+          </Typography>
+        )}
+        {product?.priceRange && (
+          <Typography variant="button" color="textPrimary">
+            {formatPriceRange(product.priceRange.minVariantPrice.amount, product.priceRange.maxVariantPrice.amount)}
+          </Typography>
+        )}
+      </Stack>
     </Box>
   );
 };
 
-export default ProductItem;
+export default ProductCard;
 
 const sx = {
   root: {
     width: "100%",
     minHeight: 300,
+    borderRadius: 2,
+    overflow: "hidden",
     backgroundColor: "background.paper",
-  },
-  content: {
-    p: 1,
-    px: 2,
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-  },
-  image: {
-    cursor: "pointer",
   },
   contentActionArea: {
     cursor: "pointer",
     overflow: "hidden",
+    borderRadius: 0,
     ".MuiCardActionArea-focusHighlight": {
       background: "transparent",
     },
   },
+  option: {
+    display: "inline",
+  }
 };

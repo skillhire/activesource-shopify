@@ -37,7 +37,7 @@ export default {
     success: "#94E8B4",
     error: "#F93943",
     warning: "#F93943",
-    disabled: "#ADB5BD",
+    disabled: "#B4B4B4",
     border: "#EDEDF1",
     avatar: "#D6D6F8",
     input: "#E6EBF5",

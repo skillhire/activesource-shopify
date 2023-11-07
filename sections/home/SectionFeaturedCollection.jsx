@@ -1,31 +1,27 @@
 import { ProductCollection } from "components";
-import { Box, Button, Container, Typography } from "@mui/material";
-import { useRouter } from "next/router";
+import { Link } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 
 const SectionFeaturedCollection = (props) => {
   const { featuredCollection } = props || {};
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push(`/collections/${featuredCollection.handle}`);
-  };
-
   return (
     <Container maxWidth="lg">
-      <Box sx={sx.header}>
-        <Typography variant="h4" my={8} maxWidth={633}>
-          Personalize for your brand, explore our diverse range of products.
-        </Typography>
-        <Button variant="outlined" onClick={handleClick}>
-          Explore Products
-        </Button>
+      <Box py={12}>
+        <Box sx={sx.header} mb={5}>
+          <Typography variant="h4" maxWidth={633} mr={2}>
+            Personalize for your brand, explore our diverse range of products.
+          </Typography>
+          <Link href={`/collections/${featuredCollection?.handle}`} variant="link" sx={sx.link}>
+            Explore Products
+          </Link>
+        </Box>
+        {featuredCollection && (
+          <ProductCollection
+            handle={featuredCollection.handle}
+            title={featuredCollection.title}
+          />
+        )}
       </Box>
-      {featuredCollection && (
-        <ProductCollection
-          handle={featuredCollection.handle}
-          title={featuredCollection.title}
-        />
-      )}
     </Container>
   );
 };
@@ -36,6 +32,24 @@ const sx = {
   header: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    flexWrap: {
+      xs: "wrap",
+      sm: "nowrap",
+      md: "nowrap",
+    },
+    justifyContent: {
+      xs: "center",
+      sm: "space-between",
+      md: "space-between",
+    },
+    textAlign: {
+      xs: "center",
+      sm: "left",
+      md: "left",
+    },
   },
+  link: {
+    py: 2,
+    whiteSpace: "nowrap"
+  }
 };

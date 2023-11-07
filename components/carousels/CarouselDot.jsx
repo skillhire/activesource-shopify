@@ -42,7 +42,7 @@ const sx = {
     py: 1,
     px: 0,
     minWidth: "calc(100vw / 8)",
-    mx: "0px",
+    mx: 0,
     "&:hover": {
       backgroundColor: "transparent",
     },

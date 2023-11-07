@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
-import { NoSearchResults, ProductItem, SearchInput } from "components";
+import { NoSearchResults, ProductCard, SearchInput } from "components";
 import {
   SwipeableDrawer,
   Container,
@@ -121,7 +121,7 @@ const SearchModal = ({ styles, ...props }) => {
                 {products &&
                   products.map((product) => (
                     <Grid item xs={6} md={3} key={product.id}>
-                      <ProductItem
+                      <ProductCard
                         product={product}
                         handleClick={handleClick}
                       />

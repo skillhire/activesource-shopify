@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Grid } from "@mui/material";
-import { ProductItem, ProductSkeleton } from "components";
+import { ProductCard, ProductSkeleton } from "components";
 import { useRouter } from "next/router";
 import { useSegment } from "hooks";
 
@@ -26,15 +26,15 @@ const ProductGrid = ({
     <Grid container spacing={1}>
       {products && !loading
         ? products.map((product) => (
-            <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} key={product.id}>
-              <ProductItem product={product} handleClick={handleClick} />
-            </Grid>
-          ))
+          <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} key={product.id}>
+            <ProductCard product={product} handleClick={handleClick} />
+          </Grid>
+        ))
         : [...Array(12)].map((_, i) => (
-            <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} key={i}>
-              <ProductSkeleton />
-            </Grid>
-          ))}
+          <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} key={i}>
+            <ProductSkeleton />
+          </Grid>
+        ))}
     </Grid>
   );
 };
