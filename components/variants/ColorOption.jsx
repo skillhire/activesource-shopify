@@ -28,10 +28,6 @@ const ColorOption = ({
           height: `${size}px`,
           width: `${size}px`,
           bgcolor: hex,
-          borderWidth: 1,
-          borderStyle: "solid",
-          borderColor: "common.grey",
-          borderRadius: "100%",
         }}
         key={label}
         value={label}
@@ -54,5 +50,9 @@ const sx = {
   color: {
     height: "24px",
     width: "24px",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "common.grey",
+    borderRadius: "100%",
   },
 };
