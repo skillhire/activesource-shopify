@@ -4,7 +4,7 @@ import {
   Logo,
   MenuToggleButton,
   CartButton,
-  SearchModal,
+  // SearchModal,
   DesktopMenuItem,
 } from "components";
 import { NAVIGATION_MENU } from "constants/navigation";
@@ -25,7 +25,7 @@ const DesktopMenu = ({ logo, handleClick, ...props }) => {
             ))}
           </Box>
           <Box sx={sx.item}>
-            <SearchModal />
+            {/* <SearchModal /> */}
             <CartButton />
           </Box>
         </Box>
