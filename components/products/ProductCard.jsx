@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useClickOrDrag } from "hooks";
 import { Box, CardActionArea, Typography, Stack } from "@mui/material";
 
-import { truncate, formatPrice } from "utils";
+import { truncate, formatPriceRange } from "utils";
 import { Image } from "components";
 import ColorOption from "components/variants/ColorOption";
 
@@ -55,19 +55,19 @@ const ProductCard = ({ product, handleClick }) => {
             handleClick={handleColorClick}
           />
         ))}
-        {product && product.options && product.options[0] && product.options[0].values.length > 0 && (
-          <Typography variant="caption" color="grey" sx={sx.price}>
+        {product?.options[0].values.length > 0 && (
+          <Typography variant="caption" color="textSecondary" sx={sx.price}>
             {product.options[0].values.map((option, i) => (
-              <Box component="span" sx={{ display: "inline" }}>
+              <Box component="span" sx={sx.option}>
                 {option}
                 {i < product.options[0].values.length - 1 && " - "}
               </Box>
             ))}
           </Typography>
         )}
-        {product && (
+        {product?.priceRange && (
           <Typography variant="button" color="textPrimary" sx={sx.price}>
-            {formatPrice(product.priceRange?.minVariantPrice.amount, product.priceRange?.maxVariantPrice.amount)}
+            {formatPriceRange(product.priceRange.minVariantPrice.amount, product.priceRange.maxVariantPrice.amount)}
           </Typography>
         )}
       </Stack>
@@ -93,4 +93,7 @@ const sx = {
       background: "transparent",
     },
   },
+  option: {
+    display: "inline",
+  }
 };

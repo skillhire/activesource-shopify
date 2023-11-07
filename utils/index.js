@@ -58,8 +58,8 @@ export const formatCurrency = (money, digits = 0) => {
   }).format(money);
 };
 
-export const formatPrice = (min, max) => {
-  if (min === max) {
+export const formatPriceRange = (min, max) => {
+  if ((!max || !min) || (min === max)) {
     return formatCurrency(min)
   }
   return `${formatCurrency(min)} - ${formatCurrency(max)}`
