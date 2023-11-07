@@ -56,7 +56,7 @@ const ProductCard = ({ product, handleClick }) => {
           />
         ))}
         {product?.options[0].values.length > 0 && (
-          <Typography variant="caption" color="textSecondary" sx={sx.price}>
+          <Typography variant="caption" color="textSecondary">
             {product.options[0].values.map((option, i) => (
               <Box component="span" sx={sx.option}>
                 {option}
@@ -66,7 +66,7 @@ const ProductCard = ({ product, handleClick }) => {
           </Typography>
         )}
         {product?.priceRange && (
-          <Typography variant="button" color="textPrimary" sx={sx.price}>
+          <Typography variant="button" color="textPrimary">
             {formatPriceRange(product.priceRange.minVariantPrice.amount, product.priceRange.maxVariantPrice.amount)}
           </Typography>
         )}
