@@ -52,7 +52,7 @@ const sx = {
     width: "24px",
     borderWidth: 1,
     borderStyle: "solid",
-    borderColor: "common.grey",
+    borderColor: "common.disabled",
     borderRadius: "100%",
   },
 };

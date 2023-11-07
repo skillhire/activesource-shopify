@@ -56,7 +56,7 @@ const ProductCard = ({ product, handleClick }) => {
           />
         ))}
         {product?.options[0].values.length > 0 && (
-          <Typography variant="caption" color="textSecondary">
+          <Typography variant="caption" color="disabled">
             {product.options[0].values.map((option, i) => (
               <Box component="span" sx={sx.option}>
                 {option}
