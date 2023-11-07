@@ -37,6 +37,6 @@ const sx = {
     opacity: 0.4,
     py: 0,
     height: 36,
-    borderRadius: "2px",
+    borderRadius: 0.5,
   },
 };

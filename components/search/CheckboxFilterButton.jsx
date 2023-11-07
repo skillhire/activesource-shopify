@@ -65,14 +65,14 @@ const sx = {
   checkboxFilled: {
     height: 18,
     width: 18,
-    borderRadius: "2px",
+    borderRadius: 0.5,
     mx: "4px",
     backgroundColor: "primary.main",
   },
   checkboxOutlined: {
     height: 18,
     width: 18,
-    borderRadius: "2px",
+    borderRadius: 0.5,
     border: "2px solid",
     mx: "4px",
     borderColor: "primary.main",

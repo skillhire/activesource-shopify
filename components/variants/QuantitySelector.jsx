@@ -44,9 +44,9 @@ const sx = {
     fontSize: 16,
   },
   buttonGroup: {
-    borderRadius: "50px",
     border: "1px solid",
     borderColor: "primary.light",
+    borderRadius: 10,
   },
   button: {
     border: "none",

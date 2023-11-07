@@ -61,13 +61,13 @@ const sx = {
     p: 0,
   },
   item: {
-    borderRadius: "10px",
+    borderRadius: 2,
     m: 0,
     width: "100%",
     maxWidth: "100%",
   },
   card: {
-    borderRadius: "10px",
+    borderRadius: 2,
     backgroundColor: "common.white",
     borderColor: "common.card",
   },

@@ -70,6 +70,6 @@ const sx = {
     opacity: 0.7,
     minWidth: "60px",
     px: 1,
-    borderRadius: "4px",
+    borderRadius: 1,
   },
 };

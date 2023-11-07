@@ -67,7 +67,7 @@ const sx = {
   button: {
     px: 2,
     minWidth: "60px",
-    borderRadius: "4px",
+    borderRadius: 1,
   },
   hidden: {
     visibility: "hidden",

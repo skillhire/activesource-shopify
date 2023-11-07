@@ -40,16 +40,18 @@ const sx = {
   button: {
     py: 0,
     px: 0,
-    mx: "0px",
+    mx: 0,
     height: "4px",
     minHeight: "4px",
-    borderRadius: "0px",
+    borderRadius: 0,
     "&:hover": {
+      // TODO: use color from palette
       backgroundColor: "#9796AC",
     },
   },
   dot: {
     height: "4px",
+    // TODO: use color from palette
     backgroundColor: "#9796AC",
     transition: "all 0.3s ease-in-out",
   },

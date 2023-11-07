@@ -132,7 +132,7 @@ const sx = {
     bgcolor: "common.white",
     borderWidth: 0,
     width: { md: "100%", sm: "70vw", xs: "90vw" },
-    borderRadius: "10px",
+    borderRadius: 2,
   },
   cardContent: {
     width: "100%",

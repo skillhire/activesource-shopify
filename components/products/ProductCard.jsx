@@ -81,7 +81,7 @@ const sx = {
   root: {
     width: "100%",
     minHeight: 300,
-    borderRadius: "10px",
+    borderRadius: 2,
     overflow: "hidden",
     backgroundColor: "background.paper",
   },
