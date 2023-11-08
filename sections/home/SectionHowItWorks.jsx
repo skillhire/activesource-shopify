@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { Box, Stack, Chip, Container, Grid, Typography } from "@mui/material";
+import { Stack, Chip, Container, Grid, Typography } from "@mui/material";
 
-import HeroImage from "assets/hero-image@2x.png";
+import PickProduct from "assets/pick-product@2x.png";
 
 const ITEMS = [{
   title: "Pick a Product",
   description: "Choose from our wide range of products",
-  image: <Image src={HeroImage} alt="Hero Image" layout="fill" />,
+  image: PickProduct,
 }]
 
 const SectionFeaturedCollection = () => {
@@ -32,9 +32,8 @@ const SectionFeaturedCollection = () => {
                 </Typography>
               </Stack>
             </Grid>
-            <Grid item xs={12} sm={6}>
-              {/* <Image src={item.image} alt="Hero Image" priority width={450} /> */}
-              {item.image}
+            <Grid item xs={12} sm={6} sx={sx.imageContainer}>
+              <Image src={item.image} alt="Hero Image 2" style={sx.image} />
             </Grid>
           </Grid>
         ))}
@@ -47,11 +46,13 @@ export default SectionFeaturedCollection;
 
 const sx = {
   root: {
-    
+
   },
   header: {
     display: "flex",
     alignItems: "center",
     textAlign: "center",
   },
+  image: { objectFit: "contain", width: "75%", height: "auto" },
+  imageContainer: { position: "relative" },
 };

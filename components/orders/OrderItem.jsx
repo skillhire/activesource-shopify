@@ -11,7 +11,7 @@ const OrderItem = ({ styles, order, handleClick, ...props }) => {
       <Button sx={sx.button} onClick={() => handleClick(order)}>
         <Image
           alt={order?.name}
-          layout="fill"
+          fill
           src={order?.lineItems?.edges[0]?.node?.variant?.image?.src}
         />
       </Button>
