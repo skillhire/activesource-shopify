@@ -1,17 +1,18 @@
 import React from "react";
 import { Box, Hidden, Toolbar } from "@mui/material";
+
 import {
   Logo,
-  MenuToggleButton,
   CartButton,
-  // SearchModal,
   DesktopMenuItem,
+  MenuToggleButton,
 } from "components";
 import { NAVIGATION_MENU } from "constants/navigation";
 
 const DesktopMenu = ({ logo, handleClick, ...props }) => {
   return (
     <Toolbar sx={sx.toolbar}>
+      {/* desktop header: */}
       <Hidden mdDown>
         <Box sx={sx.root}>
           <Box sx={sx.item}>
@@ -25,7 +26,6 @@ const DesktopMenu = ({ logo, handleClick, ...props }) => {
             ))}
           </Box>
           <Box sx={sx.item}>
-            {/* <SearchModal /> */}
             <CartButton />
           </Box>
         </Box>
