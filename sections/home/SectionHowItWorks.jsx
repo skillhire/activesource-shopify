@@ -92,8 +92,16 @@ const sx = {
     p: 1,
     background: (theme) => `${theme.palette.tertiary.main} !important`
   },
-  image: { objectFit: "contain", width: "75%", height: "auto" },
+  image: {
+    objectFit: "contain",
+    width: "75%",
+    height: "auto",
+    "@media (max-width: 600px)": {
+      width: "100%",
+    },
+  },
   imageContainer: {
+    flex: 1,
     position: "relative",
     "@media (max-width: 600px)": {
       display: "flex",
@@ -117,6 +125,7 @@ const sx = {
     px: 4,
     flex: 1,
     "@media (max-width: 600px)": {
+      padding: 0,
       display: "flex",
       textAlign: "center",
       alignItems: "center",
