@@ -11,8 +11,8 @@ export default {
     contrastText: "#FFFFFF",
   },
   tertiary: {
-    main: "#FCB524",
-    contrastText: "#FFFFFF",
+    main: "#E7DBFF",
+    contrastText: "#8044FD",
   },
   tonalOffset: 0.2,
   error: {

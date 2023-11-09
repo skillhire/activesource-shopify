@@ -14,7 +14,7 @@ const Collection = ({ styles, collection, ...props }) => {
       <Box sx={sx.imageContainer}>
         <CardActionArea onClick={handleClick}>
           <Image
-            layout="fill"
+            fill
             src={collection?.image?.url}
             alt={collection.title}
           />
