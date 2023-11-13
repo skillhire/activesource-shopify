@@ -19,7 +19,13 @@ const SectionFeaturedSolutions = () => {
             Talk to our representative for more details on custom solutions
           </Typography>
           <Box pt={2}>
-            <Button variant="contained" color="primary" size="large" onClick={handleClick} sx={sx.button}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={handleClick}
+              sx={sx.button}
+            >
               Explore Enterprise Solutions
             </Button>
           </Box>
@@ -32,12 +38,10 @@ const SectionFeaturedSolutions = () => {
 const sx = {
   button: {
     width: {
-      sm: 'auto',
-      xs: '100%',
+      sm: "auto",
+      xs: "100%",
     },
-  }
+  },
 };
 
-
 export default SectionFeaturedSolutions;
-

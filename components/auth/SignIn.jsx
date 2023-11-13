@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { useAlerts, useAuth } from "hooks";
 import { Button, Box, CircularProgress } from "@mui/material";
 import { useRouter } from "next/router";
@@ -34,7 +33,7 @@ const SignIn = ({ onSuccess, ...props }) => {
   };
 
   const handleRegisterClick = () => {
-    router.push("/register");
+    router.push("/signup");
   };
 
   useEffect(() => {
@@ -75,10 +74,6 @@ const SignIn = ({ onSuccess, ...props }) => {
       </Box>
     </>
   );
-};
-
-SignIn.propTypes = {
-  onSuccess: PropTypes.func.isRequired,
 };
 
 export default SignIn;

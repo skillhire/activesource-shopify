@@ -21,18 +21,26 @@ const TypographySection = () => {
       </Box>
 
       <Box sx={sx.item}>
-        <Typography variant="subtitle1">Header Menu (SemiBold) 16/120</Typography>
+        <Typography variant="subtitle1">
+          Header Menu (SemiBold) 16/120
+        </Typography>
         <Typography variant="subtitle2">Form Title (Medium) 16/120</Typography>
         <Typography variant="footer">Footer Menu 16/200</Typography>
         {/* <Typography variant="footer">Mobile Footer Menu 14/200</Typography> */}
       </Box>
 
       <Box sx={sx.item}>
-        <Button size="small" variant="contained">Small Button (SemiBold) 14/120</Button>
+        <Button size="small" variant="contained">
+          Small Button (SemiBold) 14/120
+        </Button>
         <br />
-        <Button size="medium" variant="contained">Button Medium (SemiBold) 20/120</Button>
+        <Button size="medium" variant="contained">
+          Button Medium (SemiBold) 20/120
+        </Button>
         <br />
-        <Button size="large" variant="contained">Button Large (SemiBold) 20/120</Button>
+        <Button size="large" variant="contained">
+          Button Large (SemiBold) 20/120
+        </Button>
       </Box>
     </Box>
   );
@@ -41,16 +49,15 @@ const TypographySection = () => {
 const sx = {
   container: {
     p: 2,
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
   },
   item: {
     marginY: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'start',
-  }
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start",
+  },
 };
 
 export default TypographySection;
-

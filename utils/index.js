@@ -59,11 +59,11 @@ export const formatCurrency = (money, digits = 0) => {
 };
 
 export const formatPriceRange = (min, max) => {
-  if ((!max || !min) || (min === max)) {
-    return formatCurrency(min)
+  if (!max || !min || min === max) {
+    return formatCurrency(min);
   }
-  return `${formatCurrency(min)} - ${formatCurrency(max)}`
-}
+  return `${formatCurrency(min)} - ${formatCurrency(max)}`;
+};
 
 // Shopify will render single SKU products with title 'Default Title'
 export const renderMerchandiseTitle = (merchandise) => {

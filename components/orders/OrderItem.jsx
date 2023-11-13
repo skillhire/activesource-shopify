@@ -1,48 +1,54 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Button, Box, Typography } from "@mui/material";
+import {
+  ListItem,
+  ListItemText,
+  ListItemButton,
+  ListItemIcon,
+  Typography,
+} from "@mui/material";
 import { Image } from "components";
 import { formatCurrency } from "utils";
 import moment from "moment";
 
 const OrderItem = ({ styles, order, handleClick, ...props }) => {
   return (
-    <Box sx={sx.root}>
-      <Button sx={sx.button} onClick={() => handleClick(order)}>
-        <Image
-          alt={order?.name}
-          layout="fill"
-          src={order?.lineItems?.edges[0]?.node?.variant?.image?.src}
+    <ListItem>
+      <ListItemButton onClick={() => handleClick(order)}>
+        <ListItemIcon sx={sx.thumbnail}>
+          <Image
+            alt={order?.name}
+            height={160}
+            width={160}
+            layout="responsive"
+            src={order?.lineItems?.edges[0]?.node?.variant?.image?.src}
+            style={{
+              width: "100%",
+              objectFit: "cover",
+            }}
+          />
+        </ListItemIcon>
+        <ListItemText
+          primary={order?.name}
+          secondary={
+            <Typography gutterBottom variant="body2" color="textSecondary">
+              {moment(order?.processedAt).format("MM/DD/YYYY")} |{" "}
+              {formatCurrency(order?.totalPrice?.amount)}
+            </Typography>
+          }
         />
-      </Button>
-      <Box py={1} px={1}>
-        <Typography gutterBottom variant="subtitle1" component="h2">
-          {order?.name}
-        </Typography>
-        <Box display="flex" flexGrow={1} justifyContent="space-between">
-          <Typography gutterBottom variant="body2" color="textSecondary">
-            {moment(order?.processedAt).format("MM/DD/YYYY")}
-          </Typography>
-          <Typography gutterBottom variant="body2" color="textSecondary">
-            {formatCurrency(order?.totalPrice)}
-          </Typography>
-        </Box>
-      </Box>
-    </Box>
+      </ListItemButton>
+    </ListItem>
   );
 };
 
 export default OrderItem;
 
-OrderItem.propTypes = {
-  styles: PropTypes.object,
-  order: PropTypes.object.isRequired,
-  handleClick: PropTypes.func.isRequired,
-};
-
 const sx = {
   root: {},
   button: {
     p: 0,
+  },
+  thumbnail: {
+    mr: 2,
   },
 };

@@ -55,6 +55,7 @@ export { default as MobileMenuItem } from "components/menu/MobileMenuItem";
 export { default as Modal } from "components/Modal";
 export { default as OrderItem } from "components/orders/OrderItem";
 export { default as OrderDetails } from "components/orders/OrderDetails";
+export { default as OrderList } from "components/orders/OrderList";
 export { default as OrderLineItem } from "components/orders/OrderLineItem";
 export { default as OrderSkeleton } from "components/skeletons/OrderSkeleton";
 export { default as Page } from "components/layout/Page";

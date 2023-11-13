@@ -9,7 +9,7 @@ import {
   MUTATION_CUSTOMER_RECOVER,
   MUTATION_CUSTOMER_RESET_BY_URL,
 } from "graphql/shopify/auth";
-import { deleteCookie, setCookie } from "cookies-next";
+import { getCookie, deleteCookie, setCookie } from "cookies-next";
 
 const useAuth = (props) => {
   const {
@@ -218,6 +218,12 @@ const useAuth = (props) => {
     resetByUrlResp?.loading,
     accessTokenRenewResp?.loading,
   ]);
+
+  useEffect(() => {
+    if (getCookie("shopifyAccessToken")) {
+      setAccessToken(getCookie("shopifyAccessToken"));
+    }
+  }, []);
 
   return {
     accessToken,
