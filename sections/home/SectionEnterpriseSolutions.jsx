@@ -9,7 +9,7 @@ const SectionFeaturedSolutions = () => {
   };
 
   return (
-    <Box py={16} sx={{ background: (theme) => theme.palette.gradient.main }}>
+    <Box py={16} sx={sx.root}>
       <Container maxWidth="lg">
         <Stack spacing={2} alignItems="center" textAlign="center">
           <Typography variant="h3">
@@ -36,6 +36,7 @@ const SectionFeaturedSolutions = () => {
 };
 
 const sx = {
+  root: { background: (theme) => theme.palette.gradient.main },
   button: {
     width: {
       sm: "auto",
