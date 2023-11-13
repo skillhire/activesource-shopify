@@ -26,10 +26,7 @@ const MobileMenuItem = ({
       }}
       secondaryAction={
         menuItem?.hasSubmenu == true && (
-          <IconButton
-            size={"small"}
-            onClick={() => handleClick(menuItem)}
-          >
+          <IconButton size={"small"} onClick={() => handleClick(menuItem)}>
             {!isSubmenuOpen ? <Add sx={sx.icon} /> : <Remove sx={sx.icon} />}
           </IconButton>
         )
@@ -38,7 +35,7 @@ const MobileMenuItem = ({
       <ListItemButton onClick={() => handleClick(menuItem)}>
         <ListItemText
           primary={
-            <Typography variant={!isSubItem ? 'subtitle1' : 'body2'}>
+            <Typography variant={!isSubItem ? "subtitle1" : "body2"}>
               {menuItem.label}
             </Typography>
           }
@@ -65,5 +62,5 @@ const sx = {
   },
   icon: {
     color: "primary.main",
-  }
+  },
 };

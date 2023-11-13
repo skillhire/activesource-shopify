@@ -7,12 +7,7 @@ const MenuToggleButton = () => {
   const { menuOpen, toggleMenu } = useContext(ShopContext);
 
   return (
-    <IconButton
-      onClick={toggleMenu}
-      color="primary"
-      edge="start"
-      size="large"
-    >
+    <IconButton onClick={toggleMenu} color="primary" edge="start" size="large">
       <Menu sx={{ color: "primary.contrastText" }} />
     </IconButton>
   );

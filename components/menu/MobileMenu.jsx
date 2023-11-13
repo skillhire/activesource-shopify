@@ -5,7 +5,11 @@ import { ShopContext } from "context";
 import { useRouter } from "next/router";
 import { Close } from "@mui/icons-material";
 
-import { NAVIGATION_MENU, LOGGED_MENU, UNLOGGED_MENU } from "constants/navigation";
+import {
+  NAVIGATION_MENU,
+  LOGGED_MENU,
+  UNLOGGED_MENU,
+} from "constants/navigation";
 
 const MobileMenu = ({ isLogged }) => {
   const router = useRouter();
@@ -25,25 +29,28 @@ const MobileMenu = ({ isLogged }) => {
     }
   };
 
-  const renderMenu = (menu) => menu.map((menuItem, i) => (
-    <Box key={`${menu}-menu-item-${menuItem.value}`}>
-      <MobileMenuItem
-        menuItem={menuItem}
-        handleClick={() => handleClick(menuItem)}
-        /** */
-        isSubmenuOpen={currentSubmenu === menuItem.value}
-      />
-      {menuItem.hasSubmenu && menuItem.value === currentSubmenu && (menuItem.submenu.map((menuItem, i) => (
+  const renderMenu = (menu) =>
+    menu.map((menuItem, i) => (
+      <Box key={`${menu}-menu-item-${menuItem.value}`}>
         <MobileMenuItem
-          key={`${menu}-submenu-item-${menuItem.value}`}
           menuItem={menuItem}
           handleClick={() => handleClick(menuItem)}
           /** */
-          isSubItem
+          isSubmenuOpen={currentSubmenu === menuItem.value}
         />
-      )))}
-    </Box>
-  ))
+        {menuItem.hasSubmenu &&
+          menuItem.value === currentSubmenu &&
+          menuItem.submenu.map((menuItem, i) => (
+            <MobileMenuItem
+              key={`${menu}-submenu-item-${menuItem.value}`}
+              menuItem={menuItem}
+              handleClick={() => handleClick(menuItem)}
+              /** */
+              isSubItem
+            />
+          ))}
+      </Box>
+    ));
 
   return (
     <Fade in={menuOpen}>
@@ -63,7 +70,7 @@ const MobileMenu = ({ isLogged }) => {
       </Box>
     </Fade>
   );
-}
+};
 
 export default MobileMenu;
 

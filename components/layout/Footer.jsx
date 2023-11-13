@@ -31,24 +31,28 @@ const Footer = ({ styles }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} sx={sx.footerMenu}>
             <Grid container spacing={4}>
-              {NAVIGATION_MENU.map(navItem => (
+              {NAVIGATION_MENU.map((navItem) => (
                 <Grid item xs={12} sm={12} md={4} key={navItem.label}>
                   <Box display="flex" justifyContent={{ md: "flex-end" }}>
                     <List dense disablePadding>
                       <ListItem disableGutters>
                         <ListItemText
-                          primary={(
+                          primary={
                             <Typography
                               variant="subtitle1"
                               sx={sx.footerHeader}
                             >
                               {navItem.label}
                             </Typography>
-                          )}
+                          }
                         />
                       </ListItem>
                       {navItem.submenu.map((menuItem, i) => (
-                        <FooterMenuItem key={i} menuItem={menuItem} handleClick={handleClick} />
+                        <FooterMenuItem
+                          key={i}
+                          menuItem={menuItem}
+                          handleClick={handleClick}
+                        />
                       ))}
                     </List>
                   </Box>
@@ -69,7 +73,11 @@ const Footer = ({ styles }) => {
           <Box sx={sx.subfooterText}>
             <Box sx={sx.legalMenuItems}>
               {LEGAL_MENU.map((menuItem, i) => (
-                <Button key={i} sx={sx.button} onClick={() => handleClick(menuItem.value)}>
+                <Button
+                  key={i}
+                  sx={sx.button}
+                  onClick={() => handleClick(menuItem.value)}
+                >
                   <Typography variant="overline" sx={sx.copyRightLabel}>
                     {menuItem.label}
                   </Typography>
@@ -79,7 +87,7 @@ const Footer = ({ styles }) => {
           </Box>
         </Box>
       </Container>
-    </Box >
+    </Box>
   );
 };
 
@@ -106,7 +114,7 @@ const sx = {
     alignItems: "center",
     justifyContent: "space-between",
     pt: { lg: 6, md: 6, sm: 4, xs: 3 },
-    pb: { lg: 6, md: 6, sm: 4, xs: 4 }
+    pb: { lg: 6, md: 6, sm: 4, xs: 4 },
   },
   subfooterText: {
     display: "flex",

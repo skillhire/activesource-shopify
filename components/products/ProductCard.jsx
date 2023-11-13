@@ -19,7 +19,7 @@ const ProductCard = ({ product, handleClick }) => {
     }
   }, [product]);
 
-  const handleColorClick = (color) => { };
+  const handleColorClick = (color) => {};
 
   useEffect(() => {
     if (product) {
@@ -39,12 +39,15 @@ const ProductCard = ({ product, handleClick }) => {
         onMouseDown={onMouseDown}
         sx={sx.contentActionArea}
       >
-        {image && (
-          <Image src={image} alt={product.title} objectFit="contain" />
-        )}
+        {image && <Image src={image} alt={product.title} objectFit="contain" />}
       </CardActionArea>
       <Stack px={2} py={2} spacing={0.5}>
-        <Typography variant="subtitle1" size="small" color="textPrimary" sx={sx.title}>
+        <Typography
+          variant="subtitle1"
+          size="small"
+          color="textPrimary"
+          sx={sx.title}
+        >
           {truncate(product?.title)}
         </Typography>
         {colors?.map((color, i) => (
@@ -67,7 +70,10 @@ const ProductCard = ({ product, handleClick }) => {
         )}
         {product?.priceRange && (
           <Typography variant="button" color="textPrimary">
-            {formatPriceRange(product.priceRange.minVariantPrice.amount, product.priceRange.maxVariantPrice.amount)}
+            {formatPriceRange(
+              product.priceRange.minVariantPrice.amount,
+              product.priceRange.maxVariantPrice.amount
+            )}
           </Typography>
         )}
       </Stack>
@@ -95,5 +101,5 @@ const sx = {
   },
   option: {
     display: "inline",
-  }
+  },
 };

@@ -11,7 +11,11 @@ const SectionFeaturedCollection = (props) => {
           <Typography variant="h4" maxWidth={633} mr={2}>
             Personalize for your brand, explore our diverse range of products.
           </Typography>
-          <Link href={`/collections/${featuredCollection?.handle}`} variant="link" sx={sx.link}>
+          <Link
+            href={`/collections/${featuredCollection?.handle}`}
+            variant="link"
+            sx={sx.link}
+          >
             Explore Products
           </Link>
         </Box>
@@ -50,6 +54,6 @@ const sx = {
   },
   link: {
     py: 2,
-    whiteSpace: "nowrap"
-  }
+    whiteSpace: "nowrap",
+  },
 };

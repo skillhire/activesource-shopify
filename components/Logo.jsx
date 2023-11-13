@@ -15,7 +15,14 @@ const Logo = ({ height = 120, width = 120, white = false, ...props }) => {
   return (
     <Box sx={sx.root}>
       <Button disableRipple onClick={handleClick} sx={sx.button}>
-        <Image responsive="true" src={LOGO?.src} sx={sx.image} alt="Logo" height={30} width={240} />
+        <Image
+          responsive="true"
+          src={LOGO?.src}
+          sx={sx.image}
+          alt="Logo"
+          height={30}
+          width={240}
+        />
       </Button>
     </Box>
   );

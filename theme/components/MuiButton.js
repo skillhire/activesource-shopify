@@ -32,7 +32,7 @@ export default {
         fontSize: 20,
         lineHeight: "120%",
         height: 64,
-        padding: '20px 52px',
+        padding: "20px 52px",
       },
     },
     {
@@ -40,14 +40,14 @@ export default {
       style: {
         fontSize: 16,
         lineHeight: "120%",
-      }
+      },
     },
     {
       props: { size: "small" },
       style: {
         fontSize: 14,
-        lineHeight: "120%"
-      }
-    }
-  ]
+        lineHeight: "120%",
+      },
+    },
+  ],
 };

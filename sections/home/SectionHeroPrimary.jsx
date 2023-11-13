@@ -12,14 +12,24 @@ const SectionHeroPrimary = (props) => {
       <Container maxWidth="lg">
         <Box sx={sx.container}>
           <Stack spacing={3}>
-            <Typography variant="h2" component="h1" maxWidth={500} color="primary.contrastText">
+            <Typography
+              variant="h2"
+              component="h1"
+              maxWidth={500}
+              color="primary.contrastText"
+            >
               {home?.title}
             </Typography>
             <Typography variant="body1" color="primary.contrastText">
               {home?.subtitle}
             </Typography>
             <Box pt={2}>
-              <Button variant="contained" color="secondary" size="large" sx={sx.button}>
+              <Button
+                variant="contained"
+                color="secondary"
+                size="large"
+                sx={sx.button}
+              >
                 Explore Products
               </Button>
             </Box>
@@ -70,5 +80,5 @@ const sx = {
       sm: "auto",
       xs: "100%",
     },
-  }
+  },
 };
