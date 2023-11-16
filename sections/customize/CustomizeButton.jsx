@@ -40,10 +40,11 @@ const CustomizeButton = (props) => {
     <StickyButtonGroup>
       <Button
         onClick={handleAddToCart}
+        color="secondary"
         variant="contained"
         startIcon={loading && <CircularProgress size={20} sx={sx.loading} />}
       >
-        Add to Bag
+        Add to Cart
       </Button>
       <Button
         onClick={() => setOpenMobile(!openMobile)}

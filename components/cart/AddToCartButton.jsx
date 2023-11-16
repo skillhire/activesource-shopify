@@ -45,13 +45,13 @@ const AddToCartButton = ({
   return (
     <Button
       fullWidth
-      color="primary"
+      color="secondary"
       onClick={handleAddToCart}
       sx={{ ...sx.root, ...styles }}
       variant="contained"
       startIcon={loading && <CircularProgress size={20} sx={sx.loader} />}
     >
-      Add to Bag
+      Add to Cart
     </Button>
   );
 };

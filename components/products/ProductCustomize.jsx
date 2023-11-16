@@ -1,0 +1,160 @@
+import React, { useState, useEffect } from "react";
+import { Button, Stack, Typography, Box, CardActionArea } from "@mui/material";
+import { getMetaValue } from "utils";
+import { useColors } from "hooks";
+import Image from "next/image";
+import { Link } from "@mui/material";
+import { CloudUpload } from "@mui/icons-material";
+
+const Thumbnail = ({ src, handleClick }) => (
+  <CardActionArea onClick={handleClick} sx={sx.thumbnail}>
+    <Image
+      src={src}
+      width={99}
+      height={144}
+      alt={"Thumbnail"}
+      style={{
+        objectFit: "cover",
+      }}
+    />
+  </CardActionArea>
+);
+
+const ProductCustomizeModal = ({
+  open = false,
+  handleClose,
+  color,
+  product,
+  customAttributes,
+  handleChange,
+}) => {
+  const [image, setImage] = useState();
+  const [activeColor, setActiveColor] = useState();
+  const [activeImage, setActiveImage] = useState();
+  const [placement, setPlacement] = useState("front");
+
+  const { colors, fetchColors } = useColors();
+
+  useEffect(() => {
+    if (open) {
+      fetchColors();
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (colors?.length > 0 && color) {
+      const active = colors.find((c) => c.handle == color.handle);
+      setActiveColor(active);
+      setActiveImage(active?.front_placement);
+    }
+  }, [colors, color]);
+
+  const isFront = getMetaValue(product, "front_placement");
+  const isBack = getMetaValue(product, "back_placement");
+
+  const handleThumbnailClick = (placement) => {
+    setPlacement(placement);
+    if (placement == "front") {
+      setActiveImage(activeColor?.front_placement);
+    } else if (placement == "back") {
+      setActiveImage(activeColor?.back_placement);
+    }
+  };
+
+  if (!activeColor) { return null; }
+
+  return (
+    <Stack>
+      {isFront && (
+        <>
+          <Stack spacing={1} sx={sx.container}>
+            <Typography variant="subtitle1" sx={sx.title}>Front Placement</Typography>
+            <Box>
+              <Button size="small" variant="outlined" sx={sx.button}>Select Placement</Button>
+            </Box>
+            <Link variant="overline" color="text.secondary">
+              Placement Guide
+            </Link>
+          </Stack>
+          <Stack spacing={1} sx={sx.container}>
+            <Typography variant="subtitle1" sx={sx.title}>Front Design</Typography>
+            <Box>
+              <Button size="small" variant="outlined" sx={sx.button} startIcon={<CloudUpload />}>Choose file</Button>
+            </Box>
+            <Typography variant="caption">
+              Support: PNG only | Max File Size: 5Mb | Resolution: 12’ x 16’
+            </Typography>
+          </Stack>
+        </>
+      )}
+      {isBack && (
+        <>
+          <Stack spacing={1} sx={sx.container}>
+            <Typography variant="subtitle1" sx={sx.title}>Back Placement</Typography>
+            <Box>
+              <Button size="small" variant="outlined" sx={sx.button}>Select Placement</Button>
+            </Box>
+            <Link variant="overline" color="text.secondary">
+              Placement Guide
+            </Link>
+          </Stack>
+          <Stack spacing={1} sx={sx.container}>
+            <Typography variant="subtitle1" sx={sx.title}>Back Design</Typography>
+            <Box>
+              <Button size="small" variant="outlined" sx={sx.button} startIcon={<CloudUpload />}>Choose file</Button>
+            </Box>
+            <Typography variant="caption">
+              Support: PNG only | Max File Size: 5Mb | Resolution: 12’ x 16’
+            </Typography>
+          </Stack>
+        </>
+      )}
+      <Stack sx={sx.container}>
+        <Typography variant="subtitle1" sx={sx.title}>Preview</Typography>
+        {activeColor && (
+          <Stack direction="row" spacing={2}>
+            {isFront && (
+              <Stack>
+                <Thumbnail
+                  src={activeColor?.front_placement}
+                  handleClick={() => handleThumbnailClick("front")}
+                />
+                <Typography variant="overline" sx={sx.overline}>Front</Typography>
+              </Stack>
+            )}
+            {isBack && (
+              <Stack>
+                <Thumbnail
+                  src={activeColor?.back_placement}
+                  handleClick={() => handleThumbnailClick("back")}
+                />
+                <Typography variant="overline" sx={sx.overline}>Back</Typography>
+              </Stack>
+            )}
+          </Stack>
+        )}
+      </Stack>
+    </Stack>
+  );
+};
+
+export default ProductCustomizeModal;
+
+const sx = {
+  container: {
+    my: 1,
+  },
+  thumbnail: {
+    p: 0,
+  },
+  title: {
+    my: 1,
+  },
+  button: {
+    minWidth: 176,
+  },
+  overline: {
+    textAlign: "center",
+    py: 1,
+  },
+};

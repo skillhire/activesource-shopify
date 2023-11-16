@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs, Stack, Typography } from "@mui/material";
 import ProductDescription from "./ProductDescription";
 
 const ProductTabs = ({ product }) => {
@@ -9,12 +9,12 @@ const ProductTabs = ({ product }) => {
 
   return (
     <Box sx={sx.root}>
-      <Tabs value={tab} indicatorColor="primary" onChange={handleTabChange}>
+      <Tabs value={tab} indicatorColor="secondary" onChange={handleTabChange} sx={sx.tabs}>
         <Tab value={0} label="Description" />
         <Tab value={1} label="Shipping" />
         <Tab value={2} label="File Guidlines" />
       </Tabs>
-      <Box sx={sx.content}>
+      <Stack sx={sx.content}>
         {tab == 0 && <ProductDescription product={product} />}
         {tab == 1 && (
           <Typography sx={sx.text} variant="body1">
@@ -62,7 +62,7 @@ const ProductTabs = ({ product }) => {
             Non curabitur gravida arcu ac tortor dignissim convallis aenean et.
           </Typography>
         )}
-      </Box>
+      </Stack>
     </Box>
   );
 };
@@ -78,8 +78,10 @@ const sx = {
     borderColor: "common.divider",
   },
   content: {
-    py: 2,
+    py: 4,
     minHeight: "240px",
+    borderBottom: "1px solid",
+    borderColor: "common.divider",
   },
   text: {
     whiteSpace: "pre-line",

@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { Box, Stack, Typography } from "@mui/material";
-import { formatCurrency } from "utils";
+import { Grid, Box, Stack, Typography } from "@mui/material";
+import { formatPriceRange } from "utils";
 import { AddToCartButton, VariantSelector } from "components";
 import CustomColorSelect from "components/variants/CustomColorSelect";
-import CustomizeButton from "components/cart/CustomizeButton";
+// import CustomizeButton from "components/cart/CustomizeButton";
 import QuantitySelector from "components/variants/QuantitySelector";
 
 const ProductDetails = ({
+  children,
   product,
   variant,
 
   selectedOptions,
   handleOptionChange,
 
+  color,
   customAttributes,
   handleColorClick,
-  handleCustomizeClick,
 }) => {
   const [addToCartDisabled, setAddToCartDisabled] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -62,39 +62,48 @@ const ProductDetails = ({
       <Stack spacing={2}>
         {product && (
           <>
-            <Box sx={sx.title}>
-              <Typography variant="h5">{product?.title}</Typography>
-              <Typography variant="button" sx={sx.price}>
-                {formatCurrency(price)}
-              </Typography>
-            </Box>
-            <VariantSelector
-              handleChange={handleOptionChange}
-              selectedOptions={selectedOptions}
-              options={product?.options}
-            />
+            <Typography variant="h4">{product?.title}</Typography>
+            <Typography variant="button" sx={sx.price}>
+              {formatPriceRange(
+                product.priceRange.minVariantPrice.amount,
+                product.priceRange.maxVariantPrice.amount
+              )}
+            </Typography>
             <CustomColorSelect
               colors={colors}
               handleClick={handleColorClick}
               customAttributes={customAttributes}
             />
+            <VariantSelector
+              handleChange={handleOptionChange}
+              selectedOptions={selectedOptions}
+              options={product?.options}
+              showGuidelines={customAttributes?.color !== undefined}
+            />
           </>
         )}
-        <QuantitySelector
-          quantity={quantity}
-          handleChange={handleQuantityChange}
-        />
-        <AddToCartButton
-          disabled={addToCartDisabled}
-          quantity={quantity}
-          variant={variant}
-          product={product}
-          customAttributes={customAttributes}
-        />
-        <CustomizeButton
+        {/* <CustomizeButton
           disabled={customAttributes?.color == undefined}
-          handleClick={handleCustomizeClick}
-        />
+          handleClick={handleCustomize}
+        /> */}
+        {children}
+        <Grid container>
+          <Grid item xs={5}>
+            <QuantitySelector
+              quantity={quantity}
+              handleChange={handleQuantityChange}
+            />
+          </Grid>
+          <Grid item xs={7}>
+            <AddToCartButton
+              disabled={addToCartDisabled}
+              quantity={quantity}
+              variant={variant}
+              product={product}
+              customAttributes={customAttributes}
+            />
+          </Grid>
+        </Grid>
       </Stack>
     </Box>
   );
@@ -104,40 +113,6 @@ export default ProductDetails;
 
 const sx = {
   root: {
-    p: 2,
-  },
-  detailsContainer: {
-    px: {
-      xs: 2,
-      sm: 9,
-    },
-  },
-  title: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  priceContainer: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-  compareAtPrice: {
-    textDecoration: "line-through",
-    color: "text.secondary",
-  },
-  addToCart: {
-    display: "flex",
-    justifyContent: {
-      xs: "center",
-      sm: "flex-start",
-    },
-    width: {
-      xs: "100%",
-      sm: "auto",
-    },
-    backgroundColor: {
-      sm: "transparent",
-    },
+    px: 2,
   },
 };

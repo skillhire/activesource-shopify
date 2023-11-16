@@ -64,13 +64,14 @@ export default {
     /* Header Menu (SemiBold) */ fontSize: 16,
     fontWeight: 600,
     lineHeight: "120%",
-    textTransform: "capitalize",
+    textTransform: "none",
   },
   overline: {
     // Small Body (Regular) 13/120
     fontSize: 13,
     fontWeight: 400,
     lineHeight: "120%",
+    textTransform: "none",
     // Mobile Footer Menu 14/200
     "@media (max-width: 600px)": {
       // Mini Body (Regular) 10/120

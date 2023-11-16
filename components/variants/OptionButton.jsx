@@ -18,7 +18,6 @@ const OptionButton = ({
         minWidth: width,
         justifyContent: justifyContent,
       }}
-      color="primary"
       onClick={() => handleClick(option, value)}
     >
       {children}
@@ -30,13 +29,11 @@ export default OptionButton;
 
 const sx = {
   active: {
-    opacity: 1,
+    background: (theme) => `${theme.palette.tertiary.main} !important`
   },
   button: {
-    textWrap: "nowrap",
-    opacity: 0.4,
-    py: 0,
-    height: 36,
-    borderRadius: 0.5,
+    textAlign: "center",
+    justifyContent: "center",
+    borderRadius: 20,
   },
 };

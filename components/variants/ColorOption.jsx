@@ -42,6 +42,7 @@ const sx = {
   button: {
     p: 0,
     minWidth: 0,
+    borderRadius: "100%",
   },
   selected: {
     border: "2px solid",

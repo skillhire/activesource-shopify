@@ -33,6 +33,5 @@ export default ProductImages;
 const sx = {
   root: {
     pt: 4,
-    backgroundColor: "background.paper",
   },
 };
