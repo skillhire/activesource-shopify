@@ -11,26 +11,15 @@ const Thumbnail = ({ src, handleClick, ...props }) => (
     <Image
       src={src}
       width={99}
-      height={144}
+      height={99}
       sx={sx.thumbnail}
       {...props}
     />
   </CardActionArea>
 );
 
-const ProductCustomizeModal = ({
-  open = false,
-  handleClose,
-  color,
-  product,
-  customAttributes,
-  handleChange,
-}) => {
-  const [image, setImage] = useState();
+const ProductCustomizeModal = ({ open = false, color, product }) => {
   const [activeColor, setActiveColor] = useState();
-  const [activeImage, setActiveImage] = useState();
-  const [placement, setPlacement] = useState("front");
-
   const { colors, fetchColors } = useColors();
 
   useEffect(() => {
@@ -43,21 +32,11 @@ const ProductCustomizeModal = ({
     if (colors?.length > 0 && color) {
       const active = colors.find((c) => c.handle == color.handle);
       setActiveColor(active);
-      setActiveImage(active?.front_placement);
     }
   }, [colors, color]);
 
   const isFront = getMetaValue(product, "front_placement");
   const isBack = getMetaValue(product, "back_placement");
-
-  const handleThumbnailClick = (placement) => {
-    setPlacement(placement);
-    if (placement == "front") {
-      setActiveImage(activeColor?.front_placement);
-    } else if (placement == "back") {
-      setActiveImage(activeColor?.back_placement);
-    }
-  };
 
   if (!activeColor) { return null; }
 
@@ -107,33 +86,25 @@ const ProductCustomizeModal = ({
           </Stack>
         </>
       )}
-      <Stack sx={sx.container}>
-        <Typography variant="subtitle1" sx={sx.title}>Preview</Typography>
-        {activeColor && (
+      {activeColor && (
+        <Stack sx={sx.container}>
+          <Typography variant="subtitle1" sx={sx.title}>Preview</Typography>
           <Stack direction="row" spacing={2}>
             {isFront && (
               <Stack>
-                <Thumbnail
-                  alt="Product's front thumbnail"
-                  src={activeColor?.front_placement}
-                  handleClick={() => handleThumbnailClick("front")}
-                />
+                <Thumbnail src={activeColor?.front_placement} alt="Product's front thumbnail" />
                 <Typography variant="overline" sx={sx.overline}>Front</Typography>
               </Stack>
             )}
             {isBack && (
               <Stack>
-                <Thumbnail
-                  alt="Product's back thumbnail"
-                  src={activeColor?.back_placement}
-                  handleClick={() => handleThumbnailClick("back")}
-                />
+                <Thumbnail src={activeColor?.back_placement} alt="Product's back thumbnail" />
                 <Typography variant="overline" sx={sx.overline}>Back</Typography>
               </Stack>
             )}
           </Stack>
-        )}
-      </Stack>
+        </Stack>
+      )}
     </Stack>
   );
 };
