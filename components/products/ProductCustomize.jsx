@@ -6,16 +6,14 @@ import Image from "next/image";
 import { Link } from "@mui/material";
 import { CloudUpload } from "@mui/icons-material";
 
-const Thumbnail = ({ src, handleClick }) => (
+const Thumbnail = ({ src, handleClick, ...props }) => (
   <CardActionArea onClick={handleClick} sx={sx.thumbnail}>
     <Image
       src={src}
       width={99}
       height={144}
-      alt={"Thumbnail"}
-      style={{
-        objectFit: "cover",
-      }}
+      sx={sx.thumbnail}
+      {...props}
     />
   </CardActionArea>
 );
@@ -116,6 +114,7 @@ const ProductCustomizeModal = ({
             {isFront && (
               <Stack>
                 <Thumbnail
+                  alt="Product's front thumbnail"
                   src={activeColor?.front_placement}
                   handleClick={() => handleThumbnailClick("front")}
                 />
@@ -125,6 +124,7 @@ const ProductCustomizeModal = ({
             {isBack && (
               <Stack>
                 <Thumbnail
+                  alt="Product's back thumbnail"
                   src={activeColor?.back_placement}
                   handleClick={() => handleThumbnailClick("back")}
                 />
@@ -146,6 +146,7 @@ const sx = {
   },
   thumbnail: {
     p: 0,
+    objectFit: "contain",
   },
   title: {
     my: 1,
