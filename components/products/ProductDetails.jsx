@@ -3,7 +3,6 @@ import { Grid, Box, Stack, Typography } from "@mui/material";
 import { formatPriceRange } from "utils";
 import { AddToCartButton, VariantSelector } from "components";
 import CustomColorSelect from "components/variants/CustomColorSelect";
-// import CustomizeButton from "components/cart/CustomizeButton";
 import QuantitySelector from "components/variants/QuantitySelector";
 
 const ProductDetails = ({
@@ -82,10 +81,6 @@ const ProductDetails = ({
             />
           </>
         )}
-        {/* <CustomizeButton
-          disabled={customAttributes?.color == undefined}
-          handleClick={handleCustomize}
-        /> */}
         {children}
         <Grid container>
           <Grid item xs={5}>
