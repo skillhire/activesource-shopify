@@ -31,20 +31,28 @@ const CartLineItem = ({ lineItem }) => {
     image: { src },
   } = variant || {};
   const { priceRange } = product || {};
-  const [currentQuantity, setCurrentQuantity] = useState(quantity || 1);
 
   const [color, setColor] = useState(null);
   const [size, setSize] = useState(null);
 
-  const handleQuantityChange = (value) => {
+  const handleQuantityChange = async (value) => {
     let lineItem = {
       variantId: variant?.id,
       quantity: value,
-      // customAttributes: customAttributes,
+      customAttributes: customAttributes,
     };
+    if (customAttributes) {
+      let attrs = {};
+      for (let [key, value] of Object.entries(customAttributes[0])) {
+        if (key !== '__typename') {
+          attrs[key] = value;
+        }
+      }
+      lineItem = { ...lineItem, customAttributes: [{ ...attrs }] };
+    }
     if (value >= 1) {
-      setCurrentQuantity(value);
-      checkoutLineItemAdd(lineItem);
+      await checkoutLineItemRemove(id);
+      await checkoutLineItemAdd(lineItem);
       trackAddToCart({
         quantity: value,
         variant: variant,
@@ -124,7 +132,7 @@ const CartLineItem = ({ lineItem }) => {
                   </Typography>
                 )}
                 <Stack sx={sx.quantity}>
-                  <QuantitySelector quantity={currentQuantity} handleChange={handleQuantityChange} />
+                  <QuantitySelector quantity={quantity} handleChange={handleQuantityChange} />
                   <Typography variant="button" color="textPrimary" sx={sx.line}>
                     <Box>{amount == 0 ? "FREE" : formatCurrency(amount)}</Box>
                   </Typography>
