@@ -21,8 +21,8 @@ import QuantitySelector from "components/variants/QuantitySelector";
 
 const CartLineItem = ({ lineItem }) => {
   const router = useRouter();
-  const { trackRemoveFromCart } = useSegment();
-  const { loading, checkoutLineItemRemove } = useCheckout();
+  const { trackAddToCart, trackRemoveFromCart } = useSegment();
+  const { loading, checkoutLineItemAdd, checkoutLineItemRemove } = useCheckout();
   const { setCartOpen } = useContext(ShopContext);
   const { id, quantity, variant, customAttributes } = lineItem || {};
   const {
@@ -33,12 +33,25 @@ const CartLineItem = ({ lineItem }) => {
   const { priceRange } = product || {};
   const [currentQuantity, setCurrentQuantity] = useState(quantity || 1);
 
-  const handleQuantityChange = (value) => {
-    setCurrentQuantity(value);
-  };
-
   const [color, setColor] = useState(null);
   const [size, setSize] = useState(null);
+
+  const handleQuantityChange = (value) => {
+    let lineItem = {
+      variantId: variant?.id,
+      quantity: value,
+      // customAttributes: customAttributes,
+    };
+    if (value >= 1) {
+      setCurrentQuantity(value);
+      checkoutLineItemAdd(lineItem);
+      trackAddToCart({
+        quantity: value,
+        variant: variant,
+        product: product,
+      });
+    }
+  };
 
   const handleRemoveLineItem = async (event) => {
     event.stopPropagation();

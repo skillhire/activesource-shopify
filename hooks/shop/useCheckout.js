@@ -224,11 +224,11 @@ const useCheckout = (props) => {
   useEffect(() => {
     setError(
       checkoutFetchResp?.error ||
-        checkoutCreateResp?.error ||
-        checkoutLineItemsAdd?.error ||
-        checkoutLineItemsRemove?.error ||
-        checkoutDiscountCodeApplyResp?.error ||
-        checkoutDiscountCodeRemoveResp?.error
+      checkoutCreateResp?.error ||
+      checkoutLineItemsAdd?.error ||
+      checkoutLineItemsRemove?.error ||
+      checkoutDiscountCodeApplyResp?.error ||
+      checkoutDiscountCodeRemoveResp?.error
     );
   }, [
     checkoutFetchResp?.error,
@@ -242,11 +242,11 @@ const useCheckout = (props) => {
   useEffect(() => {
     setLoading(
       checkoutFetchResp?.loading ||
-        checkoutCreateResp?.loading ||
-        checkoutLineItemsAddResp?.loading ||
-        checkoutLineItemsRemoveResp?.loading ||
-        checkoutDiscountCodeApplyResp?.loading ||
-        checkoutDiscountCodeRemoveResp?.loading
+      checkoutCreateResp?.loading ||
+      checkoutLineItemsAddResp?.loading ||
+      checkoutLineItemsRemoveResp?.loading ||
+      checkoutDiscountCodeApplyResp?.loading ||
+      checkoutDiscountCodeRemoveResp?.loading
     );
   }, [
     checkoutFetchResp?.loading,
