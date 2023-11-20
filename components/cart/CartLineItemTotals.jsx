@@ -1,26 +1,22 @@
 import React from "react";
 import { useCheckout } from "hooks";
 import PropTypes from "prop-types";
-import { Box, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { formatCurrency } from "utils";
-import { CartLineItemPrice } from "components";
 
 const CartLineItemTotals = ({ styles }) => {
   const { checkout } = useCheckout();
 
   return (
     <Box width="100%" sx={sx.root}>
-      {checkout && (
-        <Box>
-          <CartLineItemPrice
-            label={"Subtotal"}
-            value={formatCurrency(checkout.lineItemsSubtotalPrice?.amount)}
-          />
-          <Typography variant="body2" sx={sx.note}>
-            Taxes and shipping calculated at checkout
-          </Typography>
-        </Box>
-      )}
+      <Stack direction="row" sx={sx.container}>
+        <Typography variant="body1" sx={sx.label}>Total:</Typography>
+        <>&nbsp;</>
+        <Typography variant="body1">
+          {checkout && formatCurrency(checkout.lineItemsSubtotalPrice?.amount)}
+          {!checkout && "0"}
+        </Typography>
+      </Stack>
     </Box>
   );
 };
@@ -36,7 +32,14 @@ const sx = {
     mt: 5,
     mb: 2,
   },
-  note: {
-    textAlign: "right",
+  container: {
+    p: 2,
+    justifyContent: "center",
+    borderTop: "2px solid",
+    borderBottom: "2px solid",
+    borderColor: "divider",
   },
+  label: {
+    fontWeight: 600,
+  }
 };

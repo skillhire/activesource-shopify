@@ -91,7 +91,7 @@ const CartLineItem = ({ lineItem }) => {
             <Box>
               <Typography variant="button" color="textPrimary" sx={sx.line}>
                 <Box sx={sx.fields}>{product?.title}</Box>
-                <IconButton size={"small"} sx={sx.removeButton}>
+                <IconButton>
                   <Close onClick={handleRemoveLineItem} sx={sx.removeIcon} />
                 </IconButton>
               </Typography>
@@ -153,14 +153,10 @@ const sx = {
     height: 20,
     lineHeight: "20px",
   },
-  removeButton: {
-    mt: "-8px",
-    mr: "-8px",
-  },
   removeIcon: {
-    height: 20,
-    fontSize: 20,
-    color: "primary.main",
+    height: 21,
+    fontSize: 21,
+    color: "disabled",
   },
 };
 

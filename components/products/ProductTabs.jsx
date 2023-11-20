@@ -75,7 +75,7 @@ const sx = {
   },
   tabs: {
     borderBottom: "1px solid",
-    borderColor: "common.divider",
+    borderColor: "divider",
   },
   content: {
     py: 4,
