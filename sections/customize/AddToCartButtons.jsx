@@ -37,12 +37,13 @@ const AddToCartButtons = (props) => {
           <Button
             fullWidth
             onClick={handleAddToCart}
+            color="secondary"
             variant="contained"
             startIcon={
               loading && <CircularProgress size={20} sx={sx.loading} />
             }
           >
-            Add to Bag
+            Add to Cart
           </Button>
         )}
       </Box>

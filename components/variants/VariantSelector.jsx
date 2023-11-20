@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Link } from "@mui/material";
 import VariantSelect from "./VariantSelect";
 
 const VariantSelector = ({
@@ -7,6 +7,7 @@ const VariantSelector = ({
   options,
   styles,
   handleInfoClick,
+  showGuidelines,
   ...props
 }) => {
   return (
@@ -24,6 +25,11 @@ const VariantSelector = ({
           />
         );
       })}
+      {showGuidelines && (
+        <Link variant="overline" color="text.secondary">
+          Size Guide
+        </Link>
+      )}
     </Box>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useProducts, useVariants, useResponsive, useSegment } from "hooks";
 import { useRouter } from "next/router";
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import {
   Layout,
   ProductDetails,
@@ -9,7 +9,7 @@ import {
   ProductGrid,
   ProductTabs,
 } from "components";
-import ProductCustomizeModal from "components/products/ProductCustomizeModal";
+import ProductCustomize from "components/products/ProductCustomize";
 import { getValue } from "utils";
 
 const Product = () => {
@@ -23,7 +23,7 @@ const Product = () => {
   const [activeImage, setActiveImage] = useState();
   const [selectedOptions, setSelectedOptions] = useState({});
   const [zoom, setZoom] = useState(false);
-  const [showCustomize, setShowCustomize] = useState(false);
+  const [showCustomize, setShowCustomize] = useState(true);
   const { trackProductViewed } = useSegment();
 
   // Handle custom variant option metaobjects
@@ -68,10 +68,6 @@ const Product = () => {
     setShowCustomize(true);
   };
 
-  const handleCustomizeChange = (placement, file) => {
-    console.log(placement, file);
-  };
-
   useEffect(() => {
     if (handle) {
       fetchProduct(handle);
@@ -93,9 +89,9 @@ const Product = () => {
     <Layout title={product?.title} metaDescription={product?.description}>
       <Container maxWidth="lg">
         <Box sx={sx.root} ref={ref}>
-          <Grid container spacing={1}>
+          <Grid container spacing={2}>
             <Grid item xs={12} md={7} lg={8}>
-              <Box sx={sx.imagePane}>
+              <Box>
                 <ProductImages
                   images={images}
                   activeImage={activeImage}
@@ -107,15 +103,25 @@ const Product = () => {
             </Grid>
             <Grid item xs={12} md={5} lg={4}>
               <ProductDetails
+                color={color}
                 loading={loading}
                 product={product}
                 variant={variant}
+                showCustomize={showCustomize}
                 selectedOptions={selectedOptions}
-                handleOptionChange={handleOptionChange}
                 handleColorClick={handleColorClick}
                 customAttributes={customAttributes}
-                handleCustomizeClick={handleCustomize}
-              />
+                handleCustomize={handleCustomize}
+                handleOptionChange={handleOptionChange}
+              >
+                <ProductCustomize
+                  open={showCustomize}
+                  handleClose={() => setShowCustomize(false)}
+                  color={color}
+                  product={product}
+                  customAttributes={customAttributes}
+                />
+              </ProductDetails>
             </Grid>
             <Grid item xs={12}>
               <ProductTabs product={product} />
@@ -127,14 +133,6 @@ const Product = () => {
               />
             </Grid>
           </Grid>
-          <ProductCustomizeModal
-            open={showCustomize}
-            handleClose={() => setShowCustomize(false)}
-            color={color}
-            product={product}
-            customAttributes={customAttributes}
-            handleChange={handleCustomizeChange}
-          />
         </Box>
       </Container>
     </Layout>
@@ -146,8 +144,5 @@ export default Product;
 const sx = {
   root: {
     py: 4,
-  },
-  imagePane: {
-    backgroundColor: "background.paper",
   },
 };

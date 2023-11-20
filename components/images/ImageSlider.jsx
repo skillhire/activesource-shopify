@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, CardActionArea, Fade } from "@mui/material";
+import { Box, CardActionArea, Stack } from "@mui/material";
 import Image from "next/image";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
@@ -22,7 +22,7 @@ const ImageSlider = ({
 
   return (
     <Box sx={sx.root}>
-      <Box sx={sx.thumbnails}>
+      <Stack sx={sx.thumbnails} spacing={2}>
         {images?.map((image) => (
           <CardActionArea
             key={image?.id}
@@ -42,7 +42,7 @@ const ImageSlider = ({
             />
           </CardActionArea>
         ))}
-      </Box>
+      </Stack>
       <Box sx={{ ...sx.fade, ...(fade && sx.fadeIn) }}>
         <Box sx={sx.mainImage}>
           {(activeImage?.src || activeImage?.url) && (
@@ -116,10 +116,6 @@ const sx = {
     "&::-webkit-scrollbar": {
       display: "none",
     },
-  },
-  thumbnail: {
-    border: "2px solid",
-    borderColor: "common.white",
   },
   activeThumbnail: {
     borderColor: "primary.main",
