@@ -134,7 +134,7 @@ const CartLineItem = ({ lineItem }) => {
                 <Stack sx={sx.quantity}>
                   <QuantitySelector quantity={quantity} handleChange={handleQuantityChange} />
                   <Typography variant="button" color="textPrimary" sx={sx.line}>
-                    <Box>{amount == 0 ? "FREE" : formatCurrency(amount)}</Box>
+                    <Box>{amount == 0 ? "FREE" : formatCurrency(amount * quantity)}</Box>
                   </Typography>
                 </Stack>
               </Stack>
