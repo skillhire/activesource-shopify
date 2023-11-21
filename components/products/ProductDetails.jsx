@@ -48,8 +48,8 @@ const ProductDetails = ({
   useEffect(() => {
     if (product?.metafields?.length > 0) {
       let _colors = product.metafields
-        .find((metafield) => metafield.key === "colors")
-        .references.edges.map((e) => e.node);
+        .find((metafield) => metafield?.key === "colors")
+        ?.references.edges.map((e) => e.node);
       setColors(_colors);
     }
   }, [product]);

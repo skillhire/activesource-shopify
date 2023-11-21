@@ -19,14 +19,14 @@ const ProductCard = ({ product, handleClick }) => {
     }
   }, [product]);
 
-  const handleColorClick = (color) => {};
+  const handleColorClick = (color) => { };
 
   useEffect(() => {
     if (product) {
       setImage(product?.images?.edges[0]?.node?.src);
       let _colors = product.metafields
-        .find((metafield) => metafield.key === "colors")
-        .references.edges.map((e) => e.node);
+        .find((metafield) => metafield?.key === "colors")
+        ?.references.edges.map((e) => e.node);
       setColors(_colors);
     }
   }, [product]);
