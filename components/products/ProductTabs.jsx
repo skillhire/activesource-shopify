@@ -70,12 +70,10 @@ const ProductTabs = ({ product }) => {
 export default ProductTabs;
 
 const sx = {
-  root: {
-    width: "100%",
-  },
+  root: { width: "100%" },
   tabs: {
     borderBottom: "1px solid",
-    borderColor: "divider",
+    borderColor: "common.divider",
   },
   content: {
     py: 4,
@@ -83,7 +81,5 @@ const sx = {
     borderBottom: "1px solid",
     borderColor: "common.divider",
   },
-  text: {
-    whiteSpace: "pre-line",
-  },
+  text: { whiteSpace: "pre-line" },
 };

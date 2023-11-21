@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
-import { Box, Button, CircularProgress, Divider } from "@mui/material";
+import React, { useContext } from "react";
+import { Box, Button, CircularProgress } from "@mui/material";
 import { CustomizeContext } from "context";
-import { useRouter } from "next/router";
-import StickyButtonGroup from "./StickyButtonGroup";
 import { ChevronLeft } from "@mui/icons-material";
 import { useResponsive } from "hooks";
+
+import StickyButtonGroup from "./StickyButtonGroup";
 
 const AddToCartButtons = (props) => {
   const { isMobile } = useResponsive();
@@ -71,12 +71,6 @@ const sx = {
     },
     right: 0,
     bottom: 0,
-  },
-  divider: {
-    height: "10px",
-    width: "80%",
-    borderTop: "1px solid",
-    borderColor: "divider",
   },
   container: {
     width: "80%",

@@ -38,8 +38,6 @@ export default VariantSelect;
 
 const sx = {
   root: {
-    borderTop: "1px solid",
-    borderColor: "common.border",
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",

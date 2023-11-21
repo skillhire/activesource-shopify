@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Box, Stack, Typography } from "@mui/material";
+
 import { formatPriceRange } from "utils";
 import { AddToCartButton, VariantSelector } from "components";
 import CustomColorSelect from "components/variants/CustomColorSelect";
@@ -9,11 +10,8 @@ const ProductDetails = ({
   children,
   product,
   variant,
-
   selectedOptions,
   handleOptionChange,
-
-  color,
   customAttributes,
   handleColorClick,
 }) => {
@@ -107,7 +105,5 @@ const ProductDetails = ({
 export default ProductDetails;
 
 const sx = {
-  root: {
-    px: 2,
-  },
+  root: { px: 2 },
 };

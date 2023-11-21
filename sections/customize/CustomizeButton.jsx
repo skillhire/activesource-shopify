@@ -2,8 +2,9 @@ import React, { useState, useContext } from "react";
 import { Button, CircularProgress } from "@mui/material";
 import { CustomizeContext } from "context";
 import { useRouter } from "next/router";
-import StickyButtonGroup from "./StickyButtonGroup";
 import { Edit } from "lucide-react";
+
+import StickyButtonGroup from "./StickyButtonGroup";
 
 const CustomizeButton = (props) => {
   const router = useRouter();
@@ -76,12 +77,6 @@ const sx = {
     },
     right: 0,
     bottom: 0,
-  },
-  divider: {
-    height: "10px",
-    width: "80%",
-    borderTop: "1px solid",
-    borderColor: "divider",
   },
   container: {
     width: "80%",

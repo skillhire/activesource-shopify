@@ -48,19 +48,9 @@ const MobileMenuItem = ({
 export default MobileMenuItem;
 
 const sx = {
-  listItem: {
-    borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-  },
-  faded: {
-    backgroundColor: "secondary.faded",
-  },
-  divider: {
-    borderBottom: "1px solid rgba(255, 255, 255, 0.8)",
-  },
-  noDivider: {
-    borderBottom: "none",
-  },
-  icon: {
-    color: "primary.main",
-  },
+  listItem: { borderBottom: "1px solid rgba(255, 255, 255, 0.2)" },
+  faded: { backgroundColor: "secondary.faded" },
+  divider: { borderBottom: "1px solid rgba(255, 255, 255, 0.8)" },
+  noDivider: { borderBottom: "none" },
+  icon: { color: "primary.main" },
 };

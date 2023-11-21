@@ -51,6 +51,8 @@ const CartLineItem = ({ lineItem }) => {
       lineItem = { ...lineItem, customAttributes: [{ ...attrs }] };
     }
     if (value >= 1) {
+      // TODO: hook up the edit feature instead
+      // currently removing and adding again.
       await checkoutLineItemRemove(id);
       await checkoutLineItemAdd(lineItem);
       trackAddToCart({
@@ -121,16 +123,18 @@ const CartLineItem = ({ lineItem }) => {
                     <Close onClick={handleRemoveLineItem} sx={sx.removeIcon} />
                   </IconButton>
                 </Typography>
-                {color && (
-                  <Typography variant="body2" color="textSecondary">
-                    Color: {color}
-                  </Typography>
-                )}
-                {size && (
-                  <Typography variant="body2" color="textSecondary">
-                    Size: {size}
-                  </Typography>
-                )}
+                <Stack>
+                  {color && (
+                    <Typography variant="overline" color="text">
+                      Color: {color}
+                    </Typography>
+                  )}
+                  {size && (
+                    <Typography variant="overline" color="text">
+                      Size: {size}
+                    </Typography>
+                  )}
+                </Stack>
                 <Stack sx={sx.quantity}>
                   <QuantitySelector quantity={quantity} handleChange={handleQuantityChange} />
                   <Typography variant="button" color="textPrimary" sx={sx.line}>
