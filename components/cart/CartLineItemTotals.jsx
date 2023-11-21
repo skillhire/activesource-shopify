@@ -35,9 +35,9 @@ const sx = {
   container: {
     p: 2,
     justifyContent: "center",
-    borderTop: "2px solid",
-    borderBottom: "2px solid",
-    borderColor: "divider",
+    borderTop: "1px solid",
+    borderBottom: "1px solid",
+    borderColor: "common.divider",
   },
   label: {
     fontWeight: 600,

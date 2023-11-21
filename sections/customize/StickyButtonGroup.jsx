@@ -39,7 +39,7 @@ const sx = {
       sm: "80%",
     },
     borderTop: "1px solid",
-    borderColor: "divider",
+    borderColor: "common.divider",
   },
   container: {
     width: "80%",
