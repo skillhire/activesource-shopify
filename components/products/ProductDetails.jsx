@@ -79,7 +79,6 @@ const ProductDetails = ({
             />
           </>
         )}
-        {children}
         <Grid container>
           <Grid item xs={5}>
             <QuantitySelector
@@ -97,6 +96,7 @@ const ProductDetails = ({
             />
           </Grid>
         </Grid>
+        {children}
       </Stack>
     </Box>
   );
