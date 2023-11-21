@@ -31,8 +31,6 @@ export default CustomColorSelect;
 const sx = {
   root: {
     p: 0,
-    borderTop: "1px solid",
-    borderColor: "common.border",
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",

@@ -24,10 +24,11 @@ const CheckoutButton = ({ styles, ...props }) => {
     <Box sx={sx.root}>
       <Button
         fullWidth
-        color="primary"
+        color="secondary"
         onClick={handleCheckoutClick}
         variant="contained"
         disabled={loading}
+        size="large"
       >
         {loading ? <CircularProgress size={20} sx={sx.loader} /> : "Checkout"}
       </Button>

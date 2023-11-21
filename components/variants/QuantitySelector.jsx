@@ -1,5 +1,4 @@
-import PropTypes from "prop-types";
-import { Box, Button, ButtonGroup } from "@mui/material";
+import { Box, Button, ButtonGroup, Typography } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
 
 const QuantitySelector = ({
@@ -15,18 +14,15 @@ const QuantitySelector = ({
   return (
     <Box sx={{ ...sx.root, ...styles }}>
       <ButtonGroup sx={sx.buttonGroup}>
-        <Button sx={sx.button} onClick={removeQuantity}>
+        <Button sx={sx.button} size="small" onClick={removeQuantity}>
           <Remove sx={sx.icon} />
         </Button>
-        <Button
-          sx={sx.button}
-          onClick={() => {
-            return null;
-          }}
-        >
-          {quantity}
+        <Button sx={sx.button} size="small">
+          <Typography variant="body2">
+            {quantity}
+          </Typography>
         </Button>
-        <Button sx={sx.button} onClick={addQuantity}>
+        <Button sx={sx.button} size="small" onClick={addQuantity}>
           <Add sx={sx.icon} />
         </Button>
       </ButtonGroup>
@@ -41,7 +37,8 @@ const sx = {
     mr: 1,
   },
   icon: {
-    fontSize: 16,
+    fontSize: 20,
+    opacity: 0.5,
   },
   buttonGroup: {
     border: "1px solid",

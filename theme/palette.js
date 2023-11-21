@@ -16,7 +16,7 @@ export default {
   },
   tonalOffset: 0.2,
   error: {
-    main: "#F93943",
+    main: "#D32F2F",
     contrastText: "#FFFFFF",
   },
   text: {
@@ -34,17 +34,13 @@ export default {
     shade3: "#EFEFEF",
   },
   common: {
-    success: "#94E8B4",
-    error: "#F93943",
-    warning: "#F93943",
-    disabled: "#ADB5BD",
-    border: "#EDEDF1",
-    avatar: "#D6D6F8",
-    input: "#E6EBF5",
-    dark: "#070707",
-    black: "#23263B",
-    divider: "#B4B4B4",
-    highlight: "#EBEEFA",
+    success: "#2E7D32",
+    error: "#D32F2F",
+    warning: "#EF6C00",
+    info: "#0288D1",
+    disabled: "rgba(0, 0, 0, 0.12)",
+    input: "rgba(0, 0, 0, 0.12)",
+    border: "#B4B4B4",
   },
   divider: "#B4B4B4",
   gradient: {

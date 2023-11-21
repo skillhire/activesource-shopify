@@ -30,7 +30,6 @@ const sx = {
   avatar: {
     height: "50px",
     width: "50px",
-    backgroundColor: "common.highlight",
     mb: 2,
     color: "icon",
   },

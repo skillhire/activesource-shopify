@@ -2,8 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import { ShopContext } from "context";
 import { useCheckout, useSegment } from "hooks";
 import {
-  Badge,
   Box,
+  Link,
+  Stack,
   IconButton,
   ListItem,
   ListItemButton,
@@ -16,22 +17,51 @@ import { Close } from "@mui/icons-material";
 import { formatCurrency } from "utils";
 import { useRouter } from "next/router";
 
+import QuantitySelector from "components/variants/QuantitySelector";
+
 const CartLineItem = ({ lineItem }) => {
   const router = useRouter();
-  const { trackRemoveFromCart } = useSegment();
-  const { loading, checkoutLineItemRemove } = useCheckout();
+  const { trackAddToCart, trackRemoveFromCart } = useSegment();
+  const { loading, checkoutLineItemAdd, checkoutLineItemRemove } = useCheckout();
   const { setCartOpen } = useContext(ShopContext);
-
   const { id, quantity, variant, customAttributes } = lineItem || {};
-
-  const [color, setColor] = useState(null);
-  const [size, setSize] = useState(null);
-
   const {
     product,
     price: { amount },
     image: { src },
   } = variant || {};
+  const { priceRange } = product || {};
+
+  const [color, setColor] = useState(null);
+  const [size, setSize] = useState(null);
+
+  const handleQuantityChange = async (value) => {
+    let lineItem = {
+      variantId: variant?.id,
+      quantity: value,
+      customAttributes: customAttributes,
+    };
+    if (customAttributes) {
+      let attrs = {};
+      for (let [key, value] of Object.entries(customAttributes[0])) {
+        if (key !== '__typename') {
+          attrs[key] = value;
+        }
+      }
+      lineItem = { ...lineItem, customAttributes: [{ ...attrs }] };
+    }
+    if (value >= 1) {
+      // TODO: hook up the edit feature instead
+      // currently removing and adding again.
+      await checkoutLineItemRemove(id);
+      await checkoutLineItemAdd(lineItem);
+      trackAddToCart({
+        quantity: value,
+        variant: variant,
+        product: product,
+      });
+    }
+  };
 
   const handleRemoveLineItem = async (event) => {
     event.stopPropagation();
@@ -68,80 +98,81 @@ const CartLineItem = ({ lineItem }) => {
   }, [customAttributes]);
 
   return (
-    <ListItem
-      sx={{
-        ...sx.root,
-        ...(loading && sx.loading),
-      }}
-    >
-      <ListItemButton
-        onClick={handleClick}
-        sx={sx.listItemButton}
-        disableRipple
-        disableGutters
+    <Box sx={{ ...sx.root }}>
+      <ListItem
+        sx={{
+          ...sx.container,
+          ...(loading && sx.loading),
+        }}
       >
-        <ListItemIcon sx={sx.thumbnail}>
-          <Badge badgeContent={quantity} color="primary">
-            <Image src={src} height={72} width={72} style={styles.image} />
-          </Badge>
-        </ListItemIcon>
-        <ListItemText
-          sx={sx.text}
-          primary={
-            <Box>
-              <Typography variant="button" color="textPrimary" sx={sx.line}>
-                <Box sx={sx.fields}>{product?.title}</Box>
-                <IconButton size={"small"} sx={sx.removeButton}>
-                  <Close onClick={handleRemoveLineItem} sx={sx.removeIcon} />
-                </IconButton>
-              </Typography>
-              {size && (
-                <Typography variant="body2" color="textSecondary">
-                  size: {size}
+        <ListItemButton
+          sx={sx.listItemButton}
+          disableRipple
+          disableGutters
+        >
+          <ListItemIcon sx={sx.thumbnail}>
+            <Image src={src} height={120} width={120} style={styles.image} />
+          </ListItemIcon>
+          <ListItemText
+            sx={sx.text}
+            primary={
+              <Stack spacing={1}>
+                <Typography variant="subtitle2" color="textPrimary" sx={sx.line}>
+                  <Box>{product?.title}</Box>
+                  <IconButton>
+                    <Close onClick={handleRemoveLineItem} sx={sx.removeIcon} />
+                  </IconButton>
                 </Typography>
-              )}
-              {color && (
-                <Typography variant="body2" color="textSecondary">
-                  color: {color}
-                </Typography>
-              )}
-              <Typography variant="button" color="textPrimary" sx={sx.line}>
-                <Box>{amount == 0 ? "FREE" : formatCurrency(amount)}</Box>
-              </Typography>
-            </Box>
-          }
-        />
-      </ListItemButton>
-    </ListItem>
+                <Stack>
+                  {color && (
+                    <Typography variant="overline" color="text">
+                      Color: {color}
+                    </Typography>
+                  )}
+                  {size && (
+                    <Typography variant="overline" color="text">
+                      Size: {size}
+                    </Typography>
+                  )}
+                </Stack>
+                <Stack sx={sx.quantity}>
+                  <QuantitySelector quantity={quantity} handleChange={handleQuantityChange} />
+                  <Typography variant="button" color="textPrimary" sx={sx.line}>
+                    <Box>{amount == 0 ? "FREE" : formatCurrency(amount * quantity)}</Box>
+                  </Typography>
+                </Stack>
+              </Stack>
+            }
+          />
+        </ListItemButton>
+      </ListItem>
+      <Link variant="link" onClick={handleClick} sx={sx.link}>
+        <Typography variant="overline">Preview</Typography>
+      </Link>
+    </Box>
   );
 };
 
 export default CartLineItem;
 
 const sx = {
-  root: {
-    p: 0,
-    pb: 2.5,
+  root: { p: 0 },
+  container: {
     "&:not(:last-of-type)": {
-      mb: 2.5,
       borderBottom: "1px solid",
       borderColor: "common.border",
     },
   },
-  loading: {
-    opacity: 0.6,
-  },
+  loading: { opacity: 0.6 },
   listItemButton: {
+    display: "flex",
+    alignItems: "flex-start",
     "&:hover": {
       backgroundColor: "transparent",
     },
   },
-  button: {
-    p: 0,
-  },
-  thumbnail: {
-    mr: 2,
-  },
+  button: { p: 0 },
+  thumbnail: { mr: 2 },
   text: {
     height: 72,
     m: 0,
@@ -153,15 +184,18 @@ const sx = {
     height: 20,
     lineHeight: "20px",
   },
-  removeButton: {
-    mt: "-8px",
-    mr: "-8px",
-  },
   removeIcon: {
-    height: 20,
-    fontSize: 20,
-    color: "primary.main",
+    height: 21,
+    fontSize: 21,
+    color: "disabled",
   },
+  quantity: {
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  link: {
+    cursor: "pointer",
+  }
 };
 
 const styles = {

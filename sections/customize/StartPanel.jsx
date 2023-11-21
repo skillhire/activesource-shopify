@@ -41,7 +41,7 @@ const sx = {
   },
   listItem: {
     border: "1px solid",
-    borderColor: "divider",
+    borderColor: "common.divider",
     borderRadius: 6,
     mb: 1,
     "& .MuiListItemButton-root": {

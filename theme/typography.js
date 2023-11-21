@@ -61,7 +61,8 @@ export default {
     },
   },
   button: {
-    /* Header Menu (SemiBold) */ fontSize: 16,
+    /* Header Menu (SemiBold) */
+    fontSize: 16,
     fontWeight: 600,
     lineHeight: "120%",
     textTransform: "none",
@@ -91,6 +92,7 @@ export default {
     fontSize: 20,
     fontWeight: 600,
     lineHeight: "120%",
+    textTransform: "none",
     textDecoration: "underline",
   },
   footer: {

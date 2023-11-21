@@ -73,8 +73,8 @@ const sx = {
     height: 18,
     width: 18,
     borderRadius: 0.5,
-    border: "2px solid",
     mx: "4px",
+    border: "2px solid",
     borderColor: "primary.main",
   },
 };

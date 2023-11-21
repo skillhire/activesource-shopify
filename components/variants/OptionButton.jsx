@@ -7,7 +7,6 @@ const OptionButton = ({
   handleClick,
   children,
   width = 70,
-  justifyContent = "flex-start",
   ...props
 }) => {
   return (
@@ -16,7 +15,6 @@ const OptionButton = ({
         ...sx.button,
         ...(active && sx.active),
         minWidth: width,
-        justifyContent: justifyContent,
       }}
       onClick={() => handleClick(option, value)}
     >
@@ -32,6 +30,8 @@ const sx = {
     background: (theme) => `${theme.palette.tertiary.main} !important`
   },
   button: {
+    display: "flex",
+    alignItems: "center",
     textAlign: "center",
     justifyContent: "center",
     borderRadius: 20,
