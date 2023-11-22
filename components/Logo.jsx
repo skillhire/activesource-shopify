@@ -4,8 +4,9 @@ import { useRouter } from "next/router";
 import { Button, Box } from "@mui/material";
 
 import LOGO from "assets/logo.svg";
+import LOGO_BLACK from "assets/logo-black.svg";
 
-const Logo = ({ height = 120, width = 120, white = false, ...props }) => {
+const Logo = ({ height = 120, width = 120, black = false, ...props }) => {
   const router = useRouter();
 
   const handleClick = () => {
@@ -17,7 +18,7 @@ const Logo = ({ height = 120, width = 120, white = false, ...props }) => {
       <Button disableRipple onClick={handleClick} sx={sx.button}>
         <Image
           responsive="true"
-          src={LOGO?.src}
+          src={black ? LOGO_BLACK?.src : LOGO?.src}
           sx={sx.image}
           alt="Logo"
           height={30}
