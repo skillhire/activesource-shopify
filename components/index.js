@@ -4,6 +4,7 @@ export { default as AddressForm } from "components/addresses/AddressForm";
 export { default as AddressSkeleton } from "components/skeletons/AddressSkeleton";
 export { default as Auth } from "components/auth/AuthModal";
 export { default as AuthButton } from "components/auth/AuthButton";
+export { default as AuthIconButton } from "components/auth/AuthIconButton";
 export { default as AddToCartButton } from "components/cart/AddToCartButton";
 export { default as Alert } from "components/Alert";
 export { default as AlertModal } from "components/AlertModal";

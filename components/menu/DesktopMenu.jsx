@@ -4,6 +4,7 @@ import { Box, Hidden, Toolbar } from "@mui/material";
 import {
   Logo,
   CartButton,
+  AuthIconButton,
   DesktopMenuItem,
   MenuToggleButton,
 } from "components";
@@ -26,6 +27,7 @@ const DesktopMenu = ({ logo, handleClick, ...props }) => {
             ))}
           </Box>
           <Box sx={sx.item}>
+            <AuthIconButton />
             <CartButton />
           </Box>
         </Box>
