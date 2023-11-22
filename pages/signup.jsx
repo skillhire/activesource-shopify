@@ -1,8 +1,11 @@
 import React from "react";
-import { SignUp } from "components";
-import { Box, Container } from "@mui/material";
-import { Layout } from "components";
+import Image from "next/image";
 import { useRouter } from "next/router";
+import { Grid, Box, Container } from "@mui/material";
+
+import { SignUp, Layout } from "components";
+
+import LoginHeroImage from "assets/login-hero-image@2x.png";
 
 const Signup = () => {
   const router = useRouter();
@@ -12,8 +15,15 @@ const Signup = () => {
   return (
     <Layout>
       <Box sx={sx.root}>
-        <Container maxWidth="sm">
-          <SignUp onSuccess={handleSuccess} />
+        <Container maxWidth="lg">
+          <Grid container spacing={4} sx={sx.root}>
+            <Grid item xs={12} sm={12} md={6}>
+              <Image src={LoginHeroImage} alt="Hero Image" priority width={450} />
+            </Grid>
+            <Grid item xs={12} sm={12} md={6}>
+              <SignUp onSuccess={handleSuccess} />
+            </Grid>
+          </Grid>
         </Container>
       </Box>
     </Layout>
@@ -23,7 +33,5 @@ const Signup = () => {
 export default Signup;
 
 const sx = {
-  root: {
-    mt: 6,
-  },
+  root: { mt: 6 },
 };
