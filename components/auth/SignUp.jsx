@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useAlerts, useAuth } from "hooks";
-import { Button, Box, CircularProgress } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import { useRouter } from "next/router";
 import RegisterForm from "./SignUpForm";
 
@@ -51,28 +51,24 @@ const SignUp = ({ onSuccess, ...props }) => {
         handleChange={handleChange}
         loading={loading}
       />
-      <Box>
-        <Button
-          sx={sx.button}
-          fullWidth
-          color="primary"
-          endIcon={loading && <CircularProgress size={20} sx={sx.progress} />}
-          variant="contained"
-          onClick={handleSubmit}
-        >
-          Register
-        </Button>
-      </Box>
-      <Box>
-        <Button
-          fullWidth
-          size="large"
-          color="primary"
-          onClick={handleLoginClick}
-        >
-          Already Registered? Sign In
-        </Button>
-      </Box>
+      <Button
+        sx={sx.button}
+        fullWidth
+        color="secondary"
+        endIcon={loading && <CircularProgress size={20} sx={sx.progress} />}
+        variant="contained"
+        onClick={handleSubmit}
+      >
+        Create Account
+      </Button>
+      <Button
+        fullWidth
+        size="small"
+        color="primary"
+        onClick={handleLoginClick}
+      >
+        Already Registered? Sign In
+      </Button>
     </>
   );
 };

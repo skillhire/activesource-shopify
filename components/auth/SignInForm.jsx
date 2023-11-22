@@ -9,24 +9,24 @@ const SignInForm = ({ customer, handleChange, ...props }) => {
         <TextField
           size="small"
           sx={sx.input}
-          variant="outlined"
           name="email"
           value={customer?.email || ""}
           type="email"
           onChange={handleChange}
-          placeholder="Your Email"
+          label="Email address"
+          InputLabelProps={{ shrink: true }}
         />
       </Box>
       <Box width="100%">
         <TextField
           size="small"
           sx={sx.input}
-          variant="outlined"
           name="password"
           value={customer?.password || ""}
           type="password"
           onChange={handleChange}
-          placeholder="Your Password"
+          label="Password"
+          InputLabelProps={{ shrink: true }}
         />
       </Box>
     </Box>

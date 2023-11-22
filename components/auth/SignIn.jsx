@@ -51,29 +51,24 @@ const SignIn = ({ onSuccess, ...props }) => {
         customer={customer}
         handleChange={handleChange}
       />
-      <Box>
-        <Button
-          sx={sx.button}
-          fullWidth
-          size="large"
-          color="primary"
-          endIcon={loading && <CircularProgress size={20} sx={sx.progress} />}
-          variant="contained"
-          onClick={handleSubmit}
-        >
-          Sign In
-        </Button>
-      </Box>
-      <Box>
-        <Button
-          fullWidth
-          size="large"
-          color="primary"
-          onClick={handleRegisterClick}
-        >
-          No account? Register
-        </Button>
-      </Box>
+      <Button
+        sx={sx.button}
+        fullWidth
+        color="secondary"
+        endIcon={loading && <CircularProgress size={20} sx={sx.progress} />}
+        variant="contained"
+        onClick={handleSubmit}
+      >
+        Sign In
+      </Button>
+      <Button
+        fullWidth
+        size="small"
+        color="primary"
+        onClick={handleRegisterClick}
+      >
+        No account? Register
+      </Button>
     </>
   );
 };

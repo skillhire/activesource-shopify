@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Grid, Box, Container } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 
 import { SignUp, Layout } from "components";
 
@@ -13,19 +13,17 @@ const Signup = () => {
     router.push("/");
   };
   return (
-    <Layout>
-      <Box sx={sx.root}>
-        <Container maxWidth="lg">
-          <Grid container spacing={4} sx={sx.root}>
-            <Grid item xs={12} sm={12} md={6}>
-              <Image src={LoginHeroImage} alt="Hero Image" priority width={450} />
-            </Grid>
-            <Grid item xs={12} sm={12} md={6}>
-              <SignUp onSuccess={handleSuccess} />
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
+    <Layout sx={sx.root}>
+      <Grid container sx={sx.root}>
+        <Grid item xs={12} sm={12} md={6} sx={sx.imageContainer}>
+          <Image src={LoginHeroImage} alt="Hero Image" priority width={450} />
+        </Grid>
+        <Grid item xs={12} sm={12} md={6} sx={sx.formContainer}>
+          <Box sx={sx.form}>
+            <SignUp onSuccess={handleSuccess} />
+          </Box>
+        </Grid>
+      </Grid>
     </Layout>
   );
 };
@@ -33,5 +31,26 @@ const Signup = () => {
 export default Signup;
 
 const sx = {
-  root: { mt: 6 },
+  root: {
+    minHeight: {
+      sm: "calc(100vh - 64px)",
+      xs: "calc(100vh - 50px)",
+    },
+  },
+  imageContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "secondary.faded",
+  },
+  formContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  form: {
+    width: "100%",
+    maxWidth: 360,
+  }
 };

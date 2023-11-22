@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Checkbox, FormControlLabel, TextField } from "@mui/material";
+import { Box, Checkbox, FormControlLabel, TextField, Typography } from "@mui/material";
 
 const SignUpForm = ({ customer, handleChange, ...props }) => {
   return (
@@ -9,47 +9,47 @@ const SignUpForm = ({ customer, handleChange, ...props }) => {
         <TextField
           size="small"
           sx={sx.input}
-          variant="outlined"
-          name="firstName"
-          value={customer?.firstName || ""}
-          onChange={handleChange}
-          placeholder="First Name"
-        />
-      </Box>
-      <Box width="100%">
-        <TextField
-          size="small"
-          sx={sx.input}
-          variant="outlined"
-          name="lastName"
-          value={customer?.lastName || ""}
-          type="email"
-          onChange={handleChange}
-          placeholder="Last Name"
-        />
-      </Box>
-      <Box width="100%">
-        <TextField
-          size="small"
-          sx={sx.input}
-          variant="outlined"
           name="email"
           value={customer?.email || ""}
           type="email"
           onChange={handleChange}
-          placeholder="Your Email"
+          label="Email address"
+          InputLabelProps={{ shrink: true }}
         />
       </Box>
       <Box width="100%">
         <TextField
           size="small"
           sx={sx.input}
-          variant="outlined"
           name="password"
           value={customer?.password || ""}
           type="password"
           onChange={handleChange}
-          placeholder="Your Password"
+          label="Password"
+          InputLabelProps={{ shrink: true }}
+        />
+      </Box>
+      <Box width="100%">
+        <TextField
+          size="small"
+          sx={sx.input}
+          name="firstName"
+          value={customer?.firstName || ""}
+          onChange={handleChange}
+          label="First Name"
+          InputLabelProps={{ shrink: true }}
+        />
+      </Box>
+      <Box width="100%">
+        <TextField
+          size="small"
+          sx={sx.input}
+          name="lastName"
+          value={customer?.lastName || ""}
+          type="email"
+          onChange={handleChange}
+          label="Last Name"
+          InputLabelProps={{ shrink: true }}
         />
       </Box>
       <Box>
@@ -59,9 +59,10 @@ const SignUpForm = ({ customer, handleChange, ...props }) => {
               checked={customer?.acceptsMarketing || false}
               onChange={handleChange}
               name="acceptsMarketing"
+              size="small"
             />
           }
-          label="Subscribe to our newsletter."
+          label={<Typography variant="overline">Tick here if you want to get marketing emails from Active Source Lab</Typography>}
         />
       </Box>
     </Box>
