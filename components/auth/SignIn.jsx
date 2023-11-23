@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useAlerts, useAuth } from "hooks";
-import { Button, Box, CircularProgress } from "@mui/material";
-import { useRouter } from "next/router";
+import { Stack, Link, Typography, Button, CircularProgress } from "@mui/material";
 
 
 import SignInForm from "./SignInForm";
 
-const SignIn = ({ onSuccess, ...props }) => {
-  const router = useRouter();
+const SignIn = ({ onSuccess }) => {
   const { showAlertError } = useAlerts();
   const { error, loading, signIn } = useAuth();
   const [customer, setCustomer] = useState({});
@@ -34,10 +32,6 @@ const SignIn = ({ onSuccess, ...props }) => {
     }
   };
 
-  const handleRegisterClick = () => {
-    router.push("/signup");
-  };
-
   useEffect(() => {
     if (error && Object.keys(error)?.length > 0) {
       showAlertError("Your email or password is incorrect");
@@ -45,7 +39,7 @@ const SignIn = ({ onSuccess, ...props }) => {
   }, [error]);
 
   return (
-    <>
+    <Stack alignItems="center">
       <SignInForm
         loading={loading}
         customer={customer}
@@ -61,15 +55,14 @@ const SignIn = ({ onSuccess, ...props }) => {
       >
         Sign In
       </Button>
-      <Button
-        fullWidth
+      <Link
+        href="/forgot-password"
+        variant="link"
         size="small"
-        color="primary"
-        onClick={handleRegisterClick}
       >
-        No account? Register
-      </Button>
-    </>
+        <Typography variant="caption">Forgot Password?</Typography>
+      </Link>
+    </Stack>
   );
 };
 

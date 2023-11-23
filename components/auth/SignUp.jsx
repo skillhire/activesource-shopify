@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useAlerts, useAuth } from "hooks";
-import { Button, CircularProgress } from "@mui/material";
-import { useRouter } from "next/router";
+import { Button, CircularProgress, Typography } from "@mui/material";
+
 import RegisterForm from "./SignUpForm";
 
-const SignUp = ({ onSuccess, ...props }) => {
-  const router = useRouter();
+const SignUp = ({ onSuccess }) => {
   const { showAlertError } = useAlerts();
   const { loading, error, register } = useAuth();
   const [customer, setCustomer] = useState({});
@@ -30,10 +29,6 @@ const SignUp = ({ onSuccess, ...props }) => {
     } else {
       showAlertError("Please enter your email and password to Sign Up.");
     }
-  };
-
-  const handleLoginClick = () => {
-    router.push("/login");
   };
 
   useEffect(() => {
@@ -61,14 +56,9 @@ const SignUp = ({ onSuccess, ...props }) => {
       >
         Create Account
       </Button>
-      <Button
-        fullWidth
-        size="small"
-        color="primary"
-        onClick={handleLoginClick}
-      >
-        Already Registered? Sign In
-      </Button>
+      <Typography variant="caption">
+        Want to know more about how and why Active Source Lab uses your personal information? Read our Privacy Notice.
+      </Typography>
     </>
   );
 };
