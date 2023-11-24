@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useAlerts, useAuth } from "hooks";
-import { Button, Box, CircularProgress } from "@mui/material";
-import { useRouter } from "next/router";
+import { Button, CircularProgress, Typography } from "@mui/material";
+
 import RegisterForm from "./SignUpForm";
 
-const SignUp = ({ onSuccess, ...props }) => {
-  const router = useRouter();
+const SignUp = ({ onSuccess }) => {
   const { showAlertError } = useAlerts();
   const { loading, error, register } = useAuth();
   const [customer, setCustomer] = useState({});
@@ -32,10 +31,6 @@ const SignUp = ({ onSuccess, ...props }) => {
     }
   };
 
-  const handleLoginClick = () => {
-    router.push("/login");
-  };
-
   useEffect(() => {
     if (error && Object.keys(error)?.length > 0) {
       showAlertError(
@@ -51,28 +46,19 @@ const SignUp = ({ onSuccess, ...props }) => {
         handleChange={handleChange}
         loading={loading}
       />
-      <Box>
-        <Button
-          sx={sx.button}
-          fullWidth
-          color="primary"
-          endIcon={loading && <CircularProgress size={20} sx={sx.progress} />}
-          variant="contained"
-          onClick={handleSubmit}
-        >
-          Register
-        </Button>
-      </Box>
-      <Box>
-        <Button
-          fullWidth
-          size="large"
-          color="primary"
-          onClick={handleLoginClick}
-        >
-          Already Registered? Sign In
-        </Button>
-      </Box>
+      <Button
+        sx={sx.button}
+        fullWidth
+        color="secondary"
+        endIcon={loading && <CircularProgress size={20} sx={sx.progress} />}
+        variant="contained"
+        onClick={handleSubmit}
+      >
+        Create Account
+      </Button>
+      <Typography variant="caption">
+        Want to know more about how and why Active Source Lab uses your personal information? Read our Privacy Notice.
+      </Typography>
     </>
   );
 };

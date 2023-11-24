@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useAlerts, useAuth } from "hooks";
-import { Button, Box, CircularProgress } from "@mui/material";
-import { useRouter } from "next/router";
+import { Stack, Link, Typography, Button, CircularProgress } from "@mui/material";
+
+
 import SignInForm from "./SignInForm";
 
-const SignIn = ({ onSuccess, ...props }) => {
-  const router = useRouter();
+const SignIn = ({ onSuccess }) => {
   const { showAlertError } = useAlerts();
   const { error, loading, signIn } = useAuth();
   const [customer, setCustomer] = useState({});
@@ -32,10 +32,6 @@ const SignIn = ({ onSuccess, ...props }) => {
     }
   };
 
-  const handleRegisterClick = () => {
-    router.push("/signup");
-  };
-
   useEffect(() => {
     if (error && Object.keys(error)?.length > 0) {
       showAlertError("Your email or password is incorrect");
@@ -43,36 +39,30 @@ const SignIn = ({ onSuccess, ...props }) => {
   }, [error]);
 
   return (
-    <>
+    <Stack alignItems="center">
       <SignInForm
         loading={loading}
         customer={customer}
         handleChange={handleChange}
       />
-      <Box>
-        <Button
-          sx={sx.button}
-          fullWidth
-          size="large"
-          color="primary"
-          endIcon={loading && <CircularProgress size={20} sx={sx.progress} />}
-          variant="contained"
-          onClick={handleSubmit}
-        >
-          Sign In
-        </Button>
-      </Box>
-      <Box>
-        <Button
-          fullWidth
-          size="large"
-          color="primary"
-          onClick={handleRegisterClick}
-        >
-          No account? Register
-        </Button>
-      </Box>
-    </>
+      <Button
+        sx={sx.button}
+        fullWidth
+        color="secondary"
+        endIcon={loading && <CircularProgress size={20} sx={sx.progress} />}
+        variant="contained"
+        onClick={handleSubmit}
+      >
+        Sign In
+      </Button>
+      <Link
+        href="/forgot-password"
+        variant="link"
+        size="small"
+      >
+        <Typography variant="caption">Forgot Password?</Typography>
+      </Link>
+    </Stack>
   );
 };
 
