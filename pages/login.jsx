@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-import { SignInOrUp } from "components";
+import { default as SignInOrUp, SIGNIN_OR_SIGNUP_TABS } from "components/auth/SignInOrUp";
 
 const Login = () => {
   const router = useRouter();
@@ -11,7 +11,7 @@ const Login = () => {
   };
 
   return (
-    <SignInOrUp onSuccess={handleSuccess}></SignInOrUp>
+    <SignInOrUp tab={SIGNIN_OR_SIGNUP_TABS[0].tab} onSuccess={handleSuccess} />
   );
 };
 
