@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Checkbox, FormControlLabel, InputLabel, TextField, Typography } from "@mui/material";
+import { Box, Checkbox, FormControlLabel, InputLabel, TextField, Typography, Stack } from "@mui/material";
 
 const SignUpForm = ({ customer, handleChange, ...props }) => {
   return (
@@ -46,7 +46,7 @@ const SignUpForm = ({ customer, handleChange, ...props }) => {
           onChange={handleChange}
         />
       </Box>
-      <Box width="100%">
+      <Stack width="100%">
         <InputLabel shrink htmlFor="lastName" sx={sx.label}>
           Last Name
         </InputLabel>
@@ -58,20 +58,20 @@ const SignUpForm = ({ customer, handleChange, ...props }) => {
           type="email"
           onChange={handleChange}
         />
-      </Box>
-      <Box>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={customer?.acceptsMarketing || false}
-              onChange={handleChange}
-              name="acceptsMarketing"
-              size="small"
-            />
-          }
-          label={<Typography variant="overline">Tick here if you want to get marketing emails from Active Source Lab</Typography>}
-        />
-      </Box>
+        <Box my={1}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={customer?.acceptsMarketing || false}
+                onChange={handleChange}
+                name="acceptsMarketing"
+                size="small"
+              />
+            }
+            label={<Typography variant="overline">Tick here if you want to get marketing emails from Active Source Lab</Typography>}
+          />
+        </Box>
+      </Stack>
     </Box>
   );
 };
