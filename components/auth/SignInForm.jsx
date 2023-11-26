@@ -50,6 +50,11 @@ const sx = {
     flexDirection: "column",
     gap: "20px",
     width: "100%",
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderRadius: 2,
+      },
+    },
   },
   label: {
     color: "text.primary",
