@@ -60,7 +60,7 @@ const SignIn = ({ onSuccess }) => {
         variant="link"
         size="small"
       >
-        <Typography variant="caption">Forgot Password?</Typography>
+        <Typography variant="overline">Forgot Password?</Typography>
       </Link>
     </Stack>
   );
@@ -71,6 +71,7 @@ export default SignIn;
 const sx = {
   button: {
     my: 2,
+    mt: 4,
   },
   progress: {
     color: "#fff",

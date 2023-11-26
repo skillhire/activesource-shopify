@@ -1,10 +1,12 @@
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { Grid, Box, Tabs, Tab, Stack } from "@mui/material";
 
 import { Logo, SignIn, SignUp, Layout } from "components";
 
 import LoginHeroImage from "assets/login-hero-image@2x.png";
+import { Router } from "lucide-react";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -22,11 +24,27 @@ function CustomTabPanel(props) {
   );
 }
 
-const SignInOrUp = ({ onSuccess }) => {
-  const [value, setValue] = React.useState(0);
+export const SIGNIN_OR_SIGNUP_TABS = [
+  {
+    tab: "login",
+    url: "/login",
+    label: "Log In",
+  },
+  {
+    tab: "signup",
+    url: "/signup",
+    label: "Sign Up",
+  }
+]
+
+const SignInOrUp = ({ tab, onSuccess }) => {
+  const router = useRouter();
+  const currentTabIndex = SIGNIN_OR_SIGNUP_TABS.map(e => e.tab).indexOf(tab);
+  const value = currentTabIndex > 0 ? currentTabIndex : 0;
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    const currentValueUrl = SIGNIN_OR_SIGNUP_TABS[newValue].url;
+    router.push(currentValueUrl);
   };
 
   return (
@@ -40,8 +58,7 @@ const SignInOrUp = ({ onSuccess }) => {
           <Stack sx={sx.form} spacing={4}>
             <Box sx={sx.tabsContainer}>
               <Tabs value={value} onChange={handleChange} sx={sx.tabs}>
-                <Tab label="log in" sx={sx.tab} />
-                <Tab label="sign up" sx={sx.tab} />
+                {SIGNIN_OR_SIGNUP_TABS.map(t => <Tab key={t.tab} label={t.label} sx={sx.tab} />)}
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
