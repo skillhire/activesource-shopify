@@ -1,32 +1,36 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, InputLabel, Typography } from "@mui/material";
 
 const SignInForm = ({ customer, handleChange, ...props }) => {
   return (
     <Box sx={sx.root}>
       <Box width="100%">
+        <InputLabel shrink htmlFor="email" sx={sx.label}>
+          Email address
+        </InputLabel>
         <TextField
           size="small"
           sx={sx.input}
+          id="email"
           name="email"
           value={customer?.email || ""}
           type="email"
           onChange={handleChange}
-          label="Email address"
-          InputLabelProps={{ shrink: true }}
         />
       </Box>
       <Box width="100%">
+        <InputLabel shrink htmlFor="password" sx={sx.label}>
+          Password
+        </InputLabel>
         <TextField
           size="small"
           sx={sx.input}
+          id="password"
           name="password"
           value={customer?.password || ""}
           type="password"
           onChange={handleChange}
-          label="Password"
-          InputLabelProps={{ shrink: true }}
         />
       </Box>
     </Box>
@@ -46,6 +50,10 @@ const sx = {
     flexDirection: "column",
     gap: "20px",
     width: "100%",
+  },
+  label: {
+    color: "text.primary",
+    fontWeight: 500,
   },
   input: {
     width: "100%",

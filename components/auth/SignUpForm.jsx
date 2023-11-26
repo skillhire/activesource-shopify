@@ -1,46 +1,55 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Checkbox, FormControlLabel, TextField, Typography } from "@mui/material";
+import { Box, Checkbox, FormControlLabel, InputLabel, TextField, Typography } from "@mui/material";
 
 const SignUpForm = ({ customer, handleChange, ...props }) => {
   return (
     <Box sx={sx.root}>
       <Box width="100%">
+        <InputLabel shrink htmlFor="email" sx={sx.label}>
+          Email address
+        </InputLabel>
         <TextField
           size="small"
           sx={sx.input}
+          id="email"
           name="email"
           value={customer?.email || ""}
           type="email"
           onChange={handleChange}
-          label="Email address"
-          InputLabelProps={{ shrink: true }}
         />
       </Box>
       <Box width="100%">
+        <InputLabel shrink htmlFor="password" sx={sx.label}>
+          Password
+        </InputLabel>
         <TextField
           size="small"
           sx={sx.input}
+          id="password"
           name="password"
           value={customer?.password || ""}
           type="password"
           onChange={handleChange}
-          label="Password"
-          InputLabelProps={{ shrink: true }}
         />
       </Box>
       <Box width="100%">
+        <InputLabel shrink htmlFor="firstName" sx={sx.label}>
+          First Name
+        </InputLabel>
         <TextField
           size="small"
           sx={sx.input}
+          id="firstName"
           name="firstName"
           value={customer?.firstName || ""}
           onChange={handleChange}
-          label="First Name"
-          InputLabelProps={{ shrink: true }}
         />
       </Box>
       <Box width="100%">
+        <InputLabel shrink htmlFor="lastName" sx={sx.label}>
+          Last Name
+        </InputLabel>
         <TextField
           size="small"
           sx={sx.input}
@@ -48,8 +57,6 @@ const SignUpForm = ({ customer, handleChange, ...props }) => {
           value={customer?.lastName || ""}
           type="email"
           onChange={handleChange}
-          label="Last Name"
-          InputLabelProps={{ shrink: true }}
         />
       </Box>
       <Box>
@@ -82,6 +89,10 @@ const sx = {
     flexDirection: "column",
     gap: "20px",
     width: "100%",
+  },
+  label: {
+    color: "text.primary",
+    fontWeight: 500,
   },
   input: {
     width: "100%",
