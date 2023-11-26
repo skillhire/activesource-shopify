@@ -60,7 +60,7 @@ const SignIn = ({ onSuccess }) => {
         variant="link"
         size="small"
       >
-        <Typography variant="caption">Forgot Password?</Typography>
+        <Typography variant="overline">Forgot Password?</Typography>
       </Link>
     </Stack>
   );
