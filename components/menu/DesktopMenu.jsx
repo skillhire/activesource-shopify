@@ -18,13 +18,15 @@ const DesktopMenu = ({ logo, handleClick, ...props }) => {
         <Box sx={sx.root}>
           <Box sx={sx.item}>
             <Logo />
-            {NAVIGATION_MENU.map((menuItem, index) => (
-              <DesktopMenuItem
-                key={index}
-                menuItem={menuItem}
-                handleClick={handleClick}
-              />
-            ))}
+            <Box ml={4}>
+              {NAVIGATION_MENU.map((menuItem, index) => (
+                <DesktopMenuItem
+                  key={index}
+                  menuItem={menuItem}
+                  handleClick={handleClick}
+                />
+              ))}
+            </Box>
           </Box>
           <Box sx={sx.item}>
             <AuthIconButton />
