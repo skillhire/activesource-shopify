@@ -23,7 +23,6 @@ const Product = () => {
   const [color, setColor] = useState();
   const [zoom, setZoom] = useState(false);
   const [activeImage, setActiveImage] = useState();
-  const [showCustomize, setShowCustomize] = useState(true);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [addToCartDisabled, setAddToCartDisabled] = useState(false);
 
@@ -65,10 +64,6 @@ const Product = () => {
     });
   };
 
-  const handleCustomize = () => {
-    setShowCustomize(true);
-  };
-
   useEffect(() => {
     if (handle) {
       fetchProduct(handle);
@@ -87,6 +82,8 @@ const Product = () => {
   }, [product?.id]);
 
   const handleAddToCartDisabled = () => {
+    console.log("variant", variant);
+    console.log("customAttributes", JSON.stringify(customAttributes));
     const disabled = !variant || Object.keys(customAttributes).length < 0;
     setAddToCartDisabled(disabled);
   };
@@ -118,17 +115,13 @@ const Product = () => {
                 product={product}
                 variant={variant}
                 addToCartDisabled={addToCartDisabled}
-                showCustomize={showCustomize}
                 selectedOptions={selectedOptions}
                 handleColorClick={handleColorClick}
                 customAttributes={customAttributes}
-                handleCustomize={handleCustomize}
                 handleOptionChange={handleOptionChange}
               >
                 <ProductCustomize
-                  open={showCustomize}
                   addToCartDisabled={addToCartDisabled}
-                  handleClose={() => setShowCustomize(false)}
                   color={color}
                   product={product}
                   customAttributes={customAttributes}

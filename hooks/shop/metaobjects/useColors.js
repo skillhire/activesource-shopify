@@ -26,8 +26,8 @@ const useColors = () => {
         handle: color.handle,
         label: getValue(color, "label"),
         color: getValue(color, "color"),
-        front_placement: getImage(color, "front_placement"),
         back_placement: getImage(color, "back_placement"),
+        front_placement: getImage(color, "front_placement"),
       }));
       setColors(_colors);
     }

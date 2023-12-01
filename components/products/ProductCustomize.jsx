@@ -18,15 +18,11 @@ const Thumbnail = ({ src, handleClick, ...props }) => (
   </CardActionArea>
 );
 
-const ProductCustomizeModal = ({ open = false, color, product, addToCartDisabled }) => {
+const ProductCustomize = ({ color, product, addToCartDisabled }) => {
   const [activeColor, setActiveColor] = useState();
   const { colors, fetchColors } = useColors();
 
-  useEffect(() => {
-    if (open) {
-      fetchColors();
-    }
-  }, [open]);
+  useEffect(() => { fetchColors(); }, []);
 
   useEffect(() => {
     if (colors?.length > 0 && color) {
@@ -35,8 +31,8 @@ const ProductCustomizeModal = ({ open = false, color, product, addToCartDisabled
     }
   }, [colors, color]);
 
-  const isFront = getMetaValue(product, "front_placement");
   const isBack = getMetaValue(product, "back_placement");
+  const isFront = getMetaValue(product, "front_placement");
 
   if (addToCartDisabled) { return null; }
 
@@ -109,7 +105,7 @@ const ProductCustomizeModal = ({ open = false, color, product, addToCartDisabled
   );
 };
 
-export default ProductCustomizeModal;
+export default ProductCustomize;
 
 const sx = {
   container: {
