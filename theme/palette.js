@@ -27,9 +27,9 @@ export default {
   link: "#231D18",
   icon: "#000000",
   background: {
-    default: "#EFEFEF",
+    default: "#231D18",
     paper: "#FFFFFF",
-    shade1: "#000000",
+    shade1: "#231D18",
     shade2: "#252525",
     shade3: "#EFEFEF",
   },
