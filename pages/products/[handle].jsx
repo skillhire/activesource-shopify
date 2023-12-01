@@ -82,15 +82,13 @@ const Product = () => {
   }, [product?.id]);
 
   const handleAddToCartDisabled = () => {
-    console.log("variant", variant);
-    console.log("customAttributes", JSON.stringify(customAttributes));
-    const disabled = !variant || Object.keys(customAttributes).length < 0;
+    const disabled = !variant || Object.keys(customAttributes).length < 1;
     setAddToCartDisabled(disabled);
   };
 
   useEffect(() => {
     handleAddToCartDisabled();
-  }, [product, customAttributes, selectedOptions]);
+  }, [product, customAttributes, selectedOptions, variant, setAddToCartDisabled]);
 
   return (
     <Layout title={product?.title} metaDescription={product?.description}>

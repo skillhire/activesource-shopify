@@ -26,7 +26,6 @@ const ProductCustomize = ({ color, product, hide }) => {
 
   useEffect(() => {
     if (colors?.length > 0 && color) {
-      console.log('SET ACTIVE COLOR', color)
       const active = colors.find((c) => c.handle == color.handle);
       setActiveColor(active);
     }
