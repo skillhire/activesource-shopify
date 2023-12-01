@@ -25,15 +25,15 @@ const Footer = ({ styles }) => {
   return (
     <Box sx={{ ...sx.root, ...styles }}>
       <Container maxWidth="lg">
-        <Grid container spacing={4}>
-          <Grid item xs={12} sm={12} md={6}>
+        <Grid container>
+          <Grid item xs={12} sm={12} md={6} mb={4}>
             <Logo />
           </Grid>
           <Grid item xs={12} sm={12} md={6} sx={sx.footerMenu}>
-            <Grid container spacing={4}>
+            <Grid container spacing={12}>
               {NAVIGATION_MENU.map((navItem) => (
-                <Grid item xs={12} sm={12} md={4} key={navItem.label}>
-                  <Box display="flex" justifyContent={{ md: "flex-end" }}>
+                <Grid item xs={12} sm={12} md={4} key={navItem.label} display="flex" justifyContent={{ md: "space-between" }}>
+                  <Box display="flex" justifyContent={{ md: "flex-start" }}>
                     <List dense disablePadding>
                       <ListItem disableGutters>
                         <ListItemText
@@ -73,15 +73,18 @@ const Footer = ({ styles }) => {
           <Box sx={sx.subfooterText}>
             <Box sx={sx.legalMenuItems}>
               {LEGAL_MENU.map((menuItem, i) => (
-                <Button
-                  key={i}
-                  sx={sx.button}
-                  onClick={() => handleClick(menuItem.value)}
-                >
-                  <Typography variant="overline" sx={sx.copyRightLabel}>
-                    {menuItem.label}
-                  </Typography>
-                </Button>
+                <>
+                  <Button
+                    key={i}
+                    sx={sx.button}
+                    onClick={() => handleClick(menuItem.value)}
+                  >
+                    <Typography variant="overline" sx={sx.copyRightLabel}>
+                      {menuItem.label}
+                    </Typography>
+                  </Button>
+                  {i === 0 && <Divider orientation="vertical" flexItem />}
+                </>
               ))}
             </Box>
           </Box>
@@ -106,6 +109,7 @@ const sx = {
     textTransform: "capitalize",
   },
   button: {
+    p: 0,
     color: "common.white",
     textTransform: "none",
   },
