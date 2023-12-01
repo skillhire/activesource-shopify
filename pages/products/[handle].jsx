@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useProducts, useVariants, useResponsive, useSegment } from "hooks";
 import { useRouter } from "next/router";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import {
   Layout,
   ProductDetails,
@@ -18,13 +18,13 @@ const Product = () => {
   const router = useRouter();
   const { handle } = router.query;
   const { isMobile } = useResponsive();
+  const { trackProductViewed } = useSegment();
 
   const [color, setColor] = useState();
+  const [zoom, setZoom] = useState(false);
   const [activeImage, setActiveImage] = useState();
   const [selectedOptions, setSelectedOptions] = useState({});
-  const [zoom, setZoom] = useState(false);
-  const [showCustomize, setShowCustomize] = useState(true);
-  const { trackProductViewed } = useSegment();
+  const [addToCartDisabled, setAddToCartDisabled] = useState(false);
 
   // Handle custom variant option metaobjects
   const [customAttributes, setCustomAttributes] = useState({});
@@ -64,10 +64,6 @@ const Product = () => {
     });
   };
 
-  const handleCustomize = () => {
-    setShowCustomize(true);
-  };
-
   useEffect(() => {
     if (handle) {
       fetchProduct(handle);
@@ -84,6 +80,15 @@ const Product = () => {
       trackProductViewed(product);
     }
   }, [product?.id]);
+
+  const handleAddToCartDisabled = () => {
+    const disabled = !variant || Object.keys(customAttributes).length < 1;
+    setAddToCartDisabled(disabled);
+  };
+
+  useEffect(() => {
+    handleAddToCartDisabled();
+  }, [product, customAttributes, selectedOptions, variant, setAddToCartDisabled]);
 
   return (
     <Layout title={product?.title} metaDescription={product?.description}>
@@ -107,16 +112,14 @@ const Product = () => {
                 loading={loading}
                 product={product}
                 variant={variant}
-                showCustomize={showCustomize}
+                addToCartDisabled={addToCartDisabled}
                 selectedOptions={selectedOptions}
                 handleColorClick={handleColorClick}
                 customAttributes={customAttributes}
-                handleCustomize={handleCustomize}
                 handleOptionChange={handleOptionChange}
               >
                 <ProductCustomize
-                  open={showCustomize}
-                  handleClose={() => setShowCustomize(false)}
+                  hide={addToCartDisabled}
                   color={color}
                   product={product}
                   customAttributes={customAttributes}

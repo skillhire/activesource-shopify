@@ -1,11 +1,15 @@
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { Stack, Typography, Button, Box, Container } from "@mui/material";
+import { SHOP_ALL_URL } from "constants/navigation";
 
 import HeroImage from "assets/hero-image@2x.png";
 
-const SectionHeroPrimary = (props) => {
-  const { home } = props;
+const SectionHeroPrimary = ({ home }) => {
+  const router = useRouter();
+
+  const handleClick = () => router.push(SHOP_ALL_URL);
 
   return (
     <Box sx={sx.root}>
@@ -29,6 +33,7 @@ const SectionHeroPrimary = (props) => {
                 color="secondary"
                 size="large"
                 sx={sx.button}
+                onClick={handleClick}
               >
                 Explore Products
               </Button>

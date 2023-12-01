@@ -18,15 +18,11 @@ const Thumbnail = ({ src, handleClick, ...props }) => (
   </CardActionArea>
 );
 
-const ProductCustomizeModal = ({ open = false, color, product }) => {
+const ProductCustomize = ({ color, product, hide }) => {
   const [activeColor, setActiveColor] = useState();
   const { colors, fetchColors } = useColors();
 
-  useEffect(() => {
-    if (open) {
-      fetchColors();
-    }
-  }, [open]);
+  useEffect(() => { fetchColors(); }, []);
 
   useEffect(() => {
     if (colors?.length > 0 && color) {
@@ -35,10 +31,10 @@ const ProductCustomizeModal = ({ open = false, color, product }) => {
     }
   }, [colors, color]);
 
-  const isFront = getMetaValue(product, "front_placement");
   const isBack = getMetaValue(product, "back_placement");
+  const isFront = getMetaValue(product, "front_placement");
 
-  if (!activeColor) { return null; }
+  if (hide) { return null; }
 
   return (
     <Stack>
@@ -86,30 +82,28 @@ const ProductCustomizeModal = ({ open = false, color, product }) => {
           </Stack>
         </>
       )}
-      {activeColor && (
-        <Stack sx={sx.container}>
-          <Typography variant="subtitle1" sx={sx.title}>Preview</Typography>
-          <Stack direction="row" spacing={2}>
-            {isFront && (
-              <Stack>
-                <Thumbnail src={activeColor?.front_placement} alt="Product's front thumbnail" />
-                <Typography variant="overline" sx={sx.overline}>Front</Typography>
-              </Stack>
-            )}
-            {isBack && (
-              <Stack>
-                <Thumbnail src={activeColor?.back_placement} alt="Product's back thumbnail" />
-                <Typography variant="overline" sx={sx.overline}>Back</Typography>
-              </Stack>
-            )}
-          </Stack>
+      <Stack sx={sx.container}>
+        <Typography variant="subtitle1" sx={sx.title}>Preview</Typography>
+        <Stack direction="row" spacing={2}>
+          {isFront && (
+            <Stack>
+              <Thumbnail src={activeColor?.front_placement} alt="Product's front thumbnail" />
+              <Typography variant="overline" sx={sx.overline}>Front</Typography>
+            </Stack>
+          )}
+          {isBack && (
+            <Stack>
+              <Thumbnail src={activeColor?.back_placement} alt="Product's back thumbnail" />
+              <Typography variant="overline" sx={sx.overline}>Back</Typography>
+            </Stack>
+          )}
         </Stack>
-      )}
+      </Stack>
     </Stack>
   );
 };
 
-export default ProductCustomizeModal;
+export default ProductCustomize;
 
 const sx = {
   container: {
