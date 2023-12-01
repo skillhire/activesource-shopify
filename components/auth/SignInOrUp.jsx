@@ -91,7 +91,7 @@ const sx = {
     borderColor: 'divider'
   },
   imageContainer: {
-    display: "flex",
+    display: { xs: 'none', sm: 'none', md: 'flex' },
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "secondary.faded",
