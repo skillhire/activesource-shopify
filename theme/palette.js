@@ -1,6 +1,6 @@
 export default {
   primary: {
-    main: "#231D18",
+    main: "#2E2E2E",
     contrastText: "#FFFFFF",
   },
   secondary: {
@@ -12,7 +12,7 @@ export default {
   },
   tertiary: {
     main: "#E7DBFF",
-    contrastText: "#8044FD",
+    contrastText: "#9C6CFF",
   },
   tonalOffset: 0.2,
   error: {
@@ -20,16 +20,16 @@ export default {
     contrastText: "#FFFFFF",
   },
   text: {
-    primary: "#231D18",
+    primary: "#2E2E2E",
     secondary: "#B4B4B4",
-    link: "#231D18",
+    link: "#2E2E2E",
   },
-  link: "#231D18",
-  icon: "#000000",
+  link: "#2E2E2E",
+  icon: "#2E2E2E",
   background: {
-    default: "#EFEFEF",
+    default: "#2E2E2E",
     paper: "#FFFFFF",
-    shade1: "#000000",
+    shade1: "#2E2E2E",
     shade2: "#252525",
     shade3: "#EFEFEF",
   },

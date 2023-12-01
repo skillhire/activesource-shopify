@@ -51,7 +51,7 @@ const SignInOrUp = ({ tab, onSuccess }) => {
     <Layout sx={sx.root}>
       <Grid container sx={sx.root}>
         <Grid item xs={12} sm={12} md={6} sx={sx.imageContainer}>
-          <Image src={LoginHeroImage} alt="Hero Image" priority width={450} />
+          <Image src={LoginHeroImage} alt="Hero Image" priority height={560} />
         </Grid>
         <Grid item xs={12} sm={12} md={6} sx={sx.formContainer}>
           <Logo black />

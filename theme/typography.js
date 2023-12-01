@@ -100,9 +100,19 @@ export default {
     fontSize: 16,
     fontWeight: 400,
     lineHeight: "200%",
-    // Mobile Footer Menu 14/200
+    // Mobile Footer Menu 14/120
     "@media (max-width: 600px)": {
       fontSize: 14,
     },
   },
+  homeDescription: {
+    // Body copy 18/120
+    fontSize: 18,
+    fontWeight: 400,
+    lineHeight: "120%",
+    // Mobile Body Copy 14/120
+    "@media (max-width: 600px)": {
+      fontSize: 14,
+    },
+  }
 };

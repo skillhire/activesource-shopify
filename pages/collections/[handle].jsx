@@ -57,11 +57,9 @@ const DesktopFilterButtons = (props) => {
     <Hidden smDown>
       <Box sx={sx.searchFilters}>
         <Box sx={sx.secondaryActions}>
-          <Box sx={sx.filterText}>
-            <Typography color="text.primary" variant="button">
-              SORT BY:
-            </Typography>
-          </Box>
+          <Typography color="text.primary" variant="button">
+            SORT BY:
+          </Typography>
           <FilterButton
             label={sortBy?.label}
             handleClick={handleSortClick}
@@ -276,8 +274,7 @@ const sx = {
     width: "100%",
   },
   container: {
-    p: 0,
-    px: 2,
+    p: 2,
   },
   searchContainer: {
     minHeight: 400,
@@ -296,10 +293,6 @@ const sx = {
       display: "none",
     },
   },
-  filterText: {
-    pb: 0.5,
-    width: "70px",
-  },
   primaryActions: {
     display: "flex",
     flexDirection: "row",
@@ -309,6 +302,7 @@ const sx = {
   },
   secondaryActions: {
     display: "flex",
+    alignItems: "center",
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center",

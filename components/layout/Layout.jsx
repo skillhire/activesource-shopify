@@ -30,11 +30,7 @@ export default function Layout({
           ...(disableScroll && sx.disableScroll),
         }}
       >
-        <Box
-          sx={{
-            ...sx.container,
-          }}
-        >
+        <Box sx={{ ...sx.container }}>
           {maxWidth ? (
             <Container maxWidth={maxWidth}>{children}</Container>
           ) : (
@@ -63,11 +59,11 @@ const sx = {
     minHeight: "440px",
   },
   container: {
-    pt: {
+    mt: {
       sm: "64px",
       xs: "50px",
     },
-    minHeight: "calc(100vh - 440px)",
+    backgroundColor: "background.shade3",
   },
   disableScroll: {
     overflow: "hidden",
