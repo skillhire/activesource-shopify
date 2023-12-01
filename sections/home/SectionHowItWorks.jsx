@@ -32,50 +32,48 @@ const ITEMS = [
 
 const SectionFeaturedCollection = () => {
   return (
-    <Box sx={sx.root}>
-      <Container maxWidth="lg">
-        <Stack sx={sx.header} spacing={2}>
-          <Chip label="OUR PROCESS" variant="filled" color="tertiary" />
-          <Typography variant="h2" maxWidth={700}>
-            Launch your fitness apparel collection in 3 easy steps
-          </Typography>
-        </Stack>
-        <Stack>
-          {ITEMS.map((item, i) => {
-            let itemContainerClass = { ...sx.itemContainer };
-            if (i % 2 !== 0) {
-              itemContainerClass = { ...itemContainerClass, ...sx.itemContainerReversed }
-            }
-            return (
-              <Box
-                key={item.title}
-                sx={itemContainerClass}
-              >
-                <Box sx={sx.item}>
-                  <Stack spacing={2}>
-                    <Box>
-                      <IconButton disabled sx={sx.iconButton} >
-                        <Image responsive="true" src={item.icon} alt={`${item.title} Icon`} width={24} height={24} />
-                      </IconButton>
-                    </Box>
-                    <Typography variant="body2">STEP {i >= 10 ? i + 1 : `0${i + 1}`}</Typography>
-                    <Typography variant="h3">
-                      {item.title}
-                    </Typography>
-                    <Typography variant="homeDescription" maxWidth={380}>
-                      {item.description}
-                    </Typography>
-                  </Stack>
-                </Box>
-                <Box sx={sx.imageContainer}>
-                  <Image src={item.image} alt={`${item.title} Image`} style={sx.image} />
-                </Box>
+    <Container maxWidth="lg" sx={sx.root}>
+      <Stack sx={sx.header} spacing={2}>
+        <Chip label="OUR PROCESS" variant="filled" color="tertiary" />
+        <Typography variant="h2" maxWidth={700}>
+          Launch your fitness apparel collection in 3 easy steps
+        </Typography>
+      </Stack>
+      <Stack>
+        {ITEMS.map((item, i) => {
+          let itemContainerClass = { ...sx.itemContainer };
+          if (i % 2 !== 0) {
+            itemContainerClass = { ...itemContainerClass, ...sx.itemContainerReversed }
+          }
+          return (
+            <Box
+              key={item.title}
+              sx={itemContainerClass}
+            >
+              <Box sx={sx.item}>
+                <Stack spacing={2}>
+                  <Box>
+                    <IconButton disabled sx={sx.iconButton} >
+                      <Image responsive="true" src={item.icon} alt={`${item.title} Icon`} width={24} height={24} />
+                    </IconButton>
+                  </Box>
+                  <Typography variant="body2">STEP {i >= 10 ? i + 1 : `0${i + 1}`}</Typography>
+                  <Typography variant="h3">
+                    {item.title}
+                  </Typography>
+                  <Typography variant="homeDescription" maxWidth={380}>
+                    {item.description}
+                  </Typography>
+                </Stack>
               </Box>
-            )
-          })}
-        </Stack>
-      </Container>
-    </Box >
+              <Box sx={sx.imageContainer}>
+                <Image src={item.image} alt={`${item.title} Image`} style={sx.image} />
+              </Box>
+            </Box>
+          )
+        })}
+      </Stack>
+    </Container>
   );
 };
 

@@ -12,7 +12,7 @@ export default {
   },
   tertiary: {
     main: "#E7DBFF",
-    contrastText: "#8044FD",
+    contrastText: "#9C6CFF",
   },
   tonalOffset: 0.2,
   error: {
