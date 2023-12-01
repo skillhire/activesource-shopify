@@ -121,7 +121,7 @@ const Product = () => {
                 handleOptionChange={handleOptionChange}
               >
                 <ProductCustomize
-                  addToCartDisabled={addToCartDisabled}
+                  hide={addToCartDisabled}
                   color={color}
                   product={product}
                   customAttributes={customAttributes}

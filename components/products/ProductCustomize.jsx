@@ -18,7 +18,7 @@ const Thumbnail = ({ src, handleClick, ...props }) => (
   </CardActionArea>
 );
 
-const ProductCustomize = ({ color, product, addToCartDisabled }) => {
+const ProductCustomize = ({ color, product, hide }) => {
   const [activeColor, setActiveColor] = useState();
   const { colors, fetchColors } = useColors();
 
@@ -26,6 +26,7 @@ const ProductCustomize = ({ color, product, addToCartDisabled }) => {
 
   useEffect(() => {
     if (colors?.length > 0 && color) {
+      console.log('SET ACTIVE COLOR', color)
       const active = colors.find((c) => c.handle == color.handle);
       setActiveColor(active);
     }
@@ -34,7 +35,7 @@ const ProductCustomize = ({ color, product, addToCartDisabled }) => {
   const isBack = getMetaValue(product, "back_placement");
   const isFront = getMetaValue(product, "front_placement");
 
-  if (addToCartDisabled) { return null; }
+  if (hide) { return null; }
 
   return (
     <Stack>
@@ -82,25 +83,23 @@ const ProductCustomize = ({ color, product, addToCartDisabled }) => {
           </Stack>
         </>
       )}
-      {activeColor && (
-        <Stack sx={sx.container}>
-          <Typography variant="subtitle1" sx={sx.title}>Preview</Typography>
-          <Stack direction="row" spacing={2}>
-            {isFront && (
-              <Stack>
-                <Thumbnail src={activeColor?.front_placement} alt="Product's front thumbnail" />
-                <Typography variant="overline" sx={sx.overline}>Front</Typography>
-              </Stack>
-            )}
-            {isBack && (
-              <Stack>
-                <Thumbnail src={activeColor?.back_placement} alt="Product's back thumbnail" />
-                <Typography variant="overline" sx={sx.overline}>Back</Typography>
-              </Stack>
-            )}
-          </Stack>
+      <Stack sx={sx.container}>
+        <Typography variant="subtitle1" sx={sx.title}>Preview</Typography>
+        <Stack direction="row" spacing={2}>
+          {isFront && (
+            <Stack>
+              <Thumbnail src={activeColor?.front_placement} alt="Product's front thumbnail" />
+              <Typography variant="overline" sx={sx.overline}>Front</Typography>
+            </Stack>
+          )}
+          {isBack && (
+            <Stack>
+              <Thumbnail src={activeColor?.back_placement} alt="Product's back thumbnail" />
+              <Typography variant="overline" sx={sx.overline}>Back</Typography>
+            </Stack>
+          )}
         </Stack>
-      )}
+      </Stack>
     </Stack>
   );
 };
