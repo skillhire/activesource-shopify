@@ -73,15 +73,18 @@ const Footer = ({ styles }) => {
           <Box sx={sx.subfooterText}>
             <Box sx={sx.legalMenuItems}>
               {LEGAL_MENU.map((menuItem, i) => (
-                <Button
-                  key={i}
-                  sx={sx.button}
-                  onClick={() => handleClick(menuItem.value)}
-                >
-                  <Typography variant="overline" sx={sx.copyRightLabel}>
-                    {menuItem.label}
-                  </Typography>
-                </Button>
+                <>
+                  <Button
+                    key={i}
+                    sx={sx.button}
+                    onClick={() => handleClick(menuItem.value)}
+                  >
+                    <Typography variant="overline" sx={sx.copyRightLabel}>
+                      {menuItem.label}
+                    </Typography>
+                  </Button>
+                  {i === 0 && <Divider orientation="vertical" flexItem />}
+                </>
               ))}
             </Box>
           </Box>
@@ -106,6 +109,7 @@ const sx = {
     textTransform: "capitalize",
   },
   button: {
+    p: 0,
     color: "common.white",
     textTransform: "none",
   },
