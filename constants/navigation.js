@@ -3,7 +3,7 @@ export const SERVICES_URL = "/services";
 export const SHOP_ALL_URL = "/collections/home";
 
 export const PRODUCTS_SUBMENU = [
-  { label: "All Products", value: "/collections/home", divider: false },
+  { label: "All Products", value: SHOP_ALL_URL, divider: false },
   { label: "Men", value: "/collections/men", divider: false },
   { label: "Women", value: "/collections/women", divider: false },
   { label: "Accesories", value: "/collections/accesories", divider: false },
