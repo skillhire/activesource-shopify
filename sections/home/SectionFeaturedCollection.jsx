@@ -5,39 +5,34 @@ import { Box, Container, Typography } from "@mui/material";
 const SectionFeaturedCollection = (props) => {
   const { featuredCollection } = props || {};
   return (
-    <Box sx={sx.root}>
-      <Container maxWidth="lg">
-        <Box py={12}>
-          <Box sx={sx.header} mb={5}>
-            <Typography variant="h4" maxWidth={633} mr={2}>
-              Personalize for your brand, explore our diverse range of products.
-            </Typography>
-            <Link
-              href={`/collections/${featuredCollection?.handle}`}
-              variant="link"
-              sx={sx.link}
-            >
-              Explore Products
-            </Link>
-          </Box>
-          {featuredCollection && (
-            <ProductCollection
-              handle={featuredCollection.handle}
-              title={featuredCollection.title}
-            />
-          )}
+    <Container maxWidth="lg">
+      <Box py={12}>
+        <Box sx={sx.header} mb={5}>
+          <Typography variant="h4" maxWidth={633} mr={2}>
+            Personalize for your brand, explore our diverse range of products.
+          </Typography>
+          <Link
+            href={`/collections/${featuredCollection?.handle}`}
+            variant="link"
+            sx={sx.link}
+          >
+            Explore Products
+          </Link>
         </Box>
-      </Container>
-    </Box>
+        {featuredCollection && (
+          <ProductCollection
+            handle={featuredCollection.handle}
+            title={featuredCollection.title}
+          />
+        )}
+      </Box>
+    </Container>
   );
 };
 
 export default SectionFeaturedCollection;
 
 const sx = {
-  root: {
-    backgroundColor: "background.shade3",
-  },
   header: {
     display: "flex",
     alignItems: "center",

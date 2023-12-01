@@ -1,6 +1,6 @@
 export default {
   primary: {
-    main: "#231D18",
+    main: "#2E2E2E",
     contrastText: "#FFFFFF",
   },
   secondary: {
@@ -20,16 +20,16 @@ export default {
     contrastText: "#FFFFFF",
   },
   text: {
-    primary: "#231D18",
+    primary: "#2E2E2E",
     secondary: "#B4B4B4",
-    link: "#231D18",
+    link: "#2E2E2E",
   },
-  link: "#231D18",
-  icon: "#000000",
+  link: "#2E2E2E",
+  icon: "#2E2E2E",
   background: {
-    default: "#231D18",
+    default: "#2E2E2E",
     paper: "#FFFFFF",
-    shade1: "#231D18",
+    shade1: "#2E2E2E",
     shade2: "#252525",
     shade3: "#EFEFEF",
   },
