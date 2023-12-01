@@ -18,7 +18,7 @@ const Thumbnail = ({ src, handleClick, ...props }) => (
   </CardActionArea>
 );
 
-const ProductCustomizeModal = ({ open = false, color, product }) => {
+const ProductCustomizeModal = ({ open = false, color, product, addToCartDisabled }) => {
   const [activeColor, setActiveColor] = useState();
   const { colors, fetchColors } = useColors();
 
@@ -38,7 +38,7 @@ const ProductCustomizeModal = ({ open = false, color, product }) => {
   const isFront = getMetaValue(product, "front_placement");
   const isBack = getMetaValue(product, "back_placement");
 
-  if (!activeColor) { return null; }
+  if (addToCartDisabled) { return null; }
 
   return (
     <Stack>

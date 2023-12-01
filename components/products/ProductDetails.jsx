@@ -14,8 +14,8 @@ const ProductDetails = ({
   handleOptionChange,
   customAttributes,
   handleColorClick,
+  addToCartDisabled,
 }) => {
-  const [addToCartDisabled, setAddToCartDisabled] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
   const { priceRange } = product || {};
@@ -36,20 +36,9 @@ const ProductDetails = ({
     }
   }, [variant, minVariantPrice]);
 
-  const handleAddToCartDisabled = () => {
-    const disabled = !variant || Object.keys(customAttributes).length < 0;
-    setAddToCartDisabled(disabled);
-  };
-
-  useEffect(() => {
-    handleAddToCartDisabled();
-  }, [product, customAttributes, selectedOptions]);
-
   useEffect(() => {
     if (product?.metafields?.length > 0) {
-      let _colors = product.metafields
-        .find((metafield) => metafield?.key === "colors")
-        ?.references.edges.map((e) => e.node);
+      let _colors = product.metafields.find((metafield) => metafield?.key === "colors")?.references.edges.map((e) => e.node);
       setColors(_colors);
     }
   }, [product]);
@@ -57,7 +46,7 @@ const ProductDetails = ({
   return (
     <Box sx={sx.root}>
       <Stack spacing={2}>
-        {product && (
+        {(product &&
           <>
             <Typography variant="h4">{product?.title}</Typography>
             <Typography variant="button" sx={sx.price}>
@@ -75,7 +64,7 @@ const ProductDetails = ({
               handleChange={handleOptionChange}
               selectedOptions={selectedOptions}
               options={product?.options}
-              showGuidelines={customAttributes?.color !== undefined}
+              showGuidelines={!addToCartDisabled}
             />
           </>
         )}
@@ -98,7 +87,7 @@ const ProductDetails = ({
         </Grid>
         {children}
       </Stack>
-    </Box>
+    </Box >
   );
 };
 
