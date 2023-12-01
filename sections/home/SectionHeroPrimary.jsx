@@ -39,7 +39,10 @@ const SectionHeroPrimary = ({ home }) => {
               </Button>
             </Box>
           </Stack>
-          <Image src={HeroImage} alt="Hero Image" priority width={450} />
+          <Box sx={sx.imageContainer}>
+            <Image src={HeroImage} alt="Hero Image" priority layout='fill'
+              objectFit='contain' />
+          </Box>
         </Box>
       </Container>
     </Box>
@@ -51,17 +54,8 @@ export default SectionHeroPrimary;
 const sx = {
   root: {
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
     backgroundColor: "primary.main",
-    minHeight: {
-      sm: "calc(100vh - 64px)",
-      xs: "calc(100vh - 50px)",
-    },
-    textAlign: {
-      sm: "left",
-      xs: "center",
-    },
   },
   container: {
     display: "flex",
@@ -70,15 +64,28 @@ const sx = {
       lg: "space-between",
       sm: "center",
     },
+    flexDirection: {
+      lg: "row",
+      md: "row",
+      sm: "column",
+      xs: "column",
+    },
     pt: {
-      sm: 6,
-      xs: 6,
+      sm: 5,
+      xs: 4,
     },
     pb: {
       sm: 12,
-      xs: 6,
+      xs: 7,
     },
     flexWrap: "wrap",
+  },
+  imageContainer: {
+    flex: 1,
+    position: "relative",
+    minHeight: 550,
+    width: "100%",
+    height: "100%",
   },
   button: {
     width: {
