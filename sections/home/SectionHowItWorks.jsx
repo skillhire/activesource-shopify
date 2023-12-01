@@ -34,9 +34,9 @@ const SectionFeaturedCollection = () => {
   return (
     <Box sx={sx.root}>
       <Container maxWidth="lg">
-        <Stack sx={sx.header}>
+        <Stack sx={sx.header} spacing={2}>
           <Chip label="OUR PROCESS" variant="filled" color="tertiary" />
-          <Typography variant="h2" maxWidth={700} my={2} mb={10}>
+          <Typography variant="h2" maxWidth={700}>
             Launch your fitness apparel collection in 3 easy steps
           </Typography>
         </Stack>
@@ -52,17 +52,17 @@ const SectionFeaturedCollection = () => {
                 sx={itemContainerClass}
               >
                 <Box sx={sx.item}>
-                  <Stack spacing={1}>
+                  <Stack spacing={2}>
                     <Box>
                       <IconButton disabled sx={sx.iconButton} >
                         <Image responsive="true" src={item.icon} alt={`${item.title} Icon`} width={24} height={24} />
                       </IconButton>
                     </Box>
-                    <Typography variant="body1">STEP {i >= 10 ? i + 1 : `0${i + 1}`}</Typography>
+                    <Typography variant="body2">STEP {i >= 10 ? i + 1 : `0${i + 1}`}</Typography>
                     <Typography variant="h3">
                       {item.title}
                     </Typography>
-                    <Typography variant="body1" maxWidth={380}>
+                    <Typography variant="homeDescription" maxWidth={380}>
                       {item.description}
                     </Typography>
                   </Stack>
@@ -75,7 +75,7 @@ const SectionFeaturedCollection = () => {
           })}
         </Stack>
       </Container>
-    </Box>
+    </Box >
   );
 };
 
@@ -84,12 +84,12 @@ export default SectionFeaturedCollection;
 const sx = {
   root: {
     pt: 3,
-    backgroundColor: "background.paper",
+    pb: 6,
   },
   header: {
     display: "flex",
-    alignItems: "center",
     textAlign: "center",
+    alignItems: "center",
   },
   iconButton: {
     p: 1,
@@ -97,7 +97,7 @@ const sx = {
   },
   image: {
     objectFit: "contain",
-    width: "75%",
+    width: "100%",
     height: "auto",
     "@media (max-width: 600px)": {
       width: "100%",
@@ -115,6 +115,7 @@ const sx = {
   itemContainer: {
     my: 5,
     display: "flex",
+    alignItems: "center",
     flexDirection: "row",
     "@media (max-width: 600px)": {
       flexDirection: "column",
