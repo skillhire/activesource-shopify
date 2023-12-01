@@ -34,6 +34,7 @@ const sx = {
   listItem: {},
   text: {
     color: "common.white",
+    whiteSpace: "nowrap",
   },
   listItemButton: {
     px: 0,
