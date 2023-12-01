@@ -47,6 +47,7 @@ const AddToCartButton = ({
       fullWidth
       color="secondary"
       onClick={handleAddToCart}
+      disabled={disabled}
       sx={{ ...sx.root, ...styles }}
       variant="contained"
       startIcon={loading && <CircularProgress size={20} sx={sx.loader} />}
