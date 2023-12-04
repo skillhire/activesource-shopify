@@ -13,6 +13,7 @@ import {
   TableContainer,
   CircularProgress,
 } from '@mui/material';
+import { SHOP_ALL_URL } from "constants/navigation";
 
 import { OrderItem } from "components";
 import { useAuth, useOrders } from "hooks";
@@ -22,7 +23,9 @@ const OrderList = () => {
 
   const { orders, loading, fetchCustomerOrders } = useOrders();
 
-  const handleClick = (order) => {
+  const handleClick = () => router.push(SHOP_ALL_URL);
+
+  const handleOrderClick = (order) => {
     window.open(order?.statusUrl, "_blank");
   };
 
@@ -52,7 +55,7 @@ const OrderList = () => {
           </TableHead>
           <TableBody>
             {orders?.map((order) => (
-              <OrderItem key={order.id} order={order} handleClick={handleClick} />
+              <OrderItem key={order.id} order={order} handleClick={handleOrderClick} />
             ))}
           </TableBody>
         </Table>
@@ -75,7 +78,7 @@ const OrderList = () => {
         </Box>
       </Stack>
     )
-  }, [])
+  }, [orders])
 
   return (
     <Box>
