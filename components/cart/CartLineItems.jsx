@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useCallback } from "react";
 import { useCheckout } from "hooks";
 import { Box, List, Typography, CircularProgress } from "@mui/material";
 
@@ -7,22 +7,18 @@ import { CartLineItem } from "components";
 const CartLineItems = ({ styles }) => {
   const { checkout, loading } = useCheckout();
 
-  const lineItems = checkout?.lineItems?.edges.map((e) => e.node) || [];
+  const lineItems = useMemo(() => checkout?.lineItems?.edges.map((e) => e.node) || [], [checkout]);
 
-  const renderContent = () => {
+  const renderContent = useCallback(() => {
     if (lineItems?.length > 0) {
-      return (
-        <>
-          {lineItems.map((lineItem) => (<CartLineItem lineItem={lineItem} key={lineItem.id} />))}
-        </>
-      )
+      return lineItems.map((lineItem) => (<CartLineItem lineItem={lineItem} key={lineItem.id} />))
     }
     return (
       <Box sx={sx.empty}>
         <Typography variant="body1">Your cart is empty</Typography>
       </Box>
     )
-  }
+  }, [lineItems])
 
   return (
     <List sx={{ ...sx.root, ...styles }} disablePadding>
