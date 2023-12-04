@@ -4,8 +4,8 @@ export const SHOP_ALL_URL = "/collections/home";
 
 export const PRODUCTS_SUBMENU = [
   { label: "All Products", value: SHOP_ALL_URL, divider: false },
-  { label: "Men's", value: "/collections/mens", divider: false },
-  { label: "Women's", value: "/collections/womens", divider: false },
+  { label: "Mens", value: "/collections/mens", divider: false },
+  { label: "Womens", value: "/collections/womens", divider: false },
   { label: "Accessories", value: "/collections/accessories", divider: false },
 ];
 
