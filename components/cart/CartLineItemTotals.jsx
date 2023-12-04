@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Box, Stack, Typography } from "@mui/material";
 import { formatCurrency } from "utils";
 
-const CartLineItemTotals = ({ styles }) => {
+const CartLineItemTotals = () => {
   const { checkout } = useCheckout();
 
   return (
@@ -14,7 +14,7 @@ const CartLineItemTotals = ({ styles }) => {
         <>&nbsp;</>
         <Typography variant="body1">
           {checkout && formatCurrency(checkout.lineItemsSubtotalPrice?.amount)}
-          {!checkout && "0"}
+          {!checkout && "$0"}
         </Typography>
       </Stack>
     </Box>

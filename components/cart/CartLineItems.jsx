@@ -1,24 +1,37 @@
 import React from "react";
 import { useCheckout } from "hooks";
-import { Box, List, Typography } from "@mui/material";
+import { Box, List, Typography, CircularProgress } from "@mui/material";
+
 import { CartLineItem } from "components";
 
-const CartLineItems = ({ styles, ...props }) => {
-  const { checkout } = useCheckout();
+const CartLineItems = ({ styles }) => {
+  const { checkout, loading } = useCheckout();
 
   const lineItems = checkout?.lineItems?.edges.map((e) => e.node) || [];
 
+  const renderContent = () => {
+    if (lineItems?.length > 0) {
+      return (
+        <>
+          {lineItems.map((lineItem) => (<CartLineItem lineItem={lineItem} key={lineItem.id} />))}
+        </>
+      )
+    }
+    return (
+      <Box sx={sx.empty}>
+        <Typography variant="body1">Your cart is empty</Typography>
+      </Box>
+    )
+  }
+
   return (
     <List sx={{ ...sx.root, ...styles }} disablePadding>
-      {lineItems?.length > 0 ? (
-        lineItems.map((lineItem) => (
-          <CartLineItem lineItem={lineItem} key={lineItem.id} />
-        ))
-      ) : (
-        <Box sx={sx.empty}>
-          <Typography variant="body1">Your cart is empty</Typography>
+      {loading && (
+        <Box sx={sx.loader}>
+          <CircularProgress color="primary" />
         </Box>
       )}
+      {!loading && renderContent()}
     </List>
   );
 };
@@ -35,4 +48,9 @@ const sx = {
   empty: {
     textAlign: "center",
   },
+  loader: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }
 };
