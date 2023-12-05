@@ -1,17 +1,15 @@
 import React from "react";
 import { OrderList } from "components";
-import { Box, Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { Layout } from "components";
-import { useRouter } from "next/router";
 
 const CustomerOrders = () => {
   return (
     <Layout>
-      <Box sx={sx.root}>
-        <Container maxWidth="sm">
-          <OrderList />
-        </Container>
-      </Box>
+      <Container maxWidth="md" sx={sx.root}>
+        <Typography variant="h3" mb={6}>Order History</Typography>
+        <OrderList />
+      </Container>
     </Layout>
   );
 };
@@ -20,6 +18,7 @@ export default CustomerOrders;
 
 const sx = {
   root: {
-    mt: 6,
+    py: 12,
+    textAlign: "center",
   },
 };

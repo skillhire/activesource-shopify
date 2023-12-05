@@ -1,54 +1,49 @@
 import React from "react";
 import {
-  ListItem,
-  ListItemText,
-  ListItemButton,
-  ListItemIcon,
+  Link,
+  Stack,
+  TableRow,
+  TableCell,
   Typography,
 } from "@mui/material";
-import { Image } from "components";
-import { formatCurrency } from "utils";
+import Image from "next/image";
 import moment from "moment";
 
 const OrderItem = ({ styles, order, handleClick, ...props }) => {
-  return (
-    <ListItem>
-      <ListItemButton onClick={() => handleClick(order)}>
-        <ListItemIcon sx={sx.thumbnail}>
+  const products = order?.lineItems?.edges;
+  return products.map(product => (
+    <TableRow key={product.node?.title}>
+      <TableCell>
+        <Stack direction="row" alignItems="center">
           <Image
             alt={order?.name}
-            height={160}
-            width={160}
-            layout="responsive"
-            src={order?.lineItems?.edges[0]?.node?.variant?.image?.src}
-            style={{
-              width: "100%",
-              objectFit: "cover",
-            }}
+            height={62}
+            width={62}
+            src={product.node?.variant?.image?.src}
+            style={sx.image}
           />
-        </ListItemIcon>
-        <ListItemText
-          primary={order?.name}
-          secondary={
-            <Typography gutterBottom variant="body2" color="textSecondary">
-              {moment(order?.processedAt).format("MM/DD/YYYY")} |{" "}
-              {formatCurrency(order?.totalPrice?.amount)}
-            </Typography>
-          }
-        />
-      </ListItemButton>
-    </ListItem>
-  );
+          <Typography variant="subtitle1">
+            {product.node?.title}
+          </Typography>
+        </Stack>
+      </TableCell>
+      <TableCell>{order.name}</TableCell>
+      <TableCell>
+        <Typography variant="body2">
+          {moment(order?.processedAt).format("MM/DD/YYYY")}
+        </Typography>
+      </TableCell>
+      <TableCell>
+        <Link href={order.statusUrl} variant="link" target="_blank">
+          <Typography variant="body2">View Order Status</Typography>
+        </Link>
+      </TableCell>
+    </TableRow>
+  ))
 };
 
 export default OrderItem;
 
 const sx = {
-  root: {},
-  button: {
-    p: 0,
-  },
-  thumbnail: {
-    mr: 2,
-  },
+  image: { objectFit: "contain" },
 };
