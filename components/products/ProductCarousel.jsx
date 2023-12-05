@@ -40,7 +40,7 @@ const ProductCarousel = ({
           swipeable={swipeable}
           draggable={draggable}
           showDots={isMobile ? true : false}
-          arrows={isMobile ? false : true}
+          arrows={false}
           responsive={responsive}
           ssr
           infinite
