@@ -4,7 +4,7 @@ import Script from "next/script";
 
 const ContactUs = () => {
   return (
-    <Layout title="Contact Us | Active Source">
+    <Layout metaTitle="Contact Us | Active Source">
       <Container maxWidth="sm">
         <Script
           src="https://contact.gorgias.help/api/contact-forms/loader.js?uid=0hfeb3z6&locale=en-US"

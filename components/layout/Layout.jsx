@@ -5,7 +5,7 @@ import { Box, Container } from "@mui/material";
 export default function Layout({
   children,
   maxWidth,
-  title = "Active Source | Custom Men's Bands that Tell Your Story",
+  metaTitle = "Active Source | Custom Men's Brands that Tell Your Story",
   metaDescription = "Discover Active Source's smarter way to customize and craft designs that reflect the story of your most important partnership",
   metaKeywords,
   metaImage,
@@ -17,7 +17,7 @@ export default function Layout({
   return (
     <>
       <MetaFields
-        title={title}
+        title={metaTitle}
         metaKeywords={metaKeywords}
         metaDescription={metaDescription}
       />

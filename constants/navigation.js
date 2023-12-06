@@ -4,10 +4,10 @@ export const SHOP_ALL_URL = "/collections/home";
 export const LOGIN_URL = "/login";
 export const ACCOUNT_SOURCE_URL = "/account/me";
 
-export const PRODUCTS_SUBMENU = [
-  { label: "All Products", value: SHOP_ALL_URL, divider: false },
-  { label: "Mens", value: "/collections/mens", divider: false },
-  { label: "Womens", value: "/collections/womens", divider: false },
+export const COLLECTIONS_MENU = [
+  { label: "Shop All", value: SHOP_ALL_URL, divider: false },
+  { label: "Men's clothing", value: "/collections/mens", divider: false },
+  { label: "Women's clothing", value: "/collections/womens", divider: false },
   { label: "Accessories", value: "/collections/accessories", divider: false },
 ];
 
@@ -32,7 +32,7 @@ export const PRODUCTS_MENU = [
     value: SHOP_ALL_URL,
     divider: false,
     hasSubmenu: true,
-    submenu: PRODUCTS_SUBMENU,
+    submenu: COLLECTIONS_MENU,
   },
 ];
 

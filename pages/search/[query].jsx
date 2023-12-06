@@ -64,7 +64,7 @@ const Search = () => {
   }, [query]);
 
   return (
-    <Layout title={"Search"}>
+    <Layout metaTitle={"Search"}>
       <Container maxWidth="lg">
         <Box sx={sx.page}>
           <Box sx={sx.container}>
