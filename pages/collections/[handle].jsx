@@ -13,7 +13,9 @@ import { useCollections, useSegment } from "hooks";
 import { COLLECTIONS_MENU } from "constants/navigation";
 import { PRICE_RANGE_MIN, PRICE_RANGE_MAX } from "constants/shop";
 
-const Collection = (props) => {
+import SectionEnterpriseSolutions from "sections/collections/SectionEnterpriseSolutions";
+
+const Collection = () => {
   const router = useRouter();
   const { handle } = router.query;
   const { trackProductList, trackProductClicked } = useSegment();
@@ -118,6 +120,7 @@ const Collection = (props) => {
           handleSearch={() => handleSearch(cursor)}
         />
       </Box>
+      <SectionEnterpriseSolutions />
     </CollectionLayout>
   );
 };
@@ -130,5 +133,6 @@ const sx = {
   },
   searchContainer: {
     minHeight: 400,
+    mb: 12,
   },
 };

@@ -6,7 +6,6 @@ import { Grid, Box, Tabs, Tab, Stack } from "@mui/material";
 import { Logo, SignIn, SignUp, Layout } from "components";
 
 import LoginHeroImage from "assets/login-hero-image@2x.png";
-import { Router } from "lucide-react";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
