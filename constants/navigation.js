@@ -61,19 +61,21 @@ export const LEGAL_MENU = [
   { label: "Terms of Use", value: "/terms-of-use", divider: false },
 ];
 
-export const UNLOGGED_MENU = [
-  { label: "Login", value: "/login", divider: false },
+export const ACCOUNT_MENU = [
+  { label: "My Account", value: "/account/me", divider: false },
+  { label: "Order History", value: "/account/orders", divider: false },
 ];
 
 export const LOGGED_MENU = [
   {
     label: "Account",
-    value: "/account",
+    value: "/account/me",
     divider: false,
     hasSubmenu: true,
-    submenu: [
-      { label: "My Account", value: "/account/me", divider: false },
-      { label: "Order History", value: "/account/orders", divider: false },
-    ],
+    submenu: ACCOUNT_MENU,
   },
+];
+
+export const UNLOGGED_MENU = [
+  { label: "Login", value: "/login", divider: false },
 ];
