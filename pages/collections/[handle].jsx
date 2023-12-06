@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Grid, Box } from "@mui/material";
 import { useRouter } from "next/router";
 
@@ -10,16 +10,12 @@ import {
   LoadMore,
 } from "components";
 import { useCollections, useSegment } from "hooks";
-import {
-  PRICE_RANGE_MIN,
-  PRICE_RANGE_MAX,
-} from "constants/shop";
-import { getMetaImage } from "utils";
+import { COLLECTIONS_MENU } from "constants/navigation";
+import { PRICE_RANGE_MIN, PRICE_RANGE_MAX } from "constants/shop";
 
 const Collection = (props) => {
   const router = useRouter();
   const { handle } = router.query;
-  const [hero, setHero] = useState();
   const { trackProductList, trackProductClicked } = useSegment();
 
   // Search options
@@ -34,7 +30,7 @@ const Collection = (props) => {
     setPriceRange([PRICE_RANGE_MIN, PRICE_RANGE_MAX]);
   };
 
-  const [sortBy, setSortBy] = useState({
+  const [sortBy, _setSortBy] = useState({
     label: "Collection",
     value: "COLLECTION_DEFAULT",
     reverse: false,
@@ -87,18 +83,17 @@ const Collection = (props) => {
   useEffect(() => {
     if (collection) {
       trackProductList(collection);
-      setHero({
-        title: "Shop from the bands below",
-        subtitle: "or try on five of our sample bands at home.",
-        desktopImage: collection?.image?.url,
-        mobileImage: getMetaImage(collection, "mobile_image"),
-      });
     }
   }, [collection]);
 
 
+  const currentCollection = useMemo(() => {
+    return COLLECTIONS_MENU.find(c => c.handle === handle)
+  }, [handle])
+
+
   return (
-    <CollectionLayout title="Shop All">
+    <CollectionLayout title={currentCollection?.label}>
       <SearchTags tags={materials} handleClearAll={handleClearAll} />
       <Box sx={sx.searchContainer}>
         <Grid container spacing={1}>

@@ -5,10 +5,10 @@ export const LOGIN_URL = "/login";
 export const ACCOUNT_SOURCE_URL = "/account/me";
 
 export const COLLECTIONS_MENU = [
-  { label: "Shop All", value: SHOP_ALL_URL, divider: false },
-  { label: "Men's clothing", value: "/collections/mens", divider: false },
-  { label: "Women's clothing", value: "/collections/womens", divider: false },
-  { label: "Accessories", value: "/collections/accessories", divider: false },
+  { label: "Shop All", handle: "home", value: SHOP_ALL_URL, divider: false },
+  { label: "Men's clothing", handle: "mens", value: "/collections/mens", divider: false },
+  { label: "Women's clothing", handle: "womens", value: "/collections/womens", divider: false },
+  { label: "Accessories", handle: "accessories", value: "/collections/accessories", divider: false },
 ];
 
 export const SUPPORT_SUBMENU = [
