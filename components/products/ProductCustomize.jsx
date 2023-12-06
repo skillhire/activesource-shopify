@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Button, Stack, Typography, Box, CardActionArea } from "@mui/material";
 import { getMetaValue } from "utils";
 import { useColors } from "hooks";
@@ -31,14 +31,14 @@ const ProductCustomize = ({ color, product, hide }) => {
     }
   }, [colors, color]);
 
-  const isBack = getMetaValue(product, "back_placement");
-  const isFront = getMetaValue(product, "front_placement");
+  const isBack = useMemo(() => getMetaValue(product, "back_placement"), [product]);
+  const isFront = useMemo(() => getMetaValue(product, "front_placement"), [product]);
 
   if (hide) { return null; }
 
   return (
     <Stack>
-      {isFront && (
+      {isFront === "true" && (
         <>
           <Stack spacing={1} sx={sx.container}>
             <Typography variant="subtitle1" sx={sx.title}>Front Placement</Typography>
@@ -60,7 +60,7 @@ const ProductCustomize = ({ color, product, hide }) => {
           </Stack>
         </>
       )}
-      {isBack && (
+      {isBack === "true" && (
         <>
           <Stack spacing={1} sx={sx.container}>
             <Typography variant="subtitle1" sx={sx.title}>Back Placement</Typography>
@@ -82,23 +82,25 @@ const ProductCustomize = ({ color, product, hide }) => {
           </Stack>
         </>
       )}
-      <Stack sx={sx.container}>
-        <Typography variant="subtitle1" sx={sx.title}>Preview</Typography>
-        <Stack direction="row" spacing={2}>
-          {isFront && (
-            <Stack>
-              <Thumbnail src={activeColor?.front_placement} alt="Product's front thumbnail" />
-              <Typography variant="overline" sx={sx.overline}>Front</Typography>
-            </Stack>
-          )}
-          {isBack && (
-            <Stack>
-              <Thumbnail src={activeColor?.back_placement} alt="Product's back thumbnail" />
-              <Typography variant="overline" sx={sx.overline}>Back</Typography>
-            </Stack>
-          )}
+      {(isFront === "true" || isBack === "true") && (
+        <Stack sx={sx.container}>
+          <Typography variant="subtitle1" sx={sx.title}>Preview</Typography>
+          <Stack direction="row" spacing={2}>
+            {isFront === "true" && (
+              <Stack>
+                <Thumbnail src={activeColor?.front_placement} alt="Product's front thumbnail" />
+                <Typography variant="overline" sx={sx.overline}>Front</Typography>
+              </Stack>
+            )}
+            {isBack === "true" && (
+              <Stack>
+                <Thumbnail src={activeColor?.back_placement} alt="Product's back thumbnail" />
+                <Typography variant="overline" sx={sx.overline}>Back</Typography>
+              </Stack>
+            )}
+          </Stack>
         </Stack>
-      </Stack>
+      )}
     </Stack>
   );
 };
