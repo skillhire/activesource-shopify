@@ -8,7 +8,7 @@ const AccountLayout = ({ title, children }) => {
       <Container maxWidth="lg" sx={sx.root}>
         <Grid container>
           <Grid item xs={4}>
-            <Box>
+            <Box sx={sx.menuContainer}>
               <AccountMenu />
             </Box>
           </Grid>
@@ -30,4 +30,7 @@ const sx = {
   root: {
     py: 12,
   },
+  menuContainer: {
+    width: "fit-content"
+  }
 };

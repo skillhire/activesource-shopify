@@ -2,14 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import { IconButton } from "@mui/material";
-
+import { useAuth } from "hooks";
 import { User } from "lucide-react";
+
+import { LOGIN_URL, ACCOUNT_SOURCE_URL } from "constants/navigation";
 
 const CartButton = () => {
   const router = useRouter();
+  const { accessToken } = useAuth();
 
   const handleUserClick = () => {
-    router.push("/login");
+    router.push(accessToken ? ACCOUNT_SOURCE_URL : LOGIN_URL);
   };
 
   return (
