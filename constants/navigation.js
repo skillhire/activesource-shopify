@@ -1,6 +1,8 @@
 export const SUPPORT_URL = "/support";
 export const SERVICES_URL = "/services";
 export const SHOP_ALL_URL = "/collections/home";
+export const LOGIN_URL = "/login";
+export const ACCOUNT_SOURCE_URL = "/account/me";
 
 export const PRODUCTS_SUBMENU = [
   { label: "All Products", value: SHOP_ALL_URL, divider: false },
@@ -61,19 +63,21 @@ export const LEGAL_MENU = [
   { label: "Terms of Use", value: "/terms-of-use", divider: false },
 ];
 
-export const UNLOGGED_MENU = [
-  { label: "Login", value: "/login", divider: false },
+export const ACCOUNT_MENU = [
+  { label: "My Account", value: ACCOUNT_SOURCE_URL, divider: false },
+  { label: "Order History", value: "/account/orders", divider: false },
 ];
 
 export const LOGGED_MENU = [
   {
     label: "Account",
-    value: "/account",
+    value: ACCOUNT_SOURCE_URL,
     divider: false,
     hasSubmenu: true,
-    submenu: [
-      { label: "My Account", value: "/account/me", divider: false },
-      { label: "Order History", value: "/account/orders", divider: false },
-    ],
+    submenu: ACCOUNT_MENU,
   },
+];
+
+export const UNLOGGED_MENU = [
+  { label: "Login", value: LOGIN_URL, divider: false },
 ];

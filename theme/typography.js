@@ -95,6 +95,11 @@ export default {
     textTransform: "none",
     textDecoration: "underline",
   },
+  listItem: {
+    fontSize: 20,
+    fontWeight: 600,
+    lineHeight: "120%",
+  },
   footer: {
     // Footer Menu 16/200
     fontSize: 16,

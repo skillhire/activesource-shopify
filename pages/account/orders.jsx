@@ -1,24 +1,12 @@
 import React from "react";
-import { OrderList } from "components";
-import { Container, Typography } from "@mui/material";
-import { Layout } from "components";
+import { AccountLayout, OrderList } from "components";
 
-const CustomerOrders = () => {
+const MyOrders = () => {
   return (
-    <Layout>
-      <Container maxWidth="md" sx={sx.root}>
-        <Typography variant="h3" mb={6}>Order History</Typography>
-        <OrderList />
-      </Container>
-    </Layout>
+    <AccountLayout title="Order History">
+      <OrderList />
+    </AccountLayout>
   );
 };
 
-export default CustomerOrders;
-
-const sx = {
-  root: {
-    py: 12,
-    textAlign: "center",
-  },
-};
+export default MyOrders;

@@ -1,6 +1,9 @@
 export { default as AccountItem } from "components/AccountItem";
-export { default as AddressItem } from "components/addresses/AddressItem";
+export { default as AccountMenu } from "components/AccountMenu";
+export { default as AccountLayout } from "components/AccountLayout";
+export { default as AccountDetails } from "components/AccountDetails"
 export { default as AddressForm } from "components/addresses/AddressForm";
+export { default as AddressItem } from "components/addresses/AddressItem";
 export { default as AddressSkeleton } from "components/skeletons/AddressSkeleton";
 export { default as Auth } from "components/auth/AuthModal";
 export { default as AuthButton } from "components/auth/AuthButton";
@@ -54,11 +57,12 @@ export { default as MenuToggleButton } from "components/menu/MenuToggleButton";
 export { default as MobileMenu } from "components/menu/MobileMenu";
 export { default as MobileMenuItem } from "components/menu/MobileMenuItem";
 export { default as Modal } from "components/Modal";
+export { default as OrderList } from "components/orders/OrderList";
 export { default as OrderItem } from "components/orders/OrderItem";
 export { default as OrderDetails } from "components/orders/OrderDetails";
-export { default as OrderList } from "components/orders/OrderList";
 export { default as OrderLineItem } from "components/orders/OrderLineItem";
 export { default as OrderSkeleton } from "components/skeletons/OrderSkeleton";
+
 export { default as Page } from "components/layout/Page";
 export { default as Placeholder } from "components/Placeholder";
 export { default as ProductCard } from "components/products/ProductCard";
