@@ -40,6 +40,7 @@ export default {
       style: {
         fontSize: 16,
         lineHeight: "120%",
+        padding: "12px 16px"
       },
     },
     {
@@ -47,6 +48,7 @@ export default {
       style: {
         fontSize: 14,
         lineHeight: "120%",
+        padding: "12px 16px",
       },
     },
   ],

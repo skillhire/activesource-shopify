@@ -1,15 +1,15 @@
 import React from "react";
-import { Layout, AccountMenu } from "components";
+import { Layout, CollectionMenu } from "components";
 import { Box, Stack, Container, Grid, Typography } from "@mui/material";
 
-const AccountLayout = ({ title, children, ...props }) => {
+const ConnectionLayout = ({ title, children, ...props }) => {
   return (
     <Layout {...props}>
       <Container maxWidth="lg" sx={sx.root}>
         <Grid container>
           <Grid item xs={3}>
             <Box sx={sx.menuContainer}>
-              <AccountMenu />
+              <CollectionMenu />
             </Box>
           </Grid>
           <Grid item xs={9}>
@@ -24,7 +24,7 @@ const AccountLayout = ({ title, children, ...props }) => {
   );
 };
 
-export default AccountLayout;
+export default ConnectionLayout;
 
 const sx = {
   root: {

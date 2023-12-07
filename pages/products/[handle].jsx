@@ -91,7 +91,7 @@ const Product = () => {
   }, [product, customAttributes, selectedOptions, variant, setAddToCartDisabled]);
 
   return (
-    <Layout title={product?.title} metaDescription={product?.description}>
+    <Layout metaTitle={product?.title} metaDescription={product?.description}>
       <Container maxWidth="lg">
         <Box sx={sx.root} ref={ref}>
           <Grid container spacing={2}>

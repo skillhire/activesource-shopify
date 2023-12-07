@@ -30,6 +30,8 @@ export { default as ColorSelector } from "components/variants/VariantSelect";
 export { default as Collection } from "components/collections/Collection";
 export { default as Collections } from "components/collections/Collections";
 export { default as CollectionCarousel } from "components/collections/CollectionCarousel";
+export { default as CollectionMenu } from "components/collections/CollectionMenu";
+export { default as CollectionLayout } from "components/collections/CollectionLayout";
 export { default as CollectionGrid } from "components/collections/CollectionGrid";
 export { default as CollectionSkeleton } from "components/skeletons/CollectionSkeleton";
 export { default as CoverImage } from "components/images/CoverImage";

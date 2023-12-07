@@ -32,6 +32,12 @@ export default {
     fontWeight: 600,
     lineHeight: "133%" /* 39.9px */,
   },
+  h5: {
+    /* Button (SemiBold) */
+    fontSize: 20,
+    fontWeight: 600,
+    lineHeight: "120%",
+  },
   subtitle1: {
     // Header Menu (SemiBold) 16/120
     fontSize: 16,

@@ -92,7 +92,7 @@ const Browse = (props) => {
   }, [tags, priceRange, sortBy]);
 
   return (
-    <Layout title="ActiveSource | Browse">
+    <Layout metaTitle="ActiveSource | Browse">
       <Container maxWidth="lg">
         <Box sx={sx.searchFilters}>
           <Box sx={sx.primaryActions}>
