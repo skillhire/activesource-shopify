@@ -7,12 +7,12 @@ const AccountLayout = ({ title, children, ...props }) => {
     <Layout {...props}>
       <Container maxWidth="lg" sx={sx.root}>
         <Grid container>
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Box sx={sx.menuContainer}>
               <AccountMenu />
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <Stack>
               <Typography variant="h3" mb={6}>{title}</Typography>
               {children}

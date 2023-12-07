@@ -1,7 +1,9 @@
 import { Stack, Button, Typography, Box } from "@mui/material";
 import { useRouter } from "next/router";
 
-const SectionFeaturedSolutions = () => {
+import FlyingShirts from "assets/flying-shirts@2x.png";
+
+const SectionEnterpriseSolutions = () => {
   const router = useRouter();
 
   const handleClick = () => {
@@ -37,7 +39,9 @@ const sx = {
   root: {
     p: 7,
     borderRadius: 2,
-    background: (theme) => theme.palette.gradient.main
+    background: (theme) => theme.palette.gradient.main,
+    background: (theme) => `url(${FlyingShirts.src}) right center no-repeat, ${theme.palette.gradient.main}`,
+    backgroundSize: "55%, 100%",
   },
   button: {
     width: {
@@ -47,4 +51,4 @@ const sx = {
   },
 };
 
-export default SectionFeaturedSolutions;
+export default SectionEnterpriseSolutions;
