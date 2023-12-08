@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useClickOrDrag } from "hooks";
 import { Box, CardActionArea, Typography, Stack } from "@mui/material";
+import Image from "next/image";
 
 import { truncate, formatPriceRange } from "utils";
-import { Image } from "components";
 import ColorOption from "components/variants/ColorOption";
 
 const ProductCard = ({ product, handleClick }) => {
@@ -39,7 +39,7 @@ const ProductCard = ({ product, handleClick }) => {
         onMouseDown={onMouseDown}
         sx={sx.contentActionArea}
       >
-        {image && <Image src={image} alt={product.title} objectFit="contain" />}
+        {image && <Image src={image} alt={product.title} objectFit="contain" layout="fill" />}
       </CardActionArea>
       <Stack px={2} py={2} spacing={0.5}>
         <Typography
@@ -87,7 +87,6 @@ const sx = {
   root: {
     width: "100%",
     height: "100%",
-    minHeight: 300,
     borderRadius: 2,
     overflow: "hidden",
     backgroundColor: "background.paper",
@@ -99,6 +98,10 @@ const sx = {
     cursor: "pointer",
     overflow: "hidden",
     borderRadius: 0,
+    minHeight: 300,
+    "@media (max-width: 600px)": {
+      minHeight: 150,
+    },
     ".MuiCardActionArea-focusHighlight": {
       background: "transparent",
     },
