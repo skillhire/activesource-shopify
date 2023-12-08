@@ -2,7 +2,7 @@ import React from "react";
 import { Layout, CollectionMenu } from "components";
 import { Box, Stack, Container, Grid, Typography } from "@mui/material";
 
-const ConnectionLayout = ({ title, children, ...props }) => {
+const CollectionLayout = ({ title, children, ...props }) => {
   return (
     <Layout {...props}>
       <Container maxWidth="lg" sx={sx.root}>
@@ -24,7 +24,7 @@ const ConnectionLayout = ({ title, children, ...props }) => {
   );
 };
 
-export default ConnectionLayout;
+export default CollectionLayout;
 
 const sx = {
   root: {

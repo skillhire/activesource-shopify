@@ -98,7 +98,7 @@ const Collection = () => {
     <CollectionLayout title={currentCollection?.label}>
       <SearchTags tags={materials} handleClearAll={handleClearAll} />
       <Box sx={sx.searchContainer}>
-        <Grid container spacing={1}>
+        <Grid container rowSpacing={7} columnSpacing={5}>
           {products &&
             products?.map((product, index) => (
               <Grid item xs={6} sm={6} md={4} lg={4} key={index}>
