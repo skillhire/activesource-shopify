@@ -1,10 +1,10 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { List, ListItem, ListItemText, ListItemButton, Typography } from "@mui/material";
+import { Stack, List, ListItem, ListItemText, ListItemButton, Typography } from "@mui/material";
 
 import { COLLECTIONS_MENU } from "constants/navigation";
 
-const CollectionMenu = () => {
+const CollectionMenuMobile = () => {
   const router = useRouter();
 
   const handleClick = (url) => {
@@ -12,7 +12,7 @@ const CollectionMenu = () => {
   };
 
   return (
-    <List sx={sx.root}>
+    <List component={Stack} direction="row" sx={sx.root}>
       {COLLECTIONS_MENU.map((accountItem) => (
         <ListItem key={accountItem.label} disablePadding>
           <ListItemButton onClick={() => handleClick(accountItem.value)}>
@@ -24,11 +24,13 @@ const CollectionMenu = () => {
   );
 };
 
-export default CollectionMenu;
+export default CollectionMenuMobile;
 
 const sx = {
-  root: {},
+  root: {
+    overflowX: "scroll",
+  },
   text: {
-    pr: 4,
+    whiteSpace: "nowrap",
   },
 };

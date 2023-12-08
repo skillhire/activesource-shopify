@@ -86,10 +86,14 @@ export default ProductCard;
 const sx = {
   root: {
     width: "100%",
+    height: "100%",
     minHeight: 300,
     borderRadius: 2,
     overflow: "hidden",
     backgroundColor: "background.paper",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
   contentActionArea: {
     cursor: "pointer",
