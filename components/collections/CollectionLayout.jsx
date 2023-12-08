@@ -31,7 +31,7 @@ export default CollectionLayout;
 
 const sx = {
   root: {
-    py: 12,
+    py: { xs: 6, sm: 6, md: 12 },
   },
   menuItem: {
     display: { xs: "none", sm: "none", md: "block" },

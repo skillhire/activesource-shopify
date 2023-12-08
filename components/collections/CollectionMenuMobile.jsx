@@ -14,9 +14,9 @@ const CollectionMenuMobile = () => {
   return (
     <List component={Stack} direction="row" sx={sx.root}>
       {COLLECTIONS_MENU.map((accountItem) => (
-        <ListItem key={accountItem.label} disablePadding>
-          <ListItemButton onClick={() => handleClick(accountItem.value)}>
-            <ListItemText sx={sx.text} primary={<Typography variant="listItem">{accountItem.label}</Typography>} />
+        <ListItem key={accountItem.label} disablePadding sx={sx.item}>
+          <ListItemButton onClick={() => handleClick(accountItem.value)} sx={sx.button}>
+            <ListItemText primary={<Typography variant="listItem">{accountItem.label}</Typography>} sx={sx.text} />
           </ListItemButton>
         </ListItem>
       ))}
@@ -30,7 +30,17 @@ const sx = {
   root: {
     overflowX: "scroll",
   },
+  item: {
+    width: "fit-content",
+  },
   text: {
     whiteSpace: "nowrap",
   },
+  button: {
+    mr: 2,
+    padding: 0,
+    "&:hover": {
+      background: "none",
+    }
+  }
 };
