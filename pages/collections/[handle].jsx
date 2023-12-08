@@ -98,10 +98,10 @@ const Collection = () => {
     <CollectionLayout title={currentCollection?.label}>
       <SearchTags tags={materials} handleClearAll={handleClearAll} />
       <Box sx={sx.searchContainer}>
-        <Grid container spacing={1}>
+        <Grid container rowSpacing={{ xs: 3, sm: 3, md: 7 }} columnSpacing={{ xs: 3, sm: 3, md: 5 }}>
           {products &&
             products?.map((product, index) => (
-              <Grid item xs={6} sm={6} md={4} lg={4} key={index}>
+              <Grid item xs={12} sm={6} md={4} lg={4} key={index}>
                 <ProductCard
                   product={product}
                   handleClick={() => handleProductClick(product)}

@@ -105,6 +105,9 @@ export default {
     fontSize: 20,
     fontWeight: 600,
     lineHeight: "120%",
+    "@media (max-width: 600px)": {
+      fontSize: 14,
+    },
   },
   footer: {
     // Footer Menu 16/200

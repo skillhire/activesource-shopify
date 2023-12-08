@@ -12,7 +12,7 @@ const CollectionMenu = () => {
   };
 
   return (
-    <List>
+    <List sx={sx.root}>
       {COLLECTIONS_MENU.map((accountItem) => (
         <ListItem key={accountItem.label} disablePadding>
           <ListItemButton onClick={() => handleClick(accountItem.value)}>
