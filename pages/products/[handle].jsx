@@ -11,6 +11,7 @@ import {
 } from "components";
 import ProductCustomize from "components/products/ProductCustomize";
 import { getValue } from "utils";
+import PlacementModal from "../../sections/products/PlacementModal";
 
 const Product = () => {
   const ref = useRef();
@@ -23,9 +24,12 @@ const Product = () => {
   const [color, setColor] = useState();
   const [zoom, setZoom] = useState(false);
   const [activeImage, setActiveImage] = useState();
+  const [placement, setPlacement] = useState({});  
   const [selectedOptions, setSelectedOptions] = useState({});
   const [addToCartDisabled, setAddToCartDisabled] = useState(false);
 
+  const [openModal, setOpenModal] = useState(false)
+  const [frontOrBack, setFrontOrBack] = useState("front")
   // Handle custom variant option metaobjects
   const [customAttributes, setCustomAttributes] = useState({});
 
@@ -63,6 +67,17 @@ const Product = () => {
       color: getValue(color, "label"),
     });
   };
+
+  const handlePlacementClick = (frontOrBack) => {
+    setFrontOrBack(frontOrBack)
+    setOpenModal(true)    
+  }
+
+  const handleSelectPlacement = (placement) => {
+    setPlacement({
+      [frontOrBack]: placement 
+    })
+  }
 
   useEffect(() => {
     if (handle) {
@@ -128,6 +143,7 @@ const Product = () => {
                   hide={addToCartDisabled}
                   color={color}
                   product={product}
+                  handleClick={ handlePlacementClick }
                   customAttributes={customAttributes}
                 />
               </ProductDetails>
@@ -144,6 +160,13 @@ const Product = () => {
           </Grid>
         </Box>
       </Container>
+      <PlacementModal 
+        open={openModal}
+        handleClose={() => setOpenModal(false)}        
+        frontOrBack={ frontOrBack }
+        placement={ placement[frontOrBack] }
+        handleClick={handleSelectPlacement}
+      />
     </Layout>
   );
 };

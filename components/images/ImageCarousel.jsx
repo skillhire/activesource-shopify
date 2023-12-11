@@ -1,6 +1,6 @@
 import { CardActionArea } from "@mui/material";
 import { Box } from "@mui/material";
-import { Image } from "components";
+import Image from 'next/image';
 import { IMAGE_CAROUSEL_RESPONSIVE } from "constants/shop";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -40,7 +40,7 @@ const ImageCarousel = ({
           arrows={false}
           customDot={<ImageCarouselDot numItems={images?.length} />}
         >
-          {images.map((image) => (
+          {images?.map((image) => (
             <CardActionArea
               disableRipple
               sx={sx.cardActionArea}
@@ -49,13 +49,16 @@ const ImageCarousel = ({
             >
               <Image
                 key={image?.id}
-                src={image?.src}
+                src={image.src}
                 width={500}
                 height={500}
+                quality={100}
                 style={{
+                  width: '100%',
+                  maxWidth: '100%',
                   objectFit: "contain",
                 }}
-                responsive="true"
+                responsive={true}
                 alt={image?.altText}
               />
             </CardActionArea>
