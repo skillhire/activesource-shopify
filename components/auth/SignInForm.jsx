@@ -11,7 +11,7 @@ const SignInForm = ({ customer, handleChange, ...props }) => {
         </InputLabel>
         <TextField
           size="small"
-          sx={sx.input}
+          fullWidth
           id="email"
           name="email"
           value={customer?.email || ""}
@@ -25,7 +25,7 @@ const SignInForm = ({ customer, handleChange, ...props }) => {
         </InputLabel>
         <TextField
           size="small"
-          sx={sx.input}
+          fullWidth
           id="password"
           name="password"
           value={customer?.password || ""}
@@ -59,8 +59,5 @@ const sx = {
   label: {
     color: "text.primary",
     fontWeight: 500,
-  },
-  input: {
-    width: "100%",
   },
 };
