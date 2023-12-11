@@ -1,6 +1,13 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Stack, List, ListItem, ListItemText, ListItemButton, Typography } from "@mui/material";
+import {
+  Stack,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemButton,
+  Typography,
+} from "@mui/material";
 
 import { COLLECTIONS_MENU } from "constants/navigation";
 
@@ -15,8 +22,16 @@ const CollectionMenuMobile = () => {
     <List component={Stack} direction="row" sx={sx.root}>
       {COLLECTIONS_MENU.map((accountItem) => (
         <ListItem key={accountItem.label} disablePadding sx={sx.item}>
-          <ListItemButton onClick={() => handleClick(accountItem.value)} sx={sx.button}>
-            <ListItemText primary={<Typography variant="listItem">{accountItem.label}</Typography>} sx={sx.text} />
+          <ListItemButton
+            onClick={() => handleClick(accountItem.value)}
+            sx={sx.button}
+          >
+            <ListItemText
+              primary={
+                <Typography variant="listItem">{accountItem.label}</Typography>
+              }
+              sx={sx.text}
+            />
           </ListItemButton>
         </ListItem>
       ))}
@@ -41,6 +56,6 @@ const sx = {
     padding: 0,
     "&:hover": {
       background: "none",
-    }
-  }
+    },
+  },
 };

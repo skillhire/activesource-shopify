@@ -19,7 +19,10 @@ const Home = () => {
   };
 
   return (
-    <Layout metaTitle={metaFields.title} metaDescription={metaFields.description}>
+    <Layout
+      metaTitle={metaFields.title}
+      metaDescription={metaFields.description}
+    >
       <SectionHeroPrimary home={home} />
       <SectionFeaturedCollection featuredCollection={featuredCollection} />
       <SectionHowItWorks />

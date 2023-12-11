@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Box, Stack, Typography } from "@mui/material";
-
+import { Stack, Box, Typography } from "@mui/material";
 import { formatPriceRange } from "utils";
 import { AddToCartButton, VariantSelector } from "components";
 import CustomColorSelect from "components/variants/CustomColorSelect";
@@ -38,7 +37,9 @@ const ProductDetails = ({
 
   useEffect(() => {
     if (product?.metafields?.length > 0) {
-      let _colors = product.metafields.find((metafield) => metafield?.key === "colors")?.references.edges.map((e) => e.node);
+      let _colors = product.metafields
+        .find((metafield) => metafield?.key === "colors")
+        ?.references.edges.map((e) => e.node);
       setColors(_colors);
     }
   }, [product]);
@@ -46,7 +47,7 @@ const ProductDetails = ({
   return (
     <Box sx={sx.root}>
       <Stack spacing={2}>
-        {(product &&
+        {product && (
           <>
             <Typography variant="h4">{product?.title}</Typography>
             <Typography variant="button" sx={sx.price}>
@@ -68,26 +69,22 @@ const ProductDetails = ({
             />
           </>
         )}
-        <Grid container>
-          <Grid item xs={5}>
-            <QuantitySelector
-              quantity={quantity}
-              handleChange={handleQuantityChange}
-            />
-          </Grid>
-          <Grid item xs={7}>
-            <AddToCartButton
-              disabled={addToCartDisabled}
-              quantity={quantity}
-              variant={variant}
-              product={product}
-              customAttributes={customAttributes}
-            />
-          </Grid>
-        </Grid>
+        <Stack spacing={1} direction="row">
+          <QuantitySelector
+            quantity={quantity}
+            handleChange={handleQuantityChange}
+          />
+          <AddToCartButton
+            disabled={addToCartDisabled}
+            quantity={quantity}
+            variant={variant}
+            product={product}
+            customAttributes={customAttributes}
+          />
+        </Stack>
         {children}
       </Stack>
-    </Box >
+    </Box>
   );
 };
 

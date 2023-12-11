@@ -33,12 +33,12 @@ export const SIGNIN_OR_SIGNUP_TABS = [
     tab: "signup",
     url: "/signup",
     label: "Sign Up",
-  }
-]
+  },
+];
 
 const SignInOrUp = ({ tab, onSuccess }) => {
   const router = useRouter();
-  const currentTabIndex = SIGNIN_OR_SIGNUP_TABS.map(e => e.tab).indexOf(tab);
+  const currentTabIndex = SIGNIN_OR_SIGNUP_TABS.map((e) => e.tab).indexOf(tab);
   const value = currentTabIndex > 0 ? currentTabIndex : 0;
 
   const handleChange = (event, newValue) => {
@@ -57,7 +57,9 @@ const SignInOrUp = ({ tab, onSuccess }) => {
           <Stack sx={sx.form} spacing={4}>
             <Box sx={sx.tabsContainer}>
               <Tabs value={value} onChange={handleChange} sx={sx.tabs}>
-                {SIGNIN_OR_SIGNUP_TABS.map(t => <Tab key={t.tab} label={t.label} sx={sx.tab} />)}
+                {SIGNIN_OR_SIGNUP_TABS.map((t) => (
+                  <Tab key={t.tab} label={t.label} sx={sx.tab} />
+                ))}
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
@@ -87,10 +89,10 @@ const sx = {
   tabsContainer: {
     width: "100%",
     borderBottom: 1,
-    borderColor: 'divider'
+    borderColor: "divider",
   },
   imageContainer: {
-    display: { xs: 'none', sm: 'none', md: 'flex' },
+    display: { xs: "none", sm: "none", md: "flex" },
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "secondary.faded",
@@ -108,5 +110,5 @@ const sx = {
     maxWidth: 360,
     alignItems: "stretch",
     justifyContent: "center",
-  }
+  },
 };

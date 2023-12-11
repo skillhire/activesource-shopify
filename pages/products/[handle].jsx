@@ -88,7 +88,13 @@ const Product = () => {
 
   useEffect(() => {
     handleAddToCartDisabled();
-  }, [product, customAttributes, selectedOptions, variant, setAddToCartDisabled]);
+  }, [
+    product,
+    customAttributes,
+    selectedOptions,
+    variant,
+    setAddToCartDisabled,
+  ]);
 
   return (
     <Layout metaTitle={product?.title} metaDescription={product?.description}>

@@ -38,10 +38,11 @@ const SectionEnterpriseSolutions = () => {
 const sx = {
   root: {
     p: 7,
-    display: { xs: 'none', sm: 'block' },
+    display: { xs: "none", sm: "block" },
     borderRadius: 2,
     background: (theme) => theme.palette.gradient.main,
-    background: (theme) => `url(${FlyingShirts.src}) right center no-repeat, ${theme.palette.gradient.main}`,
+    background: (theme) =>
+      `url(${FlyingShirts.src}) right center no-repeat, ${theme.palette.gradient.main}`,
     backgroundSize: "auto 100%, 100%",
     "@media (max-width: 1200px)": {
       background: (theme) => theme.palette.gradient.main,

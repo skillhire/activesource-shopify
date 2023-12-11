@@ -10,7 +10,9 @@ const CartLineItemTotals = () => {
   return (
     <Box width="100%" sx={sx.root}>
       <Stack direction="row" sx={sx.container}>
-        <Typography variant="body1" sx={sx.label}>Total:</Typography>
+        <Typography variant="body1" sx={sx.label}>
+          Total:
+        </Typography>
         <>&nbsp;</>
         <Typography variant="body1">
           {checkout && formatCurrency(checkout.lineItemsSubtotalPrice?.amount)}
@@ -41,5 +43,5 @@ const sx = {
   },
   label: {
     fontWeight: 600,
-  }
+  },
 };

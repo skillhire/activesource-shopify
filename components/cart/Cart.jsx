@@ -6,7 +6,6 @@ import { ShopContext } from "context";
 import { CartLineItems, CartLineItemTotals, CheckoutButton } from "components";
 import { Close } from "@mui/icons-material";
 
-
 const Cart = ({ styles }) => {
   const { trackCartViewed } = useSegment();
   const { checkout, cartOpen, toggleCart } = useContext(ShopContext);

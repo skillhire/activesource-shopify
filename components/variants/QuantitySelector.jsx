@@ -18,9 +18,7 @@ const QuantitySelector = ({
           <Remove sx={sx.icon} />
         </Button>
         <Button sx={sx.button} size="small">
-          <Typography variant="body2">
-            {quantity}
-          </Typography>
+          <Typography variant="body2">{quantity}</Typography>
         </Button>
         <Button sx={sx.button} size="small" onClick={addQuantity}>
           <Add sx={sx.icon} />

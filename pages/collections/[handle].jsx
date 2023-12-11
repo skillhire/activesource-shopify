@@ -88,17 +88,19 @@ const Collection = () => {
     }
   }, [collection]);
 
-
   const currentCollection = useMemo(() => {
-    return COLLECTIONS_MENU.find(c => c.handle === handle)
-  }, [handle])
-
+    return COLLECTIONS_MENU.find((c) => c.handle === handle);
+  }, [handle]);
 
   return (
     <CollectionLayout title={currentCollection?.label}>
       <SearchTags tags={materials} handleClearAll={handleClearAll} />
       <Box sx={sx.searchContainer}>
-        <Grid container rowSpacing={{ xs: 3, sm: 3, md: 7 }} columnSpacing={{ xs: 3, sm: 3, md: 5 }}>
+        <Grid
+          container
+          rowSpacing={{ xs: 3, sm: 3, md: 7 }}
+          columnSpacing={{ xs: 3, sm: 3, md: 5 }}
+        >
           {products &&
             products?.map((product, index) => (
               <Grid item xs={6} sm={6} md={4} lg={4} key={index}>

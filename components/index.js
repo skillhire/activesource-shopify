@@ -1,7 +1,7 @@
 export { default as AccountItem } from "components/AccountItem";
 export { default as AccountMenu } from "components/AccountMenu";
 export { default as AccountLayout } from "components/AccountLayout";
-export { default as AccountDetails } from "components/AccountDetails"
+export { default as AccountDetails } from "components/AccountDetails";
 export { default as AddressForm } from "components/addresses/AddressForm";
 export { default as AddressItem } from "components/addresses/AddressItem";
 export { default as AddressSkeleton } from "components/skeletons/AddressSkeleton";

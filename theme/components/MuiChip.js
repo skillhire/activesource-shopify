@@ -11,6 +11,6 @@ export default {
     },
     label: {
       padding: "0 32px",
-    }
+    },
   },
 };

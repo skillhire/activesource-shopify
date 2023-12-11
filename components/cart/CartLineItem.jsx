@@ -22,41 +22,40 @@ import QuantitySelector from "components/variants/QuantitySelector";
 const CartLineItem = ({ lineItem }) => {
   const router = useRouter();
   const { trackAddToCart, trackRemoveFromCart } = useSegment();
-  const { loading, checkoutLineItemAdd, checkoutLineItemRemove } = useCheckout();
+  const { loading, checkoutLineItemsUpdate, checkoutLineItemRemove } =
+    useCheckout();
   const { setCartOpen } = useContext(ShopContext);
   const { id, quantity, variant, customAttributes } = lineItem || {};
+
   const {
     product,
     price: { amount },
     image: { src },
   } = variant || {};
-  const { priceRange } = product || {};
 
   const [color, setColor] = useState(null);
   const [size, setSize] = useState(null);
 
-  const handleQuantityChange = async (value) => {
-    let lineItem = {
-      variantId: variant?.id,
-      quantity: value,
-      customAttributes: customAttributes,
-    };
-    if (customAttributes) {
-      let attrs = {};
-      for (let [key, value] of Object.entries(customAttributes[0])) {
-        if (key !== '__typename') {
-          attrs[key] = value;
-        }
-      }
-      lineItem = { ...lineItem, customAttributes: [{ ...attrs }] };
+  const handleQuantityChange = async (newQuantity) => {
+    if (quantity == 0) {
+      return handleRemoveLineItem();
     }
-    if (value >= 1) {
-      // TODO: hook up the edit feature instead
-      // currently removing and adding again.
-      await checkoutLineItemRemove(id);
-      await checkoutLineItemAdd(lineItem);
+    let newLineItem = {
+      id,
+      quantity: newQuantity,
+      variantId: variant.id,
+    };
+    await checkoutLineItemsUpdate([newLineItem]);
+    let diff = newQuantity - quantity;
+    if (diff > 0) {
       trackAddToCart({
-        quantity: value,
+        quantity: diff,
+        variant: variant,
+        product: product,
+      });
+    } else {
+      trackRemoveFromCart({
+        quantity: diff,
         variant: variant,
         product: product,
       });
@@ -105,11 +104,7 @@ const CartLineItem = ({ lineItem }) => {
           ...(loading && sx.loading),
         }}
       >
-        <ListItemButton
-          sx={sx.listItemButton}
-          disableRipple
-          disableGutters
-        >
+        <ListItemButton sx={sx.listItemButton} disableRipple disableGutters>
           <ListItemIcon sx={sx.thumbnail}>
             <Image src={src} height={120} width={120} style={styles.image} />
           </ListItemIcon>
@@ -117,7 +112,11 @@ const CartLineItem = ({ lineItem }) => {
             sx={sx.text}
             primary={
               <Stack spacing={1}>
-                <Typography variant="subtitle2" color="textPrimary" sx={sx.line}>
+                <Typography
+                  variant="subtitle2"
+                  color="textPrimary"
+                  sx={sx.line}
+                >
                   <Box>{product?.title}</Box>
                   <IconButton>
                     <Close onClick={handleRemoveLineItem} sx={sx.removeIcon} />
@@ -136,9 +135,14 @@ const CartLineItem = ({ lineItem }) => {
                   )}
                 </Stack>
                 <Stack sx={sx.quantity}>
-                  <QuantitySelector quantity={quantity} handleChange={handleQuantityChange} />
+                  <QuantitySelector
+                    quantity={quantity}
+                    handleChange={handleQuantityChange}
+                  />
                   <Typography variant="button" color="textPrimary" sx={sx.line}>
-                    <Box>{amount == 0 ? "FREE" : formatCurrency(amount * quantity)}</Box>
+                    <Box>
+                      {amount == 0 ? "FREE" : formatCurrency(amount * quantity)}
+                    </Box>
                   </Typography>
                 </Stack>
               </Stack>
@@ -195,7 +199,7 @@ const sx = {
   },
   link: {
     cursor: "pointer",
-  }
+  },
 };
 
 const styles = {

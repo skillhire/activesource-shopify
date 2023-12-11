@@ -57,7 +57,8 @@ const SignUp = ({ onSuccess }) => {
         Create Account
       </Button>
       <Typography variant="caption" component="p">
-        Want to know more about how and why Active Source Lab uses your personal information? Read our Privacy Notice.
+        Want to know more about how and why Active Source Lab uses your personal
+        information? Read our Privacy Notice.
       </Typography>
     </>
   );
