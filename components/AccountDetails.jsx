@@ -74,24 +74,26 @@ export default function AccountDetails() {
           )}
         </Grid>
       </Grid>
-      <Box mt={2}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              // checked={customer?.acceptsMarketing || false}
-              // onChange={handleChange}
-              name="acceptsMarketing"
-              size="small"
-            />
-          }
-          label={
-            <Typography variant="overline">
-              Tick here if you want to get marketing emails from Active Source
-              Lab
-            </Typography>
-          }
-        />
-      </Box>
+      {isEditing && (
+        <Box mt={2}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                // checked={customer?.acceptsMarketing || false}
+                // onChange={handleChange}
+                name="acceptsMarketing"
+                size="small"
+              />
+            }
+            label={
+              <Typography variant="overline">
+                Tick here if you want to get marketing emails from Active Source
+                Lab
+              </Typography>
+            }
+          />
+        </Box>
+      )}
       <Stack alignItems="end" mt={2}>
         {isEditing && (
           <Stack direction="row" spacing={2}>
