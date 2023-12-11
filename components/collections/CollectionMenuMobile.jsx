@@ -20,15 +20,15 @@ const CollectionMenuMobile = () => {
 
   return (
     <List component={Stack} direction="row" sx={sx.root}>
-      {COLLECTIONS_MENU.map((accountItem) => (
-        <ListItem key={accountItem.label} disablePadding sx={sx.item}>
+      {COLLECTIONS_MENU.map((collectionItem) => (
+        <ListItem key={collectionItem.label} disablePadding sx={sx.item}>
           <ListItemButton
-            onClick={() => handleClick(accountItem.value)}
+            onClick={() => handleClick(collectionItem.value)}
             sx={sx.button}
           >
             <ListItemText
               primary={
-                <Typography variant="listItem">{accountItem.label}</Typography>
+                <Typography variant="listItem">{collectionItem.label}</Typography>
               }
               sx={sx.text}
             />
