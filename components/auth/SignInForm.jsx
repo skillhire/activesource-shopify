@@ -50,8 +50,8 @@ const sx = {
     flexDirection: "column",
     gap: "20px",
     width: "100%",
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
         borderRadius: 2,
       },
     },

@@ -6,6 +6,7 @@ import {
   CHECKOUT_CREATE,
   CHECKOUT_LINE_ITEMS_ADD,
   CHECKOUT_LINE_ITEMS_REMOVE,
+  CHECKOUT_LINE_ITEMS_UPDATE,
 } from "graphql/shopify/checkout";
 import {
   CHECKOUT_DISCOUNT_CODE_APPLY,
@@ -30,6 +31,9 @@ const useCheckout = (props) => {
 
   const [checkoutLineItemsRemoveMutation, checkoutLineItemsRemoveResp] =
     useMutation(CHECKOUT_LINE_ITEMS_REMOVE);
+
+  const [checkoutLineItemsUpdateMutation, checkoutLineItemsUpdateResp] =
+    useMutation(CHECKOUT_LINE_ITEMS_UPDATE);
 
   const [checkoutDiscountCodeApplyMutation, checkoutDiscountCodeApplyResp] =
     useMutation(CHECKOUT_DISCOUNT_CODE_APPLY);
@@ -69,6 +73,15 @@ const useCheckout = (props) => {
       variables: {
         checkoutId: checkout?.id,
         lineItemIds: [lineItemId],
+      },
+    });
+  };
+
+  const checkoutLineItemsUpdate = async (lineItems) => {
+    return await checkoutLineItemsUpdateMutation({
+      variables: {
+        checkoutId: checkout?.id,
+        lineItems: lineItems,
       },
     });
   };
@@ -224,17 +237,19 @@ const useCheckout = (props) => {
   useEffect(() => {
     setError(
       checkoutFetchResp?.error ||
-      checkoutCreateResp?.error ||
-      checkoutLineItemsAdd?.error ||
-      checkoutLineItemsRemove?.error ||
-      checkoutDiscountCodeApplyResp?.error ||
-      checkoutDiscountCodeRemoveResp?.error
+        checkoutCreateResp?.error ||
+        checkoutLineItemsAdd?.error ||
+        checkoutLineItemsRemove?.error ||
+        checkoutLineItemsUpdate?.error ||
+        checkoutDiscountCodeApplyResp?.error ||
+        checkoutDiscountCodeRemoveResp?.error
     );
   }, [
     checkoutFetchResp?.error,
     checkoutCreateResp?.error,
     checkoutLineItemsAdd?.error,
     checkoutLineItemsRemove?.error,
+    checkoutLineItemsUpdate?.error,
     checkoutDiscountCodeApplyResp?.error,
     checkoutDiscountCodeRemoveResp?.error,
   ]);
@@ -242,17 +257,19 @@ const useCheckout = (props) => {
   useEffect(() => {
     setLoading(
       checkoutFetchResp?.loading ||
-      checkoutCreateResp?.loading ||
-      checkoutLineItemsAddResp?.loading ||
-      checkoutLineItemsRemoveResp?.loading ||
-      checkoutDiscountCodeApplyResp?.loading ||
-      checkoutDiscountCodeRemoveResp?.loading
+        checkoutCreateResp?.loading ||
+        checkoutLineItemsAddResp?.loading ||
+        checkoutLineItemsRemoveResp?.loading ||
+        checkoutLineItemsUpdateResp?.loading ||
+        checkoutDiscountCodeApplyResp?.loading ||
+        checkoutDiscountCodeRemoveResp?.loading
     );
   }, [
     checkoutFetchResp?.loading,
     checkoutCreateResp?.loading,
     checkoutLineItemsAddResp?.loading,
     checkoutLineItemsRemoveResp?.loading,
+    checkoutLineItemsUpdateResp?.loading,
     checkoutDiscountCodeApplyResp?.loading,
     checkoutDiscountCodeRemoveResp?.loading,
   ]);
@@ -268,6 +285,7 @@ const useCheckout = (props) => {
     checkoutLineItemsAdd,
     checkoutLineItemRemove,
     checkoutLineItemsRemove,
+    checkoutLineItemsUpdate,
     checkoutDiscountCodeApply,
     checkoutDiscountCodeRemove,
   };

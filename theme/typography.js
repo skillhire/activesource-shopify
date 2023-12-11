@@ -128,5 +128,5 @@ export default {
     "@media (max-width: 600px)": {
       fontSize: 14,
     },
-  }
+  },
 };

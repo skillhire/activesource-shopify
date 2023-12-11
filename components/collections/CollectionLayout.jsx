@@ -41,6 +41,6 @@ const sx = {
     width: "fit-content",
   },
   mobileMenuItem: {
-    display: { xs: 'block', sm: 'block', md: 'none' },
+    display: { xs: "block", sm: "block", md: "none" },
   },
 };

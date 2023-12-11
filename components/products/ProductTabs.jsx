@@ -9,7 +9,12 @@ const ProductTabs = ({ product }) => {
 
   return (
     <Box sx={sx.root}>
-      <Tabs value={tab} indicatorColor="secondary" onChange={handleTabChange} sx={sx.tabs}>
+      <Tabs
+        value={tab}
+        indicatorColor="secondary"
+        onChange={handleTabChange}
+        sx={sx.tabs}
+      >
         <Tab value={0} label="Description" />
         <Tab value={1} label="Shipping" />
         <Tab value={2} label="File Guidlines" />

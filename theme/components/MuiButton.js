@@ -40,7 +40,7 @@ export default {
       style: {
         fontSize: 16,
         lineHeight: "120%",
-        padding: "12px 16px"
+        padding: "12px 16px",
       },
     },
     {

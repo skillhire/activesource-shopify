@@ -1,6 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Checkbox, FormControlLabel, InputLabel, TextField, Typography, Stack } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  InputLabel,
+  TextField,
+  Typography,
+  Stack,
+} from "@mui/material";
 
 const SignUpForm = ({ customer, handleChange, ...props }) => {
   return (
@@ -68,7 +76,12 @@ const SignUpForm = ({ customer, handleChange, ...props }) => {
                 size="small"
               />
             }
-            label={<Typography variant="overline">Tick here if you want to get marketing emails from Active Source Lab</Typography>}
+            label={
+              <Typography variant="overline">
+                Tick here if you want to get marketing emails from Active Source
+                Lab
+              </Typography>
+            }
           />
         </Box>
       </Stack>
@@ -89,8 +102,8 @@ const sx = {
     flexDirection: "column",
     gap: "20px",
     width: "100%",
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
         borderRadius: 2,
       },
     },

@@ -12,7 +12,7 @@ import {
   TableHead,
   TableContainer,
   CircularProgress,
-} from '@mui/material';
+} from "@mui/material";
 import { SHOP_ALL_URL } from "constants/navigation";
 
 import { OrderItem } from "components";
@@ -55,16 +55,22 @@ const OrderList = () => {
           </TableHead>
           <TableBody>
             {orders?.map((order) => (
-              <OrderItem key={order.id} order={order} handleClick={handleOrderClick} />
+              <OrderItem
+                key={order.id}
+                order={order}
+                handleClick={handleOrderClick}
+              />
             ))}
           </TableBody>
         </Table>
-      )
+      );
     }
     return (
       <Stack sx={sx.emptyMessage} spacing={2}>
         <Typography variant="h4">You have no orders yet</Typography>
-        <Typography variant="body1">Start making your own personalized collections</Typography>
+        <Typography variant="body1">
+          Start making your own personalized collections
+        </Typography>
         <Box pt={5}>
           <Button
             variant="contained"
@@ -77,8 +83,8 @@ const OrderList = () => {
           </Button>
         </Box>
       </Stack>
-    )
-  }, [orders])
+    );
+  }, [orders]);
 
   return (
     <Box>
@@ -90,7 +96,7 @@ const OrderList = () => {
         )}
         {!loading && renderContent()}
       </TableContainer>
-    </Box >
+    </Box>
   );
 };
 
@@ -108,7 +114,7 @@ const sx = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  }
-}
+  },
+};
 
 export default OrderList;

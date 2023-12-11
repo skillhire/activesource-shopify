@@ -40,8 +40,13 @@ const SectionHeroPrimary = ({ home }) => {
             </Box>
           </Stack>
           <Box sx={sx.imageContainer}>
-            <Image src={HeroImage} alt="Hero Image" priority layout='fill'
-              objectFit='contain' />
+            <Image
+              src={HeroImage}
+              alt="Hero Image"
+              priority
+              layout="fill"
+              objectFit="contain"
+            />
           </Box>
         </Box>
       </Container>

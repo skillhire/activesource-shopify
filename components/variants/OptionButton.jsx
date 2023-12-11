@@ -27,7 +27,7 @@ export default OptionButton;
 
 const sx = {
   active: {
-    background: (theme) => `${theme.palette.tertiary.main} !important`
+    background: (theme) => `${theme.palette.tertiary.main} !important`,
   },
   button: {
     display: "flex",

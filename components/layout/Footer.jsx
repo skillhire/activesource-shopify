@@ -32,7 +32,15 @@ const Footer = ({ styles }) => {
           <Grid item xs={12} sm={12} md={6} sx={sx.footerMenu}>
             <Grid container spacing={12}>
               {NAVIGATION_MENU.map((navItem) => (
-                <Grid item xs={12} sm={12} md={4} key={navItem.label} display="flex" justifyContent={{ md: "space-between" }}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={12}
+                  md={4}
+                  key={navItem.label}
+                  display="flex"
+                  justifyContent={{ md: "space-between" }}
+                >
                   <Box display="flex" justifyContent={{ md: "flex-start" }}>
                     <List dense disablePadding>
                       <ListItem disableGutters>

@@ -13,11 +13,7 @@ const Collection = ({ styles, collection, ...props }) => {
     <Box sx={sx.root}>
       <Box sx={sx.imageContainer}>
         <CardActionArea onClick={handleClick}>
-          <Image
-            fill
-            src={collection?.image?.url}
-            alt={collection.title}
-          />
+          <Image fill src={collection?.image?.url} alt={collection.title} />
         </CardActionArea>
       </Box>
       <Box py={2} px={1}>

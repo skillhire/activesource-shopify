@@ -14,7 +14,9 @@ const AccountLayout = ({ title, children, ...props }) => {
           </Grid>
           <Grid item xs={9}>
             <Stack>
-              <Typography variant="h3" mb={6}>{title}</Typography>
+              <Typography variant="h3" mb={6}>
+                {title}
+              </Typography>
               {children}
             </Stack>
           </Grid>
@@ -31,6 +33,6 @@ const sx = {
     py: 12,
   },
   menuContainer: {
-    width: "fit-content"
-  }
+    width: "fit-content",
+  },
 };

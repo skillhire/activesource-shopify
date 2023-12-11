@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useAlerts, useAuth } from "hooks";
-import { Stack, Link, Typography, Button, CircularProgress } from "@mui/material";
-
+import {
+  Stack,
+  Link,
+  Typography,
+  Button,
+  CircularProgress,
+} from "@mui/material";
 
 import SignInForm from "./SignInForm";
 
@@ -55,11 +60,7 @@ const SignIn = ({ onSuccess }) => {
       >
         Sign In
       </Button>
-      <Link
-        href="/forgot-password"
-        variant="link"
-        size="small"
-      >
+      <Link href="/forgot-password" variant="link" size="small">
         <Typography variant="overline">Forgot Password?</Typography>
       </Link>
     </Stack>

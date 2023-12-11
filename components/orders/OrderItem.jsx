@@ -1,17 +1,11 @@
 import React from "react";
-import {
-  Link,
-  Stack,
-  TableRow,
-  TableCell,
-  Typography,
-} from "@mui/material";
+import { Link, Stack, TableRow, TableCell, Typography } from "@mui/material";
 import Image from "next/image";
 import moment from "moment";
 
 const OrderItem = ({ styles, order, handleClick, ...props }) => {
   const products = order?.lineItems?.edges;
-  return products.map(product => (
+  return products.map((product) => (
     <TableRow key={product.node?.title}>
       <TableCell>
         <Stack direction="row" alignItems="center">
@@ -22,9 +16,7 @@ const OrderItem = ({ styles, order, handleClick, ...props }) => {
             src={product.node?.variant?.image?.src}
             style={sx.image}
           />
-          <Typography variant="subtitle1">
-            {product.node?.title}
-          </Typography>
+          <Typography variant="subtitle1">{product.node?.title}</Typography>
         </Stack>
       </TableCell>
       <TableCell>{order.name}</TableCell>
@@ -39,7 +31,7 @@ const OrderItem = ({ styles, order, handleClick, ...props }) => {
         </Link>
       </TableCell>
     </TableRow>
-  ))
+  ));
 };
 
 export default OrderItem;
