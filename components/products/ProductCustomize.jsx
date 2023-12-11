@@ -7,12 +7,12 @@ import { Link } from "@mui/material";
 import { CloudUpload } from "@mui/icons-material";
 
 const Thumbnail = ({ src, handleClick, ...props }) => (
-  <CardActionArea onClick={handleClick} sx={sx.thumbnail}>
+  <CardActionArea onClick={handleClick} sx={sx.cardActionArea}>
     <Image src={src} width={99} height={99} sx={sx.thumbnail} {...props} />
   </CardActionArea>
 );
 
-const ProductCustomize = ({ color, product, hide }) => {
+const ProductCustomize = ({ color, product, hide, handleClick }) => {
   const [activeColor, setActiveColor] = useState();
   const { colors, fetchColors } = useColors();
 
@@ -49,7 +49,7 @@ const ProductCustomize = ({ color, product, hide }) => {
               Front Placement
             </Typography>
             <Box>
-              <Button size="small" variant="outlined" sx={sx.button}>
+              <Button onClick={() => handleClick("front")} size="small" variant="outlined" sx={sx.button}>
                 Select Placement
               </Button>
             </Box>
@@ -84,7 +84,7 @@ const ProductCustomize = ({ color, product, hide }) => {
               Back Placement
             </Typography>
             <Box>
-              <Button size="small" variant="outlined" sx={sx.button}>
+              <Button onClick={() => handleClick("back")} size="small" variant="outlined" sx={sx.button}>
                 Select Placement
               </Button>
             </Box>
@@ -153,9 +153,11 @@ const sx = {
   container: {
     my: 1,
   },
-  thumbnail: {
-    p: 0,
+  thumbnail: {    
     objectFit: "contain",
+  },
+  cardActionArea: {
+    p: 0
   },
   title: {
     my: 1,
