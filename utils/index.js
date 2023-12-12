@@ -20,7 +20,7 @@ export const getMetafield = (metaobject, key) => {
 export const getMetaValue = (metaobject, key) => {
   let field = getMetafield(metaobject, key);
   return field?.value;
-}
+};
 
 export const getMetaImage = (metaobject, key) => {
   let field = getMetafield(metaobject, key);

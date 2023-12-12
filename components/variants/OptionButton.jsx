@@ -33,6 +33,6 @@ const sx = {
     textAlign: "center",
     justifyContent: "center",
     borderRadius: 20,
-    minWidth: 34
+    minWidth: 34,
   },
 };

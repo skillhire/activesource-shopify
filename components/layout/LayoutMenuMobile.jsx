@@ -25,9 +25,7 @@ const LayoutMenuMobile = ({ items }) => {
             sx={sx.button}
           >
             <ListItemText
-              primary={
-                <Typography variant="listItem">{item.label}</Typography>
-              }
+              primary={<Typography variant="listItem">{item.label}</Typography>}
               sx={sx.text}
             />
           </ListItemButton>

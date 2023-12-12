@@ -118,7 +118,7 @@ const sx = {
     maxWidth: {
       sm: "512px",
       xs: "320px",
-    },    
+    },
   },
   fade: {
     width: "100%",

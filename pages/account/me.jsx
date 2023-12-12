@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Box, Stack, IconButton } from "@mui/material"
+import { Box, Stack, IconButton } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 
 import { AccountLayout, AccountDetails } from "components";
@@ -9,7 +9,7 @@ const MyAccount = () => {
   const { accessToken } = useAuth();
   const { customer, fetchCustomer, updateCustomer, loading } = useCustomers();
   const [isEditing, setIsEditing] = useState(false);
-  const [currentCustomer, setCurrentCustomer] = useState()
+  const [currentCustomer, setCurrentCustomer] = useState();
 
   useEffect(() => {
     if (accessToken) {
@@ -39,13 +39,12 @@ const MyAccount = () => {
   };
 
   const handleCancel = useCallback(() => {
-    setIsEditing(false)
-  }, [setIsEditing])
+    setIsEditing(false);
+  }, [setIsEditing]);
 
   const handleEdit = useCallback(() => {
-    setIsEditing(true)
-  }, [setIsEditing])
-
+    setIsEditing(true);
+  }, [setIsEditing]);
 
   return (
     <AccountLayout
@@ -60,7 +59,6 @@ const MyAccount = () => {
         </Stack>
       }
     >
-
       <AccountDetails
         loading={loading}
         customer={currentCustomer}

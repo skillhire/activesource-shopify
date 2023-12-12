@@ -11,15 +11,21 @@ import {
   FormControlLabel,
 } from "@mui/material";
 
-export default function AccountDetails({ customer, loading, handleChange, handleEdit, handleCancel, isEditing, handleSubmit }) {
+export default function AccountDetails({
+  customer,
+  loading,
+  handleChange,
+  handleEdit,
+  handleCancel,
+  isEditing,
+  handleSubmit,
+}) {
   return (
     <Stack sx={sx.root}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={4} sx={sx.labelContainer}>
           <InputLabel htmlFor="firstName" sx={sx.inputLabel}>
-            <Typography variant="body1">
-              First Name:
-            </Typography>
+            <Typography variant="body1">First Name:</Typography>
           </InputLabel>
         </Grid>
         <Grid item xs={12} sm={12} md={8}>
@@ -42,9 +48,7 @@ export default function AccountDetails({ customer, loading, handleChange, handle
         </Grid>
         <Grid item xs={12} sm={12} md={4} sx={sx.labelContainer}>
           <InputLabel htmlFor="lastName" sx={sx.inputLabel}>
-            <Typography variant="body1">
-              Last Name:
-            </Typography>
+            <Typography variant="body1">Last Name:</Typography>
           </InputLabel>
         </Grid>
         <Grid item xs={12} sm={12} md={8}>
@@ -67,9 +71,7 @@ export default function AccountDetails({ customer, loading, handleChange, handle
         </Grid>
         <Grid item xs={12} sm={12} md={4} sx={sx.labelContainer}>
           <InputLabel htmlFor="email" sx={sx.inputLabel}>
-            <Typography variant="body1">
-              Email Address:
-            </Typography>
+            <Typography variant="body1">Email Address:</Typography>
           </InputLabel>
         </Grid>
         <Grid item xs={12} sm={12} md={8}>
@@ -125,7 +127,9 @@ export default function AccountDetails({ customer, loading, handleChange, handle
             </Button>
             <Button
               sx={sx.button}
-              endIcon={loading && <CircularProgress size={20} sx={sx.progress} />}
+              endIcon={
+                loading && <CircularProgress size={20} sx={sx.progress} />
+              }
               size="small"
               color="secondary"
               variant="contained"

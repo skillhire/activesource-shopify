@@ -22,9 +22,7 @@ const LayoutMenu = ({ items }) => {
           <ListItemButton onClick={() => handleClick(item.value)}>
             <ListItemText
               sx={sx.text}
-              primary={
-                <Typography variant="listItem">{item.label}</Typography>
-              }
+              primary={<Typography variant="listItem">{item.label}</Typography>}
             />
           </ListItemButton>
         </ListItem>

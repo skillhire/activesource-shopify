@@ -38,7 +38,7 @@ export const ProductFragment = gql`
             id
             altText
             src
-            url             
+            url
           }
         }
         ... on ProductVariant {
@@ -46,7 +46,7 @@ export const ProductFragment = gql`
           title
           sku
           availableForSale
-        }        
+        }
       }
       references(first: 250) {
         edges {

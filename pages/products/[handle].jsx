@@ -31,7 +31,7 @@ const Product = () => {
 
   const { isMobile } = useResponsive();
   const { trackProductViewed } = useSegment();
-  
+
   const [zoom, setZoom] = useState(false);
   const [activeImage, setActiveImage] = useState();
   const [placement, setPlacement] = useState({});
@@ -51,13 +51,13 @@ const Product = () => {
     selectedOptions,
   });
 
-  const handleUpload = async (image, frontOrBack) => {       
-    if (frontOrBack == "front") {      
+  const handleUpload = async (image, frontOrBack) => {
+    if (frontOrBack == "front") {
       setCustomization({
         ...customization,
         frontLogo: image,
-      })
-    } else if(frontOrBack == "back"){
+      });
+    } else if (frontOrBack == "back") {
       setCustomization({
         ...customization,
         backLogo: image,
@@ -107,7 +107,7 @@ const Product = () => {
     setPlacement({
       ...placement,
       [frontOrBack]: newPlacement,
-    })
+    });
     setCustomization({
       ...customization,
       [frontOrBack]: newPlacement,
@@ -144,7 +144,7 @@ const Product = () => {
 
   // Set values from encoded JWT URL param
   useEffect(() => {
-    if (customization?.color) {  
+    if (customization?.color) {
       // Ensure the color metaobject is selected
       setActiveColor(customization?.color);
       // Default to the front placement image
@@ -152,7 +152,7 @@ const Product = () => {
         id: "front",
         src: customization?.color?.front_placement,
         isFront: true,
-        isBack: false
+        isBack: false,
       });
     }
 
@@ -160,7 +160,7 @@ const Product = () => {
     if (product?.variants && customization?.variantId) {
       const selectedVariant = product?.variants?.edges?.find(
         (v) => v?.node?.id?.split("/").pop() == customization?.variantId
-      );      
+      );
       if (selectedVariant?.node) {
         setVariant(selectedVariant.node);
       }
@@ -174,19 +174,19 @@ const Product = () => {
         Size: selectedVariant?.node?.selectedOptions?.find(
           (o) => o?.name == "Size"
         )?.value,
-      });      
+      });
     }
   }, [product, customization?.color, customization?.variantId]);
 
   useEffect(() => {
     if (activeColor) {
-      // Store color with the customization object 
+      // Store color with the customization object
       setCustomization({
         ...customization,
         color: activeColor,
       });
-      // Select the product color option that 
-      // matches the meta color name field. This is necessary 
+      // Select the product color option that
+      // matches the meta color name field. This is necessary
       // to ensure the correct color / size SKU is assigned at checkout
       setSelectedOptions({
         ...selectedOptions,
@@ -221,7 +221,7 @@ const Product = () => {
               </Box>
             </Grid>
             <Grid item xs={12} md={5} lg={4}>
-              <ProductDetails                
+              <ProductDetails
                 loading={loading}
                 product={product}
                 variant={variant}

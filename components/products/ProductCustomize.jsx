@@ -26,15 +26,14 @@ const Thumbnail = ({ src, handleClick, ...props }) => (
   </CardActionArea>
 );
 
-const ProductCustomize = ({  
-  product,  
+const ProductCustomize = ({
+  product,
   handleClick,
   handleUpload,
   handlePreviewClick,
   activeColor,
 }) => {
-  const { customization, setCustomization } =
-    useContext(CustomizeContext);
+  const { customization, setCustomization } = useContext(CustomizeContext);
 
   const [frontFile, setFrontFile] = useState(false);
   const [backFile, setBackFile] = useState(false);
@@ -104,8 +103,7 @@ const ProductCustomize = ({
     }
   }, []);
 
-  
-  if(!activeColor) return null;
+  if (!activeColor) return null;
 
   return (
     <Stack>

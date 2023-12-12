@@ -1,12 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import ColorOption from "./ColorOption";
 
-const CustomColorSelect = ({
-  colors,
-  activeColor,
-  handleClick,
-  ...props
-}) => {
+const CustomColorSelect = ({ colors, activeColor, handleClick, ...props }) => {
   return (
     <Box sx={sx.root}>
       <Typography variant="subtitle1" sx={sx.label}>

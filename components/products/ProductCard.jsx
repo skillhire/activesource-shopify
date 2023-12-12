@@ -30,11 +30,11 @@ const ProductCard = ({ product, handleClick }) => {
       let formattedColors = _colors.map((color) => ({
         id: color?.id,
         hex: getValue(color, "color"),
-        name: getValue(color, "name"),  
+        name: getValue(color, "name"),
         front_placement: getImage(color, "front_placement"),
-        back_placement: getImage(color, "back_placement")        
-      }))
-      setColors(formattedColors);      
+        back_placement: getImage(color, "back_placement"),
+      }));
+      setColors(formattedColors);
     }
   }, [product]);
 

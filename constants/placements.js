@@ -32,7 +32,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
     {
       id: "F02",
@@ -43,7 +43,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
     {
       id: "F03",
@@ -54,7 +54,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
     {
       id: "F04",
@@ -65,7 +65,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
     {
       id: "F05",
@@ -76,7 +76,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
     {
       id: "F06",
@@ -87,7 +87,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
     {
       id: "F07",
@@ -98,7 +98,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
     {
       id: "F08",
@@ -109,7 +109,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
     {
       id: "F09",
@@ -120,7 +120,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
     {
       id: "F10",
@@ -131,7 +131,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
   ],
   back: [
@@ -144,7 +144,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
     {
       id: "B02",
@@ -155,7 +155,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
     {
       id: "B03",
@@ -166,7 +166,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
     {
       id: "B04",
@@ -177,7 +177,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
     {
       id: "B05",
@@ -188,7 +188,7 @@ export const PLACEMENTS = {
       top: 100,
       left: 100,
       height: 30,
-      width: 200
+      width: 200,
     },
   ],
 };

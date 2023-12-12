@@ -83,8 +83,8 @@ const useCustomers = () => {
   useEffect(() => {
     setError(
       fetchCustomerResp?.error ||
-      createCustomerResp?.error ||
-      updateCustomerResp?.error
+        createCustomerResp?.error ||
+        updateCustomerResp?.error
     );
   }, [
     fetchCustomerResp?.error,
@@ -95,8 +95,8 @@ const useCustomers = () => {
   useEffect(() => {
     setLoading(
       fetchCustomerResp?.loading ||
-      createCustomerResp?.loading ||
-      updateCustomerResp?.loading
+        createCustomerResp?.loading ||
+        updateCustomerResp?.loading
     );
   }, [
     fetchCustomerResp?.loading,

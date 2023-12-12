@@ -6,7 +6,7 @@ const VariantSelect = ({
   option,
   values,
   selected,
-  handleChange,  
+  handleChange,
   styles = {},
   ...props
 }) => {
@@ -49,7 +49,7 @@ const sx = {
     opacity: 1,
   },
   optionsContainer: {
-    display: "flex",    
+    display: "flex",
     flexWrap: "wrap",
     width: "100%",
     "&::-webkit-scrollbar": {

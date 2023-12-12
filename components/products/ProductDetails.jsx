@@ -41,14 +41,14 @@ const ProductDetails = ({
       let _colors = product.metafields
         .find((metafield) => metafield?.key === "colors")
         ?.references.edges.map((e) => e.node);
-      
+
       let formattedColors = _colors.map((color) => ({
         id: color?.id,
         hex: getValue(color, "color"),
-        name: getValue(color, "name"),  
+        name: getValue(color, "name"),
         front_placement: getImage(color, "front_placement"),
-        back_placement: getImage(color, "back_placement")        
-      }))
+        back_placement: getImage(color, "back_placement"),
+      }));
       setColors(formattedColors);
     }
   }, [product]);
@@ -74,7 +74,7 @@ const ProductDetails = ({
             <VariantSelector
               handleChange={handleOptionChange}
               selectedOptions={selectedOptions}
-              options={product?.options}              
+              options={product?.options}
             />
           </>
         )}

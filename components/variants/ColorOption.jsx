@@ -8,7 +8,6 @@ const ColorOption = ({
   size = 24,
   ...props
 }) => {
-
   return (
     <Button
       sx={{

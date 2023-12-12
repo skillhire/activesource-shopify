@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Box } from "@mui/material";
 import VariantSelect from "./VariantSelect";
 
@@ -12,10 +12,7 @@ const VariantSelector = ({
   return (
     <Box sx={sx.root}>
       {options.map((option) => {
-        if (
-          option?.name == "Color" || 
-          option?.name == 'Title'
-        ) return null;        
+        if (option?.name == "Color" || option?.name == "Title") return null;
         return (
           <VariantSelect
             name={option?.name}
