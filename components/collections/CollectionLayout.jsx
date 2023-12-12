@@ -1,6 +1,8 @@
 import React from "react";
-import { Layout, CollectionMenu, CollectionMenuMobile } from "components";
+import { Layout, LayoutMenu, LayoutMenuMobile } from "components";
 import { Box, Stack, Container, Grid, Typography } from "@mui/material";
+
+import { COLLECTIONS_MENU } from "constants/navigation";
 
 const CollectionLayout = ({ title, children, ...props }) => {
   return (
@@ -9,14 +11,14 @@ const CollectionLayout = ({ title, children, ...props }) => {
         <Grid container>
           <Grid item xs={3} sx={sx.menuItem}>
             <Box sx={sx.menuContainer}>
-              <CollectionMenu />
+              <LayoutMenu items={COLLECTIONS_MENU} />
             </Box>
           </Grid>
           <Grid item xs={12} sm={12} md={9} lg={9}>
             <Stack spacing={4}>
               <Typography variant="h3">{title}</Typography>
               <Box sx={sx.mobileMenuItem}>
-                <CollectionMenuMobile />
+                <LayoutMenuMobile items={COLLECTIONS_MENU} />
               </Box>
               {children}
             </Stack>

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Autocomplete, Box, TextField, InputAdornment } from "@mui/material";
 import { useGooglePlaces } from "hooks";
-import SearchIcon from "assets/search-icon.svg";
 import Image from "next/image";
+
+import SearchIcon from "assets/search-icon.svg";
 
 const GooglePlacesInput = (props) => {
   const { handleClick } = props || {};

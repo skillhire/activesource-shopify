@@ -9,9 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { COLLECTIONS_MENU } from "constants/navigation";
-
-const CollectionMenuMobile = () => {
+const LayoutMenuMobile = ({ items }) => {
   const router = useRouter();
 
   const handleClick = (url) => {
@@ -20,15 +18,15 @@ const CollectionMenuMobile = () => {
 
   return (
     <List component={Stack} direction="row" sx={sx.root}>
-      {COLLECTIONS_MENU.map((accountItem) => (
-        <ListItem key={accountItem.label} disablePadding sx={sx.item}>
+      {items.map((item) => (
+        <ListItem key={item.label} disablePadding sx={sx.item}>
           <ListItemButton
-            onClick={() => handleClick(accountItem.value)}
+            onClick={() => handleClick(item.value)}
             sx={sx.button}
           >
             <ListItemText
               primary={
-                <Typography variant="listItem">{accountItem.label}</Typography>
+                <Typography variant="listItem">{item.label}</Typography>
               }
               sx={sx.text}
             />
@@ -39,7 +37,7 @@ const CollectionMenuMobile = () => {
   );
 };
 
-export default CollectionMenuMobile;
+export default LayoutMenuMobile;
 
 const sx = {
   root: {

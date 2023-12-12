@@ -75,9 +75,6 @@ export default AddressForm;
 
 const sx = {
   root: {},
-  input: {
-    width: "100%",
-  },
   button: {
     py: 2,
     px: 3,

@@ -8,9 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { ACCOUNT_MENU } from "constants/navigation";
-
-const AccountMenu = () => {
+const LayoutMenu = ({ items }) => {
   const router = useRouter();
 
   const handleClick = (url) => {
@@ -18,14 +16,14 @@ const AccountMenu = () => {
   };
 
   return (
-    <List>
-      {ACCOUNT_MENU.map((accountItem) => (
-        <ListItem key={accountItem.label} disablePadding>
-          <ListItemButton onClick={() => handleClick(accountItem.value)}>
+    <List sx={sx.root}>
+      {items.map((item) => (
+        <ListItem key={item.label} disablePadding>
+          <ListItemButton onClick={() => handleClick(item.value)}>
             <ListItemText
               sx={sx.text}
               primary={
-                <Typography variant="listItem">{accountItem.label}</Typography>
+                <Typography variant="listItem">{item.label}</Typography>
               }
             />
           </ListItemButton>
@@ -35,7 +33,7 @@ const AccountMenu = () => {
   );
 };
 
-export default AccountMenu;
+export default LayoutMenu;
 
 const sx = {
   root: {},

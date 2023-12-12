@@ -19,7 +19,7 @@ const SignUpForm = ({ customer, handleChange, ...props }) => {
         </InputLabel>
         <TextField
           size="small"
-          sx={sx.input}
+          fullWidth
           id="email"
           name="email"
           value={customer?.email || ""}
@@ -33,7 +33,7 @@ const SignUpForm = ({ customer, handleChange, ...props }) => {
         </InputLabel>
         <TextField
           size="small"
-          sx={sx.input}
+          fullWidth
           id="password"
           name="password"
           value={customer?.password || ""}
@@ -47,7 +47,7 @@ const SignUpForm = ({ customer, handleChange, ...props }) => {
         </InputLabel>
         <TextField
           size="small"
-          sx={sx.input}
+          fullWidth
           id="firstName"
           name="firstName"
           value={customer?.firstName || ""}
@@ -60,7 +60,7 @@ const SignUpForm = ({ customer, handleChange, ...props }) => {
         </InputLabel>
         <TextField
           size="small"
-          sx={sx.input}
+          fullWidth
           name="lastName"
           value={customer?.lastName || ""}
           type="email"
@@ -111,8 +111,5 @@ const sx = {
   label: {
     color: "text.primary",
     fontWeight: 500,
-  },
-  input: {
-    width: "100%",
   },
 };
