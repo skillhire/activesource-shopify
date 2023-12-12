@@ -8,7 +8,7 @@ import {
   CardActionArea,
   InputBase,
 } from "@mui/material";
-import { getMetaValue } from "utils";
+import { getMetaImage, getMetaValue } from "utils";
 import { useCloudinary, useColors } from "hooks";
 import Image from "next/image";
 import { Link } from "@mui/material";
@@ -26,23 +26,18 @@ const Thumbnail = ({ src, handleClick, ...props }) => (
   </CardActionArea>
 );
 
-const ProductCustomize = ({
-  color,
-  product,
-  hide,
+const ProductCustomize = ({  
+  product,  
   handleClick,
   handleUpload,
   handlePreviewClick,
   activeColor,
-  setActiveColor,
 }) => {
-  const { customization, setCustomization, createBitlyLink } =
+  const { customization, setCustomization } =
     useContext(CustomizeContext);
 
   const [frontFile, setFrontFile] = useState(false);
   const [backFile, setBackFile] = useState(false);
-
-  const { colors, fetchColors } = useColors();
 
   const { unsignedUpload } = useCloudinary({
     cloudName: CLOUDINARY_CLOUD_NAME,
@@ -52,17 +47,6 @@ const ProductCustomize = ({
 
   const frontRef = useRef();
   const backRef = useRef();
-
-  useEffect(() => {
-    fetchColors();
-  }, []);
-
-  useEffect(() => {
-    if (colors?.length > 0 && color) {
-      const active = colors.find((c) => c.handle == color.handle);
-      setActiveColor(active);
-    }
-  }, [colors, color]);
 
   const frontInputClick = () => {
     frontRef.current.click();
@@ -87,7 +71,7 @@ const ProductCustomize = ({
 
     if (name == "front") {
       setFrontFile(file);
-    } else if (ev.target.name == "back") {
+    } else if (name == "back") {
       setBackFile(file);
     }
     handleUpload(image, name);
@@ -120,9 +104,8 @@ const ProductCustomize = ({
     }
   }, []);
 
-  if (hide) {
-    return null;
-  }
+  
+  if(!activeColor) return null;
 
   return (
     <Stack>

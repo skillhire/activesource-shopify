@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useClickOrDrag } from "hooks";
 import { Box, CardActionArea, Typography, Stack } from "@mui/material";
 import Image from "next/image";
-
+import { getValue, getImage } from "utils";
 import { truncate, formatPriceRange } from "utils";
 import ColorOption from "components/variants/ColorOption";
 
@@ -27,7 +27,14 @@ const ProductCard = ({ product, handleClick }) => {
       let _colors = product.metafields
         .find((metafield) => metafield?.key === "colors")
         ?.references.edges.map((e) => e.node);
-      setColors(_colors);
+      let formattedColors = _colors.map((color) => ({
+        id: color?.id,
+        hex: getValue(color, "color"),
+        name: getValue(color, "name"),  
+        front_placement: getImage(color, "front_placement"),
+        back_placement: getImage(color, "back_placement")        
+      }))
+      setColors(formattedColors);      
     }
   }, [product]);
 

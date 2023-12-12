@@ -1,4 +1,5 @@
-import { Box, Link } from "@mui/material";
+import React from 'react'
+import { Box } from "@mui/material";
 import VariantSelect from "./VariantSelect";
 
 const VariantSelector = ({
@@ -6,15 +7,15 @@ const VariantSelector = ({
   handleChange,
   options,
   styles,
-  handleInfoClick,
-  showGuidelines,
   ...props
 }) => {
   return (
     <Box sx={sx.root}>
       {options.map((option) => {
-        if (option?.name == "Color") return null;
-        if (option?.name == "Title") return null;
+        if (
+          option?.name == "Color" || 
+          option?.name == 'Title'
+        ) return null;        
         return (
           <VariantSelect
             name={option?.name}
@@ -26,11 +27,6 @@ const VariantSelector = ({
           />
         );
       })}
-      {showGuidelines && (
-        <Link variant="overline" color="text.secondary">
-          Size Guide
-        </Link>
-      )}
     </Box>
   );
 };

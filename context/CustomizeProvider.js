@@ -15,8 +15,8 @@ const CustomizeProvider = ({ children, ...rest }) => {
     variantId: null,
     frontLogo: null,
     backLogo: null,
-    frontPlacement: null,
-    backPlacement: null,
+    front: null,
+    back: null,
   });
 
   const { shortenUrl } = useBitly();

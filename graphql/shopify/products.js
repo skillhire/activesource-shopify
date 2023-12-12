@@ -33,19 +33,20 @@ export const ProductFragment = gql`
       namespace
       description
       reference {
-        ... on ProductVariant {
-          id
-          title
-          sku
-          availableForSale
-        }
         ... on MediaImage {
           image {
             id
             altText
             src
+            url             
           }
         }
+        ... on ProductVariant {
+          id
+          title
+          sku
+          availableForSale
+        }        
       }
       references(first: 250) {
         edges {
@@ -135,6 +136,13 @@ export const ProductFragment = gql`
                 type
                 value
                 reference {
+                  ... on MediaImage {
+                    image {
+                      id
+                      altText
+                      src
+                    }
+                  }
                   ... on Product {
                     id
                     handle

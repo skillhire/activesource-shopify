@@ -6,7 +6,6 @@ const OptionButton = ({
   active,
   handleClick,
   children,
-  width = 70,
   ...props
 }) => {
   return (
@@ -14,7 +13,6 @@ const OptionButton = ({
       sx={{
         ...sx.button,
         ...(active && sx.active),
-        minWidth: width,
       }}
       onClick={() => handleClick(option, value)}
     >
@@ -35,5 +33,6 @@ const sx = {
     textAlign: "center",
     justifyContent: "center",
     borderRadius: 20,
+    minWidth: 34
   },
 };

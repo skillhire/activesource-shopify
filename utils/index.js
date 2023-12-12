@@ -8,6 +8,11 @@ export const getValue = (object, key) => {
   return field?.value;
 };
 
+export const getImage = (object, key) => {
+  let field = getField(object, key);
+  return field?.reference?.image?.src;
+};
+
 export const getMetafield = (metaobject, key) => {
   return metaobject?.metafields?.find((field) => field?.key == key);
 };
@@ -15,7 +20,7 @@ export const getMetafield = (metaobject, key) => {
 export const getMetaValue = (metaobject, key) => {
   let field = getMetafield(metaobject, key);
   return field?.value;
-};
+}
 
 export const getMetaImage = (metaobject, key) => {
   let field = getMetafield(metaobject, key);

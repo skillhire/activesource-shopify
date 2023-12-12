@@ -6,8 +6,7 @@ const VariantSelect = ({
   option,
   values,
   selected,
-  handleChange,
-  handleInfoClick,
+  handleChange,  
   styles = {},
   ...props
 }) => {
@@ -19,7 +18,6 @@ const VariantSelect = ({
       <Box sx={sx.optionsContainer}>
         {values?.map((value) => (
           <OptionButton
-            width={"30px"}
             key={value}
             value={value}
             option={option}
@@ -51,12 +49,12 @@ const sx = {
     opacity: 1,
   },
   optionsContainer: {
-    display: "flex",
-    overflowX: "scroll",
+    display: "flex",    
+    flexWrap: "wrap",
     width: "100%",
     "&::-webkit-scrollbar": {
       display: "none",
     },
-    gap: "10px",
+    gap: "5px",
   },
 };

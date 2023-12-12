@@ -1,16 +1,13 @@
 import { Button, Box } from "@mui/material";
-import { getValue } from "utils";
+import { getValue, getImage } from "utils";
 
 const ColorOption = ({
   color,
-  customAttributes,
+  activeColor,
   handleClick,
   size = 24,
   ...props
 }) => {
-  const hex = getValue(color, "color");
-  const label = getValue(color, "label");
-  const selected = customAttributes?.color;
 
   return (
     <Button
@@ -18,7 +15,7 @@ const ColorOption = ({
         ...sx.button,
         height: `${size + 4}px`,
         width: `${size + 4}px`,
-        ...(selected === label && sx.selected),
+        ...(activeColor?.name === color.name && sx.selected),
       }}
       onClick={() => handleClick(color)}
     >
@@ -27,10 +24,10 @@ const ColorOption = ({
           ...sx.color,
           height: `${size}px`,
           width: `${size}px`,
-          bgcolor: hex,
+          bgcolor: color.hex,
         }}
-        key={label}
-        value={label}
+        key={color.name}
+        value={color.name}
       />
     </Button>
   );

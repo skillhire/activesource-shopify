@@ -3,7 +3,7 @@ import ColorOption from "./ColorOption";
 
 const CustomColorSelect = ({
   colors,
-  customAttributes,
+  activeColor,
   handleClick,
   ...props
 }) => {
@@ -17,7 +17,7 @@ const CustomColorSelect = ({
           <ColorOption
             key={i}
             color={color}
-            customAttributes={customAttributes}
+            activeColor={activeColor}
             handleClick={handleClick}
           />
         ))}

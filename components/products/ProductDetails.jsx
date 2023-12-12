@@ -4,10 +4,12 @@ import { formatPriceRange } from "utils";
 import { AddToCartButton, VariantSelector } from "components";
 import CustomColorSelect from "components/variants/CustomColorSelect";
 import QuantitySelector from "components/variants/QuantitySelector";
+import { getValue, getField, getImage } from "utils";
 
 const ProductDetails = ({
   product,
   variant,
+  activeColor,
   selectedOptions,
   handleOptionChange,
   customAttributes,
@@ -39,7 +41,15 @@ const ProductDetails = ({
       let _colors = product.metafields
         .find((metafield) => metafield?.key === "colors")
         ?.references.edges.map((e) => e.node);
-      setColors(_colors);
+      
+      let formattedColors = _colors.map((color) => ({
+        id: color?.id,
+        hex: getValue(color, "color"),
+        name: getValue(color, "name"),  
+        front_placement: getImage(color, "front_placement"),
+        back_placement: getImage(color, "back_placement")        
+      }))
+      setColors(formattedColors);
     }
   }, [product]);
 
@@ -57,14 +67,14 @@ const ProductDetails = ({
             </Typography>
             <CustomColorSelect
               colors={colors}
+              activeColor={activeColor}
               handleClick={handleColorClick}
               customAttributes={customAttributes}
             />
             <VariantSelector
               handleChange={handleOptionChange}
               selectedOptions={selectedOptions}
-              options={product?.options}
-              showGuidelines={!addToCartDisabled}
+              options={product?.options}              
             />
           </>
         )}

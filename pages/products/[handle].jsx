@@ -31,8 +31,7 @@ const Product = () => {
 
   const { isMobile } = useResponsive();
   const { trackProductViewed } = useSegment();
-
-  const [color, setColor] = useState();
+  
   const [zoom, setZoom] = useState(false);
   const [activeImage, setActiveImage] = useState();
   const [placement, setPlacement] = useState({});
@@ -52,13 +51,13 @@ const Product = () => {
     selectedOptions,
   });
 
-  const handleUpload = async (image, frontOrBack) => {
-    if (frontOrBack == "front") {
+  const handleUpload = async (image, frontOrBack) => {       
+    if (frontOrBack == "front") {      
       setCustomization({
         ...customization,
         frontLogo: image,
-      });
-    } else {
+      })
+    } else if(frontOrBack == "back"){
       setCustomization({
         ...customization,
         backLogo: image,
@@ -96,7 +95,7 @@ const Product = () => {
   };
 
   const handleColorClick = (color) => {
-    setColor(color);
+    setActiveColor(color);
   };
 
   const handlePlacementClick = (frontOrBack) => {
@@ -105,6 +104,10 @@ const Product = () => {
   };
 
   const handleSelectPlacement = (newPlacement) => {
+    setPlacement({
+      ...placement,
+      [frontOrBack]: newPlacement,
+    })
     setCustomization({
       ...customization,
       [frontOrBack]: newPlacement,
@@ -123,6 +126,7 @@ const Product = () => {
   }, [product, variantImage]);
 
   useEffect(() => {
+    // Reset the selected options values when the product changes
     setSelectedOptions({});
     if (product?.id) {
       trackProductViewed(product);
@@ -138,33 +142,58 @@ const Product = () => {
     handleAddToCartDisabled();
   }, [product, selectedOptions, variant, setAddToCartDisabled]);
 
-  // Set values from encoded JWT customization
+  // Set values from encoded JWT URL param
   useEffect(() => {
-    if (customization?.color) {
-      setColor(customization?.color);
+    if (customization?.color) {  
+      // Ensure the color metaobject is selected
+      setActiveColor(customization?.color);
+      // Default to the front placement image
+      setActiveImage({
+        id: "front",
+        src: customization?.color?.front_placement,
+        isFront: true,
+        isBack: false
+      });
     }
+
+    // Find the variant from the variantId
     if (product?.variants && customization?.variantId) {
       const selectedVariant = product?.variants?.edges?.find(
         (v) => v?.node?.id?.split("/").pop() == customization?.variantId
-      );
+      );      
       if (selectedVariant?.node) {
         setVariant(selectedVariant.node);
       }
+
+      // Set the product selected options from Variant ID
+      setSelectedOptions({
+        ...selectedOptions,
+        Color: selectedVariant?.node?.selectedOptions?.find(
+          (o) => o?.name == "Color"
+        )?.value,
+        Size: selectedVariant?.node?.selectedOptions?.find(
+          (o) => o?.name == "Size"
+        )?.value,
+      });      
     }
   }, [product, customization?.color, customization?.variantId]);
 
   useEffect(() => {
-    if (color) {
+    if (activeColor) {
+      // Store color with the customization object 
       setCustomization({
         ...customization,
-        color: color,
+        color: activeColor,
       });
+      // Select the product color option that 
+      // matches the meta color name field. This is necessary 
+      // to ensure the correct color / size SKU is assigned at checkout
       setSelectedOptions({
         ...selectedOptions,
-        Color: getValue(color, "name"),
+        Color: activeColor?.name,
       });
     }
-  }, [color]);
+  }, [activeColor]);
 
   useEffect(() => {
     if (variant?.id) {
@@ -192,19 +221,17 @@ const Product = () => {
               </Box>
             </Grid>
             <Grid item xs={12} md={5} lg={4}>
-              <ProductDetails
-                color={color}
+              <ProductDetails                
                 loading={loading}
                 product={product}
                 variant={variant}
+                activeColor={activeColor}
                 addToCartDisabled={addToCartDisabled}
                 selectedOptions={selectedOptions}
                 handleColorClick={handleColorClick}
                 handleOptionChange={handleOptionChange}
               />
               <ProductCustomize
-                hide={addToCartDisabled}
-                color={color}
                 product={product}
                 handleClick={handlePlacementClick}
                 activeColor={activeColor}

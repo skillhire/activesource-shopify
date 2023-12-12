@@ -46,13 +46,13 @@ const ImageSlider = ({
           </CardActionArea>
         ))}
       </Stack>
-      <Box sx={{ ...sx.fade, ...(fade && sx.fadeIn) }}>
+      <Box>
         <Box sx={sx.mainImage}>
           {(activeImage?.src || activeImage?.url) && (
             <Image
               src={activeImage?.src || activeImage?.url}
-              width={500}
-              height={500}
+              width={512}
+              height={512}
               style={sx.image}
               alt={activeImage?.altText}
               responsive="true"
@@ -61,8 +61,8 @@ const ImageSlider = ({
           {customization?.frontLogo && activeImage?.isFront && (
             <Image
               src={customization?.frontLogo}
-              width={500}
-              height={500}
+              width={512}
+              height={512}
               style={{
                 top: customization?.front?.top,
                 left: customization?.front?.left,
@@ -76,8 +76,8 @@ const ImageSlider = ({
           {customization?.backLogo && activeImage?.isBack && (
             <Image
               src={customization?.backLogo}
-              width={500}
-              height={500}
+              width={512}
+              height={512}
               style={{
                 top: customization?.back?.top,
                 left: customization?.back?.left,
