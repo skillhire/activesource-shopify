@@ -136,17 +136,6 @@ export default function AccountDetails({ customer, loading, handleChange, handle
             </Button>
           </Stack>
         )}
-        {!isEditing && (
-          <Button
-            sx={sx.button}
-            size="small"
-            color="tertiary"
-            variant="contained"
-            onClick={handleEdit}
-          >
-            Edit
-          </Button>
-        )}
       </Stack>
     </Stack>
   );

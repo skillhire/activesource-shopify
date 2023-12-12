@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
+import { Box, Stack, IconButton } from "@mui/material"
+import { Edit } from "@mui/icons-material";
 
 import { AccountLayout, AccountDetails } from "components";
 import { useAuth, useCustomers } from "hooks";
@@ -19,10 +21,11 @@ const MyAccount = () => {
   }, [accessToken, customer]);
 
   const handleSubmit = useCallback(async () => {
-    updateCustomer({
+    await updateCustomer({
       customer: currentCustomer,
       customerAccessToken: accessToken,
     });
+    setIsEditing(false);
   }, [currentCustomer, accessToken]);
 
   const handleChange = (e) => {
@@ -45,12 +48,23 @@ const MyAccount = () => {
 
 
   return (
-    <AccountLayout title="My Account">
+    <AccountLayout
+      title={
+        <Stack direction="row">
+          <Box mr={2}>My Account</Box>
+          {!isEditing && (
+            <IconButton onClick={handleEdit} color="primary">
+              <Edit fontSize="small" />
+            </IconButton>
+          )}
+        </Stack>
+      }
+    >
+
       <AccountDetails
         loading={loading}
         customer={currentCustomer}
         isEditing={isEditing}
-        handleEdit={handleEdit}
         handleSubmit={handleSubmit}
         handleChange={handleChange}
         handleCancel={handleCancel}
