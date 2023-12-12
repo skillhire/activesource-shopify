@@ -1,4 +1,3 @@
-import { useState, useCallback } from "react";
 import {
   Box,
   Stack,
@@ -8,68 +7,86 @@ import {
   TextField,
   InputLabel,
   Typography,
+  CircularProgress,
   FormControlLabel,
 } from "@mui/material";
 
-export default function AccountDetails() {
-  const [isEditing, setIsEditing] = useState(false);
-  const handleCancel = useCallback(() => {
-    setIsEditing(false)
-  }, [setIsEditing])
-
-  const handleSubmit = useCallback(() => {
-    // TODO: handleSubmit
-  }, [])
-
-  const handleEdit = useCallback(() => {
-    setIsEditing(true)
-  }, [setIsEditing])
-
+export default function AccountDetails({ customer, loading, handleChange, handleEdit, handleCancel, isEditing, handleSubmit }) {
   return (
     <Stack sx={sx.root}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={4} sx={sx.labelContainer}>
-          <InputLabel htmlFor="first-name" sx={sx.inputLabel}>
+          <InputLabel htmlFor="firstName" sx={sx.inputLabel}>
             <Typography variant="body1">
               First Name:
             </Typography>
           </InputLabel>
         </Grid>
         <Grid item xs={12} sm={12} md={8}>
-          {isEditing && <TextField id="first-name" name="first-name" size="small" fullWidth sx={sx.input} />}
+          {isEditing && (
+            <TextField
+              defaultValue={customer?.firstName}
+              id="firstName"
+              name="firstName"
+              size="small"
+              fullWidth
+              sx={sx.input}
+              onChange={handleChange}
+            />
+          )}
           {!isEditing && (
             <Typography variant="h5" sx={sx.infoLabel}>
-              ?????
+              {customer?.firstName}
             </Typography>
           )}
         </Grid>
         <Grid item xs={12} sm={12} md={4} sx={sx.labelContainer}>
-          <InputLabel htmlFor="last-name" sx={sx.inputLabel}>
+          <InputLabel htmlFor="lastName" sx={sx.inputLabel}>
             <Typography variant="body1">
               Last Name:
             </Typography>
           </InputLabel>
         </Grid>
         <Grid item xs={12} sm={12} md={8}>
-          {isEditing && <TextField id="last-name" name="last-name" size="small" fullWidth sx={sx.input} />}
+          {isEditing && (
+            <TextField
+              defaultValue={customer?.lastName}
+              id="lastName"
+              name="lastName"
+              size="small"
+              fullWidth
+              sx={sx.input}
+              onChange={handleChange}
+            />
+          )}
           {!isEditing && (
             <Typography variant="h5" sx={sx.infoLabel}>
-              ?????
+              {customer?.lastName}
             </Typography>
           )}
         </Grid>
         <Grid item xs={12} sm={12} md={4} sx={sx.labelContainer}>
-          <InputLabel htmlFor="email-address" sx={sx.inputLabel}>
+          <InputLabel htmlFor="email" sx={sx.inputLabel}>
             <Typography variant="body1">
               Email Address:
             </Typography>
           </InputLabel>
         </Grid>
         <Grid item xs={12} sm={12} md={8}>
-          {isEditing && <TextField id="email-address" name="email-address" size="small" fullWidth sx={sx.input} />}
+          {isEditing && (
+            <TextField
+              defaultValue={customer?.email}
+              id="email"
+              name="email"
+              size="small"
+              fullWidth
+              sx={sx.input}
+              onChange={handleChange}
+            />
+          )}
           {!isEditing && (
             <Typography variant="h5" sx={sx.infoLabel}>
-              ?????
+              {customer?.email}
             </Typography>
           )}
         </Grid>
@@ -79,8 +96,8 @@ export default function AccountDetails() {
           <FormControlLabel
             control={
               <Checkbox
-                // checked={customer?.acceptsMarketing || false}
-                // onChange={handleChange}
+                checked={customer?.acceptsMarketing}
+                onChange={handleChange}
                 name="acceptsMarketing"
                 size="small"
               />
@@ -108,9 +125,11 @@ export default function AccountDetails() {
             </Button>
             <Button
               sx={sx.button}
+              endIcon={loading && <CircularProgress size={20} sx={sx.progress} />}
               size="small"
               color="secondary"
               variant="contained"
+              disabled={loading}
               onClick={handleSubmit}
             >
               Save Changes

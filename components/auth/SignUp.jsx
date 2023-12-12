@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useAlerts, useAuth } from "hooks";
 import { Button, CircularProgress, Typography } from "@mui/material";
 
-import RegisterForm from "./SignUpForm";
+import SignUpForm from "./SignUpForm";
 
 const SignUp = ({ onSuccess }) => {
   const { showAlertError } = useAlerts();
@@ -41,7 +41,7 @@ const SignUp = ({ onSuccess }) => {
 
   return (
     <>
-      <RegisterForm
+      <SignUpForm
         customer={customer}
         handleChange={handleChange}
         loading={loading}
