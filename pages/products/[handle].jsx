@@ -17,9 +17,7 @@ import {
 } from "components";
 import ProductCustomize from "components/products/ProductCustomize";
 import { CustomizeContext } from "context";
-import { getValue } from "utils";
 import PlacementModal from "sections/products/PlacementModal";
-import { PLACEMENTS } from "constants/placements";
 
 const Product = () => {
   const ref = useRef();
