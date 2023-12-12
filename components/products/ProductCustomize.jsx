@@ -139,8 +139,8 @@ const ProductCustomize = ({
                 variant="outlined"
                 sx={sx.button}
               >
-                {customization?.frontPlacement
-                  ? `${customization?.frontPlacement?.title} (${customization?.frontPlacement?.dimensions})`
+                {customization?.front
+                  ? `${customization?.front?.title} (${customization?.front?.dimensions})`
                   : "Select Placement"}
               </Button>
             </Box>
@@ -190,8 +190,8 @@ const ProductCustomize = ({
                 variant="outlined"
                 sx={sx.button}
               >
-                {customization?.backPlacement
-                  ? `${customization?.backPlacement?.title} (${customization?.backPlacement?.dimensions})`
+                {customization?.back
+                  ? `${customization?.back?.title} (${customization?.back?.dimensions})`
                   : "Select Placement"}
               </Button>
             </Box>

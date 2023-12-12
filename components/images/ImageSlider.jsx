@@ -64,10 +64,10 @@ const ImageSlider = ({
               width={500}
               height={500}
               style={{
-                top: 160,
-                left: 160,
-                height: 30,
-                width: 140,
+                top: customization?.front?.top,
+                left: customization?.front?.left,
+                height: customization?.front?.height,
+                width: customization?.front?.width,
                 position: "absolute",
                 objectFit: "contain",
               }}
@@ -79,10 +79,10 @@ const ImageSlider = ({
               width={500}
               height={500}
               style={{
-                top: 160,
-                left: 160,
-                height: 30,
-                width: 140,
+                top: customization?.back?.top,
+                left: customization?.back?.left,
+                height: customization?.back?.height,
+                width: customization?.back?.width,
                 position: "absolute",
                 objectFit: "contain",
               }}
@@ -112,14 +112,13 @@ const sx = {
     justifyContent: "center",
     alignItems: "center",
     width: {
-      sm: "500px",
+      sm: "512px",
       xs: "320px",
     },
     maxWidth: {
-      sm: "500px",
+      sm: "512px",
       xs: "320px",
-    },
-    border: "2px solid red",
+    },    
   },
   fade: {
     width: "100%",

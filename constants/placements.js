@@ -29,6 +29,10 @@ export const PLACEMENTS = {
       title: "Full Front",
       dimensions: "14'x17.5'",
       previewSrc: Front1,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
     {
       id: "F02",
@@ -36,6 +40,10 @@ export const PLACEMENTS = {
       title: "Center Chest",
       dimensions: "14'x10'",
       previewSrc: Front2,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
     {
       id: "F03",
@@ -43,6 +51,10 @@ export const PLACEMENTS = {
       title: "Center Chest",
       dimensions: "14'x4'",
       previewSrc: Front3,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
     {
       id: "F04",
@@ -50,6 +62,10 @@ export const PLACEMENTS = {
       title: "Center Chest",
       dimensions: "14'x2.5'",
       previewSrc: Front4,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
     {
       id: "F05",
@@ -57,6 +73,10 @@ export const PLACEMENTS = {
       title: "Center Chest",
       dimensions: "14'x2'",
       previewSrc: Front5,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
     {
       id: "F06",
@@ -64,6 +84,10 @@ export const PLACEMENTS = {
       title: "Center Chest",
       dimensions: "14'x1'",
       previewSrc: Front6,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
     {
       id: "F07",
@@ -71,6 +95,10 @@ export const PLACEMENTS = {
       title: "Left Chest",
       dimensions: "4.5'x4.5'",
       previewSrc: Front7,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
     {
       id: "F08",
@@ -78,6 +106,10 @@ export const PLACEMENTS = {
       title: "Left Chest",
       dimensions: "4.5'x3.5'",
       previewSrc: Front8,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
     {
       id: "F09",
@@ -85,6 +117,10 @@ export const PLACEMENTS = {
       title: "Left Chest",
       dimensions: "3.5'x1.5'",
       previewSrc: Front9,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
     {
       id: "F10",
@@ -92,6 +128,10 @@ export const PLACEMENTS = {
       title: "Left Chest",
       dimensions: "3'x1'",
       previewSrc: Front10,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
   ],
   back: [
@@ -101,6 +141,10 @@ export const PLACEMENTS = {
       title: "Full Back",
       dimensions: "14'x17.5'",
       previewSrc: Back1,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
     {
       id: "B02",
@@ -108,6 +152,10 @@ export const PLACEMENTS = {
       title: "Center Back",
       dimensions: "14'x10'",
       previewSrc: Back2,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
     {
       id: "B03",
@@ -115,6 +163,10 @@ export const PLACEMENTS = {
       title: "Center Back",
       dimensions: "14'x4'",
       previewSrc: Back3,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
     {
       id: "B04",
@@ -122,6 +174,10 @@ export const PLACEMENTS = {
       title: "Center Back",
       dimensions: "4'x4'",
       previewSrc: Back4,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
     {
       id: "B05",
@@ -129,6 +185,10 @@ export const PLACEMENTS = {
       title: "Back of Neck",
       dimensions: "4'x1'",
       previewSrc: Back5,
+      top: 100,
+      left: 100,
+      height: 30,
+      width: 200
     },
   ],
 };

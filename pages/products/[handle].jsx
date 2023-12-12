@@ -107,7 +107,7 @@ const Product = () => {
   const handleSelectPlacement = (newPlacement) => {
     setCustomization({
       ...customization,
-      [frontOrBack + "Placement"]: newPlacement,
+      [frontOrBack]: newPlacement,
     });
     setOpenModal(false);
   };
