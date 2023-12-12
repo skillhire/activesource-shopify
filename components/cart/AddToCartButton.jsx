@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useCheckout, useAlerts, useSegment } from "hooks";
 import { Button, CircularProgress } from "@mui/material";
-import { ShopContext } from "context";
+import { CustomizeContext, ShopContext } from "context";
 
 const AddToCartButton = ({
   disabled,
@@ -16,6 +16,7 @@ const AddToCartButton = ({
 
   const { showAlertError } = useAlerts();
   const { toggleCart } = useContext(ShopContext);
+  const { createBitlyLink } = useContext(CustomizeContext);
   const { loading, checkoutLineItemAdd } = useCheckout();
 
   const handleAddToCart = async () => {
@@ -25,13 +26,15 @@ const AddToCartButton = ({
         variantId: variant?.id,
         quantity: quantity,
       };
-      if (customAttributes) {
-        let attributes = Object.keys(customAttributes).map((key) => ({
-          key: key,
-          value: customAttributes[key],
-        }));
-        lineItem = { ...lineItem, customAttributes: attributes };
-      }
+      lineItem = {
+        ...lineItem,
+        customAttributes: [
+          {
+            key: "url",
+            value: await createBitlyLink(),
+          },
+        ],
+      };
       checkoutLineItemAdd(lineItem);
       trackAddToCart({
         quantity: quantity,

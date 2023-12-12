@@ -15,6 +15,10 @@ const ShopifyPage = (props) => {
     }
   }, [handle]);
 
+  useEffect(() => {
+    console.log("Page", page);
+  }, [page]);
+
   return (
     <Layout>
       <Page title={page?.title} body={page?.body} />

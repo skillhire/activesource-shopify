@@ -9,6 +9,8 @@ const ProductImages = ({
   activeImage,
   handleClick,
   handleClose,
+  previewFront,
+  previewBack,
   ...props
 }) => {
   const { isMobile } = useResponsive();

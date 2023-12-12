@@ -1,5 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useProducts, useVariants, useResponsive, useSegment } from "hooks";
+import React, { useState, useContext, useEffect, useRef } from "react";
+import {
+  useCloudinary,
+  useProducts,
+  useVariants,
+  useResponsive,
+  useSegment,
+} from "hooks";
 import { useRouter } from "next/router";
 import { Box, Container, Grid } from "@mui/material";
 import {
@@ -10,36 +16,65 @@ import {
   ProductTabs,
 } from "components";
 import ProductCustomize from "components/products/ProductCustomize";
+import { CustomizeContext } from "context";
 import { getValue } from "utils";
-import PlacementModal from "../../sections/products/PlacementModal";
+import PlacementModal from "sections/products/PlacementModal";
+import { PLACEMENTS } from "constants/placements";
 
 const Product = () => {
   const ref = useRef();
-
   const router = useRouter();
+
   const { handle } = router.query;
+
+  const { customization, setCustomization } = useContext(CustomizeContext);
+
   const { isMobile } = useResponsive();
   const { trackProductViewed } = useSegment();
 
   const [color, setColor] = useState();
   const [zoom, setZoom] = useState(false);
   const [activeImage, setActiveImage] = useState();
-  const [placement, setPlacement] = useState({});  
+  const [placement, setPlacement] = useState({});
   const [selectedOptions, setSelectedOptions] = useState({});
   const [addToCartDisabled, setAddToCartDisabled] = useState(false);
 
-  const [openModal, setOpenModal] = useState(false)
-  const [frontOrBack, setFrontOrBack] = useState("front")
-  // Handle custom variant option metaobjects
-  const [customAttributes, setCustomAttributes] = useState({});
+  const [openModal, setOpenModal] = useState(false);
+  const [frontOrBack, setFrontOrBack] = useState("front");
+
+  const [activeColor, setActiveColor] = useState();
 
   const { loading, product, recommendedProducts, images, fetchProduct } =
     useProducts();
 
-  const { variant, variantImage } = useVariants({
+  const { variant, setVariant, variantImage } = useVariants({
     product,
     selectedOptions,
   });
+
+  const handleUpload = async (image, frontOrBack) => {
+    if (frontOrBack == "front") {
+      setCustomization({
+        ...customization,
+        frontLogo: image,
+      });
+    } else {
+      setCustomization({
+        ...customization,
+        backLogo: image,
+      });
+    }
+  };
+
+  const handlePreviewClick = (imgSrc, frontOrBack) => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setActiveImage({
+      id: frontOrBack,
+      src: imgSrc,
+      isFront: frontOrBack == "front" ? true : false,
+      isBack: frontOrBack == "back" ? true : false,
+    });
+  };
 
   const handleImageClick = (image) => {
     if (image?.id === activeImage?.id) {
@@ -62,22 +97,20 @@ const Product = () => {
 
   const handleColorClick = (color) => {
     setColor(color);
-    setCustomAttributes({
-      ...customAttributes,
-      color: getValue(color, "label"),
-    });
   };
 
   const handlePlacementClick = (frontOrBack) => {
-    setFrontOrBack(frontOrBack)
-    setOpenModal(true)    
-  }
+    setFrontOrBack(frontOrBack);
+    setOpenModal(true);
+  };
 
-  const handleSelectPlacement = (placement) => {
-    setPlacement({
-      [frontOrBack]: placement 
-    })
-  }
+  const handleSelectPlacement = (newPlacement) => {
+    setCustomization({
+      ...customization,
+      [frontOrBack]: newPlacement,
+    });
+    setOpenModal(false);
+  };
 
   useEffect(() => {
     if (handle) {
@@ -97,19 +130,50 @@ const Product = () => {
   }, [product?.id]);
 
   const handleAddToCartDisabled = () => {
-    const disabled = !variant || Object.keys(customAttributes).length < 1;
+    const disabled = !variant;
     setAddToCartDisabled(disabled);
   };
 
   useEffect(() => {
     handleAddToCartDisabled();
-  }, [
-    product,
-    customAttributes,
-    selectedOptions,
-    variant,
-    setAddToCartDisabled,
-  ]);
+  }, [product, selectedOptions, variant, setAddToCartDisabled]);
+
+  // Set values from encoded JWT customization
+  useEffect(() => {
+    if (customization?.color) {
+      setColor(customization?.color);
+    }
+    if (product?.variants && customization?.variantId) {
+      const selectedVariant = product?.variants?.edges?.find(
+        (v) => v?.node?.id?.split("/").pop() == customization?.variantId
+      );
+      if (selectedVariant?.node) {
+        setVariant(selectedVariant.node);
+      }
+    }
+  }, [product, customization?.color, customization?.variantId]);
+
+  useEffect(() => {
+    if (color) {
+      setCustomization({
+        ...customization,
+        color: color,
+      });
+      setSelectedOptions({
+        ...selectedOptions,
+        Color: getValue(color, "name"),
+      });
+    }
+  }, [color]);
+
+  useEffect(() => {
+    if (variant?.id) {
+      setCustomization({
+        ...customization,
+        variantId: variant?.id?.split("/").pop(),
+      });
+    }
+  }, [variant?.id]);
 
   return (
     <Layout metaTitle={product?.title} metaDescription={product?.description}>
@@ -136,17 +200,18 @@ const Product = () => {
                 addToCartDisabled={addToCartDisabled}
                 selectedOptions={selectedOptions}
                 handleColorClick={handleColorClick}
-                customAttributes={customAttributes}
                 handleOptionChange={handleOptionChange}
-              >
-                <ProductCustomize
-                  hide={addToCartDisabled}
-                  color={color}
-                  product={product}
-                  handleClick={ handlePlacementClick }
-                  customAttributes={customAttributes}
-                />
-              </ProductDetails>
+              />
+              <ProductCustomize
+                hide={addToCartDisabled}
+                color={color}
+                product={product}
+                handleClick={handlePlacementClick}
+                activeColor={activeColor}
+                setActiveColor={setActiveColor}
+                handleUpload={handleUpload}
+                handlePreviewClick={handlePreviewClick}
+              />
             </Grid>
             <Grid item xs={12}>
               <ProductTabs product={product} />
@@ -160,11 +225,11 @@ const Product = () => {
           </Grid>
         </Box>
       </Container>
-      <PlacementModal 
+      <PlacementModal
         open={openModal}
-        handleClose={() => setOpenModal(false)}        
-        frontOrBack={ frontOrBack }
-        placement={ placement[frontOrBack] }
+        handleClose={() => setOpenModal(false)}
+        frontOrBack={frontOrBack}
+        placement={placement[frontOrBack]}
         handleClick={handleSelectPlacement}
       />
     </Layout>

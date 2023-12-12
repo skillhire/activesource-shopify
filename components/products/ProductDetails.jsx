@@ -6,7 +6,6 @@ import CustomColorSelect from "components/variants/CustomColorSelect";
 import QuantitySelector from "components/variants/QuantitySelector";
 
 const ProductDetails = ({
-  children,
   product,
   variant,
   selectedOptions,
@@ -82,7 +81,6 @@ const ProductDetails = ({
             customAttributes={customAttributes}
           />
         </Stack>
-        {children}
       </Stack>
     </Box>
   );

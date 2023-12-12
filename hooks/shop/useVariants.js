@@ -5,20 +5,16 @@ const useVariants = ({ product, selectedOptions }) => {
   const [variantImage, setVariantImage] = useState();
 
   const selectVariant = () => {
-    if (product?.variants?.edges?.length == 1) {
-      setVariant(product.variants.edges[0].node);
-    } else {
-      const selectedVariant = product.variants.edges.find(({ node: variant }) =>
-        variant.selectedOptions.every((option) => {
-          return selectedOptions[option.name] == option.value;
-        })
-      );
-      setVariant(selectedVariant?.node);
-    }
+    const selectedVariant = product.variants.edges.find(({ node: variant }) =>
+      variant.selectedOptions.every((option) => {
+        return selectedOptions[option.name] == option.value;
+      })
+    );
+    setVariant(selectedVariant?.node);
   };
 
   useEffect(() => {
-    if (product) {
+    if (Object.keys(selectedOptions)?.length > 0 && product) {
       selectVariant();
     }
   }, [selectedOptions]);
