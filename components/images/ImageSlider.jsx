@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { CustomizeContext } from "context";
 import { Box, CardActionArea, Stack } from "@mui/material";
 import Image from "next/image";
-import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
-import { Close } from "@mui/icons-material";
 
 const ImageSlider = ({
   activeImage,
@@ -11,8 +10,12 @@ const ImageSlider = ({
   loading,
   handleClick,
   thumbnailSize = 80,
+  previewFront,
+  previewBack,
   ...props
 }) => {
+  const { customization } = useContext(CustomizeContext);
+
   const [fade, setFade] = useState(false);
 
   useEffect(() => {
@@ -46,16 +49,44 @@ const ImageSlider = ({
       <Box sx={{ ...sx.fade, ...(fade && sx.fadeIn) }}>
         <Box sx={sx.mainImage}>
           {(activeImage?.src || activeImage?.url) && (
-            <Zoom IconUnzoom={Close}>
-              <Image
-                src={activeImage?.src || activeImage?.url}
-                width={500}
-                height={500}
-                style={sx.image}
-                alt={activeImage?.altText}
-                responsive="true"
-              />
-            </Zoom>
+            <Image
+              src={activeImage?.src || activeImage?.url}
+              width={500}
+              height={500}
+              style={sx.image}
+              alt={activeImage?.altText}
+              responsive="true"
+            />
+          )}
+          {customization?.frontLogo && activeImage?.isFront && (
+            <Image
+              src={customization?.frontLogo}
+              width={500}
+              height={500}
+              style={{
+                top: 160,
+                left: 160,
+                height: 30,
+                width: 140,
+                position: "absolute",
+                objectFit: "contain",
+              }}
+            />
+          )}
+          {customization?.backLogo && activeImage?.isBack && (
+            <Image
+              src={customization?.backLogo}
+              width={500}
+              height={500}
+              style={{
+                top: 160,
+                left: 160,
+                height: 30,
+                width: 140,
+                position: "absolute",
+                objectFit: "contain",
+              }}
+            />
           )}
         </Box>
       </Box>
@@ -76,11 +107,19 @@ const sx = {
     alignItems: "flex-start",
   },
   mainImage: {
+    position: "relative",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
-    maxWidth: "100vw",
+    width: {
+      sm: "500px",
+      xs: "320px",
+    },
+    maxWidth: {
+      sm: "500px",
+      xs: "320px",
+    },
+    border: "2px solid red",
   },
   fade: {
     width: "100%",
@@ -126,6 +165,12 @@ const sx = {
     width: "auto",
   },
   image: {
+    position: "relative",
     objectFit: "contain",
+  },
+  logo: {
+    position: "absolute",
+    top: 0,
+    left: 0,
   },
 };

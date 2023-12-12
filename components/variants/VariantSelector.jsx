@@ -13,6 +13,7 @@ const VariantSelector = ({
   return (
     <Box sx={sx.root}>
       {options.map((option) => {
+        if (option?.name == "Color") return null;
         if (option?.name == "Title") return null;
         return (
           <VariantSelect

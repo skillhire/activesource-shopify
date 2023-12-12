@@ -24,7 +24,7 @@ const useColors = () => {
       let _colors = metaobjects.map((color) => ({
         id: color.id,
         handle: color.handle,
-        label: getValue(color, "label"),
+        name: getValue(color, "name"),
         color: getValue(color, "color"),
         back_placement: getImage(color, "back_placement"),
         front_placement: getImage(color, "front_placement"),

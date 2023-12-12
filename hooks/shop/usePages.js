@@ -18,7 +18,7 @@ const usePages = () => {
 
   useEffect(() => {
     if (data) {
-      setPage(data.pageByHandle);
+      setPage(data);
     }
   }, [data]);
 

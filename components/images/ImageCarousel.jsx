@@ -1,6 +1,6 @@
 import { CardActionArea } from "@mui/material";
 import { Box } from "@mui/material";
-import Image from 'next/image';
+import Image from "next/image";
 import { IMAGE_CAROUSEL_RESPONSIVE } from "constants/shop";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -54,8 +54,8 @@ const ImageCarousel = ({
                 height={500}
                 quality={100}
                 style={{
-                  width: '100%',
-                  maxWidth: '100%',
+                  width: "100%",
+                  maxWidth: "100%",
                   objectFit: "contain",
                 }}
                 responsive={true}

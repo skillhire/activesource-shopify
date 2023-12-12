@@ -8,15 +8,14 @@ const QuantitySelector = ({
   styles,
   ...props
 }) => {
-  
   const addQuantity = () => {
     handleChange(quantity + 1);
-  }
+  };
   const removeQuantity = () => {
-    if (quantity > 1){
+    if (quantity > 1) {
       handleChange(quantity - 1);
     }
-  }
+  };
 
   return (
     <Box sx={{ ...sx.root, ...styles }}>

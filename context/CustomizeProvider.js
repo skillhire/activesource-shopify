@@ -12,20 +12,18 @@ const CustomizeProvider = ({ children, ...rest }) => {
   const { jwt, handle } = router.query;
 
   const [customization, setCustomization] = useState({
-    url: null,
-    front_image: null,
-    back_image: null,
-    front_placement_code: null,
-    back_placement_code: null,
+    variantId: null,
+    frontLogo: null,
+    backLogo: null,
+    frontPlacement: null,
+    backPlacement: null,
   });
-
-  const [openMobile, setOpenMobile] = useState(false);
 
   const { shortenUrl } = useBitly();
 
   const createBitlyLink = async () => {
-    const jwt = encodeJwt(items);
-    let longUrl = `${CLIENT_URL}/customize/${handle}?jwt=${jwt}`;
+    const jwt = encodeJwt(customization);
+    let longUrl = `${CLIENT_URL}/products/${handle}?jwt=${jwt}`;
     let shortUrl = await shortenUrl(longUrl);
     return shortUrl;
   };
@@ -35,6 +33,13 @@ const CustomizeProvider = ({ children, ...rest }) => {
     const jwt = sign(data, secret);
     return jwt;
   };
+
+  useEffect(() => {
+    if (jwt?.length > 0) {
+      const newCustomization = jwt_decode(jwt);
+      setCustomization(newCustomization);
+    }
+  }, [jwt]);
 
   const value = {
     customization,
