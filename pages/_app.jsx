@@ -6,6 +6,7 @@ import { theme } from "theme";
 import { SEGMENT_WRITE_KEY } from "constants/shop";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import "react-multi-carousel/lib/styles.css"
 
 export default function ShopJs({ Component, pageProps }) {
   useEffect(() => {

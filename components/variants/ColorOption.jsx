@@ -1,5 +1,4 @@
-import { Button, Box } from "@mui/material";
-import { getValue, getImage } from "utils";
+import { IconButton, Box } from "@mui/material";
 
 const ColorOption = ({
   color,
@@ -9,18 +8,14 @@ const ColorOption = ({
   ...props
 }) => {
   return (
-    <Button
-      sx={{
-        ...sx.button,
-        height: `${size + 4}px`,
-        width: `${size + 4}px`,
-        ...(activeColor?.name === color.name && sx.selected),
-      }}
+    <IconButton
+      sx={sx.button}
       onClick={() => handleClick(color)}
     >
       <Box
         sx={{
           ...sx.color,
+          ...(activeColor?.name === color.name && sx.selected),
           height: `${size}px`,
           width: `${size}px`,
           bgcolor: color.hex,
@@ -28,7 +23,7 @@ const ColorOption = ({
         key={color.name}
         value={color.name}
       />
-    </Button>
+    </IconButton>
   );
 };
 
@@ -36,8 +31,7 @@ export default ColorOption;
 
 const sx = {
   button: {
-    p: 0,
-    mr: 0.5,
+    p: 0,    
     minWidth: 0,
     borderRadius: "100%",
   },

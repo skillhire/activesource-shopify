@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { CustomizeContext } from "context";
 import { Box, CardActionArea, Stack } from "@mui/material";
 import Image from "next/image";
+import ImageWithLogo from "./ImageWithLogo";
 import "react-medium-image-zoom/dist/styles.css";
 
 const ImageSlider = ({
@@ -46,49 +47,10 @@ const ImageSlider = ({
           </CardActionArea>
         ))}
       </Stack>
-      <Box>
-        <Box sx={sx.mainImage}>
-          {(activeImage?.src || activeImage?.url) && (
-            <Image
-              src={activeImage?.src || activeImage?.url}
-              width={512}
-              height={512}
-              style={sx.image}
-              alt={activeImage?.altText}
-              responsive="true"
-            />
-          )}
-          {customization?.frontLogo && activeImage?.isFront && (
-            <Image
-              src={customization?.frontLogo}
-              width={512}
-              height={512}
-              style={{
-                top: customization?.front?.top,
-                left: customization?.front?.left,
-                height: customization?.front?.height,
-                width: customization?.front?.width,
-                position: "absolute",
-                objectFit: "contain",
-              }}
-            />
-          )}
-          {customization?.backLogo && activeImage?.isBack && (
-            <Image
-              src={customization?.backLogo}
-              width={512}
-              height={512}
-              style={{
-                top: customization?.back?.top,
-                left: customization?.back?.left,
-                height: customization?.back?.height,
-                width: customization?.back?.width,
-                position: "absolute",
-                objectFit: "contain",
-              }}
-            />
-          )}
-        </Box>
+      <Box>        
+        <ImageWithLogo 
+          activeImage={activeImage}
+        />                  
       </Box>
     </Box>
   );
@@ -164,8 +126,8 @@ const sx = {
     width: "auto",
   },
   image: {
-    position: "relative",
-    objectFit: "contain",
+    position: 'relative',
+    objectFit: 'contain'
   },
   logo: {
     position: "absolute",
@@ -173,3 +135,4 @@ const sx = {
     left: 0,
   },
 };
+

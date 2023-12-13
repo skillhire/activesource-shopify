@@ -1,29 +1,23 @@
-import { CardActionArea } from "@mui/material";
-import { Box } from "@mui/material";
-import Image from "next/image";
-import { IMAGE_CAROUSEL_RESPONSIVE } from "constants/shop";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import { useClickOrDrag } from "hooks";
-import ImageCarouselDot from "./ImageCarouselDot";
+import { CardActionArea } from "@mui/material"
+import { Box } from "@mui/material"
+import Image from "next/image"
+import { IMAGE_CAROUSEL_RESPONSIVE } from "constants/shop"
+import Carousel from "react-multi-carousel"
+import { useClickOrDrag } from "hooks"
+import ImageCarouselDot from "./ImageCarouselDot"
+import ImageWithLogo from "./ImageWithLogo"
 
 const ImageCarousel = ({
   images,
+  activeImage,
   loading,
-  handleClick,
-  itemWidth = 500,
-  itemHeight = 500,
-  numSkeletons = 4,
-  xs = 12,
-  sm = 6,
-  md = 6,
-  lg = 6,
+  handleClick,      
   responsive = IMAGE_CAROUSEL_RESPONSIVE,
   ...props
 }) => {
   const { onMouseDown, onMouseUp } = useClickOrDrag({
     onClick: handleClick,
-  });
+  })
 
   return (
     <Box sx={sx.mobileCarousel}>
@@ -40,6 +34,16 @@ const ImageCarousel = ({
           arrows={false}
           customDot={<ImageCarouselDot numItems={images?.length} />}
         >
+          <CardActionArea
+            disableRipple
+            sx={sx.cardActionArea}
+            onMouseDown={onMouseDown}
+            onMouseUp={onMouseUp}
+          >
+            <ImageWithLogo 
+              activeImage={activeImage}
+            />
+          </CardActionArea>
           {images?.map((image) => (
             <CardActionArea
               disableRipple
@@ -66,10 +70,10 @@ const ImageCarousel = ({
         </Carousel>
       )}
     </Box>
-  );
-};
+  )
+}
 
-export default ImageCarousel;
+export default ImageCarousel
 
 const sx = {
   mobileCarousel: {
@@ -82,5 +86,8 @@ const sx = {
   cardActionArea: {
     p: 0,
     width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
-};
+}

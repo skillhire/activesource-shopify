@@ -230,9 +230,10 @@ const Product = () => {
                 handleColorClick={handleColorClick}
                 handleOptionChange={handleOptionChange}
               />
-              <ProductCustomize
+              <ProductCustomize                
                 product={product}
                 handleClick={handlePlacementClick}
+                activeImage={activeImage}
                 activeColor={activeColor}
                 setActiveColor={setActiveColor}
                 handleUpload={handleUpload}

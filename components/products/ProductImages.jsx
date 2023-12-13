@@ -2,15 +2,10 @@ import { Box } from "@mui/material";
 import { ImageCarousel, ImageSlider } from "components";
 import { useResponsive } from "hooks";
 
-const ProductImages = ({
-  product,
-  zoom = false,
+const ProductImages = ({  
   images,
   activeImage,
-  handleClick,
-  handleClose,
-  previewFront,
-  previewBack,
+  handleClick,    
   ...props
 }) => {
   const { isMobile } = useResponsive();
@@ -18,7 +13,11 @@ const ProductImages = ({
   return (
     <Box sx={sx.root}>
       {isMobile ? (
-        <ImageCarousel images={images} handleClick={handleClick} />
+        <ImageCarousel           
+          images={images} 
+          activeImage={activeImage}
+          handleClick={handleClick} 
+        />
       ) : (
         <ImageSlider
           images={images}
