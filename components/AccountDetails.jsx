@@ -15,7 +15,6 @@ export default function AccountDetails({
   customer,
   loading,
   handleChange,
-  handleEdit,
   handleCancel,
   isEditing,
   handleSubmit,
@@ -36,7 +35,6 @@ export default function AccountDetails({
               name="firstName"
               size="small"
               fullWidth
-              sx={sx.input}
               onChange={handleChange}
             />
           )}
@@ -59,7 +57,6 @@ export default function AccountDetails({
               name="lastName"
               size="small"
               fullWidth
-              sx={sx.input}
               onChange={handleChange}
             />
           )}
@@ -82,7 +79,6 @@ export default function AccountDetails({
               name="email"
               size="small"
               fullWidth
-              sx={sx.input}
               onChange={handleChange}
             />
           )}
@@ -161,5 +157,4 @@ const sx = {
     alignItems: "center",
   },
   inputLabel: { color: "primary.main" },
-  input: { backgroundColor: "background.paper" },
 };
