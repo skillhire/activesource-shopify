@@ -14,7 +14,16 @@ const ProductCard = ({ product, handleClick }) => {
     onClick: () => handleClick(product),
   });
 
+<<<<<<< HEAD
   const handleColorClick = (color) => {};
+=======
+  useEffect(() => {
+    if (product) {
+    }
+  }, [product]);
+
+  const handleColorClick = (color) => { };
+>>>>>>> staging
 
   useEffect(() => {
     if (product) {

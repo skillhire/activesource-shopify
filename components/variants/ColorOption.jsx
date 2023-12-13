@@ -37,6 +37,7 @@ export default ColorOption;
 const sx = {
   button: {
     p: 0,
+    mr: 0.5,
     minWidth: 0,
     borderRadius: "100%",
   },

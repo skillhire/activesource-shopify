@@ -103,6 +103,7 @@ const sx = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "background.paper",
   },
   form: {
     mt: 4,
