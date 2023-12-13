@@ -1,7 +1,7 @@
-import { ProductCollection } from "components";
+import { Link, Box, Container, Typography } from "@mui/material";
+
 import { useResponsive } from "hooks";
-import { Link } from "@mui/material";
-import { Box, Container, Typography } from "@mui/material";
+import { ProductCollection } from "components";
 
 const SectionFeaturedCollection = (props) => {
   const { isMobile } = useResponsive();
