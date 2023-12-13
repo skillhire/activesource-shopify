@@ -12,6 +12,7 @@ const ProductGrid = ({
   md = 3,
   lg = 3,
   xl = 3,
+  spacing = 1,
   ...props
 }) => {
   const router = useRouter();
@@ -24,7 +25,7 @@ const ProductGrid = ({
 
   return (
     <Stack alignItems="center" py={2}>
-      <Grid container spacing={1}>
+      <Grid container spacing={1} {...props}>
         {products && !loading && products.map((product) => (
           <Grid
             item
