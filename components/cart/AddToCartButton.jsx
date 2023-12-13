@@ -26,22 +26,26 @@ const AddToCartButton = ({
         variantId: variant?.id,
         quantity: quantity,
       };
+
+      let url = await createBitlyLink()
+      
+
       lineItem = {
         ...lineItem,
         customAttributes: [
           {
             key: "url",
-            value: await createBitlyLink(),
+            value: url,
           },
         ],
-      };
-      checkoutLineItemAdd(lineItem);
+      }
+      checkoutLineItemAdd(lineItem)
       trackAddToCart({
         quantity: quantity,
         variant: variant,
         product: product,
-      });
-      setTimeout(() => toggleCart(), 500);
+      })
+      setTimeout(() => toggleCart(), 500)
     }
   };
 

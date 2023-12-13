@@ -5,11 +5,10 @@ import {
   Stack,
   Typography,
   Box,
-  CardActionArea,
-  InputBase,
+  CardActionArea  
 } from "@mui/material";
-import { getMetaImage, getMetaValue } from "utils";
-import { useCloudinary, useColors } from "hooks";
+import { getMetaValue } from "utils";
+import { useCloudinary } from "hooks";
 import Image from "next/image";
 import { Link } from "@mui/material";
 import { CloudUpload } from "@mui/icons-material";
@@ -87,19 +86,22 @@ const ProductCustomize = ({
 
   useEffect(() => {
     let cookie = JSON.parse(getCookie("activesource") || "{}");
-    if (cookie?.front) {
+    let newCustomization = {};
+    if (cookie?.front) {      
       setFrontFile(cookie?.front);
-      setCustomization({
-        ...customization,
-        frontLogo: cookie?.front?.image,
-      });
+      newCustomization = {        
+        frontLogo: cookie?.front?.image,        
+      }      
     }
     if (cookie?.back) {
       setBackFile(cookie?.back);
-      setCustomization({
-        ...customization,
-        backLogo: cookie?.back?.image,
-      });
+      newCustomization = {
+        ...newCustomization,
+        backLogo: cookie?.back?.image,        
+      }      
+    }
+    if(newCustomization?.backLogo || newCustomization?.frontLogo){
+      setCustomization(newCustomization)
     }
   }, []);
 
@@ -113,18 +115,21 @@ const ProductCustomize = ({
             <Typography variant="subtitle1" sx={sx.title}>
               Front Placement
             </Typography>
-            <Box>
+            <Stack direction="row" spacing={1} sx={ sx.row }>
               <Button
                 onClick={() => handleClick("front")}
                 size="small"
                 variant="outlined"
-                sx={sx.button}
+                sx={{ 
+                  ...sx.button,
+                  ...(customization?.front && sx.active)
+                }}
               >
                 {customization?.front
                   ? `${customization?.front?.title} (${customization?.front?.dimensions})`
                   : "Select Placement"}
               </Button>
-            </Box>
+            </Stack>
             <Link variant="overline" color="text.secondary">
               Placement Guide
             </Link>
@@ -133,16 +138,19 @@ const ProductCustomize = ({
             <Typography variant="subtitle1" sx={sx.title}>
               Front Design
             </Typography>
-            <Box sx={sx.column}>
+            <Stack direction="row" spacing={1} sx={ sx.row }>
               <Button
                 size="small"
                 variant="outlined"
-                sx={sx.button}
+                sx={{ ...sx.button, ...(frontFile && sx.active) || {} }}
                 startIcon={<CloudUpload />}
                 onClick={frontInputClick}
               >
-                {frontFile ? `${frontFile.name}` : "Choose file"}
-              </Button>
+                Choose file
+              </Button>    
+              <Typography variant="caption">
+                { frontFile?.name }
+              </Typography>          
               <input
                 type="file"
                 ref={frontRef}
@@ -151,7 +159,7 @@ const ProductCustomize = ({
                 name="front"
                 onChange={handleChange}
               />
-            </Box>
+            </Stack>
             <Typography variant="caption">
               Support: PNG only | Max File Size: 5Mb | Resolution: 12’ x 16’
             </Typography>
@@ -164,18 +172,24 @@ const ProductCustomize = ({
             <Typography variant="subtitle1" sx={sx.title}>
               Back Placement
             </Typography>
-            <Box>
+            <Stack direction="row" spacing={1} sx={ sx.row }>
               <Button
                 onClick={() => handleClick("back")}
                 size="small"
                 variant="outlined"
-                sx={sx.button}
+                sx={{ 
+                  ...sx.button,
+                  ...(customization?.back && sx.active)
+                }}
               >
                 {customization?.back
                   ? `${customization?.back?.title} (${customization?.back?.dimensions})`
                   : "Select Placement"}
               </Button>
-            </Box>
+              <Typography variant="caption">
+                { customization?.back && "Change" }
+              </Typography>
+            </Stack>
             <Link variant="overline" color="text.secondary">
               Placement Guide
             </Link>
@@ -184,16 +198,22 @@ const ProductCustomize = ({
             <Typography variant="subtitle1" sx={sx.title}>
               Back Design
             </Typography>
-            <Box sx={sx.column}>
+            <Stack direction="row" spacing={1} sx={sx.row}>
               <Button
                 size="small"
                 variant="outlined"
-                sx={sx.button}
+                sx={{ 
+                  ...sx.button,
+                  ...(backFile && sx.active)
+                }}
                 onClick={backInputClick}
                 startIcon={<CloudUpload />}
               >
-                {backFile ? `${backFile?.name}` : "Choose file"}
+                Choose file                 
               </Button>
+              <Typography variant="caption">
+                { backFile?.name }
+              </Typography>
               <input
                 type="file"
                 ref={backRef}
@@ -202,7 +222,7 @@ const ProductCustomize = ({
                 name="back"
                 onChange={handleChange}
               />
-            </Box>
+            </Stack>
             <Typography variant="caption">
               Support: PNG only | Max File Size: 5Mb | Resolution: 12’ x 16’
             </Typography>
@@ -267,11 +287,22 @@ const sx = {
     flexDirection: "column",
     gap: "20px",
   },
+  row: {
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  },
   title: {
     my: 1,
   },
   button: {
-    width: 176,
+    minWidth: 176,
+    maxwidth: 220
+  },
+  active: {    
+    bgcolor: 'secondary.light',
+    '&:hover': {
+      bgcolor: 'secondary.light',
+    }
   },
   overline: {
     textAlign: "center",

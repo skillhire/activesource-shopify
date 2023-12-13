@@ -12,12 +12,7 @@ const ProductCard = ({ product, handleClick }) => {
 
   const { onMouseUp, onMouseDown } = useClickOrDrag({
     onClick: () => handleClick(product),
-  });
-
-  useEffect(() => {
-    if (product) {
-    }
-  }, [product]);
+  });  
 
   const handleColorClick = (color) => {};
 
@@ -64,14 +59,16 @@ const ProductCard = ({ product, handleClick }) => {
         >
           {truncate(product?.title)}
         </Typography>
-        {colors?.map((color, i) => (
-          <ColorOption
-            key={i}
-            color={color}
-            size={12}
-            handleClick={handleColorClick}
-          />
-        ))}
+        <Stack direction="row" spacing={0}>
+          {colors?.map((color, i) => (
+            <ColorOption
+              key={i}
+              color={color}
+              size={12}
+              handleClick={handleColorClick}
+            />
+          ))}
+        </Stack>
         {product?.options && product?.options[0].values.length > 0 && (
           <Typography variant="caption" color="textSecondary">
             {product.options[0].values.map((option, i) => (

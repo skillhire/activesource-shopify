@@ -1,166 +1,171 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react"
 import {
-  useCloudinary,
   useProducts,
   useVariants,
   useResponsive,
   useSegment,
-} from "hooks";
-import { useRouter } from "next/router";
-import { Box, Container, Grid } from "@mui/material";
+} from "hooks"
+import { useRouter } from "next/router"
+import { Box, Container, Grid } from "@mui/material"
 import {
   Layout,
   ProductDetails,
   ProductImages,
   ProductGrid,
   ProductTabs,
-} from "components";
-import ProductCustomize from "components/products/ProductCustomize";
-import { CustomizeContext } from "context";
-import PlacementModal from "sections/products/PlacementModal";
+} from "components"
+import ProductCustomize from "components/products/ProductCustomize"
+import ProductAddToCart from "components/products/ProductAddToCart"
+import { CustomizeContext } from "context"
+import PlacementModal from "sections/products/PlacementModal"
+import { getMetaValue } from "utils"
 
 const Product = () => {
-  const ref = useRef();
-  const router = useRouter();
+  const ref = useRef()
+  const router = useRouter()
 
-  const { handle } = router.query;
+  const { handle } = router.query
 
-  const { customization, setCustomization } = useContext(CustomizeContext);
+  const { customization, setCustomization } = useContext(CustomizeContext)
 
-  const { isMobile } = useResponsive();
-  const { trackProductViewed } = useSegment();
+  const { isMobile } = useResponsive()
+  const { trackProductViewed } = useSegment()
 
-  const [zoom, setZoom] = useState(false);
-  const [activeImage, setActiveImage] = useState();
-  const [placement, setPlacement] = useState({});
-  const [selectedOptions, setSelectedOptions] = useState({});
-  const [addToCartDisabled, setAddToCartDisabled] = useState(false);
+  const [zoom, setZoom] = useState(false)
+  const [activeImage, setActiveImage] = useState()
+  const [placement, setPlacement] = useState({})
+  const [selectedOptions, setSelectedOptions] = useState({})
+  const [addToCartDisabled, setAddToCartDisabled] = useState(false)
 
-  const [openModal, setOpenModal] = useState(false);
-  const [frontOrBack, setFrontOrBack] = useState("front");
+  const [openModal, setOpenModal] = useState(false)
+  const [frontOrBack, setFrontOrBack] = useState("front")
 
-  const [activeColor, setActiveColor] = useState();
+  const [activeColor, setActiveColor] = useState()
 
   const { loading, product, recommendedProducts, images, fetchProduct } =
-    useProducts();
+    useProducts()
 
   const { variant, setVariant, variantImage } = useVariants({
     product,
     selectedOptions,
-  });
+  })
 
   const handleUpload = async (image, frontOrBack) => {
     if (frontOrBack == "front") {
       setCustomization({
         ...customization,
         frontLogo: image,
-      });
+      })
     } else if (frontOrBack == "back") {
       setCustomization({
         ...customization,
         backLogo: image,
-      });
+      })
     }
-  };
+  }
 
   const handlePreviewClick = (imgSrc, frontOrBack) => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" })
     setActiveImage({
       id: frontOrBack,
       src: imgSrc,
       isFront: frontOrBack == "front" ? true : false,
       isBack: frontOrBack == "back" ? true : false,
-    });
-  };
+    })
+  }
 
   const handleImageClick = (image) => {
     if (image?.id === activeImage?.id) {
-      setZoom(true);
+      setZoom(true)
     } else {
-      setActiveImage(image);
+      setActiveImage(image)
     }
-  };
+  }
 
   const handleClose = () => {
-    setZoom(false);
-  };
+    setZoom(false)
+  }
 
   const handleOptionChange = (name, value) => {
     setSelectedOptions({
       ...selectedOptions,
       [name]: value,
-    });
-  };
+    })
+  }
 
   const handleColorClick = (color) => {
-    setActiveColor(color);
-  };
+    setActiveColor(color)
+  }
 
   const handlePlacementClick = (frontOrBack) => {
-    setFrontOrBack(frontOrBack);
-    setOpenModal(true);
-  };
+    setFrontOrBack(frontOrBack)
+    setOpenModal(true)
+  }
 
   const handleSelectPlacement = (newPlacement) => {
     setPlacement({
       ...placement,
       [frontOrBack]: newPlacement,
-    });
+    })
     setCustomization({
       ...customization,
       [frontOrBack]: newPlacement,
-    });
-    setOpenModal(false);
-  };
+    })
+    setOpenModal(false)
+  }
 
   useEffect(() => {
     if (handle) {
-      fetchProduct(handle);
+      fetchProduct(handle)
     }
-  }, [handle]);
+  }, [handle])
 
   useEffect(() => {
-    setActiveImage(variantImage || product?.images?.edges[0]?.node);
-  }, [product, variantImage]);
+    setActiveImage(variantImage || product?.images?.edges[0]?.node)
+  }, [product, variantImage])
 
   useEffect(() => {
     // Reset the selected options values when the product changes
-    setSelectedOptions({});
+    setSelectedOptions({})
     if (product?.id) {
-      trackProductViewed(product);
+      trackProductViewed(product)
     }
-  }, [product?.id]);
+  }, [product?.id])
 
   const handleAddToCartDisabled = () => {
-    const disabled = !variant;
-    setAddToCartDisabled(disabled);
-  };
+    const isBack = getMetaValue(product, "back_placement") == "true" 
+    const isFront = getMetaValue(product, "front_placement") == "true"
+    const disabled = !variant || 
+      !(isFront && customization?.frontLogo && customization?.front) || 
+      !(isBack && customization?.backLogo && customization?.back)       
+    setAddToCartDisabled(disabled)
+  }
 
-  useEffect(() => {
-    handleAddToCartDisabled();
-  }, [product, selectedOptions, variant, setAddToCartDisabled]);
+  useEffect(() => {    
+    handleAddToCartDisabled()
+  }, [product, customization, variant])
 
   // Set values from encoded JWT URL param
   useEffect(() => {
     if (customization?.color) {
       // Ensure the color metaobject is selected
-      setActiveColor(customization?.color);
+      setActiveColor(customization?.color)
       // Default to the front placement image
       setActiveImage({
         id: "front",
         src: customization?.color?.front_placement,
         isFront: true,
         isBack: false,
-      });
+      })
     }
 
     // Find the variant from the variantId
     if (product?.variants && customization?.variantId) {
       const selectedVariant = product?.variants?.edges?.find(
         (v) => v?.node?.id?.split("/").pop() == customization?.variantId
-      );
+      )
       if (selectedVariant?.node) {
-        setVariant(selectedVariant.node);
+        setVariant(selectedVariant.node)
       }
 
       // Set the product selected options from Variant ID
@@ -172,9 +177,9 @@ const Product = () => {
         Size: selectedVariant?.node?.selectedOptions?.find(
           (o) => o?.name == "Size"
         )?.value,
-      });
+      })
     }
-  }, [product, customization?.color, customization?.variantId]);
+  }, [product, customization?.color, customization?.variantId])
 
   useEffect(() => {
     if (activeColor) {
@@ -182,25 +187,26 @@ const Product = () => {
       setCustomization({
         ...customization,
         color: activeColor,
-      });
+      })
       // Select the product color option that
       // matches the meta color name field. This is necessary
       // to ensure the correct color / size SKU is assigned at checkout
       setSelectedOptions({
         ...selectedOptions,
         Color: activeColor?.name,
-      });
+      })
     }
-  }, [activeColor]);
+  }, [activeColor])
 
   useEffect(() => {
     if (variant?.id) {
+      // Store the selected variant ID in the customization object
       setCustomization({
         ...customization,
         variantId: variant?.id?.split("/").pop(),
-      });
+      })
     }
-  }, [variant?.id]);
+  }, [variant?.id])
 
   return (
     <Layout metaTitle={product?.title} metaDescription={product?.description}>
@@ -224,7 +230,6 @@ const Product = () => {
                 product={product}
                 variant={variant}
                 activeColor={activeColor}
-                addToCartDisabled={addToCartDisabled}
                 selectedOptions={selectedOptions}
                 handleColorClick={handleColorClick}
                 handleOptionChange={handleOptionChange}
@@ -236,6 +241,12 @@ const Product = () => {
                 setActiveColor={setActiveColor}
                 handleUpload={handleUpload}
                 handlePreviewClick={handlePreviewClick}
+              />
+              <ProductAddToCart
+                loading={loading}
+                product={product}
+                variant={variant}                
+                addToCartDisabled={addToCartDisabled}                                
               />
             </Grid>
             <Grid item xs={12}>
@@ -258,13 +269,13 @@ const Product = () => {
         handleClick={handleSelectPlacement}
       />
     </Layout>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product
 
 const sx = {
   root: {
     py: 4,
   },
-};
+}

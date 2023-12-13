@@ -95,7 +95,7 @@ const sx = {
     display: { xs: "none", sm: "none", md: "flex" },
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "secondary.faded",
+    backgroundColor: "common.faded",
   },
   formContainer: {
     p: 4,
