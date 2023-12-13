@@ -12,7 +12,7 @@ const ProductCard = ({ product, handleClick }) => {
 
   const { onMouseUp, onMouseDown } = useClickOrDrag({
     onClick: () => handleClick(product),
-  });  
+  });
 
   const handleColorClick = (color) => {};
 

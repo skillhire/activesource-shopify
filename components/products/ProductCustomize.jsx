@@ -1,11 +1,12 @@
 import React, { useRef, useState, useContext, useEffect, useMemo } from "react";
 import { CustomizeContext } from "context";
+import { useAlerts } from "hooks";
 import {
   Button,
   Stack,
   Typography,
-  Box,
-  CardActionArea  
+  CircularProgress,
+  CardActionArea,
 } from "@mui/material";
 import { getMetaValue } from "utils";
 import { useCloudinary } from "hooks";
@@ -13,6 +14,7 @@ import Image from "next/image";
 import { Link } from "@mui/material";
 import { CloudUpload } from "@mui/icons-material";
 import {
+  MAX_FILE_SIZE,
   CLOUDINARY_CLOUD_NAME,
   CLOUDINARY_API_KEY,
   CLOUDINARY_UPLOAD_PRESET,
@@ -25,38 +27,45 @@ const Thumbnail = ({ src, handleClick, ...props }) => (
   </CardActionArea>
 );
 
-const ProductCustomize = ({
-  product,
-  handleClick,
-  handleUpload,
-  handlePreviewClick,
-  activeColor,
-}) => {
+const ImagePreview = ({ label, src, name, handleClick }) => (
+  <Stack>
+    <Thumbnail
+      handleClick={() => handleClick(src, name)}
+      src={src}
+      alt="Product thumbnail"
+    />
+    <Typography variant="overline" sx={sx.overline}>
+      {label}
+    </Typography>
+  </Stack>
+);
+
+const FileUploader = ({ label, name, handleClick, handleUpload, ...props }) => {
+  const { showAlertError } = useAlerts();
+
+  const ref = useRef();
+  const [file, setFile] = useState();
   const { customization, setCustomization } = useContext(CustomizeContext);
 
-  const [frontFile, setFrontFile] = useState(false);
-  const [backFile, setBackFile] = useState(false);
-
-  const { unsignedUpload } = useCloudinary({
+  const { loading, unsignedUpload } = useCloudinary({
     cloudName: CLOUDINARY_CLOUD_NAME,
     apiKey: CLOUDINARY_API_KEY,
     uploadPreset: CLOUDINARY_UPLOAD_PRESET,
   });
 
-  const frontRef = useRef();
-  const backRef = useRef();
-
-  const frontInputClick = () => {
-    frontRef.current.click();
-  };
-
-  const backInputClick = () => {
-    backRef.current.click();
+  const fileInputClick = () => {
+    ref.current.click();
   };
 
   const handleChange = async (ev) => {
-    const { files, name } = ev.target;
+    const { files } = ev.target;
     const file = files[0];
+    if (file?.size > MAX_FILE_SIZE) {
+      showAlertError(
+        "File size is too big. Please upload a file less than 5Mb"
+      );
+      return;
+    }
     const resp = await unsignedUpload(file);
     const image = resp?.data?.secure_url;
 
@@ -66,15 +75,90 @@ const ProductCustomize = ({
       image: image,
     };
     setCookie("activesource", JSON.stringify(cookie));
-
-    if (name == "front") {
-      setFrontFile(file);
-    } else if (name == "back") {
-      setBackFile(file);
-    }
+    setFile(file);
     handleUpload(image, name);
   };
 
+  useEffect(() => {
+    let cookie = JSON.parse(getCookie("activesource") || "{}");
+    let newCustomization = {};
+    if (cookie[name]) {
+      setFile(cookie[name]);
+      newCustomization = {
+        [`${name}Logo`]: cookie[name].image,
+      };
+    }
+    setCustomization(newCustomization);
+  }, []);
+
+  return (
+    <>
+      <Stack spacing={1} sx={sx.container}>
+        <Typography variant="subtitle1" sx={sx.title}>
+          {label} Placement
+        </Typography>
+        <Stack direction="row" spacing={1} sx={sx.row}>
+          <Button
+            onClick={() => handleClick(name)}
+            size="small"
+            variant="outlined"
+            sx={{
+              ...sx.button,
+              ...(customization[name] && sx.active),
+            }}
+          >
+            {customization[name]
+              ? `${customization[name].title} (${customization[name]?.dimensions})`
+              : "Select Placement"}
+          </Button>
+        </Stack>
+        <Link variant="overline" color="text.secondary">
+          Placement Guide
+        </Link>
+      </Stack>
+      <Stack spacing={1} sx={sx.container}>
+        <Typography variant="subtitle1" sx={sx.title}>
+          {label} Design
+        </Typography>
+        <Stack direction="row" spacing={1} sx={sx.row}>
+          <Button
+            size="small"
+            variant="outlined"
+            sx={{
+              ...sx.button,
+              ...(file && sx.active),
+            }}
+            startIcon={<CloudUpload />}
+            endIcon={loading && <CircularProgress size={20} sx={sx.loading} />}
+            onClick={fileInputClick}
+          >
+            Choose file
+          </Button>
+          <Typography variant="caption">{file?.name}</Typography>
+          <input
+            type="file"
+            ref={ref}
+            accept="image/*"
+            hidden
+            name={name}
+            onChange={handleChange}
+          />
+        </Stack>
+        <Typography variant="caption">
+          Support: PNG only | Max File Size: 5Mb | Resolution: 12’ x 16’
+        </Typography>
+      </Stack>
+    </>
+  );
+};
+
+const ProductCustomize = ({
+  product,
+  handleClick,
+  handleUpload,
+  handlePreviewClick,
+  activeColor,
+}) => {
   const isBack = useMemo(
     () => getMetaValue(product, "back_placement"),
     [product]
@@ -84,150 +168,25 @@ const ProductCustomize = ({
     [product]
   );
 
-  useEffect(() => {
-    let cookie = JSON.parse(getCookie("activesource") || "{}");
-    let newCustomization = {};
-    if (cookie?.front) {      
-      setFrontFile(cookie?.front);
-      newCustomization = {        
-        frontLogo: cookie?.front?.image,        
-      }      
-    }
-    if (cookie?.back) {
-      setBackFile(cookie?.back);
-      newCustomization = {
-        ...newCustomization,
-        backLogo: cookie?.back?.image,        
-      }      
-    }
-    if(newCustomization?.backLogo || newCustomization?.frontLogo){
-      setCustomization(newCustomization)
-    }
-  }, []);
-
   if (!activeColor) return null;
 
   return (
     <Stack>
       {isFront === "true" && (
-        <>
-          <Stack spacing={1} sx={sx.container}>
-            <Typography variant="subtitle1" sx={sx.title}>
-              Front Placement
-            </Typography>
-            <Stack direction="row" spacing={1} sx={ sx.row }>
-              <Button
-                onClick={() => handleClick("front")}
-                size="small"
-                variant="outlined"
-                sx={{ 
-                  ...sx.button,
-                  ...(customization?.front && sx.active)
-                }}
-              >
-                {customization?.front
-                  ? `${customization?.front?.title} (${customization?.front?.dimensions})`
-                  : "Select Placement"}
-              </Button>
-            </Stack>
-            <Link variant="overline" color="text.secondary">
-              Placement Guide
-            </Link>
-          </Stack>
-          <Stack spacing={1} sx={sx.container}>
-            <Typography variant="subtitle1" sx={sx.title}>
-              Front Design
-            </Typography>
-            <Stack direction="row" spacing={1} sx={ sx.row }>
-              <Button
-                size="small"
-                variant="outlined"
-                sx={{ ...sx.button, ...(frontFile && sx.active) || {} }}
-                startIcon={<CloudUpload />}
-                onClick={frontInputClick}
-              >
-                Choose file
-              </Button>    
-              <Typography variant="caption">
-                { frontFile?.name }
-              </Typography>          
-              <input
-                type="file"
-                ref={frontRef}
-                accept="image/*"
-                hidden
-                name="front"
-                onChange={handleChange}
-              />
-            </Stack>
-            <Typography variant="caption">
-              Support: PNG only | Max File Size: 5Mb | Resolution: 12’ x 16’
-            </Typography>
-          </Stack>
-        </>
+        <FileUploader
+          label={"Front"}
+          name={"front"}
+          handleClick={handleClick}
+          handleUpload={handleUpload}
+        />
       )}
       {isBack === "true" && (
-        <>
-          <Stack spacing={1} sx={sx.container}>
-            <Typography variant="subtitle1" sx={sx.title}>
-              Back Placement
-            </Typography>
-            <Stack direction="row" spacing={1} sx={ sx.row }>
-              <Button
-                onClick={() => handleClick("back")}
-                size="small"
-                variant="outlined"
-                sx={{ 
-                  ...sx.button,
-                  ...(customization?.back && sx.active)
-                }}
-              >
-                {customization?.back
-                  ? `${customization?.back?.title} (${customization?.back?.dimensions})`
-                  : "Select Placement"}
-              </Button>
-              <Typography variant="caption">
-                { customization?.back && "Change" }
-              </Typography>
-            </Stack>
-            <Link variant="overline" color="text.secondary">
-              Placement Guide
-            </Link>
-          </Stack>
-          <Stack spacing={1} sx={sx.container}>
-            <Typography variant="subtitle1" sx={sx.title}>
-              Back Design
-            </Typography>
-            <Stack direction="row" spacing={1} sx={sx.row}>
-              <Button
-                size="small"
-                variant="outlined"
-                sx={{ 
-                  ...sx.button,
-                  ...(backFile && sx.active)
-                }}
-                onClick={backInputClick}
-                startIcon={<CloudUpload />}
-              >
-                Choose file                 
-              </Button>
-              <Typography variant="caption">
-                { backFile?.name }
-              </Typography>
-              <input
-                type="file"
-                ref={backRef}
-                accept="image/*"
-                hidden
-                name="back"
-                onChange={handleChange}
-              />
-            </Stack>
-            <Typography variant="caption">
-              Support: PNG only | Max File Size: 5Mb | Resolution: 12’ x 16’
-            </Typography>
-          </Stack>
-        </>
+        <FileUploader
+          label={"Back"}
+          name={"back"}
+          handleClick={handleClick}
+          handleUpload={handleUpload}
+        />
       )}
       {(isFront === "true" || isBack === "true") && (
         <Stack sx={sx.container}>
@@ -236,32 +195,20 @@ const ProductCustomize = ({
           </Typography>
           <Stack direction="row" spacing={2}>
             {isFront === "true" && (
-              <Stack>
-                <Thumbnail
-                  handleClick={() =>
-                    handlePreviewClick(activeColor?.front_placement, "front")
-                  }
-                  src={activeColor?.front_placement}
-                  alt="Product's front thumbnail"
-                />
-                <Typography variant="overline" sx={sx.overline}>
-                  Front
-                </Typography>
-              </Stack>
+              <ImagePreview
+                label="Front"
+                src={activeColor?.front_placement}
+                name="front"
+                handleClick={handlePreviewClick}
+              />
             )}
             {isBack === "true" && (
-              <Stack>
-                <Thumbnail
-                  handleClick={() =>
-                    handlePreviewClick(activeColor?.back_placement, "back")
-                  }
-                  src={activeColor?.back_placement}
-                  alt="Product's back thumbnail"
-                />
-                <Typography variant="overline" sx={sx.overline}>
-                  Back
-                </Typography>
-              </Stack>
+              <ImagePreview
+                label="Back"
+                src={activeColor?.back_placement}
+                name="back"
+                handleClick={handlePreviewClick}
+              />
             )}
           </Stack>
         </Stack>
@@ -288,24 +235,29 @@ const sx = {
     gap: "20px",
   },
   row: {
-    alignItems: 'center',
-    justifyContent: 'flex-start'
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
   title: {
     my: 1,
   },
   button: {
     minWidth: 176,
-    maxwidth: 220
+    maxwidth: 220,
   },
-  active: {    
-    bgcolor: 'secondary.light',
-    '&:hover': {
-      bgcolor: 'secondary.light',
-    }
+  active: {
+    bgcolor: "secondary.light",
+    "&:hover": {
+      bgcolor: "secondary.light",
+    },
   },
   overline: {
     textAlign: "center",
     py: 1,
+  },
+  loading: {
+    height: "20px",
+    width: "20px",
+    color: "text.primary",
   },
 };

@@ -14,7 +14,6 @@ const ProductDetails = ({
   customAttributes,
   handleColorClick,
 }) => {
-
   const { priceRange } = product || {};
   const { minVariantPrice } = priceRange || {};
 
@@ -69,10 +68,9 @@ const ProductDetails = ({
             options={product?.options}
           />
         </>
-      )}        
+      )}
     </Stack>
   );
 };
 
 export default ProductDetails;
-

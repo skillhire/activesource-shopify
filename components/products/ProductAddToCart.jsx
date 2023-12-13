@@ -5,17 +5,17 @@ import QuantitySelector from "components/variants/QuantitySelector";
 
 const ProductAddToCart = ({
   product,
-  variant,  
-  customAttributes={},  
+  variant,
+  customAttributes = {},
   addToCartDisabled,
 }) => {
-  const [quantity, setQuantity] = useState(1);  
-  
+  const [quantity, setQuantity] = useState(1);
+
   const handleQuantityChange = (value) => {
     setQuantity(value);
   };
 
-  return (    
+  return (
     <Stack spacing={1} direction="row">
       <QuantitySelector
         quantity={quantity}
@@ -32,4 +32,4 @@ const ProductAddToCart = ({
   );
 };
 
-export default ProductAddToCart
+export default ProductAddToCart;

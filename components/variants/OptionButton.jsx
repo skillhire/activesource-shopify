@@ -25,7 +25,7 @@ export default OptionButton;
 
 const sx = {
   active: {
-    bgcolor: 'secondary.light',
+    bgcolor: "secondary.light",
   },
   button: {
     display: "flex",
