@@ -34,6 +34,10 @@ export default {
     fontSize: 30,
     fontWeight: 600,
     lineHeight: "133%" /* 39.9px */,
+    "@media (max-width: 600px)": {
+      fontSize: 25,
+      lineHeight: "120%",
+    },
   },
   h5: {
     /* Button (SemiBold) */
@@ -106,6 +110,9 @@ export default {
     lineHeight: "120%",
     textTransform: "none",
     textDecoration: "underline",
+    "@media (max-width: 600px)": {
+      fontSize: 14,
+    },
   },
   listItem: {
     fontSize: 20,

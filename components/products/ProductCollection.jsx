@@ -28,13 +28,17 @@ const ProductCollection = ({
           products={products}
         />
       )}
-      {variant == "grid" && (
-        <ProductGrid
-          title={collection?.title}
-          loading={loading}
-          products={products}
-        />
-      )}
+      <Box sx={sx.gridContainer}>
+        {variant == "grid" && (
+          <ProductGrid
+            xs={12}
+            rowSpacing={4}
+            title={collection?.title}
+            loading={loading}
+            products={products}
+          />
+        )}
+      </Box>
     </Box>
   );
 };
@@ -50,7 +54,6 @@ ProductCollection.propTypes = {
 export default ProductCollection;
 
 const sx = {
-  root: {
-    py: 2,
-  },
+  root: { py: 2 },
+  gridContainer: { margin: "0 auto", maxWidth: { xs: 265 } }
 };
