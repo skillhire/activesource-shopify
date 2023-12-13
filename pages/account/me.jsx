@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Box, Stack, IconButton } from "@mui/material";
 import { Edit } from "@mui/icons-material";
+import { useRouter } from "next/router";
 
+import { LOGIN_URL } from "constants/navigation";
 import { AccountLayout, AccountDetails } from "components";
-import { useAuth, useCustomers } from "hooks";
+import { useAuth, useAlerts, useCustomers } from "hooks";
 
 const MyAccount = () => {
+  const router = useRouter();
   const { accessToken } = useAuth();
+  const { showAlertError } = useAlerts();
   const { customer, fetchCustomer, updateCustomer, loading } = useCustomers();
   const [isEditing, setIsEditing] = useState(false);
   const [currentCustomer, setCurrentCustomer] = useState();
@@ -14,6 +18,9 @@ const MyAccount = () => {
   useEffect(() => {
     if (accessToken) {
       fetchCustomer(accessToken);
+    } else {
+      showAlertError("Please log in to view this page");
+      router.push(LOGIN_URL);
     }
     if (customer) {
       setCurrentCustomer(customer);
@@ -45,6 +52,10 @@ const MyAccount = () => {
   const handleEdit = useCallback(() => {
     setIsEditing(true);
   }, [setIsEditing]);
+
+  if (!accessToken) {
+    return null;
+  }
 
   return (
     <AccountLayout
