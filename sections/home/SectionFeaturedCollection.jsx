@@ -7,8 +7,8 @@ const SectionFeaturedCollection = (props) => {
   return (
     <Container maxWidth="lg">
       <Box py={12}>
-        <Box sx={sx.header} mb={5}>
-          <Typography variant="h4" maxWidth={633} mr={2}>
+        <Box sx={sx.header}>
+          <Typography variant="h4" sx={sx.title}>
             Personalize for your brand, explore our diverse range of products.
           </Typography>
           <Link
@@ -19,12 +19,7 @@ const SectionFeaturedCollection = (props) => {
             Explore Products
           </Link>
         </Box>
-        {featuredCollection && (
-          <ProductCollection
-            handle={featuredCollection.handle}
-            title={featuredCollection.title}
-          />
-        )}
+        {featuredCollection && (<ProductCollection handle={featuredCollection.handle} title={featuredCollection.title} />)}
       </Box>
     </Container>
   );
@@ -36,21 +31,14 @@ const sx = {
   header: {
     display: "flex",
     alignItems: "center",
-    flexWrap: {
-      xs: "wrap",
-      sm: "nowrap",
-      md: "nowrap",
-    },
-    justifyContent: {
-      xs: "center",
-      sm: "space-between",
-      md: "space-between",
-    },
-    textAlign: {
-      xs: "center",
-      sm: "left",
-      md: "left",
-    },
+    mb: { xs: 0, sm: 5 },
+    flexWrap: { xs: "wrap", sm: "nowrap" },
+    textAlign: { xs: "center", sm: "left" },
+    justifyContent: { xs: "center", sm: "space-between" },
+  },
+  title: {
+    mr: { xs: 0, sm: 2 },
+    mb: { xs: 2, sm: 0 },
   },
   link: {
     py: 2,

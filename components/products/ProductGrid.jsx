@@ -7,8 +7,8 @@ import { useSegment } from "hooks";
 const ProductGrid = ({
   products,
   loading,
-  xs = 6,
-  sm = 4,
+  xs = 12,
+  sm = 6,
   md = 3,
   lg = 3,
   xl = 3,
@@ -23,37 +23,37 @@ const ProductGrid = ({
   };
 
   return (
-    <Stack alignItems="center" py={2}>
-      <Typography variant="h4" py={2}>
-        You May Also Like
-      </Typography>
-      <Grid container spacing={1}>
+    <Stack alignItems="center" sx={sx.root}>
+      <Grid container rowSpacing={4}>
         {products && !loading
           ? products.map((product) => (
-              <Grid
-                item
-                xs={xs}
-                sm={sm}
-                md={md}
-                lg={lg}
-                xl={xl}
-                key={product.id}
-              >
-                <ProductCard product={product} handleClick={handleClick} />
-              </Grid>
-            ))
+            <Grid
+              item
+              xs={xs}
+              sm={sm}
+              md={md}
+              lg={lg}
+              xl={xl}
+              key={product.id}
+            >
+              <ProductCard product={product} handleClick={handleClick} />
+            </Grid>
+          ))
           : [...Array(12)].map((_, i) => (
-              <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} key={i}>
-                <ProductSkeleton />
-              </Grid>
-            ))}
+            <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} key={i}>
+              <ProductSkeleton />
+            </Grid>
+          ))}
       </Grid>
     </Stack>
   );
 };
 
 const sx = {
-  root: {},
+  root: {
+    margin: "0 auto",
+    maxWidth: { xs: 265 }
+  },
 };
 
 ProductGrid.propTypes = {
