@@ -19,7 +19,7 @@ const ProductCard = ({ product, handleClick }) => {
     }
   }, [product]);
 
-  const handleColorClick = (color) => {};
+  const handleColorClick = (color) => { };
 
   useEffect(() => {
     if (product) {
@@ -64,14 +64,16 @@ const ProductCard = ({ product, handleClick }) => {
         >
           {truncate(product?.title)}
         </Typography>
-        {colors?.map((color, i) => (
-          <ColorOption
-            key={i}
-            color={color}
-            size={12}
-            handleClick={handleColorClick}
-          />
-        ))}
+        <Box>
+          {colors?.map((color, i) => (
+            <ColorOption
+              key={i}
+              color={color}
+              size={12}
+              handleClick={handleColorClick}
+            />
+          ))}
+        </Box>
         {product?.options && product?.options[0].values.length > 0 && (
           <Typography variant="caption" color="textSecondary">
             {product.options[0].values.map((option, i) => (

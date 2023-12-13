@@ -29,10 +29,15 @@ export default {
     {
       props: { size: "large" },
       style: {
+        height: 64,
         fontSize: 20,
         lineHeight: "120%",
-        height: 64,
         padding: "20px 52px",
+        "@media (max-width: 600px)": {
+          height: 42,
+          fontSize: 14,
+          padding: "12px 24px",
+        },
       },
     },
     {
@@ -40,15 +45,20 @@ export default {
       style: {
         fontSize: 16,
         lineHeight: "120%",
-        padding: "12px 16px",
+        padding: "12px 24px",
+        "@media (max-width: 600px)": {
+          height: 42,
+          fontSize: 14,
+        },
       },
     },
     {
       props: { size: "small" },
       style: {
+        height: 42,
         fontSize: 14,
         lineHeight: "120%",
-        padding: "12px 16px",
+        padding: "12px 24px",
       },
     },
   ],

@@ -76,6 +76,7 @@ const sx = {
     width: "100%",
   },
   item: {
+    height: "100%",
     px: "5px",
     pb: {
       sm: 0,

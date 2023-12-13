@@ -25,6 +25,9 @@ export default {
     fontSize: 35,
     fontWeight: 600,
     lineHeight: "120%" /* 42px */,
+    "@media (max-width: 600px)": {
+      fontSize: 25,
+    },
   },
   h4: {
     // Small Title (SemiBold) 30/133
@@ -55,6 +58,9 @@ export default {
     fontSize: 20,
     fontWeight: 400,
     lineHeight: "120%",
+    "@media (max-width: 600px)": {
+      fontSize: 14,
+    },
   },
   body2: {
     // Body Copy (Regular) 16/120

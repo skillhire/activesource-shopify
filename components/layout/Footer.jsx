@@ -49,6 +49,7 @@ const Footer = ({ styles }) => {
                             <Typography
                               variant="subtitle1"
                               sx={sx.footerHeader}
+                              pb={1}
                             >
                               {navItem.label}
                             </Typography>
