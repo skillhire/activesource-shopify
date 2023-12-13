@@ -5,18 +5,19 @@ import {
   Typography,
 } from "@mui/material";
 
-const FooterMenuItem = ({ menuItem, handleClick, submenu = false }) => {
+const FooterMenuItem = ({ menuItem, handleClick }) => {
   return (
     <ListItem
       disableGutters
       disablePadding
-      sx={{ ...sx.listItem, ...(submenu && sx.submenuListItem) }}
+      sx={{ ...sx.root }}
     >
       <ListItemButton
         sx={sx.listItemButton}
         onClick={() => handleClick(menuItem?.value)}
       >
         <ListItemText
+          sx={sx.listItemText}
           primary={
             <Typography sx={sx.text} variant="footer">
               {menuItem?.label}
@@ -31,12 +32,11 @@ const FooterMenuItem = ({ menuItem, handleClick, submenu = false }) => {
 export default FooterMenuItem;
 
 const sx = {
-  listItem: {},
+  root: {},
   text: {
     color: "common.white",
     whiteSpace: "nowrap",
   },
-  listItemButton: {
-    px: 0,
-  },
+  listItemText: { m: 0 },
+  listItemButton: { px: 0, "&:hover": { background: "none" } },
 };
