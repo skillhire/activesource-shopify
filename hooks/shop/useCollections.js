@@ -60,12 +60,12 @@ const useCollections = () => {
   };
 
   const fetchCollections = async (perPage = PER_PAGE) => {
-    let resp = fetchCollectionsQuery({
+    let resp = await fetchCollectionsQuery({
       variables: {
         first: perPage,
       },
     });
-    setCursors(resp?.data?.collections?.pageInfo?.endCursor);
+    setCursor(resp?.data?.collections?.pageInfo?.endCursor);
     setHasNextPage(resp?.data?.collections?.pageInfo?.hasNextPage);
     setCollections(resp.data?.collections?.edges.map((e) => e.node));
   };

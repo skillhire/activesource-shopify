@@ -43,8 +43,10 @@ const Collection = () => {
     cursor,
     hasNextPage,
     collection,
+    collections,
     products,
     fetchCollection,
+    fetchCollections,
   } = useCollections();
 
   const handleProductClick = (product) => {
@@ -77,10 +79,11 @@ const Collection = () => {
   };
 
   useEffect(() => {
+    fetchCollections();
     if (handle) {
       handleSearch();
     }
-  }, [handle, sortBy]);
+  }, [handle, sortBy, collections]);
 
   useEffect(() => {
     if (collection) {
