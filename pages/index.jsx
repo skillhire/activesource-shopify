@@ -14,7 +14,7 @@ const Home = () => {
   }, []);
 
   const metaFields = {
-    title: "Active Source ",
+    title: "Active Source",
     description: "Active Source Lab",
   };
 

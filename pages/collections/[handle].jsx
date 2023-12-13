@@ -10,7 +10,6 @@ import {
   LoadMore,
 } from "components";
 import { useCollections, useSegment } from "hooks";
-import { COLLECTIONS_MENU } from "constants/navigation";
 import { PRICE_RANGE_MIN, PRICE_RANGE_MAX } from "constants/shop";
 
 import SectionEnterpriseSolutions from "sections/collections/SectionEnterpriseSolutions";
@@ -92,7 +91,7 @@ const Collection = () => {
   }, [collection]);
 
   const currentCollection = useMemo(() => {
-    return COLLECTIONS_MENU.find((c) => c.handle === handle);
+    return collections.find((c) => c.handle === handle);
   }, [handle]);
 
   return (
