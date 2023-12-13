@@ -7,6 +7,7 @@ import { Box } from "@mui/material";
 const ProductCollection = ({
   handle,
   perPage = 20,
+  variant = "carousel",
   styles,
 }) => {
   const { loading, error, collection, fetchCollection, products } =
@@ -20,20 +21,20 @@ const ProductCollection = ({
 
   return (
     <Box sx={{ ...sx.root, ...styles }}>
-      <Box sx={{ display: { sm: 'block', xs: 'none' } }}>
+      {variant == "carousel" && (
         <ProductCarousel
           title={collection?.title}
           loading={loading}
           products={products}
         />
-      </Box>
-      <Box sx={{ display: { sm: 'none', xs: 'block' } }}>
+      )}
+      {variant == "grid" && (
         <ProductGrid
           title={collection?.title}
           loading={loading}
           products={products}
         />
-      </Box>
+      )}
     </Box>
   );
 };

@@ -1,8 +1,10 @@
 import { ProductCollection } from "components";
+import { useResponsive } from "hooks";
 import { Link } from "@mui/material";
 import { Box, Container, Typography } from "@mui/material";
 
 const SectionFeaturedCollection = (props) => {
+  const { isMobile } = useResponsive();
   const { featuredCollection } = props || {};
   return (
     <Container maxWidth="lg">
@@ -19,7 +21,13 @@ const SectionFeaturedCollection = (props) => {
             Explore Products
           </Link>
         </Box>
-        {featuredCollection && (<ProductCollection handle={featuredCollection.handle} title={featuredCollection.title} />)}
+        {featuredCollection && (
+          <ProductCollection
+            variant={isMobile ? "grid" : "carousel"}
+            handle={featuredCollection.handle}
+            title={featuredCollection.title}
+          />
+        )}
       </Box>
     </Container>
   );
