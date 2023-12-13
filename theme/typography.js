@@ -25,6 +25,9 @@ export default {
     fontSize: 35,
     fontWeight: 600,
     lineHeight: "120%" /* 42px */,
+    "@media (max-width: 600px)": {
+      fontSize: 25,
+    },
   },
   h4: {
     // Small Title (SemiBold) 30/133
