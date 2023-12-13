@@ -58,6 +58,9 @@ export default {
     fontSize: 20,
     fontWeight: 400,
     lineHeight: "120%",
+    "@media (max-width: 600px)": {
+      fontSize: 14,
+    },
   },
   body2: {
     // Body Copy (Regular) 16/120
