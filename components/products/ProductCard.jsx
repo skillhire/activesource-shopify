@@ -14,12 +14,16 @@ const ProductCard = ({ product, handleClick }) => {
     onClick: () => handleClick(product),
   });
 
+<<<<<<< HEAD
+  const handleColorClick = (color) => {};
+=======
   useEffect(() => {
     if (product) {
     }
   }, [product]);
 
   const handleColorClick = (color) => { };
+>>>>>>> staging
 
   useEffect(() => {
     if (product) {
@@ -64,7 +68,7 @@ const ProductCard = ({ product, handleClick }) => {
         >
           {truncate(product?.title)}
         </Typography>
-        <Box>
+        <Stack direction="row" spacing={0}>
           {colors?.map((color, i) => (
             <ColorOption
               key={i}
@@ -73,7 +77,7 @@ const ProductCard = ({ product, handleClick }) => {
               handleClick={handleColorClick}
             />
           ))}
-        </Box>
+        </Stack>
         {product?.options && product?.options[0].values.length > 0 && (
           <Typography variant="caption" color="textSecondary">
             {product.options[0].values.map((option, i) => (

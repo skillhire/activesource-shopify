@@ -6,8 +6,7 @@ export default {
   secondary: {
     main: "#8044FD",
     dark: "#9C6CFF",
-    light: "#E0DBEB",
-    faded: "#D6D1E0",
+    light: "#C6AAFF",
     contrastText: "#FFFFFF",
   },
   tertiary: {
@@ -41,6 +40,7 @@ export default {
     disabled: "rgba(0, 0, 0, 0.12)",
     input: "rgba(0, 0, 0, 0.12)",
     border: "#B4B4B4",
+    faded: "#D6D1E0",
   },
   divider: "#B4B4B4",
   gradient: {

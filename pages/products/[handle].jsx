@@ -1,11 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
-import {
-  useCloudinary,
-  useProducts,
-  useVariants,
-  useResponsive,
-  useSegment,
-} from "hooks";
+import { useProducts, useVariants, useResponsive, useSegment } from "hooks";
 import { useRouter } from "next/router";
 import { Box, Container, Grid } from "@mui/material";
 import {
@@ -16,8 +10,10 @@ import {
   ProductTabs,
 } from "components";
 import ProductCustomize from "components/products/ProductCustomize";
+import ProductAddToCart from "components/products/ProductAddToCart";
 import { CustomizeContext } from "context";
 import PlacementModal from "sections/products/PlacementModal";
+import { getMetaValue } from "utils";
 
 const Product = () => {
   const ref = useRef();
@@ -132,13 +128,18 @@ const Product = () => {
   }, [product?.id]);
 
   const handleAddToCartDisabled = () => {
-    const disabled = !variant;
+    const isBack = getMetaValue(product, "back_placement") == "true";
+    const isFront = getMetaValue(product, "front_placement") == "true";
+    const disabled =
+      !variant ||
+      !(isFront && customization?.frontLogo && customization?.front) ||
+      !(isBack && customization?.backLogo && customization?.back);
     setAddToCartDisabled(disabled);
   };
 
   useEffect(() => {
     handleAddToCartDisabled();
-  }, [product, selectedOptions, variant, setAddToCartDisabled]);
+  }, [product, customization, variant]);
 
   // Set values from encoded JWT URL param
   useEffect(() => {
@@ -195,6 +196,7 @@ const Product = () => {
 
   useEffect(() => {
     if (variant?.id) {
+      // Store the selected variant ID in the customization object
       setCustomization({
         ...customization,
         variantId: variant?.id?.split("/").pop(),
@@ -224,7 +226,6 @@ const Product = () => {
                 product={product}
                 variant={variant}
                 activeColor={activeColor}
-                addToCartDisabled={addToCartDisabled}
                 selectedOptions={selectedOptions}
                 handleColorClick={handleColorClick}
                 handleOptionChange={handleOptionChange}
@@ -236,6 +237,12 @@ const Product = () => {
                 setActiveColor={setActiveColor}
                 handleUpload={handleUpload}
                 handlePreviewClick={handlePreviewClick}
+              />
+              <ProductAddToCart
+                loading={loading}
+                product={product}
+                variant={variant}
+                addToCartDisabled={addToCartDisabled}
               />
             </Grid>
             <Grid item xs={12}>

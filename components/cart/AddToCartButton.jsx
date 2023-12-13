@@ -26,12 +26,15 @@ const AddToCartButton = ({
         variantId: variant?.id,
         quantity: quantity,
       };
+
+      let url = await createBitlyLink();
+
       lineItem = {
         ...lineItem,
         customAttributes: [
           {
             key: "url",
-            value: await createBitlyLink(),
+            value: url,
           },
         ],
       };

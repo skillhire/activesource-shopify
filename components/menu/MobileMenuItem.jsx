@@ -49,7 +49,7 @@ export default MobileMenuItem;
 
 const sx = {
   listItem: { borderBottom: "1px solid rgba(255, 255, 255, 0.2)" },
-  faded: { backgroundColor: "secondary.faded" },
+  faded: { backgroundColor: "common.faded" },
   divider: { borderBottom: "1px solid rgba(255, 255, 255, 0.8)" },
   noDivider: { borderBottom: "none" },
   icon: { color: "primary.main" },
