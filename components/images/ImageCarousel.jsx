@@ -12,6 +12,7 @@ const ImageCarousel = ({
   activeImage,
   loading,
   handleClick,      
+  arrows = false,
   responsive = IMAGE_CAROUSEL_RESPONSIVE,
   ...props
 }) => {
@@ -31,7 +32,7 @@ const ImageCarousel = ({
           keyBoardControl={true}
           slidesToSlide={1}
           showDots={images?.length > 1 ? true : false}
-          arrows={false}
+          arrows={arrows}
           customDot={<ImageCarouselDot numItems={images?.length} />}
         >
           <CardActionArea

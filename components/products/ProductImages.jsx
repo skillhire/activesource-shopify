@@ -13,7 +13,8 @@ const ProductImages = ({
   return (
     <Box sx={sx.root}>
       {isMobile ? (
-        <ImageCarousel           
+        <ImageCarousel  
+          arrows         
           images={images} 
           activeImage={activeImage}
           handleClick={handleClick} 
@@ -32,7 +33,5 @@ const ProductImages = ({
 export default ProductImages;
 
 const sx = {
-  root: {
-    pt: 4,
-  },
+  root: {},
 };

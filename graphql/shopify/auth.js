@@ -85,3 +85,27 @@ export const MUTATION_CUSTOMER_RESET_BY_URL = gql`
     }
   }
 `;
+
+export const MUTATION_CUSTOMER_ACTIVATE_BY_URL = gql`
+  mutation customerActivateByUrl($password: String!, $activationUrl: URL!) {
+    customerActivateByUrl(password: $password, activationUrl: $activationUrl) {
+      customer {
+        id
+        email
+        firstName
+        lastName
+        phone
+        acceptsMarketing
+      }
+      customerAccessToken {
+        accessToken
+        expiresAt
+      }
+      customerUserErrors {
+        code
+        field
+        message
+      }
+    }
+  }
+`;
