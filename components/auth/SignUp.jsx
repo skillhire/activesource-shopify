@@ -23,6 +23,9 @@ const SignUp = ({ onSuccess }) => {
   const handleSubmit = async () => {
     if (customer?.email && customer?.password) {
       let resp = await register(customer);
+      if(resp?.customerCreate?.customerUserErrors?.length > 0) {
+        showAlertError(resp?.customerCreate?.customerUserErrors[0]?.message)
+      }
       if (resp?.customerAccessToken?.accessToken) {
         onSuccess();
       }

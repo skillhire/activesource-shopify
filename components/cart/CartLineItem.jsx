@@ -74,7 +74,14 @@ const CartLineItem = ({ lineItem }) => {
   };
 
   const handleClick = () => {
-    router.push(`/products/${product?.handle}`);
+    let url = lineItem?.customAttributes.find(
+      (attribute) => attribute.key === "url"
+    )?.value;
+    if(url){
+      router.push(url);
+    }else{
+      router.push(`/products/${product?.handle}`);
+    }    
     setCartOpen(false);
   };
 
@@ -134,8 +141,9 @@ const CartLineItem = ({ lineItem }) => {
                     </Typography>
                   )}
                 </Stack>
-                <Stack sx={sx.quantity}>
+                <Stack direction="row" spacing={1} sx={sx.quantity}>
                   <QuantitySelector
+                    small
                     quantity={quantity}
                     handleChange={handleQuantityChange}
                   />

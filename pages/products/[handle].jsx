@@ -209,16 +209,14 @@ const Product = () => {
       <Container maxWidth="lg">
         <Box sx={sx.root} ref={ref}>
           <Grid container spacing={2}>
-            <Grid item xs={12} md={7} lg={8}>
-              <Box>
-                <ProductImages
-                  images={images}
-                  activeImage={activeImage}
-                  handleClick={handleImageClick}
-                  zoom={zoom}
-                  handleClose={handleClose}
-                />
-              </Box>
+            <Grid item xs={12} md={7} lg={8}>              
+              <ProductImages
+                images={images}
+                activeImage={activeImage}
+                handleClick={handleImageClick}
+                zoom={zoom}
+                handleClose={handleClose}
+              />              
             </Grid>
             <Grid item xs={12} md={5} lg={4}>
               <ProductDetails

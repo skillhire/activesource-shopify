@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useMutation } from "@apollo/client";
 import { ShopContext } from "context";
-import {
+import {  
   MUTATION_ACCESS_TOKEN_CREATE,
   MUTATION_ACCESS_TOKEN_DELETE,
   MUTATION_ACCESS_TOKEN_RENEW,
+  MUTATION_CUSTOMER_ACTIVATE_BY_URL,
   MUTATION_CUSTOMER_CREATE,
   MUTATION_CUSTOMER_RECOVER,
   MUTATION_CUSTOMER_RESET_BY_URL,
@@ -40,6 +41,11 @@ const useAuth = (props) => {
   const [resetByUrlMutation, resetByUrlResp] = useMutation(
     MUTATION_CUSTOMER_RESET_BY_URL
   );
+
+  const [activateByUrlMutation, activateByUrlResp] = useMutation(
+    MUTATION_CUSTOMER_ACTIVATE_BY_URL
+  );
+
 
   const signIn = async (customer) => {
     const { email, password } = customer || {};
@@ -107,11 +113,22 @@ const useAuth = (props) => {
   };
 
   const recover = async (email) => {
-    await recoverMutation({
+    let resp = await recoverMutation({
       variables: {
         email: email,
       },
-    });
+    })
+    return resp?.data
+  };
+
+  const activateByUrl = async (password, activationUrl) => {
+    let resp = await activateByUrlMutation({
+      variables: {
+        password: password,
+        activationUrl: activationUrl,
+      },
+    })
+    return resp?.data
   };
 
   // Signing out is denied if access token is expired
@@ -153,6 +170,15 @@ const useAuth = (props) => {
   }, [signInResp?.data]);
 
   useEffect(() => {
+    if (activateByUrlResp?.data) {
+      handleStoreAccessToken(
+        activateByUrlResp.data?.customerActivateByUrl?.customerAccessToken
+      );
+    }
+  }, [activateByUrlResp?.data]);
+
+
+  useEffect(() => {
     if (resetByUrlResp?.data) {
       handleStoreAccessToken(
         resetByUrlResp.data?.customerResetByUrl?.customerAccessToken
@@ -190,6 +216,7 @@ const useAuth = (props) => {
       ...signOutResp?.error,
       ...recoverResp?.error,
       ...resetByUrlResp?.error,
+      ...activateByUrlResp?.error,
       ...accessTokenRenewResp?.error,
     });
   }, [
@@ -198,6 +225,7 @@ const useAuth = (props) => {
     signOutResp?.error,
     recoverResp?.error,
     resetByUrlResp?.error,
+    activateByUrlResp?.error,
     accessTokenRenewResp?.error,
   ]);
 
@@ -208,6 +236,7 @@ const useAuth = (props) => {
         signOutResp?.loading ||
         recoverResp?.loading ||
         resetByUrlResp?.loading ||
+        activateByUrlResp?.loading ||
         accessTokenRenewResp?.loading
     );
   }, [
@@ -216,6 +245,7 @@ const useAuth = (props) => {
     signOutResp?.loading,
     recoverResp?.loading,
     resetByUrlResp?.loading,
+    activateByUrlResp?.loading,
     accessTokenRenewResp?.loading,
   ]);
 
@@ -239,6 +269,7 @@ const useAuth = (props) => {
     signIn,
     signOut,
     register,
+    activateByUrl,
     recover,
     resetByUrl,
     accessTokenRenew,
