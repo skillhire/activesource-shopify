@@ -1,52 +1,51 @@
-import React, { useState, useEffect } from "react"
-import { useAlerts, useAuth } from "hooks"
+import React, { useState, useEffect } from "react";
+import { useAlerts, useAuth } from "hooks";
 import {
   Stack,
   Link,
   Typography,
   Button,
   CircularProgress,
-} from "@mui/material"
-import { useRouter } from 'next/router'
-import ResetPasswordForm from "./ResetPasswordForm"
+} from "@mui/material";
+import { useRouter } from "next/router";
+import ResetPasswordForm from "./ResetPasswordForm";
 
 const ResetPassword = ({ onSuccess }) => {
-  const router = useRouter()
-  const { showAlertSuccess, showAlertError } = useAlerts()
-  const { error, loading, resetByUrl } = useAuth()  
-  const [customer, setCustomer] = useState({})
+  const router = useRouter();
+  const { showAlertSuccess, showAlertError } = useAlerts();
+  const { error, loading, resetByUrl } = useAuth();
+  const [customer, setCustomer] = useState({});
 
   const handleChange = (e) => {
-    const { name } = e.target
-    const value = e.target.type === "checkbox" ?  
-      e.target.checked : 
-      e.target.value
+    const { name } = e.target;
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setCustomer({
       ...customer,
       [name]: value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = async () => {
     if (customer?.password && router?.query?.url) {
-      let resp = await resetByUrl(customer?.password, router?.query?.url)
+      let resp = await resetByUrl(customer?.password, router?.query?.url);
       if (resp?.customerResetByUrl?.customerAccessToken) {
-        showAlertSuccess('Your password has successfully been changed.')
-        onSuccess()
+        showAlertSuccess("Your password has successfully been changed.");
+        onSuccess();
       } else {
-        showAlertError('There was an error resetting your password')
+        showAlertError("There was an error resetting your password");
       }
-      return resp
+      return resp;
     } else {
-      showAlertError("Please enter your email to reset password.")
+      showAlertError("Please enter your email to reset password.");
     }
-  }
+  };
 
   useEffect(() => {
     if (error && Object.keys(error)?.length > 0) {
-      showAlertError("Your email or password is incorrect")
+      showAlertError("Your email or password is incorrect");
     }
-  }, [error])
+  }, [error]);
 
   return (
     <Stack alignItems="center">
@@ -69,10 +68,10 @@ const ResetPassword = ({ onSuccess }) => {
         <Typography variant="overline">Sign In</Typography>
       </Link>
     </Stack>
-  )
-}
+  );
+};
 
-export default ResetPassword
+export default ResetPassword;
 
 const sx = {
   button: {
@@ -82,4 +81,4 @@ const sx = {
   progress: {
     color: "#fff",
   },
-}
+};

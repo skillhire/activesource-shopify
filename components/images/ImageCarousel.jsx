@@ -1,24 +1,24 @@
-import { CardActionArea } from "@mui/material"
-import { Box } from "@mui/material"
-import Image from "next/image"
-import { IMAGE_CAROUSEL_RESPONSIVE } from "constants/shop"
-import Carousel from "react-multi-carousel"
-import { useClickOrDrag } from "hooks"
-import ImageCarouselDot from "./ImageCarouselDot"
-import ImageWithLogo from "./ImageWithLogo"
+import { CardActionArea } from "@mui/material";
+import { Box } from "@mui/material";
+import Image from "next/image";
+import { IMAGE_CAROUSEL_RESPONSIVE } from "constants/shop";
+import Carousel from "react-multi-carousel";
+import { useClickOrDrag } from "hooks";
+import ImageCarouselDot from "./ImageCarouselDot";
+import ImageWithLogo from "./ImageWithLogo";
 
 const ImageCarousel = ({
   images,
   activeImage,
   loading,
-  handleClick,      
+  handleClick,
   arrows = false,
   responsive = IMAGE_CAROUSEL_RESPONSIVE,
   ...props
 }) => {
   const { onMouseDown, onMouseUp } = useClickOrDrag({
     onClick: handleClick,
-  })
+  });
 
   return (
     <Box sx={sx.mobileCarousel}>
@@ -41,9 +41,7 @@ const ImageCarousel = ({
             onMouseDown={onMouseDown}
             onMouseUp={onMouseUp}
           >
-            <ImageWithLogo 
-              activeImage={activeImage}
-            />
+            <ImageWithLogo activeImage={activeImage} />
           </CardActionArea>
           {images?.map((image) => (
             <CardActionArea
@@ -71,10 +69,10 @@ const ImageCarousel = ({
         </Carousel>
       )}
     </Box>
-  )
-}
+  );
+};
 
-export default ImageCarousel
+export default ImageCarousel;
 
 const sx = {
   mobileCarousel: {
@@ -91,4 +89,4 @@ const sx = {
     justifyContent: "center",
     alignItems: "center",
   },
-}
+};

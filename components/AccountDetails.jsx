@@ -19,7 +19,6 @@ export default function AccountDetails({
   isEditing,
   handleSubmit,
 }) {
-
   return (
     <Stack sx={sx.root}>
       <Grid container spacing={2}>
@@ -69,7 +68,7 @@ export default function AccountDetails({
         </Grid>
         <Grid item xs={12} sm={12} md={4} sx={sx.labelContainer}>
           <InputLabel htmlFor="email" sx={sx.inputLabel}>
-            <Typography variant="body1">Email Address:</Typography>
+            <Typography variant="body1">Email:</Typography>
           </InputLabel>
         </Grid>
         <Grid item xs={12} sm={12} md={8}>

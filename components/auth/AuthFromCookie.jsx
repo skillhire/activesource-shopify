@@ -1,21 +1,20 @@
-import React, { useEffect } from 'react'
-import { useAuth } from 'hooks'
-import { getCookie } from 'cookies-next'
+import React, { useEffect } from "react";
+import { useAuth } from "hooks";
+import { getCookie } from "cookies-next";
 
 const AuthFromCookie = () => {
-
-  const { accessToken, setAccessToken } = useAuth()
+  const { accessToken, setAccessToken } = useAuth();
 
   useEffect(() => {
-    if(!accessToken){
-      const token = getCookie('shopifyAccessToken')
+    if (!accessToken) {
+      const token = getCookie("shopifyAccessToken");
       if (token) {
-        setAccessToken(token)
+        setAccessToken(token);
       }
     }
-  }, [])
+  }, []);
 
-  return null 
-}
+  return null;
+};
 
-export default AuthFromCookie
+export default AuthFromCookie;

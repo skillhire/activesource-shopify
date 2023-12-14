@@ -27,7 +27,7 @@ const ForgotPassword = ({ onSuccess }) => {
   const handleSubmit = async () => {
     if (customer?.email) {
       let resp = await recover(customer?.email);
-      showAlertSuccess('Password reset instructions have been sent.')
+      showAlertSuccess("Password reset instructions have been sent.");
       return resp;
     } else {
       showAlertError("Please enter your email to reset password.");

@@ -77,11 +77,11 @@ const CartLineItem = ({ lineItem }) => {
     let url = lineItem?.customAttributes.find(
       (attribute) => attribute.key === "url"
     )?.value;
-    if(url){
+    if (url) {
       router.push(url);
-    }else{
+    } else {
       router.push(`/products/${product?.handle}`);
-    }    
+    }
     setCartOpen(false);
   };
 

@@ -10,10 +10,10 @@ const ImageWithBorder = ({
   left,
   height,
   width,
-  enableBorder=false,
+  enableBorder = false,
   ...props
 }) => {
-  return(
+  return (
     <>
       <Image
         src={src}
@@ -28,31 +28,27 @@ const ImageWithBorder = ({
           objectFit: "contain",
         }}
       />
-      { enableBorder && (
-      <Box 
-        sx={{
-          border: "2px solid blue",
-          top: top,
-          left: left,
-          height: height,
-          width: width,   
-          position: "absolute",             
-        }}
-      />
+      {enableBorder && (
+        <Box
+          sx={{
+            border: "2px solid blue",
+            top: top,
+            left: left,
+            height: height,
+            width: width,
+            position: "absolute",
+          }}
+        />
       )}
     </>
-  )
-}
+  );
+};
 
-
-const ImageWithLogo = ({
-  activeImage,  
-  ...props
-}) => {
+const ImageWithLogo = ({ activeImage, ...props }) => {
   const { customization } = useContext(CustomizeContext);
-  
-  if(!activeImage) return null;
-  return (   
+
+  if (!activeImage) return null;
+  return (
     <Box sx={sx.root}>
       {(activeImage?.src || activeImage?.url) && (
         <Image
@@ -64,38 +60,42 @@ const ImageWithLogo = ({
           responsive={true}
         />
       )}
-      {customization?.frontLogo && customization?.front && activeImage?.isFront && (        
-        <ImageWithBorder 
-          enableBorder
-          src={ customization?.frontLogo }
-          top={ customization?.front?.top }
-          left={ customization?.front?.left }
-          height={ customization?.front?.height }
-          width={ customization?.front?.width }
-        />        
-      )}
-      {customization?.backLogo && customization?.back && activeImage?.isBack && (
-        <ImageWithBorder 
-          enableBorder
-          src={ customization?.backLogo }
-          top={ customization?.back?.top }
-          left={ customization?.back?.left }
-          height={ customization?.back?.height }
-          width={ customization?.back?.width }
-        />        
-      )}      
+      {customization?.frontLogo &&
+        customization?.front &&
+        activeImage?.isFront && (
+          <ImageWithBorder
+            enableBorder
+            src={customization?.frontLogo}
+            top={customization?.front?.top}
+            left={customization?.front?.left}
+            height={customization?.front?.height}
+            width={customization?.front?.width}
+          />
+        )}
+      {customization?.backLogo &&
+        customization?.back &&
+        activeImage?.isBack && (
+          <ImageWithBorder
+            enableBorder
+            src={customization?.backLogo}
+            top={customization?.back?.top}
+            left={customization?.back?.left}
+            height={customization?.back?.height}
+            width={customization?.back?.width}
+          />
+        )}
     </Box>
   );
 };
 
 export default ImageWithLogo;
 
-const sx = {  
+const sx = {
   root: {
     position: "relative",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",    
+    alignItems: "center",
     width: {
       sm: "512px",
       xs: "320px",
@@ -104,10 +104,9 @@ const sx = {
       sm: "512px",
       xs: "320px",
     },
-  },  
+  },
   image: {
-    position: 'relative',
-    objectFit: 'contain'
-  },  
+    position: "relative",
+    objectFit: "contain",
+  },
 };
-

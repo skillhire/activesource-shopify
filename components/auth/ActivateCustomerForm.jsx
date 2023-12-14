@@ -1,9 +1,9 @@
-import React from "react"
+import React from "react";
 import { Stack, TextField, InputLabel } from "@mui/material";
 
 const ActivateCustomerForm = ({ customer, handleChange, ...props }) => {
-  return (    
-    <Stack sx={ sx.root } spacing={1} direction="column">
+  return (
+    <Stack sx={sx.root} spacing={1} direction="column">
       <InputLabel shrink htmlFor="email" sx={sx.label}>
         Password
       </InputLabel>
@@ -15,18 +15,18 @@ const ActivateCustomerForm = ({ customer, handleChange, ...props }) => {
         id="password"
         name="password"
         placeholder="New password"
-        value={customer?.password || ""}        
+        value={customer?.password || ""}
         onChange={handleChange}
       />
-    </Stack>          
+    </Stack>
   );
 };
 
 export default ActivateCustomerForm;
 
 const sx = {
-  root: {    
-    width: "100%",    
+  root: {
+    width: "100%",
   },
   label: {
     color: "text.primary",

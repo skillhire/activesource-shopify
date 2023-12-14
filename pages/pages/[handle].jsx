@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { usePages } from "hooks";
 import { Page, Layout } from "components";
 import { useRouter } from "next/router";
+import SectionContactUs from "sections/pages/SectionContactUs";
 
 const ShopifyPage = (props) => {
   const router = useRouter();
@@ -15,13 +16,10 @@ const ShopifyPage = (props) => {
     }
   }, [handle]);
 
-  useEffect(() => {
-    console.log("Page", page);
-  }, [page]);
-
   return (
     <Layout>
-      <Page title={page?.title} body={page?.body} />
+      <Page html title={page?.title} body={page?.body} image={page?.image} />
+      <SectionContactUs />
     </Layout>
   );
 };

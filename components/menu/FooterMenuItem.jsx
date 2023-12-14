@@ -7,11 +7,7 @@ import {
 
 const FooterMenuItem = ({ menuItem, handleClick }) => {
   return (
-    <ListItem
-      disableGutters
-      disablePadding
-      sx={{ ...sx.root }}
-    >
+    <ListItem disableGutters disablePadding sx={{ ...sx.root }}>
       <ListItemButton
         sx={sx.listItemButton}
         onClick={() => handleClick(menuItem?.value)}

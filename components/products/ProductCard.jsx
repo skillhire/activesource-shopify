@@ -59,7 +59,7 @@ const ProductCard = ({ product, handleClick }) => {
         >
           {truncate(product?.title)}
         </Typography>
-        <Stack direction="row" spacing={0}>
+        <Stack direction="row" spacing={0.5}>
           {colors?.map((color, i) => (
             <ColorOption
               key={i}

@@ -58,14 +58,13 @@ const useCustomers = () => {
   };
 
   const updateCustomer = async ({ customerAccessToken, customer }) => {
-
     let phone = customer.phone;
-    if(phone.startsWith("1")){
+    if (phone.startsWith("1")) {
       phone = `+${phone}`;
-    }else if(!phone.startsWith("+1")){
+    } else if (!phone.startsWith("+1")) {
       phone = `+1${phone}`;
     }
-    
+
     const variables = {
       customerAccessToken,
       customer: {

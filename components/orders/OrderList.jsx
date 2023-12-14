@@ -20,7 +20,7 @@ import { useAuth, useOrders } from "hooks";
 import { useRouter } from "next/router";
 
 const OrderList = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { accessToken } = useAuth();
   const { orders, loading, fetchCustomerOrders } = useOrders();
 

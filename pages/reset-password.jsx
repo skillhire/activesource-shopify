@@ -1,9 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import {
-  AuthScreen,
-  ResetPassword 
-} from "components";
+import { AuthScreen, ResetPassword } from "components";
 import { ACCOUNT_SOURCE_URL } from "constants/navigation";
 
 const Reset = () => {

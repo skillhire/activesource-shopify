@@ -18,7 +18,16 @@ const usePages = () => {
 
   useEffect(() => {
     if (data) {
-      setPage(data);
+      let image = data?.pageByHandle?.metafields?.find((m) => m.key === "image")
+        ?.reference?.image?.src;
+
+      let formattedPage = {
+        title: data?.pageByHandle?.title,
+        body: data?.pageByHandle?.body,
+        handle: data?.pageByHandle?.handle,
+        image: image,
+      };
+      setPage(formattedPage);
     }
   }, [data]);
 

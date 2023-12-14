@@ -18,7 +18,7 @@ const MyAccount = () => {
   useEffect(() => {
     if (accessToken) {
       fetchCustomer(accessToken);
-    } 
+    }
     if (customer) {
       setCurrentCustomer(customer);
     }
@@ -29,7 +29,7 @@ const MyAccount = () => {
       customer: currentCustomer,
       customerAccessToken: accessToken,
     });
-    if(resp?.customerUpdate?.customerUserErrors?.length > 0){
+    if (resp?.customerUpdate?.customerUserErrors?.length > 0) {
       showAlertError(resp?.customerUpdate?.customerUserErrors[0].message);
       return;
     }
@@ -58,7 +58,7 @@ const MyAccount = () => {
     return null;
   }
 
-  if(!customer) return null;
+  if (!customer) return null;
   return (
     <AccountLayout
       title={

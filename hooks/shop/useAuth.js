@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useMutation } from "@apollo/client";
 import { ShopContext } from "context";
-import {  
+import {
   MUTATION_ACCESS_TOKEN_CREATE,
   MUTATION_ACCESS_TOKEN_DELETE,
   MUTATION_ACCESS_TOKEN_RENEW,
@@ -45,7 +45,6 @@ const useAuth = (props) => {
   const [activateByUrlMutation, activateByUrlResp] = useMutation(
     MUTATION_CUSTOMER_ACTIVATE_BY_URL
   );
-
 
   const signIn = async (customer) => {
     const { email, password } = customer || {};
@@ -117,8 +116,8 @@ const useAuth = (props) => {
       variables: {
         email: email,
       },
-    })
-    return resp?.data
+    });
+    return resp?.data;
   };
 
   const activateByUrl = async (password, activationUrl) => {
@@ -127,8 +126,8 @@ const useAuth = (props) => {
         password: password,
         activationUrl: activationUrl,
       },
-    })
-    return resp?.data
+    });
+    return resp?.data;
   };
 
   // Signing out is denied if access token is expired
@@ -176,7 +175,6 @@ const useAuth = (props) => {
       );
     }
   }, [activateByUrlResp?.data]);
-
 
   useEffect(() => {
     if (resetByUrlResp?.data) {
