@@ -19,6 +19,7 @@ export default function AccountDetails({
   isEditing,
   handleSubmit,
 }) {
+
   return (
     <Stack sx={sx.root}>
       <Grid container spacing={2}>
@@ -85,6 +86,28 @@ export default function AccountDetails({
           {!isEditing && (
             <Typography variant="h5" sx={sx.infoLabel}>
               {customer?.email}
+            </Typography>
+          )}
+        </Grid>
+        <Grid item xs={12} sm={12} md={4} sx={sx.labelContainer}>
+          <InputLabel htmlFor="phone" sx={sx.inputLabel}>
+            <Typography variant="body1">Phone:</Typography>
+          </InputLabel>
+        </Grid>
+        <Grid item xs={12} sm={12} md={8}>
+          {isEditing && (
+            <TextField
+              defaultValue={customer?.phone}
+              id="phone"
+              name="phone"
+              size="small"
+              fullWidth
+              onChange={handleChange}
+            />
+          )}
+          {!isEditing && (
+            <Typography variant="h5" sx={sx.infoLabel}>
+              {customer?.phone}
             </Typography>
           )}
         </Grid>

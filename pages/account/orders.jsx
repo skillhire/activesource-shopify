@@ -10,13 +10,6 @@ const MyOrders = () => {
   const { accessToken } = useAuth();
   const { showAlertError } = useAlerts();
 
-  useEffect(() => {
-    if (!accessToken) {
-      showAlertError("Please log in to view this page");
-      router.push(LOGIN_URL);
-    }
-  }, [accessToken]);
-
   if (!accessToken) {
     return null;
   }

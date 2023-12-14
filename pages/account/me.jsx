@@ -18,22 +18,23 @@ const MyAccount = () => {
   useEffect(() => {
     if (accessToken) {
       fetchCustomer(accessToken);
-    } else {
-      showAlertError("Please log in to view this page");
-      router.push(LOGIN_URL);
-    }
+    } 
     if (customer) {
       setCurrentCustomer(customer);
     }
   }, [accessToken, customer]);
 
-  const handleSubmit = useCallback(async () => {
-    await updateCustomer({
+  const handleSubmit = async () => {
+    let resp = await updateCustomer({
       customer: currentCustomer,
       customerAccessToken: accessToken,
     });
+    if(resp?.customerUpdate?.customerUserErrors?.length > 0){
+      showAlertError(resp?.customerUpdate?.customerUserErrors[0].message);
+      return;
+    }
     setIsEditing(false);
-  }, [currentCustomer, accessToken]);
+  };
 
   const handleChange = (e) => {
     const { name } = e.target;
@@ -57,6 +58,7 @@ const MyAccount = () => {
     return null;
   }
 
+  if(!customer) return null;
   return (
     <AccountLayout
       title={

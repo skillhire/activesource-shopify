@@ -3,6 +3,7 @@ import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CustomizeProvider, SegmentProvider, ShopProvider } from "context";
 import { theme } from "theme";
+import { AuthFromCookie } from 'components'
 import { SEGMENT_WRITE_KEY } from "constants/shop";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
@@ -25,6 +26,7 @@ export default function ShopJs({ Component, pageProps }) {
             <CustomizeProvider>
               <LocalizationProvider dateAdapter={AdapterMoment}>
                 <CssBaseline />
+                <AuthFromCookie />
                 <Component {...pageProps} />
               </LocalizationProvider>
             </CustomizeProvider>

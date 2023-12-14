@@ -17,10 +17,11 @@ import { SHOP_ALL_URL } from "constants/navigation";
 
 import { OrderItem } from "components";
 import { useAuth, useOrders } from "hooks";
+import { useRouter } from "next/router";
 
 const OrderList = () => {
+  const router = useRouter()
   const { accessToken } = useAuth();
-
   const { orders, loading, fetchCustomerOrders } = useOrders();
 
   const handleClick = () => router.push(SHOP_ALL_URL);

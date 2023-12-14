@@ -58,11 +58,19 @@ const useCustomers = () => {
   };
 
   const updateCustomer = async ({ customerAccessToken, customer }) => {
+
+    let phone = customer.phone;
+    if(phone.startsWith("1")){
+      phone = `+${phone}`;
+    }else if(!phone.startsWith("+1")){
+      phone = `+1${phone}`;
+    }
+    
     const variables = {
       customerAccessToken,
       customer: {
         email: customer.email,
-        phone: `+1${customer.phone}`, // quick and dirty solution for now, hopefully our customers have US phone numbers
+        phone: phone,
         firstName: customer.firstName,
         lastName: customer.lastName,
         acceptsMarketing: customer.acceptsMarketing,
@@ -77,7 +85,7 @@ const useCustomers = () => {
     if (resp?.data?.customerUpdate?.customer) {
       setCustomer(resp?.data?.customerUpdate?.customer);
     }
-    return resp?.data?.customerUpdate;
+    return resp?.data;
   };
 
   useEffect(() => {
