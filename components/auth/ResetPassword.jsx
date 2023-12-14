@@ -29,7 +29,7 @@ const ResetPassword = ({ onSuccess }) => {
 
   const handleSubmit = async () => {
     if (customer?.password && router?.query?.url) {
-      let resp = await resetByUrl(password, router?.query?.url)
+      let resp = await resetByUrl(customer?.password, router?.query?.url)
       if (resp?.customerResetByUrl?.customerAccessToken) {
         showAlertSuccess('Your password has successfully been changed.')
         onSuccess()

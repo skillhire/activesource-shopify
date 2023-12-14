@@ -4,6 +4,7 @@ import {
   AuthScreen,
   ForgotPassword 
 } from "components";
+import { ACCOUNT_SOURCE_URL } from "constants/navigation";
 
 const Forgot = () => {
   const router = useRouter();

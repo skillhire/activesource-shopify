@@ -4,6 +4,7 @@ import {
   AuthScreen,
   ResetPassword 
 } from "components";
+import { ACCOUNT_SOURCE_URL } from "constants/navigation";
 
 const Reset = () => {
   const router = useRouter();
