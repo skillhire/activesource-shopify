@@ -1,52 +1,51 @@
-import React, { useState, useEffect } from "react"
-import { useAlerts, useAuth } from "hooks"
+import React, { useState, useEffect } from "react";
+import { useAlerts, useAuth } from "hooks";
 import {
   Stack,
   Link,
   Typography,
   Button,
   CircularProgress,
-} from "@mui/material"
-import { useRouter } from 'next/router'
-import ActivateCustomerForm from "./ActivateCustomerForm"
+} from "@mui/material";
+import { useRouter } from "next/router";
+import ActivateCustomerForm from "./ActivateCustomerForm";
 
 const ActivateCustomer = ({ onSuccess }) => {
-  const router = useRouter()
-  const { showAlertSuccess, showAlertError } = useAlerts()
-  const { error, loading, activateByUrl } = useAuth()  
-  const [customer, setCustomer] = useState({})
+  const router = useRouter();
+  const { showAlertSuccess, showAlertError } = useAlerts();
+  const { error, loading, activateByUrl } = useAuth();
+  const [customer, setCustomer] = useState({});
 
   const handleChange = (e) => {
-    const { name } = e.target
-    const value = e.target.type === "checkbox" ?  
-      e.target.checked : 
-      e.target.value
+    const { name } = e.target;
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setCustomer({
       ...customer,
       [name]: value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = async () => {
     if (customer?.password && router?.query?.url) {
-      let resp = await activateByUrl(customer?.password, router.query.url)
+      let resp = await activateByUrl(customer?.password, router.query.url);
       if (resp?.data?.customerActivateByUrl?.customerAccessToken) {
-        showAlertSuccess('Your account has been successfully activated.')
-        onSuccess()
+        showAlertSuccess("Your account has been successfully activated.");
+        onSuccess();
       } else {
-        showAlertError('There was an error activating your account')
+        showAlertError("There was an error activating your account");
       }
-      return resp
+      return resp;
     } else {
-      showAlertError("Please enter your password to activate your account.")
+      showAlertError("Please enter your password to activate your account.");
     }
-  }
+  };
 
   useEffect(() => {
     if (error && Object.keys(error)?.length > 0) {
-      showAlertError("Your email or password is incorrect")
+      showAlertError("Your email or password is incorrect");
     }
-  }, [error])
+  }, [error]);
 
   return (
     <Stack alignItems="center">
@@ -69,10 +68,10 @@ const ActivateCustomer = ({ onSuccess }) => {
         <Typography variant="overline">Sign In</Typography>
       </Link>
     </Stack>
-  )
-}
+  );
+};
 
-export default ActivateCustomer
+export default ActivateCustomer;
 
 const sx = {
   button: {
@@ -82,4 +81,4 @@ const sx = {
   progress: {
     color: "#fff",
   },
-}
+};

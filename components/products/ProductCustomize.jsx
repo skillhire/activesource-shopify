@@ -1,43 +1,43 @@
-import React, { useRef, useState, useContext, useEffect, useMemo } from "react"
-import { CustomizeContext } from "context"
-import { useAlerts } from "hooks"
+import React, { useRef, useState, useContext, useEffect, useMemo } from "react";
+import { CustomizeContext } from "context";
+import { useAlerts } from "hooks";
 import {
   Button,
   Stack,
   Typography,
   CircularProgress,
   CardActionArea,
-} from "@mui/material"
-import { getMetaValue } from "utils"
-import { useCloudinary } from "hooks"
-import Image from "next/image"
-import { Link } from "@mui/material"
-import { CloudUpload } from "@mui/icons-material"
+} from "@mui/material";
+import { getMetaValue } from "utils";
+import { useCloudinary } from "hooks";
+import Image from "next/image";
+import { Link } from "@mui/material";
+import { CloudUpload } from "@mui/icons-material";
 import {
   MAX_FILE_SIZE,
   CLOUDINARY_CLOUD_NAME,
   CLOUDINARY_API_KEY,
   CLOUDINARY_UPLOAD_PRESET,
-} from "constants/shop"
-import { getCookie, setCookie } from "cookies-next"
+} from "constants/shop";
+import { getCookie, setCookie } from "cookies-next";
 
-const Thumbnail = ({ src, handleClick, selected=false, ...props }) => (
+const Thumbnail = ({ src, handleClick, selected = false, ...props }) => (
   <CardActionArea onClick={handleClick} sx={sx.cardActionArea}>
-    <Image 
-      src={src} 
-      width={100} 
-      height={145} 
+    <Image
+      src={src}
+      width={100}
+      height={145}
       style={{
         ...(selected && sx.activeThumbnail),
-        borderRadius: '8px',
-        backgroundColor: "white",        
-        objectFit: 'contain'
+        borderRadius: "8px",
+        backgroundColor: "white",
+        objectFit: "contain",
       }}
     />
   </CardActionArea>
-)
+);
 
-const ImagePreview = ({ label, src, selected=false, name, handleClick }) => (
+const ImagePreview = ({ label, src, selected = false, name, handleClick }) => (
   <Stack>
     <Thumbnail
       selected={selected}
@@ -49,53 +49,53 @@ const ImagePreview = ({ label, src, selected=false, name, handleClick }) => (
       {label}
     </Typography>
   </Stack>
-)
+);
 
 const FileUploader = ({ label, name, handleClick, handleUpload, ...props }) => {
-  const { showAlertError } = useAlerts()
+  const { showAlertError } = useAlerts();
 
-  const ref = useRef()
-  const [file, setFile] = useState()
-  const { customization, setCustomization } = useContext(CustomizeContext)
+  const ref = useRef();
+  const [file, setFile] = useState();
+  const { customization, setCustomization } = useContext(CustomizeContext);
 
   const { loading, unsignedUpload } = useCloudinary({
     cloudName: CLOUDINARY_CLOUD_NAME,
     apiKey: CLOUDINARY_API_KEY,
     uploadPreset: CLOUDINARY_UPLOAD_PRESET,
-  })
+  });
 
   const fileInputClick = () => {
-    ref.current.click()
-  }
+    ref.current.click();
+  };
 
   const handleChange = async (ev) => {
-    const { files } = ev.target
-    const file = files[0]
+    const { files } = ev.target;
+    const file = files[0];
     if (file?.size > MAX_FILE_SIZE) {
       showAlertError(
         "File size is too big. Please upload a file less than 5Mb"
-      )
-      return
+      );
+      return;
     }
-    const resp = await unsignedUpload(file)
-    const image = resp?.data?.secure_url
+    const resp = await unsignedUpload(file);
+    const image = resp?.data?.secure_url;
 
-    let cookie = JSON.parse(getCookie("activesource") || "{}")
+    let cookie = JSON.parse(getCookie("activesource") || "{}");
     cookie[name] = {
       name: file.name,
       image: image,
-    }
-    setCookie("activesource", JSON.stringify(cookie))
-    setFile(file)
-    handleUpload(image, name)
-  }
-  
+    };
+    setCookie("activesource", JSON.stringify(cookie));
+    setFile(file);
+    handleUpload(image, name);
+  };
+
   useEffect(() => {
-    let cookie = JSON.parse(getCookie("activesource") || "{}")        
-    if (cookie[name]) {      
-      setFile(cookie[name])
-    }         
-  }, [name])  
+    let cookie = JSON.parse(getCookie("activesource") || "{}");
+    if (cookie[name]) {
+      setFile(cookie[name]);
+    }
+  }, [name]);
 
   return (
     <>
@@ -155,8 +155,8 @@ const FileUploader = ({ label, name, handleClick, handleUpload, ...props }) => {
         </Typography>
       </Stack>
     </>
-  )
-}
+  );
+};
 
 const ProductCustomize = ({
   product,
@@ -164,32 +164,31 @@ const ProductCustomize = ({
   handleUpload,
   handlePreviewClick,
   activeColor,
-  activeImage
+  activeImage,
 }) => {
-
-  const { customization, setCustomization } = useContext(CustomizeContext)
+  const { customization, setCustomization } = useContext(CustomizeContext);
 
   const isBack = useMemo(
     () => getMetaValue(product, "back_placement"),
     [product]
-  )
+  );
   const isFront = useMemo(
     () => getMetaValue(product, "front_placement"),
     [product]
-  )
+  );
 
   useEffect(() => {
-    const cookie = JSON.parse(getCookie("activesource") || "{}")
-    if(cookie?.front || cookie?.back){
+    const cookie = JSON.parse(getCookie("activesource") || "{}");
+    if (cookie?.front || cookie?.back) {
       setCustomization({
         ...customization,
         frontLogo: cookie.front?.image,
         backLogo: cookie.back?.image,
-      })         
-    }   
-  }, [])
+      });
+    }
+  }, []);
 
-  if (!activeColor) return null
+  if (!activeColor) return null;
 
   return (
     <Stack>
@@ -220,7 +219,7 @@ const ProductCustomize = ({
                 label="Front"
                 src={activeColor?.front_placement}
                 name="front"
-                selected={ activeImage?.src === activeColor?.front_placement }
+                selected={activeImage?.src === activeColor?.front_placement}
                 handleClick={handlePreviewClick}
               />
             )}
@@ -228,7 +227,7 @@ const ProductCustomize = ({
               <ImagePreview
                 label="Back"
                 src={activeColor?.back_placement}
-                selected={ activeImage?.src === activeColor?.back_placement }
+                selected={activeImage?.src === activeColor?.back_placement}
                 name="back"
                 handleClick={handlePreviewClick}
               />
@@ -237,21 +236,21 @@ const ProductCustomize = ({
         </Stack>
       )}
     </Stack>
-  )
-}
+  );
+};
 
-export default ProductCustomize
+export default ProductCustomize;
 
 const sx = {
   container: {
     my: 1,
   },
   thumbnail: {
-    borderRadius: '8px',
+    borderRadius: "8px",
     objectFit: "contain",
   },
   activeThumbnail: {
-    border: '1px solid black'
+    border: "1px solid black",
   },
   cardActionArea: {
     p: 0,
@@ -287,4 +286,4 @@ const sx = {
     width: "20px",
     color: "text.primary",
   },
-}
+};

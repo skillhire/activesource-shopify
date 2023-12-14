@@ -8,10 +8,7 @@ const ColorOption = ({
   ...props
 }) => {
   return (
-    <IconButton
-      sx={sx.button}
-      onClick={() => handleClick(color)}
-    >
+    <IconButton sx={sx.button} onClick={() => handleClick(color)}>
       <Box
         sx={{
           ...sx.color,
@@ -31,7 +28,7 @@ export default ColorOption;
 
 const sx = {
   button: {
-    p: 0,    
+    p: 0,
     minWidth: 0,
     borderRadius: "100%",
   },

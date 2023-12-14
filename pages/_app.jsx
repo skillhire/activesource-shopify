@@ -3,11 +3,11 @@ import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CustomizeProvider, SegmentProvider, ShopProvider } from "context";
 import { theme } from "theme";
-import { AuthFromCookie } from 'components'
+import { AuthFromCookie } from "components";
 import { SEGMENT_WRITE_KEY } from "constants/shop";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import "react-multi-carousel/lib/styles.css"
+import "react-multi-carousel/lib/styles.css";
 
 export default function ShopJs({ Component, pageProps }) {
   useEffect(() => {

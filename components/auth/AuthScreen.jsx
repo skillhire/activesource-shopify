@@ -37,7 +37,6 @@ export const SIGNIN_OR_SIGNUP_TABS = [
 ];
 
 const AuthScreen = ({ children }) => {
-
   return (
     <Layout sx={sx.root}>
       <Grid container sx={sx.root}>
@@ -47,7 +46,7 @@ const AuthScreen = ({ children }) => {
         <Grid item xs={12} sm={12} md={6} sx={sx.formContainer}>
           <Logo black />
           <Stack sx={sx.form} spacing={4}>
-            { children }
+            {children}
           </Stack>
         </Grid>
       </Grid>

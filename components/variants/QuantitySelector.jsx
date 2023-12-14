@@ -17,38 +17,38 @@ const QuantitySelector = ({
     }
   };
 
-  return (    
-    <ButtonGroup 
-      sx={{ 
-        ...sx.buttonGroup, 
-        ...(small && sx.buttonGroupSmall)
+  return (
+    <ButtonGroup
+      sx={{
+        ...sx.buttonGroup,
+        ...(small && sx.buttonGroupSmall),
+      }}
+    >
+      <Button
+        sx={{
+          ...sx.button,
+          ...(small && sx.buttonSmall),
         }}
-      >
-      <Button 
-        sx={{ 
-          ...sx.button, 
-          ...(small && sx.buttonSmall)
-        }} 
-        size="small" 
+        size="small"
         onClick={removeQuantity}
       >
         <Remove sx={sx.icon} />
       </Button>
-      <Button 
-        sx={{ 
-          ...sx.button, 
-          ...(small && sx.buttonSmall)
-        }}  
+      <Button
+        sx={{
+          ...sx.button,
+          ...(small && sx.buttonSmall),
+        }}
         size="small"
       >
         <Typography variant="body2">{quantity}</Typography>
       </Button>
-      <Button 
-        sx={{ 
-          ...sx.button, 
-          ...(small && sx.buttonSmall)
-        }} 
-        size="small" 
+      <Button
+        sx={{
+          ...sx.button,
+          ...(small && sx.buttonSmall),
+        }}
+        size="small"
         onClick={addQuantity}
       >
         <Add sx={sx.icon} />
@@ -59,7 +59,7 @@ const QuantitySelector = ({
 
 export default QuantitySelector;
 
-const sx = {  
+const sx = {
   icon: {
     fontSize: 20,
     opacity: 0.5,
@@ -68,22 +68,22 @@ const sx = {
     maxWidth: "150px",
     border: "1px solid",
     borderColor: "primary.light",
-    borderRadius: 10,    
+    borderRadius: 10,
   },
   buttonGroupSmall: {
-    height: '32px'
+    height: "32px",
   },
-  button: {    
+  button: {
     p: 0,
     width: "30px",
     minWidth: "30px",
-    border: "none",    
+    border: "none",
     "&:hover": {
       border: "none",
     },
   },
-  buttonSmall: {    
-    height: '32px',
-    minHeight: '32px',    
-  }
+  buttonSmall: {
+    height: "32px",
+    minHeight: "32px",
+  },
 };

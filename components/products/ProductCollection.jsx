@@ -55,5 +55,5 @@ export default ProductCollection;
 
 const sx = {
   root: { py: 2 },
-  gridContainer: { margin: "0 auto", maxWidth: { xs: 265 } }
+  gridContainer: { margin: "0 auto", maxWidth: { xs: 265 } },
 };

@@ -1,11 +1,23 @@
 import React from "react";
 import { Box, Container, Typography } from "@mui/material";
+import Image from "next/image";
 
-const Page = ({ title, subtitle, body, html = false, ...props }) => {
+const Page = ({ title, subtitle, image, body, html = false, ...props }) => {
   return (
     <Box sx={sx.root}>
-      <Container maxWidth="md">
-        <Typography variant="h2" sx={sx.title}>
+      <Image
+        src={image}
+        width={1200}
+        height={300}
+        alt={title}
+        style={{
+          width: "100%",
+          objectFit: "cover",
+        }}
+        responsive
+      />
+      <Container maxWidth="sm">
+        <Typography variant="h4" sx={sx.title}>
           {title}
         </Typography>
         {subtitle && (
@@ -14,9 +26,13 @@ const Page = ({ title, subtitle, body, html = false, ...props }) => {
           </Typography>
         )}
         {html ? (
-          <Box dangerouslySetInnerHTML={{ __html: body }} />
+          <Typography
+            variant="body2"
+            sx={sx.text}
+            dangerouslySetInnerHTML={{ __html: body }}
+          />
         ) : (
-          <Typography variant="body1" sx={sx.text}>
+          <Typography variant="body2" sx={sx.text}>
             {body}
           </Typography>
         )}
@@ -32,10 +48,8 @@ const sx = {
     my: 8,
   },
   title: {
-    textAlign: "center",
-  },
-  subtitle: {
-    textAlign: "center",
+    mt: 6,
+    mb: 4,
   },
   text: {
     whiteSpace: "pre-wrap",

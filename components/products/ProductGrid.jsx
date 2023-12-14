@@ -26,24 +26,20 @@ const ProductGrid = ({
   return (
     <Stack alignItems="center" py={2}>
       <Grid container spacing={1} {...props}>
-        {products && !loading && products.map((product) => (
-          <Grid
-            item
-            xs={xs}
-            sm={sm}
-            md={md}
-            lg={lg}
-            xl={xl}
-            key={product.id}
-          >
-            <ProductCard product={product} handleClick={handleClick} />
-          </Grid>
-        ))}
-        {products && loading && [...Array(12)].map((_, i) => (
-          <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} key={i}>
-            <ProductSkeleton />
-          </Grid>
-        ))}
+        {products &&
+          !loading &&
+          products.map((product) => (
+            <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} key={product.id}>
+              <ProductCard product={product} handleClick={handleClick} />
+            </Grid>
+          ))}
+        {products &&
+          loading &&
+          [...Array(12)].map((_, i) => (
+            <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} key={i}>
+              <ProductSkeleton />
+            </Grid>
+          ))}
       </Grid>
     </Stack>
   );

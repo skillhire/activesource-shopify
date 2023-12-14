@@ -9,6 +9,23 @@ const PageFragment = gql`
     bodySummary
     createdAt
     updatedAt
+    metafields(identifiers: [{ namespace: "custom", key: "image" }]) {
+      id
+      key
+      value
+      namespace
+      description
+      reference {
+        ... on MediaImage {
+          image {
+            id
+            altText
+            src
+            url
+          }
+        }
+      }
+    }
   }
 `;
 

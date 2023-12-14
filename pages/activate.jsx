@@ -1,9 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import {
-  AuthScreen,
-  ActivateCustomer 
-} from "components";
+import { AuthScreen, ActivateCustomer } from "components";
 
 const Reset = () => {
   const router = useRouter();

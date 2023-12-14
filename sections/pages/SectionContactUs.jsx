@@ -5,7 +5,7 @@ const SectionFeaturedSolutions = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/pages/enterprise-solutions`);
+    router.push(`/contact-us`);
   };
 
   return (
@@ -13,7 +13,7 @@ const SectionFeaturedSolutions = () => {
       <Container maxWidth="lg">
         <Stack spacing={2} alignItems="center" textAlign="center">
           <Typography variant="h3">
-            Are you a large business looking for custom solutions?
+            Lorem ipsum dolor sit amet consectetur adipiscing elit
           </Typography>
           <Typography variant="body1">
             Talk to our representative for more details on custom solutions
@@ -26,7 +26,7 @@ const SectionFeaturedSolutions = () => {
               onClick={handleClick}
               sx={sx.button}
             >
-              Explore Enterprise Solutions
+              Contact Us Now
             </Button>
           </Box>
         </Stack>
@@ -36,7 +36,9 @@ const SectionFeaturedSolutions = () => {
 };
 
 const sx = {
-  root: { background: (theme) => theme.palette.gradient.main },
+  root: {
+    background: (theme) => theme.palette.gradient.main,
+  },
   button: {
     width: {
       sm: "auto",

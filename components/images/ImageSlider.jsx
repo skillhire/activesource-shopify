@@ -47,10 +47,8 @@ const ImageSlider = ({
           </CardActionArea>
         ))}
       </Stack>
-      <Box>        
-        <ImageWithLogo 
-          activeImage={activeImage}
-        />                  
+      <Box>
+        <ImageWithLogo activeImage={activeImage} />
       </Box>
     </Box>
   );
@@ -126,8 +124,8 @@ const sx = {
     width: "auto",
   },
   image: {
-    position: 'relative',
-    objectFit: 'contain'
+    position: "relative",
+    objectFit: "contain",
   },
   logo: {
     position: "absolute",
@@ -135,4 +133,3 @@ const sx = {
     left: 0,
   },
 };
-
