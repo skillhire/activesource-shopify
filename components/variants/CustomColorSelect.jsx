@@ -1,0 +1,57 @@
+import { Box, Typography } from "@mui/material";
+import ColorOption from "./ColorOption";
+
+const CustomColorSelect = ({ colors, activeColor, handleClick, ...props }) => {
+  return (
+    <Box sx={sx.root}>
+      <Typography variant="subtitle1" sx={sx.label}>
+        Color
+      </Typography>
+      <Box sx={sx.optionsContainer}>
+        {colors?.map((color, i) => (
+          <ColorOption
+            key={i}
+            color={color}
+            activeColor={activeColor}
+            handleClick={handleClick}
+          />
+        ))}
+      </Box>
+      { activeColor && (
+        <Typography variant="caption" sx={sx.colorLabel}>
+          Color: {activeColor?.name}
+        </Typography>
+      )}      
+    </Box>
+  );
+};
+
+export default CustomColorSelect;
+
+const sx = {
+  root: {
+    p: 0,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    width: "100%",
+  },
+  label: {
+    minWidth: "100px",
+    height: "100%",
+    justifyContent: "flex-start",
+    mb: 1,
+  },
+  colorLabel: {
+    mt: 1
+  },
+  optionsContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    width: "100%",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
+    gap: "10px",
+  },
+};
