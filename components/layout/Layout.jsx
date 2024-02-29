@@ -5,7 +5,7 @@ import { Box, Container } from "@mui/material";
 export default function Layout({
   children,
   maxWidth,
-  metaTitle = "Active Source Lab | Custom Men's Brands that Tell Your Story",
+  metaTitle = "Active Source Lab | Apparel for Fitness Studios",
   metaDescription = "Discover Active Source's smarter way to customize and craft designs that reflect the story of your most important partnership",
   metaKeywords,
   metaImage,

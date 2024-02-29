@@ -36,9 +36,7 @@ const CartLineItem = ({ lineItem }) => {
   const [color, setColor] = useState(null);
   const [size, setSize] = useState(null);
   const [frontPreview, setFrontPreview] = useState(null);
-  const [frontLogo, setFrontLogo] = useState(null);
   const [backPreview, setBackPreview] = useState(null);
-  const [backLogo, setBackLogo] = useState(null);
 
   const handleQuantityChange = async (newQuantity) => {
     if (quantity == 0) {
@@ -127,7 +125,14 @@ const CartLineItem = ({ lineItem }) => {
       >
         <ListItemButton sx={sx.listItemButton} disableRipple disableGutters>
           <ListItemIcon sx={sx.thumbnail}>
-            <Image src={src} height={120} width={120} style={styles.image} />
+            { frontPreview && (
+              <Image 
+                src={frontPreview} 
+                height={120} 
+                width={120} 
+                style={styles.image} 
+              />
+            )}
           </ListItemIcon>
           <ListItemText
             sx={sx.text}

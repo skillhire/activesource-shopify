@@ -39,7 +39,7 @@ const Cart = ({ styles }) => {
             Taxes and shipping calculated at checkout
           </Typography>
           <Typography variant="caption" sx={sx.note}>
-            By proceeding to checkout, I acknowledge and agree to Active Source Lab's <Link href="/terms-of-service" target="_blank">Terms of Service</Link> and <Link href="/terms-of-service" target="_blank">Privacy Policy</Link>.
+            By proceeding to checkout, I acknowledge and agree to Active Source Lab's <Link href="/terms-of-service" target="_blank">Terms of Service</Link> and <Link href="/privacy-policy" target="_blank">Privacy Policy</Link>.
           </Typography>
           </Box>
         </Box>

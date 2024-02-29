@@ -131,7 +131,7 @@ const FileUploader = ({ label, disablePlacement=false, name, handleClick, handle
           </Button>
         </Stack>
         <Link variant="overline" color="text.secondary" href="/placement-guide" target="_blank">
-          Placement Guide
+          Custom Placement
         </Link>
       </Stack>
       )}
@@ -163,7 +163,7 @@ const FileUploader = ({ label, disablePlacement=false, name, handleClick, handle
             onChange={handleChange}
           />
         </Stack>
-        <Typography variant="caption">
+        <Typography variant="overline">
           <b>File requirements:</b> PNG format with transparency, less than 5Mb, 300 PPI resolution
         </Typography>
       </Stack>

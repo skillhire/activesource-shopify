@@ -152,6 +152,8 @@ export const HOODIE_PLACEMENTS = {
       left: "21.54%",
       height: "71.41%",
       width: "57.03%",
+      widthInches: 14,
+      heightInches: 17.5
     },
     {
       id: "B02",
