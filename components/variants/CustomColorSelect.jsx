@@ -52,6 +52,6 @@ const sx = {
     "&::-webkit-scrollbar": {
       display: "none",
     },
-    gap: "10px",
+    gap: "6px",
   },
 };

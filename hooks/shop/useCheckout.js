@@ -15,7 +15,7 @@ import {
 import { setCookie, getCookie } from "cookies-next";
 
 const useCheckout = (props) => {
-  const { checkout, setCheckout, setLineItemTotal } = useContext(ShopContext);
+  const { checkout, setCheckout, lineItemTotal, setLineItemTotal } = useContext(ShopContext);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -288,6 +288,7 @@ const useCheckout = (props) => {
     checkoutLineItemsUpdate,
     checkoutDiscountCodeApply,
     checkoutDiscountCodeRemove,
+    lineItemTotal
   };
 };
 

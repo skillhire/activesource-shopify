@@ -1,5 +1,5 @@
 import React from "react";
-import { CardActionArea, Stack } from "@mui/material";
+import { Typography, CardActionArea, Stack } from "@mui/material";
 import Image from "next/image";
 import Canvas from "./Canvas";
 
@@ -50,18 +50,23 @@ const ImageSlider = ({
 
   return (
     <Stack direction="row" spacing={3} sx={sx.root}>
-      <Stack sx={sx.thumbnails} spacing={1}>
-        {images?.map((image) => (
-          <Thumbnail 
-            key={image.id}
-            height={thumbnailSize}
-            width={thumbnailSize}
-            image={image}
-            activeImage={activeImage}
-            handleClick={handleClick}
-          />
-        ))}
-      </Stack>      
+        <Stack direction="column" spacing={1}>
+          <Typography variant="button">
+            Product Photos 
+          </Typography>
+          <Stack sx={sx.thumbnails} spacing={1}>
+          {images?.map((image) => (
+            <Thumbnail 
+              key={image.id}
+              height={thumbnailSize}
+              width={thumbnailSize}
+              image={image}
+              activeImage={activeImage}
+              handleClick={handleClick}
+            />
+          ))}
+        </Stack>      
+      </Stack>
       <Canvas 
         enableZoom 
         activeImage={activeImage} 
@@ -110,7 +115,12 @@ const sx = {
       display: "none",
     },
   },
+  thumbnail: {
+    border: '1px solid',
+    borderColor: "transparent",
+  },
   activeThumbnail: {
+    border: '1px solid',
     borderColor: "primary.main",
   },
   cardActionArea: {

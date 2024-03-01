@@ -5,13 +5,13 @@ import { Box, Stack, Typography } from "@mui/material";
 import { formatCurrency } from "utils";
 
 const CartLineItemTotals = () => {
-  const { checkout } = useCheckout();
-
+  const { checkout, lineItemTotal } = useCheckout();
+  
   return (
     <Box width="100%" sx={sx.root}>
       <Stack direction="row" sx={sx.container}>
         <Typography variant="body1" sx={sx.label}>
-          Total:
+          Total ({lineItemTotal} item{lineItemTotal > 1 ? "s" : ""}):
         </Typography>
         <>&nbsp;</>
         <Typography variant="body1">

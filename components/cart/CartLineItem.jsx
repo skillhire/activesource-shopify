@@ -29,6 +29,7 @@ const CartLineItem = ({ lineItem }) => {
 
   const {
     product,
+    selectedOptions,
     price: { amount },
     image: { src },
   } = variant || {};
@@ -95,10 +96,6 @@ const CartLineItem = ({ lineItem }) => {
 
   useEffect(() => {
     if (customAttributes) {
-      const _color = customAttributes.find(
-        (attribute) => attribute.key === "color"
-      );
-      setColor(_color?.value);
       setFrontPreview(
         customAttributes.find((attribute) => attribute.key === "_print_preview_1")?.value
       );
@@ -107,6 +104,15 @@ const CartLineItem = ({ lineItem }) => {
       );
     }
   }, [customAttributes]);
+
+  useEffect(() => {
+    if (selectedOptions) {
+      const _color = selectedOptions.find(
+        (option) => option.name == "Color"
+      );
+      setColor(_color?.value);
+    }
+  }, [selectedOptions])
 
   return (
     <Box sx={sx.root}>
@@ -146,7 +152,7 @@ const CartLineItem = ({ lineItem }) => {
               </Typography>
             }
             secondary={
-              <>
+              <Stack direction="column">
               {color && (
                 <Typography variant="overline" color="text">
                   Color: {color}
@@ -169,7 +175,7 @@ const CartLineItem = ({ lineItem }) => {
                   </Box>
                 </Typography>
               </Stack>
-            </>
+            </Stack>
             }
           />
         </ListItemButton>

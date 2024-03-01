@@ -37,13 +37,15 @@ const sx = {
     p: 0,
     minWidth: 0,
     borderRadius: "100%",
+    border: "2px solid",
+    borderColor: "transparent",
   },
   buttonSelected: {
-    border: "1px solid",
+    border: "2px solid",
     borderColor: "primary.main",
   },
   selected: {
-    border: "1px solid",
+    border: "2px solid",
     borderColor: "common.white",
   },
   color: {
