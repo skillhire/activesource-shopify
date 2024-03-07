@@ -107,8 +107,8 @@ export const HOODIE_PLACEMENTS = {
       title: "Left Chest",
       dimensions: '3.5"x3.5"',
       previewSrc: Front8,
-      top: "24.47%",
-      left: "62.23%",
+      top: "20.41%",
+      left: "58.17%",
       height: "14.21%",
       width: "14.21%",
       widthInches: 3.5,
@@ -118,14 +118,14 @@ export const HOODIE_PLACEMENTS = {
       id: "F09",
       code: "LC",
       title: "Left Chest",
-      dimensions: '4.5"x1.5"',
+      dimensions: '4.5"x4.5"',
       previewSrc: Front9,
       top: "24.47%",
       left: "58.14%",
-      height: "6.09%",
+      height: "18.28%",
       width: "18.28%",
       widthInches: 4.5,
-      heightInches: 1.5
+      heightInches: 4.5
     },
     {
       id: "F10",
