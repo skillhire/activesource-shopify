@@ -18,11 +18,6 @@ export default class MyDocument extends Document {
           <script src="//embed.typeform.com/next/embed.js"></script>
           <script async src="https://www.googletagmanager.com/gtag/js?id=Tag_ID"></script>
           <script type="text/javascript" src="/scripts/google-analytics.js"></script>
-          <script 
-            type="text/javascript"
-            src="https://contact.gorgias.help/api/contact-forms/loader.js?uid=0hfeb3z6&locale=en-US"
-            data-gorgias-contact-form="script"
-          />
         </Head>
         <body>
           <Main />
