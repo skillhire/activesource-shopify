@@ -17,11 +17,14 @@ const ProductEnquireEnterpriseModal = (props) => {
   } = props || {};
 
   const [contactInfo, setContactInfo] = useState(DEFAULT_CONTACT_INFO);
+  const updateContactInfo = (field) => setContactInfo({
+    ...contactInfo,
+    [field.target.name]: field.target.value}
+  );
 
   return (
     <Modal
       open={open}
-      maxWidth={false}
       actions={
         <Box sx={sx.actions}>
           <Button
@@ -43,10 +46,7 @@ const ProductEnquireEnterpriseModal = (props) => {
         </Typography>
         <EnterpriseContactForm
           contactInfo={contactInfo}
-          handleChange={(field) => setContactInfo({
-            ...contactInfo,
-            [field.target.name]: field.target.value}
-          )}
+          handleChange={updateContactInfo}
         />
       </Box>
     </Modal>
@@ -66,29 +66,19 @@ const sx = {
       xs: 2,
       sm: 6,
     },
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
   },
   title: {
     textAlign: "center",
     mb: 5.5,
   },
   actions: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
     width: "100%",
-    mx: {
+    px: {
       xs: 2,
-      sm: 0,
+      sm: 6,
     },
   },
   confirmButton: {
     width: "100%",
-    maxWidth: 467,
   },
 };

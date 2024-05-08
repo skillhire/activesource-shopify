@@ -1,10 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Box, TextField, InputLabel } from "@mui/material";
+import { Box, Stack, TextField, InputLabel } from "@mui/material";
 
 const EnterpriseContactForm = ({ contactInfo, handleChange }) => {
   return (
-    <Box sx={sx.boxContainer}>
+    <Stack>
       <Box>
         <InputLabel sx={sx.fieldLabel} for="name">Your Name</InputLabel>
         <TextField
@@ -51,27 +50,14 @@ const EnterpriseContactForm = ({ contactInfo, handleChange }) => {
           onChange={handleChange}
         />
       </Box>
-    </Box>
+    </Stack>
   );
-};
-
-EnterpriseContactForm.propTypes = {
-  loading: PropTypes.bool,
-  contactInfo: PropTypes.object.isRequired,
-  handleChange: PropTypes.func.isRequired,
 };
 
 export default EnterpriseContactForm;
 
 const sx = {
   root: {},
-  boxContainer: {
-    my: 2,
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    maxWidth: "487px",
-  },
   fieldLabel: {
     color: "text.primary",
     fontSize: 16,
@@ -87,7 +73,7 @@ const sx = {
       fontWeight: "normal",
     },
     ".MuiInputBase-root.MuiFilledInput-underline": {
-      borderRadius: "5px",
+      borderRadius: 1,
       "&:before, &:after, &:hover:after, &:hover:before": {
         borderBottom: 0,
       },
