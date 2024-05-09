@@ -27,23 +27,25 @@ const Product = () => {
   const { handle } = router.query
 
   const { 
+    activeImage,
+    setActiveImage,
+    activePlacement,
+    setActivePlacement,
+    activeColor,
+    setActiveColor,
     customization, 
     setCustomization 
   } = useContext(CustomizeContext)
 
   const { trackProductViewed } = useSegment()
 
-  const [zoom, setZoom] = useState(false)
-  const [activeImage, setActiveImage] = useState()
-  const [activePlacement, setActivePlacement] = useState({})
+  const [zoom, setZoom] = useState(false)  
   const [placements, setPlacements] = useState(SHIRT_PLACEMENTS)
   const [selectedOptions, setSelectedOptions] = useState({})
   const [addToCartDisabled, setAddToCartDisabled] = useState(false)
 
   const [openModal, setOpenModal] = useState(false)
   const [frontOrBack, setFrontOrBack] = useState("front")
-
-  const [activeColor, setActiveColor] = useState()
 
   const { loading, product, recommendedProducts, images, fetchProduct } =
     useProducts()
@@ -70,20 +72,19 @@ const Product = () => {
 
   const handlePreviewClick = (imgSrc, frontOrBack) => {
     window.scrollTo({ top: 0, behavior: "smooth" })
+    setFrontOrBack(frontOrBack)
     setActiveImage({
       id: frontOrBack,
-      url: imgSrc,
-      isFront: frontOrBack == "front" ? true : false,
-      isBack: frontOrBack == "back" ? true : false,
+      url: imgSrc
     })
   }
 
   const handleImageClick = (image) => {
-    if (image?.id === activeImage?.id) {
+    if(image?.url == activeImage?.url){
       setZoom(true)
-    } else {
+    }else{
       setActiveImage(image)
-    }
+    }    
   }
 
   const handleClose = () => {
@@ -234,10 +235,12 @@ const Product = () => {
   useEffect(() => {
     if (activeColor) {
       setActiveImage({
-        id: "front",
         url: activeColor?.front_placement,
-        isFront: true,
-        isBack: false,
+      })
+      setCustomization({
+        ...customization,
+        print_background_1: activeColor?.front_placement,
+        print_background_2: activeColor?.back_placement,
       })
       // Select the product color option that
       // matches the meta color name field. This is necessary
@@ -254,7 +257,7 @@ const Product = () => {
     if(!activeColor && product){
       let colors = getProductColors(product)
       if(colors.length > 0){
-        setActiveColor(colors[0])
+        setActiveColor(colors[0])        
       }
     }
   }, [activeColor, product])

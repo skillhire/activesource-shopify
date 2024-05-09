@@ -33,5 +33,6 @@ export { default as usePage } from "hooks/shop/metaobjects/usePage";
 export { default as useColors } from "hooks/shop/metaobjects/useColors";
 
 // App
-export { default as useBitly } from "hooks/app/useBitly";
+export { default as useCanvas } from "hooks/app/useCanvas";
+export { default as useCustomization } from "hooks/app/useCustomization";
 export { default as useCloudinary } from "hooks/app/useCloudinary";

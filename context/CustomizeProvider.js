@@ -3,6 +3,18 @@ import { CustomizeContext } from "context";
 
 const CustomizeProvider = ({ children, ...rest }) => {
 
+  const [activeColor, setActiveColor] = useState()
+  const [activeImage, setActiveImage] = useState({ url: null });
+  const [activePlacement, setActivePlacement] = useState({
+    code: null,
+    yPos: null, // Interger value in percentages
+    xPos: null,
+    width: null,
+    height: null,
+    printWidth: null, // Float value in inches
+    printHeight: null
+  })
+
   const [customization, setCustomization] = useState({    
     print_sku: null,    
     print_location_1: null, // Specific code for the warehous such as CF, FB
@@ -35,6 +47,12 @@ const CustomizeProvider = ({ children, ...rest }) => {
     },
   });
   const value = {
+    activeColor,
+    setActiveColor,
+    activeImage,
+    setActiveImage, 
+    activePlacement,
+    setActivePlacement,
     customization,
     setCustomization,
   };

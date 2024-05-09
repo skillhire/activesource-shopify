@@ -5,7 +5,7 @@ import NextImage from "next/image";
 import { dataURLtoFile, cloudinaryResizeImage, shopifyResizeImage } from "utils";
 import Zoom from 'react-medium-image-zoom'
 import { Close } from '@mui/icons-material'
-import { useCloudinary } from "hooks";
+import { useCustomization, useCloudinary } from "hooks";
 import {
   CLOUDINARY_CLOUD_NAME,
   CLOUDINARY_API_KEY,
@@ -15,6 +15,16 @@ import {
 const IMAGE_HEIGHT = 1600
 const IMAGE_WIDTH = 1600
 const PIXELS_PER_INCH = 300
+
+const DEFAULT_PLACEMENT = {
+  code: 'CF',
+  width: 100,
+  height: 100,
+  left: 0,
+  top: 0,
+  printWidth: 15,
+  printHeight: 15
+}
 
 const CanvasImage = ({ src }) => (
   <NextImage 
@@ -30,16 +40,16 @@ const CanvasImage = ({ src }) => (
   />  
 )
 
-const Canvas = ({ activeImage, enableZoom=false, ...props }) => {
+const Canvas = ({ enableZoom=false, ...props }) => {
   
   const { 
+    activeImage,
+    setActiveImage,
     customization, 
     setCustomization 
   } = useContext(CustomizeContext);
 
   const canvasRef = useRef(null);
-
-  const [dataURL, setDataURL] = useState()
   
   const { unsignedUpload } = useCloudinary({
     cloudName: CLOUDINARY_CLOUD_NAME,
@@ -47,112 +57,158 @@ const Canvas = ({ activeImage, enableZoom=false, ...props }) => {
     uploadPreset: CLOUDINARY_UPLOAD_PRESET,
   });
 
-  // Resize the logo to the actual print size, assuming an image of 72dpi
-  const handleResizePrintLogo = (logo, width, height) => {
-    return new Promise((resolve, reject) => {
-      let img = new Image();
-      img.src = logo;
-      let url = '';
-      img.onload = () => {
-        // Resize the image to print at 300 DPI (PPI). Cloudinary 
-        // maintains the aspect ratio and will pad the image not stretch it
-        // using the transform 'pad' option
-        let widthPixels = parseInt(width * PIXELS_PER_INCH)
-        let heightPixels = parseInt(height * PIXELS_PER_INCH)
-        url = cloudinaryResizeImage(logo, { width: widthPixels, height: heightPixels })
-        resolve(url)
-      }    
-      img.onerror = () => {
-        reject(new Error('Image failed to load'));
-      };
-    });
+  const resizeCloudinaryImage = (image, placement) => {
+    const width = parseInt(parseFloat(placement.width) / 100 * IMAGE_WIDTH);
+    const height = parseInt(parseFloat(placement.height) / 100 * IMAGE_HEIGHT);  
+    return cloudinaryResizeImage(image, { width, height })   
   }
 
-  const renderCanvasImage = async (logo, placement, isFront=true) => {
-    const image = new Image();
-    image.crossOrigin="anonymous" // Required to export canvas image
-    const canvas = canvasRef.current
-    const ctx = canvas?.getContext('2d')    
-    const width = parseInt(parseFloat(placement.width) / 100 * IMAGE_WIDTH);
-    const height = parseInt(parseFloat(placement.height) / 100 * IMAGE_HEIGHT);
-    image.src = cloudinaryResizeImage(logo, { width, height })   
-    let imageSrc 
-    image.onload = async () => {
-      const width = parseFloat(placement.width) / 100 * IMAGE_WIDTH;
-      const height = parseFloat(placement.height) / 100 * IMAGE_HEIGHT;  
-      const xPos = parseFloat(placement.left) / 100 * IMAGE_WIDTH;
-      const yPos = parseFloat(placement.top) / 100 * IMAGE_HEIGHT;
-      ctx.drawImage(image, xPos, yPos, width, height)
-      imageSrc = canvas.toDataURL("image/png")
-      setDataURL(imageSrc)   
-      let file = dataURLtoFile(imageSrc, "logo.png")
-      let cloudinary = await unsignedUpload(file, "image.png")  
-      let printResizedLogo = await handleResizePrintLogo(logo, placement.widthInches, placement.heightInches)
-      if(isFront){        
-        setCustomization({
-          ...customization,
-          print_url_1: printResizedLogo, 
-          print_preview_1: cloudinary?.data?.secure_url,
-          file_extension_1: 'png'
-        })
-      }else{
-        setCustomization({
-          ...customization,
-          print_url_2: printResizedLogo, 
-          print_preview_2: cloudinary?.data?.secure_url,
-          file_extension_2: 'png'
-        })
+  const resizeShopifyImage = (image, height=IMAGE_HEIGHT, width=IMAGE_WIDTH) => {
+    return shopifyResizeImage(image, height, width)
+  }
+
+  const resizePrintUrl = (image, widthInches, heightInches) => {
+    return cloudinaryResizeImage(image, { 
+      width: widthInches * PIXELS_PER_INCH, 
+      height: heightInches * PIXELS_PER_INCH
+    })
+  }
+
+  const handleUploadToCloudinary = async (dataUrl) => {
+    let file = dataURLtoFile(dataUrl, "logo.png")
+    let cloudinary = await unsignedUpload(file, "image.png")        
+    let previewUrl = cloudinary?.data?.secure_url
+    return previewUrl 
+  }
+
+  const renderCanvasImage = async (resizedImage, placement=DEFAULT_PLACEMENT) => {
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.crossOrigin="anonymous" // Required to export canvas image
+      const canvas = canvasRef.current
+      const ctx = canvas?.getContext('2d')    
+      image.src = resizedImage
+      let imageSrc 
+      image.onload = async () => {
+        const width = parseFloat(placement.width) / 100 * IMAGE_WIDTH;
+        const height = parseFloat(placement.height) / 100 * IMAGE_HEIGHT;  
+        const xPos = parseFloat(placement.left) / 100 * IMAGE_WIDTH;
+        const yPos = parseFloat(placement.top) / 100 * IMAGE_HEIGHT;
+        ctx.drawImage(image, xPos, yPos, width, height)
+        imageSrc = canvas.toDataURL("image/png")      
+        setActiveImage({ url: imageSrc })   
+        return resolve(imageSrc)
+      }     
+    }) 
+  }
+
+  const renderCompositeImage = async (logo, background, placement) => {
+
+    // You need an overlay image, background image, and the placement data 
+    // to render a composite image.
+    if(logo && background && placement){      
+
+      // First resize the images. We assume the background image is  
+      // a Shopify product image and the logo is a Cloudinary image. 
+      let backgroundSrc = resizeShopifyImage(background)
+      let logoSrc = resizeCloudinaryImage(logo, placement)
+
+      // First render the backround image to canvas with default placement 
+      // at 0,0 coordinates and 100% height and width
+      await renderCanvasImage(backgroundSrc)
+      
+      // Render the logoSrc image and return the generated previewImage 
+      let imageSrc = await renderCanvasImage(logoSrc, placement)
+
+      // Upload the previewUrl to Cloudinary. 
+      let previewUrl = await handleUploadToCloudinary(imageSrc)
+
+      // Generate the printUrl last 
+      let printUrl = resizePrintUrl(logo, placement.printWidth, placement.printHeight)
+            
+      return {
+        printUrl,
+        previewUrl
       }
     }
-    return imageSrc
   }
 
-  useEffect(() => {     
-    const image = new Image();
-    image.crossOrigin="anonymous" 
-    image.src = shopifyResizeImage(activeImage?.url, IMAGE_HEIGHT, IMAGE_WIDTH)
-    image.onload = () => {
-      const canvas = canvasRef.current
-      const ctx = canvas?.getContext('2d')
-      ctx.drawImage(image, 0, 0, IMAGE_HEIGHT, IMAGE_WIDTH)
-      setDataURL(canvas.toDataURL("image/png"))
-      if(activeImage?.isFront && customization?.print_logo_1 && customization?.print_placement_1){            
-        renderCanvasImage(          
-          customization?.print_logo_1,
-          customization?.print_placement_1, 
-          true       
-        )
-      }  
-      if(activeImage?.isBack && customization?.print_logo_2 && customization?.print_placement_2){            
-        renderCanvasImage(          
-          customization?.print_logo_2,
-          customization?.print_placement_2,    
-          false    
-        )
-      }    
-    }    
+
+  useEffect(() => {    
+    const { 
+      print_logo_1, 
+      print_background_1, 
+      print_placement_1 
+    } = customization || {}
+    
+    const {
+      printUrl,
+      previewUrl
+    } = renderCompositeImage(
+      print_logo_1, 
+      print_background_1, 
+      print_placement_1      
+    )    
+
+    setActiveImage({ url: previewUrl })
+    setCustomization({
+      ...customization,
+      print_url_1: printUrl,
+      print_preview_1: previewUrl
+    })
 
   }, [
-    activeImage, 
+    customization?.print_background_1,
     customization?.print_placement_1, 
     customization?.print_logo_1, 
-    customization?.print_placement_2,
+  ])
+
+  useEffect(() => {   
+    
+    const { 
+      print_logo_2, 
+      print_background_2, 
+      print_placement_2 
+    } = customization || {}
+
+    const {
+      printUrl,
+      previewUrl
+    } = renderCompositeImage(
+      print_logo_2, 
+      print_background_2, 
+      print_placement_2      
+    )    
+
+    setActiveImage({ url: previewUrl })
+    setCustomization({
+      ...customization,
+      print_url_2: printUrl,
+      print_preview_2: previewUrl
+    })
+    renderCompositeImage(
+      customization?.print_logo_2,
+      customization?.print_background_2,
+      customization?.print_placement_2
+    )    
+  }, [
+    customization?.print_background_2,
+    customization?.print_placement_2, 
     customization?.print_logo_2, 
   ])
 
-  if (!activeImage) return null;
   return (
     <Box sx={sx.root}>
-      { dataURL && (
+      { activeImage?.url && (
         enableZoom ? (
         <Zoom scale={4} IconUnzoom={Close}>
           <CanvasImage 
-            src={ dataURL }
+            src={ activeImage?.url }
           />
         </Zoom>
         ):(
           <CanvasImage 
-            src={ dataURL }
+            src={ activeImage?.url }
           />          
         )
       )}
