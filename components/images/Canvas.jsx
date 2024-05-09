@@ -5,7 +5,7 @@ import NextImage from "next/image";
 import { dataURLtoFile, cloudinaryResizeImage, shopifyResizeImage } from "utils";
 import Zoom from 'react-medium-image-zoom'
 import { Close } from '@mui/icons-material'
-import { useCustomization, useCloudinary } from "hooks";
+import { useCloudinary } from "hooks";
 import {
   CLOUDINARY_CLOUD_NAME,
   CLOUDINARY_API_KEY,
@@ -40,9 +40,11 @@ const CanvasImage = ({ src }) => (
   />  
 )
 
-const Canvas = ({ activeImage, enableZoom=false, ...props }) => {
+const Canvas = ({ enableZoom=false, ...props }) => {
   
   const { 
+    activeImage,
+    setActiveImage,
     customization, 
     setCustomization 
   } = useContext(CustomizeContext);
@@ -99,7 +101,7 @@ const Canvas = ({ activeImage, enableZoom=false, ...props }) => {
     }) 
   }
 
-  const renderCompositeImage = async (logo, background, placement) => {
+  const renderCompositeImage = async (logo, background, placement, isFront) => {
 
     // You need an overlay image, background image, and the placement data 
     // to render a composite image.
@@ -122,8 +124,23 @@ const Canvas = ({ activeImage, enableZoom=false, ...props }) => {
       // Generate the printUrl last 
       let printUrl = resizePrintUrl(logo, placement.printWidth, placement.printHeight)
       
+  
+      if(isFront){
+        setCustomization({
+          ...customization,
+          print_url_1: printUrl,
+          print_preview_1: previewUrl
+        })
+      }else{
+        setCustomization({
+          ...customization,
+          print_url_2: printUrl,
+          print_preview_2: previewUrl
+        })
+      }      
+    
       setActiveImage({
-        url: imageSrc 
+        url: previewUrl 
       })
 
       return {
@@ -132,6 +149,42 @@ const Canvas = ({ activeImage, enableZoom=false, ...props }) => {
       }
     }
   }
+
+  useEffect(() => {
+    const { print_logo_1, print_placement_1 } = customization || {}
+    if(print_logo_1 && print_placement_1){
+      let printUrl = resizePrintUrl(
+        print_logo_1, 
+        print_placement_1.printWidth, 
+        print_placement_1.printHeight
+      )
+      setCustomization({
+        ...customization,
+        print_url_1: printUrl
+      })
+    }
+  }, [
+    customization?.print_logo_1, 
+    customization?.print_placement_1
+  ])
+
+  useEffect(() => {
+    const { print_logo_2, print_placement_2 } = customization || {}
+    if(print_logo_2 && print_placement_2){
+      let printUrl = resizePrintUrl(
+        print_logo_2, 
+        print_placement_2.printWidth, 
+        print_placement_2.printHeight
+      )
+      setCustomization({
+        ...customization,
+        print_url_2: printUrl
+      })
+    }
+  }, [
+    customization?.print_logo_2, 
+    customization?.print_placement_2
+  ])
 
 
   useEffect(() => {    
@@ -142,20 +195,12 @@ const Canvas = ({ activeImage, enableZoom=false, ...props }) => {
       print_placement_1 
     } = customization || {}
 
-    const {
-      printUrl,
-      previewUrl
-    } = renderCompositeImage(
+    renderCompositeImage(
       print_logo_1, 
       print_background_1, 
-      print_placement_1      
+      print_placement_1,
+      true      
     )    
-
-    setCustomization({
-      ...customization,
-      print_url_1: printUrl,
-      print_preview_1: previewUrl
-    })
 
   }, [
     customization?.print_background_1,
@@ -171,40 +216,24 @@ const Canvas = ({ activeImage, enableZoom=false, ...props }) => {
       print_placement_2 
     } = customization || {}
 
-    const {
-      printUrl,
-      previewUrl
-    } = renderCompositeImage(
+    renderCompositeImage(
       print_logo_2, 
       print_background_2, 
-      print_placement_2      
+      print_placement_2,
+      false       
     )    
 
-    setCustomization({
-      ...customization,
-      print_url_2: printUrl,
-      print_preview_2: previewUrl
-    })
     renderCompositeImage(
       customization?.print_logo_2,
       customization?.print_background_2,
       customization?.print_placement_2
     )    
   }, [
-    customization?.print_background_2,
     customization?.print_placement_2, 
+    customization?.print_background_2,
     customization?.print_logo_2, 
   ])
   
-
-  const [src, setSrc] = useState()
-
-  useEffect(() => {
-    if(activeImage?.url){
-      setSrc(activeImage.url)
-    }
-  }, [activeImage?.url])
-
   return (
     <Box sx={sx.root}>
       {(activeImage?.url && enableZoom) && (

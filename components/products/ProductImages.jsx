@@ -1,8 +1,10 @@
 import { Hidden, Box } from "@mui/material";
 import { ImageCarousel, ImageSlider } from "components";
-import { useResponsive } from "hooks";
+import { useCustomization } from "hooks";
 
-const ProductImages = ({ images, activeImage, handleClick, ...props }) => {
+const ProductImages = ({ images, handleClick, ...props }) => {
+
+  const {activeImage} = useCustomization()
 
   return (
     <Box sx={sx.root}>

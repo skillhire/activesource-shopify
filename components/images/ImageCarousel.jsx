@@ -46,9 +46,7 @@ const ImageCarousel = ({
               onMouseDown={onMouseDown}
               onMouseUp={onMouseUp}
             >
-              <Canvas 
-                activeImage={activeImage} 
-              />
+              <Canvas />
             </CardActionArea>
           </Box>
           {images

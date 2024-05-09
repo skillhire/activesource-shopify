@@ -3,7 +3,6 @@ import { useProducts, useVariants, useSegment } from "hooks"
 import { useRouter } from "next/router"
 import { Box, Container, Grid } from "@mui/material"
 import {
-  Alert,
   Layout,
   ProductDetails,
   ProductImages,
@@ -23,7 +22,6 @@ import {
 
 const Product = () => {
   const router = useRouter()
-
   const { handle } = router.query
 
   const { 
@@ -53,7 +51,10 @@ const Product = () => {
   const { loading, product, recommendedProducts, images, fetchProduct } =
     useProducts()
 
-  const { variant, setVariant, variantImage } = useVariants({
+  const { 
+    variant, 
+    setVariant 
+  } = useVariants({
     product,
     selectedOptions,
   })
@@ -104,7 +105,7 @@ const Product = () => {
   const handleColorClick = (color) => {
     setActiveColor(color)                    
     setActiveImage({
-      url: color?.print_preview_1 || color?.front_placement 
+      url: customization?.print_preview_1 || color?.print_preview_1 || color?.front_placement 
     })
     let newCustomization = { ...customization }
     
@@ -132,14 +133,13 @@ const Product = () => {
       print_preview_2: print_preview_2 || newCustomization?.print_preview_2,
       print_location_2: print_location_2 || newCustomization?.print_location_2                    
     }        
-    setCustomization(newCustomization)  
 
-    // Select the product color option that
-    // matches the meta color name field. This is necessary
-    // to ensure the correct color / size SKU is assigned at checkout
+
+    setCustomization(newCustomization)  
+    
     setSelectedOptions({
       ...selectedOptions,
-      Color: activeColor?.name,
+      Color: color?.name,
     })
   }
 
@@ -210,21 +210,7 @@ const Product = () => {
       fetchProduct(handle)
     }
   }, [handle])
-
-  const handleAddToCartDisabled = () => {
-    const isBack = getMetaValue(product, "back_placement") == "true"
-    const isFront = getMetaValue(product, "front_placement") == "true"
-    const disabled =
-      !variant ||
-      (isFront && (!customization?.print_url_1 || !customization?.print_placement_1)) ||
-      (isBack && (!customization?.print_url_2 || !customization?.print_placement_2));
-    setAddToCartDisabled(disabled)
-  }
-
-  useEffect(() => {
-    handleAddToCartDisabled()
-  }, [product, customization, variant])
-
+  
   // Set values from encoded JWT URL param
   useEffect(() => {
     // Find the variant from the variantId
@@ -338,7 +324,6 @@ const Product = () => {
             <Grid item xs={12} md={7} lg={8}>
               <ProductImages
                 images={images}
-                activeImage={activeImage}
                 handleClick={handleImageClick}
                 zoom={zoom}
                 handleClose={handleClose}

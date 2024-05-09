@@ -27,6 +27,7 @@ const CustomizeProvider = ({ children, ...rest }) => {
     print_preview_1: null, // Logo + background preview image 
     print_type_1: 'DigitalPrint',
     print_logo_1: null, // The original uploaded logo 
+    file_extension_1: 'png',
     print_placement_1: {
       code: null,
       yPos: null, // Interger value in percentages
@@ -40,7 +41,8 @@ const CustomizeProvider = ({ children, ...rest }) => {
     print_location_2: null,
     print_preview_2: null,        
     print_url_2: null,
-    print_type_2: 'DigitalPrint',    
+    print_type_2: 'DigitalPrint',  
+    file_extension_2: 'png',  
     print_placement_2: {
       code: null,
       yPos: null,

@@ -67,10 +67,7 @@ const ImageSlider = ({
           ))}
         </Stack>      
       </Stack>
-      <Canvas 
-        enableZoom 
-        activeImage={activeImage} 
-      />      
+      <Canvas enableZoom />      
     </Stack>
   );
 };
