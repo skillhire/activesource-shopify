@@ -1,56 +1,60 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useBitly } from "hooks";
 import { CustomizeContext } from "context";
-import { CLIENT_URL } from "constants/shop";
-import { useRouter } from "next/router";
-import jwt_decode from "jwt-decode";
-
-const sign = require("jwt-encode");
 
 const CustomizeProvider = ({ children, ...rest }) => {
-  const router = useRouter();
-  const { jwt, handle } = router.query;
 
-  const [customization, setCustomization] = useState({
-    front: null,
-    back: null,
+  const [activeColor, setActiveColor] = useState()
+  const [activeImage, setActiveImage] = useState({ url: null });
+  const [activePlacement, setActivePlacement] = useState({
+    code: null,
+    yPos: null, // Interger value in percentages
+    xPos: null,
+    width: null,
+    height: null,
+    printWidth: null, // Float value in inches
+    printHeight: null
+  })
+
+  const [customization, setCustomization] = useState({    
     print_sku: null,    
-    print_location_1: null,
-    print_url_1: null,    
-    print_preview_1: null,
+    print_location_1: null, // Specific code for the warehous such as CF, FB
+    print_url_1: null,  // Scaled to print size logo URL
+    print_preview_1: null, // Logo + background preview image 
     print_type_1: 'DigitalPrint',
+    print_logo_1: null, // The original uploaded logo 
+    print_placement_1: {
+      code: null,
+      yPos: null, // Interger value in percentages
+      xPos: null,
+      width: null,
+      height: null,
+      printWidth: null, // Float value in inches
+      printHeight: null
+    },
+    print_logo_2: null,
     print_location_2: null,
     print_preview_2: null,        
     print_url_2: null,
-    print_type_2: 'DigitalPrint',
+    print_type_2: 'DigitalPrint',    
+    print_placement_2: {
+      code: null,
+      yPos: null,
+      xPos: null,
+      width: null,
+      height: null,
+      printWidth: null,
+      printHeight: null
+    },
   });
-  const { shortenUrl } = useBitly();
-
-  const createBitlyLink = async () => {
-    const jwt = encodeJwt(customization);
-    let longUrl = `${CLIENT_URL}/products/${handle}?jwt=${jwt}`;
-    let shortUrl = await shortenUrl(longUrl);
-    return shortUrl;
-  };
-
-  const encodeJwt = (data) => {
-    const secret = "no-security-required";
-    const jwt = sign(data, secret);
-    return jwt;
-  };
-
-  useEffect(() => {
-    if (jwt?.length > 0) {
-      const newCustomization = jwt_decode(jwt);
-      setCustomization(newCustomization);
-    }
-  }, [jwt]);
-
   const value = {
+    activeColor,
+    setActiveColor,
+    activeImage,
+    setActiveImage, 
+    activePlacement,
+    setActivePlacement,
     customization,
     setCustomization,
-    createBitlyLink,
-    encodeJwt,
   };
 
   return (

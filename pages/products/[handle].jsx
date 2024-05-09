@@ -26,21 +26,26 @@ const Product = () => {
 
   const { handle } = router.query
 
-  const { customization, setCustomization } = useContext(CustomizeContext)
+  const { 
+    activeImage,
+    setActiveImage,
+    activePlacement,
+    setActivePlacement,
+    activeColor,
+    setActiveColor,
+    customization, 
+    setCustomization 
+  } = useContext(CustomizeContext)
 
   const { trackProductViewed } = useSegment()
 
-  const [zoom, setZoom] = useState(false)
-  const [activeImage, setActiveImage] = useState()
-  const [activePlacement, setActivePlacement] = useState({})
+  const [zoom, setZoom] = useState(false)  
   const [placements, setPlacements] = useState(SHIRT_PLACEMENTS)
   const [selectedOptions, setSelectedOptions] = useState({})
   const [addToCartDisabled, setAddToCartDisabled] = useState(false)
 
   const [openModal, setOpenModal] = useState(false)
   const [frontOrBack, setFrontOrBack] = useState("front")
-
-  const [activeColor, setActiveColor] = useState()
 
   const { loading, product, recommendedProducts, images, fetchProduct } =
     useProducts()
@@ -67,20 +72,19 @@ const Product = () => {
 
   const handlePreviewClick = (imgSrc, frontOrBack) => {
     window.scrollTo({ top: 0, behavior: "smooth" })
+    setFrontOrBack(frontOrBack)
     setActiveImage({
       id: frontOrBack,
-      url: imgSrc,
-      isFront: frontOrBack == "front" ? true : false,
-      isBack: frontOrBack == "back" ? true : false,
+      url: imgSrc
     })
   }
 
   const handleImageClick = (image) => {
-    if (image?.id === activeImage?.id) {
+    if(image?.url == activeImage?.url){
       setZoom(true)
-    } else {
+    }else{
       setActiveImage(image)
-    }
+    }    
   }
 
   const handleClose = () => {
@@ -112,16 +116,16 @@ const Product = () => {
     if(frontOrBack == "front"){
       newCustomization = {
         ...newCustomization,
-        front: newPlacement,
+        print_placement_1: newPlacement,
         print_location_1: newPlacement?.code,
       }
     }
     if(frontOrBack == "back"){
       newCustomization = {
         ...customization,
-        back: newPlacement,
+        print_placement_2: newPlacement,
         print_location_2: newPlacement?.code,
-      }
+      }      
     }
     setCustomization(newCustomization)
     setActiveImage({
@@ -141,12 +145,13 @@ const Product = () => {
       print_preview_1: null,
       print_type_1: 'DigitalPrint',    
       file_extension_1: null,
+      print_placement_1: null,
+
       print_location_2: null,
       print_preview_2: null,
       print_type_2: 'DigitalPrint',    
       file_extension_2: null,
-      front: null,
-      back: null
+      print_placement_1: null
     })
     setActiveImage(null)
     setSelectedOptions({})
@@ -170,21 +175,14 @@ const Product = () => {
     setActiveImage(variantImage || product?.images?.edges[0]?.node)
   }, [product, variantImage])
 
-  useEffect(() => {
-    // Reset the selected options values when the product changes
-    setSelectedOptions({})
-    if (product?.id) {
-      trackProductViewed(product)
-    }
-  }, [product?.id])
 
   const handleAddToCartDisabled = () => {
     const isBack = getMetaValue(product, "back_placement") == "true"
     const isFront = getMetaValue(product, "front_placement") == "true"
     const disabled =
       !variant ||
-      (isFront && (!customization?.print_url_1 || !customization?.front)) ||
-      (isBack && (!customization?.print_url_2 || !customization?.back));
+      (isFront && (!customization?.print_url_1 || !customization?.print_placement_1)) ||
+      (isBack && (!customization?.print_url_2 || !customization?.print_placement_2));
     setAddToCartDisabled(disabled)
   }
 
@@ -237,10 +235,12 @@ const Product = () => {
   useEffect(() => {
     if (activeColor) {
       setActiveImage({
-        id: "front",
         url: activeColor?.front_placement,
-        isFront: true,
-        isBack: false,
+      })
+      setCustomization({
+        ...customization,
+        print_background_1: activeColor?.front_placement,
+        print_background_2: activeColor?.back_placement,
       })
       // Select the product color option that
       // matches the meta color name field. This is necessary
@@ -257,7 +257,7 @@ const Product = () => {
     if(!activeColor && product){
       let colors = getProductColors(product)
       if(colors.length > 0){
-        setActiveColor(colors[0])
+        setActiveColor(colors[0])        
       }
     }
   }, [activeColor, product])
@@ -289,6 +289,14 @@ const Product = () => {
       setPlacements(SHIRT_PLACEMENTS)
     }    
   }, [product?.productType])
+
+  useEffect(() => {
+    // Reset the selected options values when the product changes
+    setSelectedOptions({})
+    if (product?.id) {
+      trackProductViewed(product)
+    }
+  }, [product?.id])
 
 
   return (

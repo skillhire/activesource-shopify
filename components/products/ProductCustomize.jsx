@@ -108,6 +108,13 @@ const FileUploader = ({ label, disablePlacement=false, name, handleClick, handle
     }    
   }, [name]);
 
+  let placement = {}
+  if(name === 'front'){
+    placement = customization?.print_placement_1
+  }else if(name === 'back'){
+    placement = customization?.print_placement_2
+  }
+
   return (
     <>
       { !disablePlacement && (
@@ -122,11 +129,11 @@ const FileUploader = ({ label, disablePlacement=false, name, handleClick, handle
             variant="outlined"
             sx={{
               ...sx.button,
-              ...(customization[name] && sx.active),
+              ...(placement?.code && sx.active),
             }}
           >
-            {customization[name]?.title
-              ? `${customization[name].title} (${customization[name]?.dimensions})`
+            {placement?.title
+              ? `${placement.title} (${placement?.dimensions})`
               : "Select Placement"}
           </Button>
         </Stack>
