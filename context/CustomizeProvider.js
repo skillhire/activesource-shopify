@@ -5,6 +5,11 @@ const CustomizeProvider = ({ children, ...rest }) => {
 
   const [activeColor, setActiveColor] = useState()
   const [activeImage, setActiveImage] = useState({ url: null });
+
+  const [disableLogo, setDisableLogo] = useState(false)
+  const [disablePlacement, setDisablePlacement] = useState(false)
+  const [notForSale, setNotForSale] = useState(false)
+
   const [activePlacement, setActivePlacement] = useState({
     code: null,
     yPos: null, // Interger value in percentages
@@ -46,7 +51,14 @@ const CustomizeProvider = ({ children, ...rest }) => {
       printHeight: null
     },
   });
+  
   const value = {
+    disableLogo,
+    setDisableLogo,
+    disablePlacement,
+    setDisablePlacement,
+    notForSale,
+    setNotForSale,
     activeColor,
     setActiveColor,
     activeImage,

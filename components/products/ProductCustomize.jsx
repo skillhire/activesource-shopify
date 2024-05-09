@@ -51,7 +51,7 @@ const ImagePreview = ({ label, src, selected = false, name, handleClick }) => (
   </Stack>
 );
 
-const FileUploader = ({ label, disablePlacement=false, name, handleClick, handleUpload, ...props }) => {
+const FileUploader = ({ label, disableLogo=false, disablePlacement=false, name, handleClick, handleUpload, ...props }) => {
   const { showAlertError } = useAlerts();
 
   const ref = useRef();
@@ -118,62 +118,64 @@ const FileUploader = ({ label, disablePlacement=false, name, handleClick, handle
   return (
     <>
       { !disablePlacement && (
-      <Stack spacing={1} sx={sx.container}>
-        <Typography variant="subtitle1" sx={sx.title}>
-          {label} Placement
-        </Typography>
-        <Stack direction="row" spacing={1} sx={sx.row}>
-          <Button
-            onClick={() => handleClick(name)}
-            size="small"
-            variant="outlined"
-            sx={{
-              ...sx.button,
-              ...(placement?.code && sx.active),
-            }}
-          >
-            {placement?.title
-              ? `${placement.title} (${placement?.dimensions})`
-              : "Select Placement"}
-          </Button>
+        <Stack spacing={1} sx={sx.container}>
+          <Typography variant="subtitle1" sx={sx.title}>
+            {label} Placement
+          </Typography>
+          <Stack direction="row" spacing={1} sx={sx.row}>
+            <Button
+              onClick={() => handleClick(name)}
+              size="small"
+              variant="outlined"
+              sx={{
+                ...sx.button,
+                ...(placement?.code && sx.active),
+              }}
+            >
+              {placement?.title
+                ? `${placement.title} (${placement?.dimensions})`
+                : "Select Placement"}
+            </Button>
+          </Stack>
+          <Link variant="overline" color="text.secondary" href="/placement-guide" target="_blank">
+            Custom Placement
+          </Link>
         </Stack>
-        <Link variant="overline" color="text.secondary" href="/placement-guide" target="_blank">
-          Custom Placement
-        </Link>
-      </Stack>
       )}
-      <Stack spacing={1} sx={sx.container}>
-        <Typography variant="subtitle1" sx={sx.title}>
-          {label} Design
-        </Typography>
-        <Stack direction="row" spacing={1} sx={sx.row}>
-          <Button
-            size="small"
-            variant="outlined"
-            sx={{
-              ...sx.button,
-              ...(file && sx.active),
-            }}
-            startIcon={<CloudUpload />}
-            endIcon={loading && <CircularProgress size={20} sx={sx.loading} />}
-            onClick={fileInputClick}
-          >
-            Choose file
-          </Button>
-          <Typography variant="caption">{file?.name}</Typography>
-          <input
-            type="file"
-            ref={ref}
-            accept="image/png"
-            hidden
-            name={name}
-            onChange={handleChange}
-          />
+      { !disableLogo && (
+        <Stack spacing={1} sx={sx.container}>
+          <Typography variant="subtitle1" sx={sx.title}>
+            {label} Design
+          </Typography>
+          <Stack direction="row" spacing={1} sx={sx.row}>
+            <Button
+              size="small"
+              variant="outlined"
+              sx={{
+                ...sx.button,
+                ...(file && sx.active),
+              }}
+              startIcon={<CloudUpload />}
+              endIcon={loading && <CircularProgress size={20} sx={sx.loading} />}
+              onClick={fileInputClick}
+            >
+              Choose file
+            </Button>
+            <Typography variant="caption">{file?.name}</Typography>
+            <input
+              type="file"
+              ref={ref}
+              accept="image/png"
+              hidden
+              name={name}
+              onChange={handleChange}
+            />
+          </Stack>
+          <Typography variant="overline">
+            <b>File requirements:</b> PNG format with transparency, less than 5Mb, 300 PPI resolution
+          </Typography>
         </Stack>
-        <Typography variant="overline">
-          <b>File requirements:</b> PNG format with transparency, less than 5Mb, 300 PPI resolution
-        </Typography>
-      </Stack>
+      )}
     </>
   );
 };
@@ -188,9 +190,8 @@ const ProductCustomize = ({
 }) => {
   const { customization, setCustomization } = useContext(CustomizeContext);
 
-  const isBack = getMetaValue(product, "back_placement")
-  const isFront = getMetaValue(product, "front_placement")
-  const isBag = product?.productType == "Bag"  
+  const hasBackPlacement = getMetaValue(product, "back_placement") == "true"
+  const hasFrontPlacement = getMetaValue(product, "front_placement") == "true"
 
   useEffect(() => {
     const cookie = JSON.parse(getCookie("activesource") || "{}");
@@ -205,34 +206,38 @@ const ProductCustomize = ({
 
   //if (!activeColor) return null;
 
+  const { disableLogo, disablePlacement } = useContext(CustomizeContext);
+
   return (
     <Stack>
-      {isFront === "true" && (
+      {hasFrontPlacement && (
         <FileUploader
           label={"Front"}
           name={"front"}
           handleClick={handleClick}
           handleUpload={handleUpload}
-          disablePlacement={isBag}
+          disableLogo={disableLogo}
+          disablePlacement={disablePlacement}
         />
       )}
-      {isBack === "true" && (
+      {hasBackPlacement && (
         <FileUploader
           label={"Back"}
           name={"back"}
           handleClick={handleClick}
           handleUpload={handleUpload}
-          disablePlacement={isBag}
+          disableLogo={disableLogo}
+          disablePlacement={disablePlacement}
         />
       )}
 
-      {(activeColor && (isFront === "true" || isBack === "true")) && (
+      {(activeColor && (hasBackPlacement || hasFrontPlacement)) && (
         <Stack sx={sx.container}>
           <Typography variant="subtitle1" sx={sx.title}>
             Preview
           </Typography>
           <Stack direction="row" spacing={2}>
-            {isFront === "true" && (
+            {hasFrontPlacement && (
               <ImagePreview
                 label="Front"
                 src={activeColor?.front_placement}
@@ -241,7 +246,7 @@ const ProductCustomize = ({
                 handleClick={handlePreviewClick}
               />
             )}
-            {isBack === "true" && (
+            {hasBackPlacement && (
               <ImagePreview
                 label="Back"
                 src={activeColor?.back_placement}

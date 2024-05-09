@@ -40,11 +40,9 @@ const CanvasImage = ({ src }) => (
   />  
 )
 
-const Canvas = ({ enableZoom=false, ...props }) => {
+const Canvas = ({ activeImage, enableZoom=false, ...props }) => {
   
   const { 
-    activeImage,
-    setActiveImage,
     customization, 
     setCustomization 
   } = useContext(CustomizeContext);
@@ -96,7 +94,6 @@ const Canvas = ({ enableZoom=false, ...props }) => {
         const yPos = parseFloat(placement.top) / 100 * IMAGE_HEIGHT;
         ctx.drawImage(image, xPos, yPos, width, height)
         imageSrc = canvas.toDataURL("image/png")      
-        setActiveImage({ url: imageSrc })   
         return resolve(imageSrc)
       }     
     }) 
@@ -106,8 +103,7 @@ const Canvas = ({ enableZoom=false, ...props }) => {
 
     // You need an overlay image, background image, and the placement data 
     // to render a composite image.
-    if(logo && background && placement){      
-
+    if(logo && background && placement?.code){      
       // First resize the images. We assume the background image is  
       // a Shopify product image and the logo is a Cloudinary image. 
       let backgroundSrc = resizeShopifyImage(background)
@@ -125,7 +121,11 @@ const Canvas = ({ enableZoom=false, ...props }) => {
 
       // Generate the printUrl last 
       let printUrl = resizePrintUrl(logo, placement.printWidth, placement.printHeight)
-            
+      
+      setActiveImage({
+        url: imageSrc 
+      })
+
       return {
         printUrl,
         previewUrl
@@ -135,12 +135,13 @@ const Canvas = ({ enableZoom=false, ...props }) => {
 
 
   useEffect(() => {    
+    
     const { 
       print_logo_1, 
       print_background_1, 
       print_placement_1 
     } = customization || {}
-    
+
     const {
       printUrl,
       previewUrl
@@ -150,7 +151,6 @@ const Canvas = ({ enableZoom=false, ...props }) => {
       print_placement_1      
     )    
 
-    setActiveImage({ url: previewUrl })
     setCustomization({
       ...customization,
       print_url_1: printUrl,
@@ -180,7 +180,6 @@ const Canvas = ({ enableZoom=false, ...props }) => {
       print_placement_2      
     )    
 
-    setActiveImage({ url: previewUrl })
     setCustomization({
       ...customization,
       print_url_2: printUrl,
@@ -196,21 +195,30 @@ const Canvas = ({ enableZoom=false, ...props }) => {
     customization?.print_placement_2, 
     customization?.print_logo_2, 
   ])
+  
+
+  const [src, setSrc] = useState()
+
+  useEffect(() => {
+    if(activeImage?.url){
+      setSrc(activeImage.url)
+    }
+  }, [activeImage?.url])
 
   return (
     <Box sx={sx.root}>
-      { activeImage?.url && (
-        enableZoom ? (
+      {(activeImage?.url && enableZoom) && (
         <Zoom scale={4} IconUnzoom={Close}>
           <CanvasImage 
             src={ activeImage?.url }
           />
         </Zoom>
-        ):(
-          <CanvasImage 
-            src={ activeImage?.url }
-          />          
-        )
+      )}
+      
+      {(activeImage?.url && !enableZoom) && (
+        <CanvasImage 
+          src={ activeImage?.url }
+        />          
       )}
       <canvas 
         ref={canvasRef} 
