@@ -25,7 +25,6 @@ const AddToCartButton = ({
     const isFront = getMetaValue(product, "front_placement") == "true"
     let disabled = false; 
 
-    console.log("Customization", customization)
     if(!variant){
       showAlertError("Please select a size and color")
       disabled = true       
