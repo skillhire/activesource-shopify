@@ -31,7 +31,12 @@ const CanvasImage = ({ src }) => (
 )
 
 const Canvas = ({ activeImage, enableZoom=false, ...props }) => {
-  const { customization, setCustomization } = useContext(CustomizeContext);
+  
+  const { 
+    customization, 
+    setCustomization 
+  } = useContext(CustomizeContext);
+
   const canvasRef = useRef(null);
 
   const [dataURL, setDataURL] = useState()
@@ -83,7 +88,7 @@ const Canvas = ({ activeImage, enableZoom=false, ...props }) => {
       let file = dataURLtoFile(imageSrc, "logo.png")
       let cloudinary = await unsignedUpload(file, "image.png")  
       let printResizedLogo = await handleResizePrintLogo(logo, placement.widthInches, placement.heightInches)
-      if(isFront){
+      if(isFront){        
         setCustomization({
           ...customization,
           print_url_1: printResizedLogo, 
@@ -111,17 +116,17 @@ const Canvas = ({ activeImage, enableZoom=false, ...props }) => {
       const ctx = canvas?.getContext('2d')
       ctx.drawImage(image, 0, 0, IMAGE_HEIGHT, IMAGE_WIDTH)
       setDataURL(canvas.toDataURL("image/png"))
-      if(activeImage?.isFront && customization?.print_logo_1 && customization?.front){            
+      if(activeImage?.isFront && customization?.print_logo_1 && customization?.print_placement_1){            
         renderCanvasImage(          
           customization?.print_logo_1,
-          customization?.front, 
+          customization?.print_placement_1, 
           true       
         )
       }  
-      if(activeImage?.isBack && customization?.print_logo_2 && customization?.back){            
+      if(activeImage?.isBack && customization?.print_logo_2 && customization?.print_placement_2){            
         renderCanvasImage(          
           customization?.print_logo_2,
-          customization?.back,    
+          customization?.print_placement_2,    
           false    
         )
       }    
@@ -129,9 +134,9 @@ const Canvas = ({ activeImage, enableZoom=false, ...props }) => {
 
   }, [
     activeImage, 
-    customization?.front, 
+    customization?.print_placement_1, 
     customization?.print_logo_1, 
-    customization?.back,
+    customization?.print_placement_2,
     customization?.print_logo_2, 
   ])
 

@@ -26,7 +26,10 @@ const Product = () => {
 
   const { handle } = router.query
 
-  const { customization, setCustomization } = useContext(CustomizeContext)
+  const { 
+    customization, 
+    setCustomization 
+  } = useContext(CustomizeContext)
 
   const { trackProductViewed } = useSegment()
 
@@ -112,16 +115,16 @@ const Product = () => {
     if(frontOrBack == "front"){
       newCustomization = {
         ...newCustomization,
-        front: newPlacement,
+        print_placement_1: newPlacement,
         print_location_1: newPlacement?.code,
       }
     }
     if(frontOrBack == "back"){
       newCustomization = {
         ...customization,
-        back: newPlacement,
+        print_placement_2: newPlacement,
         print_location_2: newPlacement?.code,
-      }
+      }      
     }
     setCustomization(newCustomization)
     setActiveImage({
@@ -141,12 +144,13 @@ const Product = () => {
       print_preview_1: null,
       print_type_1: 'DigitalPrint',    
       file_extension_1: null,
+      print_placement_1: null,
+
       print_location_2: null,
       print_preview_2: null,
       print_type_2: 'DigitalPrint',    
       file_extension_2: null,
-      front: null,
-      back: null
+      print_placement_1: null
     })
     setActiveImage(null)
     setSelectedOptions({})
@@ -170,21 +174,14 @@ const Product = () => {
     setActiveImage(variantImage || product?.images?.edges[0]?.node)
   }, [product, variantImage])
 
-  useEffect(() => {
-    // Reset the selected options values when the product changes
-    setSelectedOptions({})
-    if (product?.id) {
-      trackProductViewed(product)
-    }
-  }, [product?.id])
 
   const handleAddToCartDisabled = () => {
     const isBack = getMetaValue(product, "back_placement") == "true"
     const isFront = getMetaValue(product, "front_placement") == "true"
     const disabled =
       !variant ||
-      (isFront && (!customization?.print_url_1 || !customization?.front)) ||
-      (isBack && (!customization?.print_url_2 || !customization?.back));
+      (isFront && (!customization?.print_url_1 || !customization?.print_placement_1)) ||
+      (isBack && (!customization?.print_url_2 || !customization?.print_placement_2));
     setAddToCartDisabled(disabled)
   }
 
@@ -289,6 +286,14 @@ const Product = () => {
       setPlacements(SHIRT_PLACEMENTS)
     }    
   }, [product?.productType])
+
+  useEffect(() => {
+    // Reset the selected options values when the product changes
+    setSelectedOptions({})
+    if (product?.id) {
+      trackProductViewed(product)
+    }
+  }, [product?.id])
 
 
   return (
