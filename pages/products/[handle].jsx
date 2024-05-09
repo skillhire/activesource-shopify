@@ -279,8 +279,8 @@ const Product = () => {
       })  
       setCustomization({
         ...customization,
-        print_location_1: BAG_PLACEMENT?.code,
-        front: BAG_PLACEMENT
+        print_location_1: BAG_PLACEMENT?.code,        
+        print_placement_1: BAG_PLACEMENT
       });
     }
     if(product?.productType == "Hoodie"){
