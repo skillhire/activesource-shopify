@@ -1,26 +1,28 @@
-import { Box } from "@mui/material";
+import { Hidden, Box } from "@mui/material";
 import { ImageCarousel, ImageSlider } from "components";
-import { useResponsive } from "hooks";
+import { useCustomization } from "hooks";
 
-const ProductImages = ({ images, activeImage, handleClick, ...props }) => {
-  const { isMobile } = useResponsive();
+const ProductImages = ({ images, handleClick, ...props }) => {
+
+  const {activeImage} = useCustomization()
 
   return (
     <Box sx={sx.root}>
-      {isMobile ? (
+      <Hidden smUp>
         <ImageCarousel
           arrows
           images={images}
           activeImage={activeImage}
           handleClick={handleClick}
         />
-      ) : (
+      </Hidden>
+      <Hidden smDown>
         <ImageSlider
           images={images}
           handleClick={handleClick}
           activeImage={activeImage}
         />
-      )}
+      </Hidden> 
     </Box>
   );
 };

@@ -25,6 +25,9 @@ export const ProductFragment = gql`
         { namespace: "custom", key: "front_placement" }
         { namespace: "custom", key: "back_placement" }
         { namespace: "custom", key: "recommended_products" }
+        { namespace: "custom", key: "not_for_sale" }
+        { namespace: "custom", key: "disable_placement" }
+        { namespace: "custom", key: "disable_logo" }
       ]
     ) {
       id
@@ -79,6 +82,9 @@ export const ProductFragment = gql`
                   { namespace: "custom", key: "front_placement" }
                   { namespace: "custom", key: "back_placement" }
                   { namespace: "custom", key: "recommended_products" }
+                  { namespace: "custom", key: "not_for_sale" }
+                  { namespace: "custom", key: "disable_placements" }
+                  { namespace: "custom", key: "disable_logo" }
                 ]
               ) {
                 id

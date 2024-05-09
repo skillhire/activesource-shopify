@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useCheckout, useAlerts, useSegment } from "hooks";
 import { Button, CircularProgress } from "@mui/material";
 import { CustomizeContext, ShopContext } from "context";
+import { getMetaValue } from "utils"
 
 const AddToCartButton = ({
   disabled,
@@ -19,11 +20,37 @@ const AddToCartButton = ({
   const { customization } = useContext(CustomizeContext);
   const { loading, checkoutLineItemAdd } = useCheckout();
 
-  const handleAddToCart = async () => {
-    if (disabled){
-      showAlertError("Please select all options");
-      return;
+  const handleAddToCartDisabled = () => {
+    const isBack = getMetaValue(product, "back_placement") == "true"
+    const isFront = getMetaValue(product, "front_placement") == "true"
+    let disabled = false; 
+
+    console.log("Customization", customization)
+    if(!variant){
+      showAlertError("Please select a size and color")
+      disabled = true       
     }
+    if(isFront && !customization?.print_url_1){
+      showAlertError("Please select a front logo")
+      disabled = true 
+    }
+    if(isFront && !customization?.print_location_1){
+      showAlertError("Please select a front placement")
+      disabled = true 
+    }
+    if(isBack && !customization?.print_url_2){
+      showAlertError("Please select a back logo")
+      disabled = true 
+    }
+    if(isBack && !customization?.print_location_2){
+      showAlertError("Please select a back placement")
+      disabled = true 
+    }
+    return disabled 
+  }
+
+  const handleAddToCart = async () => {
+    const disabled = handleAddToCartDisabled()
     let customAttributes = [
       {key: "_print_sku", value: variant?.sku },
     ]
@@ -44,7 +71,7 @@ const AddToCartButton = ({
         {key: "_print_url_2", value: customization?.print_url_2},
         {key: "_print_location_2", value: customization?.print_location_2},
         {key: "_print_preview_2", value: customization?.print_preview_2},
-        {key: "_file_extension_2", value: customization?.file_extension_2},
+        {key: "_file_extension_2", value: customization?.file_extension_2}
       ]
     }
   

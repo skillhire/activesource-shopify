@@ -138,6 +138,12 @@ export function getProductColors(product) {
     name: getValue(color, "name"),
     front_placement: getImage(color, "front_placement"),
     back_placement: getImage(color, "back_placement"),
+    print_location_1: getValue(color, "print_location_1"),
+    print_url_1: getValue(color, "print_url_1"),
+    print_preview_1: getValue(color, "print_preview_1"),
+    print_location_2: getValue(color, "print_location_2"),
+    print_url_2: getValue(color, "print_url_2"),
+    print_preview_2: getValue(color, "print_preview_2"),
   }));
   return formattedColors;
 }

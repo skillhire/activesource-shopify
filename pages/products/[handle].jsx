@@ -3,7 +3,6 @@ import { useProducts, useVariants, useSegment } from "hooks"
 import { useRouter } from "next/router"
 import { Box, Container, Grid } from "@mui/material"
 import {
-  Alert,
   Layout,
   ProductDetails,
   ProductImages,
@@ -23,10 +22,12 @@ import {
 
 const Product = () => {
   const router = useRouter()
-
   const { handle } = router.query
 
   const { 
+    setNotForSale,
+    setDisableLogo,
+    setDisablePlacement,
     activeImage,
     setActiveImage,
     activePlacement,
@@ -50,7 +51,10 @@ const Product = () => {
   const { loading, product, recommendedProducts, images, fetchProduct } =
     useProducts()
 
-  const { variant, setVariant, variantImage } = useVariants({
+  const { 
+    variant, 
+    setVariant 
+  } = useVariants({
     product,
     selectedOptions,
   })
@@ -83,7 +87,7 @@ const Product = () => {
     if(image?.url == activeImage?.url){
       setZoom(true)
     }else{
-      setActiveImage(image)
+      setActiveImage({ url: image?.url })
     }    
   }
 
@@ -99,8 +103,46 @@ const Product = () => {
   }
 
   const handleColorClick = (color) => {
-    setActiveColor(color)
+    setActiveColor(color)                    
+    setActiveImage({
+      url: customization?.print_preview_1 || color?.print_preview_1 || color?.front_placement 
+    })
+    let newCustomization = { ...customization }
+    
+    let { 
+      front_placement,      
+      print_url_1,
+      print_preview_1, 
+      print_location_1,
+
+      back_placement,
+      print_url_2,
+      print_preview_2,
+      print_location_2        
+    } = color || {}
+    
+    newCustomization = {
+      ...newCustomization,
+      print_background_1: front_placement || newCustomization?.print_background_1,
+      print_url_1: print_url_1 || newCustomization?.print_url_1,
+      print_preview_1: print_preview_1 || newCustomization?.print_preview_1, 
+      print_location_1: print_location_1 || newCustomization?.print_location_1,
+      
+      print_background_2: back_placement || newCustomization?.print_background_2,
+      print_url_2: print_url_2 || newCustomization?.print_url_2,
+      print_preview_2: print_preview_2 || newCustomization?.print_preview_2,
+      print_location_2: print_location_2 || newCustomization?.print_location_2                    
+    }        
+
+
+    setCustomization(newCustomization)  
+    
+    setSelectedOptions({
+      ...selectedOptions,
+      Color: color?.name,
+    })
   }
+
 
   const handlePlacementClick = (frontOrBack) => {
     setFrontOrBack(frontOrBack)
@@ -130,9 +172,7 @@ const Product = () => {
     setCustomization(newCustomization)
     setActiveImage({
       id: frontOrBack,
-      url: activeColor?.[`${frontOrBack}_placement`],
-      isFront: frontOrBack == "front" ? true : false,
-      isBack: frontOrBack == "back" ? true : false,
+      url: activeColor?.[`${frontOrBack}_placement`]
     })    
     setOpenModal(false)
   }
@@ -153,7 +193,7 @@ const Product = () => {
       file_extension_2: null,
       print_placement_1: null
     })
-    setActiveImage(null)
+    setActiveImage({ url: null })
     setSelectedOptions({})
     setVariant(null)
     setAddToCartDisabled(true)
@@ -170,26 +210,7 @@ const Product = () => {
       fetchProduct(handle)
     }
   }, [handle])
-
-  useEffect(() => {
-    setActiveImage(variantImage || product?.images?.edges[0]?.node)
-  }, [product, variantImage])
-
-
-  const handleAddToCartDisabled = () => {
-    const isBack = getMetaValue(product, "back_placement") == "true"
-    const isFront = getMetaValue(product, "front_placement") == "true"
-    const disabled =
-      !variant ||
-      (isFront && (!customization?.print_url_1 || !customization?.print_placement_1)) ||
-      (isBack && (!customization?.print_url_2 || !customization?.print_placement_2));
-    setAddToCartDisabled(disabled)
-  }
-
-  useEffect(() => {
-    handleAddToCartDisabled()
-  }, [product, customization, variant])
-
+  
   // Set values from encoded JWT URL param
   useEffect(() => {
     // Find the variant from the variantId
@@ -232,35 +253,18 @@ const Product = () => {
     }
   }, [product, customization?.variantId])
 
-  useEffect(() => {
-    if (activeColor) {
-      setActiveImage({
-        url: activeColor?.front_placement,
-      })
-      setCustomization({
-        ...customization,
-        print_background_1: activeColor?.front_placement,
-        print_background_2: activeColor?.back_placement,
-      })
-      // Select the product color option that
-      // matches the meta color name field. This is necessary
-      // to ensure the correct color / size SKU is assigned at checkout
-      setSelectedOptions({
-        ...selectedOptions,
-        Color: activeColor?.name,
-      })
-    }
-  }, [activeColor])
 
   // Default select the first color option
   useEffect(() => {
-    if(!activeColor && product){
+    if(product?.id){
       let colors = getProductColors(product)
       if(colors.length > 0){
-        setActiveColor(colors[0])        
+        let firstColor = colors[0]
+        handleColorClick(firstColor)
       }
     }
-  }, [activeColor, product])
+  }, [product?.id])
+
 
   useEffect(() => {
     if (variant?.sku) {      
@@ -290,6 +294,18 @@ const Product = () => {
     }    
   }, [product?.productType])
 
+
+  useEffect(() => {
+    if(product?.handle){
+      let _notForSale = getMetaValue(product, "not_for_sale") == "true"
+      let _disableLogo = getMetaValue(product, "disable_logo") == "true"
+      let _disablePlacement = getMetaValue(product, "disable_placement") == "true"
+      setNotForSale(_notForSale)
+      setDisableLogo(_disableLogo)
+      setDisablePlacement(_disablePlacement)
+    }
+  }, [product?.handle])
+
   useEffect(() => {
     // Reset the selected options values when the product changes
     setSelectedOptions({})
@@ -308,7 +324,6 @@ const Product = () => {
             <Grid item xs={12} md={7} lg={8}>
               <ProductImages
                 images={images}
-                activeImage={activeImage}
                 handleClick={handleImageClick}
                 zoom={zoom}
                 handleClose={handleClose}

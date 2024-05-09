@@ -4,6 +4,12 @@ import { CustomizeContext } from 'context'
 const useCustomization = () => {
 
   const {
+    disableLogo,
+    setDisableLogo,
+    disablePlacement,
+    setDisablePlacement,
+    notForSale,
+    setNotForSale,
     activeImage,
     setActiveImage,
     activePlacement,
@@ -15,6 +21,12 @@ const useCustomization = () => {
   } = useContext(CustomizeContext);
 
   return {
+    disableLogo,
+    setDisableLogo,
+    disablePlacement,
+    setDisablePlacement,
+    notForSale,
+    setNotForSale,
     activeColor,
     setActiveColor,
     activeImage,
