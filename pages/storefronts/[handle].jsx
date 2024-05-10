@@ -64,7 +64,6 @@ const sx = {
   },
   description: {
     maxWidth: 600,
-    textAlign: "center",
   },
   collection: {
     width: "100%"
