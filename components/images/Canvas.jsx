@@ -26,14 +26,15 @@ const DEFAULT_PLACEMENT = {
   printHeight: 15
 }
 
-const CanvasImage = ({ src }) => (
+const CanvasImage = ({ src, loading }) => (
   <NextImage 
     height={1600}
     width={1600}
     src={src}      
-    style={{
+    style={{      
       position: "relative",
-      objectFit: "cover",        
+      objectFit: "cover",   
+      ...(loading && { opacity: 0.85 })     
     }}
     layout="responsive"
     onClick={(ev) => ev.preventDefault()}
@@ -43,6 +44,8 @@ const CanvasImage = ({ src }) => (
 const Canvas = ({ enableZoom=false, ...props }) => {
   
   const { 
+    loading,
+    setLoading,
     activeImage,
     setActiveImage,
     customization, 
@@ -105,26 +108,21 @@ const Canvas = ({ enableZoom=false, ...props }) => {
 
     // You need an overlay image, background image, and the placement data 
     // to render a composite image.
-    if(logo && background && placement?.code){      
+    if(logo && background && placement?.code){ 
+      setLoading(true)     
       // First resize the images. We assume the background image is  
       // a Shopify product image and the logo is a Cloudinary image. 
       let backgroundSrc = resizeShopifyImage(background)
       let logoSrc = resizeCloudinaryImage(logo, placement)
-
       // First render the backround image to canvas with default placement 
       // at 0,0 coordinates and 100% height and width
-      await renderCanvasImage(backgroundSrc)
-      
+      await renderCanvasImage(backgroundSrc)      
       // Render the logoSrc image and return the generated previewImage 
       let imageSrc = await renderCanvasImage(logoSrc, placement)
-
       // Upload the previewUrl to Cloudinary. 
       let previewUrl = await handleUploadToCloudinary(imageSrc)
-
       // Generate the printUrl last 
-      let printUrl = resizePrintUrl(logo, placement.printWidth, placement.printHeight)
-      
-  
+      let printUrl = resizePrintUrl(logo, placement.printWidth, placement.printHeight)    
       if(isFront){
         setCustomization({
           ...customization,
@@ -137,12 +135,9 @@ const Canvas = ({ enableZoom=false, ...props }) => {
           print_url_2: printUrl,
           print_preview_2: previewUrl
         })
-      }      
-    
-      setActiveImage({
-        url: previewUrl 
-      })
-
+      }          
+      setActiveImage({ url: previewUrl })
+      setTimeout(() => setLoading(false), 1500)     
       return {
         printUrl,
         previewUrl
@@ -239,6 +234,7 @@ const Canvas = ({ enableZoom=false, ...props }) => {
       {(activeImage?.url && enableZoom) && (
         <Zoom scale={4} IconUnzoom={Close}>
           <CanvasImage 
+            loading={loading}
             src={ activeImage?.url }
           />
         </Zoom>
@@ -246,6 +242,7 @@ const Canvas = ({ enableZoom=false, ...props }) => {
       
       {(activeImage?.url && !enableZoom) && (
         <CanvasImage 
+          loading={loading}
           src={ activeImage?.url }
         />          
       )}

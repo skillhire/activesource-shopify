@@ -6,7 +6,7 @@ import { Button, Box } from "@mui/material";
 import LOGO from "assets/logo.svg";
 import LOGO_BLACK from "assets/logo-black.svg";
 
-const Logo = ({ height = 120, width = 120, black = false, ...props }) => {
+const Logo = ({ height = 30, width = 240, black = false, ...props }) => {
   const router = useRouter();
 
   const handleClick = () => {
@@ -21,8 +21,8 @@ const Logo = ({ height = 120, width = 120, black = false, ...props }) => {
           src={black ? LOGO_BLACK?.src : LOGO?.src}
           sx={sx.image}
           alt="Logo"
-          height={30}
-          width={240}
+          height={height}
+          width={width}
         />
       </Button>
     </Box>
