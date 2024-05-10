@@ -34,7 +34,7 @@ const CanvasImage = ({ src, loading }) => (
     style={{      
       position: "relative",
       objectFit: "cover",   
-      ...(loading && { opacity: 0.85 })     
+      //...(loading && { opacity: 0.85 })     
     }}
     layout="responsive"
     onClick={(ev) => ev.preventDefault()}

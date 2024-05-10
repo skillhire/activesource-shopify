@@ -77,10 +77,19 @@ const Product = () => {
   const handlePreviewClick = (imgSrc, frontOrBack) => {
     window.scrollTo({ top: 0, behavior: "smooth" })
     setFrontOrBack(frontOrBack)
-    setActiveImage({
-      id: frontOrBack,
-      url: imgSrc
-    })
+
+    if(frontOrBack == "front"){
+      setCustomization({
+        ...customization,
+        print_background_1: imgSrc,
+      })
+    }else if(frontOrBack == "back"){
+      setCustomization({
+        ...customization,
+        print_background_2: imgSrc,
+      })
+    }
+    
   }
 
   const handleImageClick = (image) => {
@@ -105,7 +114,7 @@ const Product = () => {
   const handleColorClick = (color) => {
     setActiveColor(color)                    
     setActiveImage({
-      url: customization?.print_preview_1 || color?.print_preview_1 || color?.front_placement 
+      url: color?.print_preview_1 || color?.front_placement 
     })
     let newCustomization = { ...customization }
     
