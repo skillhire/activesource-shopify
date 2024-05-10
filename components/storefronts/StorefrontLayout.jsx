@@ -6,16 +6,12 @@ import StorefrontHeader from "./StorefrontHeader";
 
 export default function Layout({
   children,
-  logo,
-  name,
-  image,
-  metaTitle = "Active Source Lab | Apparel for Fitness Studios",
-  metaImage,
-  disableFooter = false,
-  disableLoaders = false,
-  disableScroll = false,
+  storefront,  
   ...props
 }) {
+
+  const { name, logo } = storefront;
+  
   return (
     <>
       <MetaFields

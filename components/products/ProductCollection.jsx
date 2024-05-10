@@ -8,6 +8,7 @@ const ProductCollection = ({
   perPage = 20,
   variant = "carousel",
   styles,
+  productUrl
 }) => {
   const { loading, error, collection, fetchCollection, products } =
     useCollections();
@@ -25,6 +26,7 @@ const ProductCollection = ({
           title={collection?.title}
           loading={loading}
           products={products}
+          productUrl={productUrl}
         />
       )}
       <Box sx={sx.gridContainer}>
@@ -35,6 +37,7 @@ const ProductCollection = ({
             title={collection?.title}
             loading={loading}
             products={products?.splice(0, 4)}
+            productUrl={productUrl}
           />
         )}
       </Box>

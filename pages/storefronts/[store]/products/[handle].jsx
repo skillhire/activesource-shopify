@@ -1,15 +1,16 @@
 import React, { useEffect } from "react"
 import { useRouter } from "next/router"
 import {
-  Layout,
+  StorefrontLayout,
   PDP,  
 } from "components"
-import { useProducts } from "hooks"
+import { useProducts, useStorefronts } from "hooks"
 
 const Product = () => {
   const router = useRouter()
-  const { handle } = router.query
-
+  const { handle, store } = router.query
+  const { storefront, fetchStorefront } = useStorefronts();
+  
   const { loading, product, recommendedProducts, images, fetchProduct } =
     useProducts()
 
@@ -19,16 +20,24 @@ const Product = () => {
     }
   }, [handle])
 
+  useEffect(() => {
+    if(store){
+      fetchStorefront(store)
+    }
+  }, [store])
+  
+  if(!storefront) return null;
   return (
-    <Layout metaTitle={product?.title} metaDescription={product?.description}>
+    <StorefrontLayout storefront={storefront}>
       <PDP 
         loading={loading}
         handle={handle} 
         images={images}
         product={ product }
         recommendedProducts={ recommendedProducts }
+        productUrl={`/storefronts/${store}/products`}
       />      
-    </Layout>
+    </StorefrontLayout>
   )
 }
 
