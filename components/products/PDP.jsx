@@ -117,7 +117,7 @@ const Product = ({
   const handleColorClick = (color) => {
     setActiveColor(color)                    
     setActiveImage({
-      url: color?.print_preview_1 || color?.front_placement 
+      url: color?.print_preview_1 || color?.front_placement || customization?.print_preview_1
     })
     let newCustomization = { ...customization }
     
@@ -193,16 +193,17 @@ const Product = ({
     setActivePlacement({})    
     setCustomization({
       ...customization,
+      // Intentionally do not delete print_logos
       print_location_1: null,
       print_preview_1: null,
       print_type_1: 'DigitalPrint',    
-      file_extension_1: null,
+      file_extension_1: 'png',
       print_placement_1: null,
 
       print_location_2: null,
       print_preview_2: null,
       print_type_2: 'DigitalPrint',    
-      file_extension_2: null,
+      file_extension_2: 'png',
       print_placement_1: null
     })
     setActiveImage({ url: null })
@@ -267,6 +268,10 @@ const Product = ({
       if(colors.length > 0){
         let firstColor = colors[0]
         handleColorClick(firstColor)
+        setCustomization({
+          ...customization,
+          print_background_1: firstColor?.front_placement,
+        })
       }
     }
   }, [product?.id])
@@ -280,6 +285,10 @@ const Product = ({
       })
     }
   }, [variant?.sku])
+
+  useEffect(() => {
+    console.log('Customization', customization)
+  }, [customization])
 
   // Auto-select placement for tote bags
   useEffect(() => {
