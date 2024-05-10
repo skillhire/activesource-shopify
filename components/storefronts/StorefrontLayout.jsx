@@ -10,7 +10,7 @@ export default function Layout({
   ...props
 }) {
 
-  const { name, logo } = storefront;
+  const { name, logo } = storefront || {}
   
   return (
     <>

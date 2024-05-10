@@ -30,6 +30,7 @@ const Product = () => {
   return (
     <StorefrontLayout storefront={storefront}>
       <PDP 
+        disableFileGuidelines
         loading={loading}
         handle={handle} 
         images={images}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, List, ListItem,ListItemText, Box, Tab, Tabs, Stack, Typography } from "@mui/material";
 import ProductDescription from "./ProductDescription";
 
-const ProductTabs = ({ product }) => {
+const ProductTabs = ({ product, disableShipping=false, disableFileGuidelines=false }) => {
   const [tab, setTab] = useState(0);
 
   const handleTabChange = (e, newValue) => setTab(newValue);
@@ -17,8 +17,12 @@ const ProductTabs = ({ product }) => {
         centered
       >
         <Tab value={0} label="Description" />
-        <Tab value={1} label="Shipping" />
-        <Tab value={2} label="File Guidlines" />
+        { !disableShipping && (
+          <Tab value={1} label="Shipping" />
+        )}
+        { !disableFileGuidelines && (
+          <Tab value={2} label="File Guidlines" />
+        )}
       </Tabs>
       <Stack sx={sx.content}>
         <Box sx={ sx.tabContent }>

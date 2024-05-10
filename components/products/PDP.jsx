@@ -25,6 +25,8 @@ const Product = ({
     recommendedProducts, 
     images,
     productUrl,
+    disableShipping,
+    disableFileGuidelines,
     ...props  
   }) => {  
 
@@ -359,7 +361,11 @@ const Product = ({
             </Grid>
             <Grid item xs={12}>
               <Box mt={4} />
-              <ProductTabs product={product} />
+              <ProductTabs 
+                product={product} 
+                disableShipping={disableShipping}
+                disableFileGuidelines={disableFileGuidelines}
+              />
             </Grid>
             <Grid item xs={12}>
               <ProductsYouMayAlsoLike 
