@@ -4,6 +4,8 @@ import { CustomizeContext } from 'context'
 const useCustomization = () => {
 
   const {
+    loading,
+    setLoading,
     disableLogo,
     setDisableLogo,
     disablePlacement,
@@ -21,6 +23,8 @@ const useCustomization = () => {
   } = useContext(CustomizeContext);
 
   return {
+    loading,
+    setLoading,
     disableLogo,
     setDisableLogo,
     disablePlacement,

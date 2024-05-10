@@ -3,6 +3,7 @@ import { CustomizeContext } from "context";
 
 const CustomizeProvider = ({ children, ...rest }) => {
 
+  const [loading, setLoading] = useState(false);
   const [activeColor, setActiveColor] = useState()
   const [activeImage, setActiveImage] = useState({ url: null });
 
@@ -55,6 +56,8 @@ const CustomizeProvider = ({ children, ...rest }) => {
   });
   
   const value = {
+    loading,
+    setLoading,
     disableLogo,
     setDisableLogo,
     disablePlacement,

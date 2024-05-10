@@ -3,7 +3,6 @@ import useMetaobject from "../useMetaobjects";
 
 const usePage = () => {
   const [page, setPage] = useState();
-  const [title, setTitle] = useState();
 
   const {
     getReference,

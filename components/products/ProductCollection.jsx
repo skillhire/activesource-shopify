@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import { useCollections } from "hooks";
 import { ProductCarousel, ProductGrid } from "components";
 import { Box } from "@mui/material";
@@ -43,17 +42,15 @@ const ProductCollection = ({
   );
 };
 
-ProductCollection.propTypes = {
-  handle: PropTypes.string.isRequired,
-  products: PropTypes.array,
-  variant: PropTypes.oneOf(["carousel", "grid"]),
-  query: PropTypes.string,
-  styles: PropTypes.object,
-};
-
 export default ProductCollection;
 
 const sx = {
-  root: { py: 2 },
-  gridContainer: { margin: "0 auto", maxWidth: { xs: 265 } },
+  root: { 
+    py: 2, 
+    width: "100%",    
+  },
+  gridContainer: {
+    width: '100%',
+    margin: "0 auto", 
+  },
 };
