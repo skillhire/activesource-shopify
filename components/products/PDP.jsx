@@ -286,10 +286,6 @@ const Product = ({
     }
   }, [variant?.sku])
 
-  useEffect(() => {
-    console.log('Customization', customization)
-  }, [customization])
-
   // Auto-select placement for tote bags
   useEffect(() => {
     if(product?.productType == "Bag"){
@@ -308,7 +304,6 @@ const Product = ({
       setPlacements(SHIRT_PLACEMENTS)
     }    
   }, [product?.productType])
-
 
   useEffect(() => {
     if(product?.handle){
@@ -351,7 +346,7 @@ const Product = ({
                 selectedOptions={selectedOptions}
                 handleColorClick={handleColorClick}
                 handleOptionChange={handleOptionChange}
-              />
+              />              
               <ProductCustomize
                 product={product}
                 handleClick={handlePlacementClick}
@@ -360,7 +355,7 @@ const Product = ({
                 setActiveColor={setActiveColor}
                 handleUpload={handleUpload}
                 handlePreviewClick={handlePreviewClick}
-              />              
+              />                          
               <ProductAddToCart
                 loading={loading}
                 product={product}
