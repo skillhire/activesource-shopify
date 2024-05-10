@@ -103,26 +103,30 @@ const Canvas = ({ enableZoom=false, ...props }) => {
     }) 
   }
 
-  const renderCompositeImage = async (logo, background, placement, isFront) => {
-
+  const renderCompositeImage = async (print_logo, print_background, print_placement, isFront) => {
     // You need an overlay image, background image, and the placement data 
     // to render a composite image.
-    if(logo && background && placement?.code){ 
+    if(print_logo && print_logo && print_placement?.code){ 
       setLoading(true)     
+      
       // First resize the images. We assume the background image is  
       // a Shopify product image and the logo is a Cloudinary image. 
-      let backgroundSrc = resizeShopifyImage(background)
-      let logoSrc = resizeCloudinaryImage(logo, placement)
+      let backgroundSrc = resizeShopifyImage(print_background)
+      let logoSrc = resizeCloudinaryImage(print_logo, print_placement)
+      
       // First render the backround image to canvas with default placement 
       // at 0,0 coordinates and 100% height and width
       await renderCanvasImage(backgroundSrc)      
       // Render the logoSrc image and return the generated previewImage 
-      let imageSrc = await renderCanvasImage(logoSrc, placement)
+      let imageSrc = await renderCanvasImage(logoSrc, print_placement)
       // Upload the previewUrl to Cloudinary. 
       let previewUrl = await handleUploadToCloudinary(imageSrc)
+      
       // Generate the printUrl last 
-      let printUrl = resizePrintUrl(logo, placement.printWidth, placement.printHeight)    
-      if(isFront){
+      const { printWidth, printHeight } = print_placement
+      let printUrl = resizePrintUrl(print_logo, printWidth, printHeight)    
+      setActiveImage({ url: previewUrl })
+      if(isFront){        
         setCustomization({
           ...customization,
           print_url_1: printUrl,
@@ -135,7 +139,6 @@ const Canvas = ({ enableZoom=false, ...props }) => {
           print_preview_2: previewUrl
         })
       }          
-      setActiveImage({ url: previewUrl })
       setTimeout(() => setLoading(false), 1500)     
       return {
         printUrl,
@@ -144,14 +147,11 @@ const Canvas = ({ enableZoom=false, ...props }) => {
     }
   }
 
+  // Generate the print logo 
   useEffect(() => {
     const { print_logo_1, print_placement_1 } = customization || {}
     if(print_logo_1 && print_placement_1){
-      let printUrl = resizePrintUrl(
-        print_logo_1, 
-        print_placement_1.printWidth, 
-        print_placement_1.printHeight
-      )
+      let printUrl = resizePrintUrl(print_logo_1, print_placement_1.printWidth, print_placement_1.printHeight)
       setCustomization({
         ...customization,
         print_url_1: printUrl
@@ -162,6 +162,7 @@ const Canvas = ({ enableZoom=false, ...props }) => {
     customization?.print_placement_1
   ])
 
+  // Generate the print logo 
   useEffect(() => {
     const { print_logo_2, print_placement_2 } = customization || {}
     if(print_logo_2 && print_placement_2){
@@ -180,7 +181,6 @@ const Canvas = ({ enableZoom=false, ...props }) => {
     customization?.print_placement_2
   ])
 
-
   useEffect(() => {    
     
     const { 
@@ -193,7 +193,7 @@ const Canvas = ({ enableZoom=false, ...props }) => {
       print_logo_1, 
       print_background_1, 
       print_placement_1,
-      true      
+      true
     )    
 
   }, [
