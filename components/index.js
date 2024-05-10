@@ -114,6 +114,7 @@ export { default as LoadMore } from "components/search/LoadMore";
 export { default as NoSearchResults } from "components/search/NoSearchResults";
 export { default as PriceFilterButton } from "components/search/PriceFilterButton";
 export { default as SearchTags } from "components/search/SearchTags";
+export { default as PDP } from "components/products/PDP";
 
 // Storefronts
 export { default as StorefrontLayout } from "components/storefronts/StorefrontLayout";

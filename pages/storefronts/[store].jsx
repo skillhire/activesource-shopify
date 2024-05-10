@@ -7,23 +7,19 @@ import Image from 'next/image'
 
 const Storefront = (props) => {
   const router = useRouter();
-  const { handle } = router.query;
+  const { store } = router.query;
 
   const { storefront, fetchStorefront } = useStorefronts();
 
   useEffect(() => {
-    if (handle) {
-      fetchStorefront(handle);
+    if (store) {
+      fetchStorefront(store);
     }
-  }, [handle]);
-
-  useEffect(() => {
-    console.log(storefront)
-  }, [storefront])
+  }, [store]);
 
   return (
     <StorefrontLayout
-      name={ storefront?.name }
+      storefront={ storefront }
     >
       <Stack direction="column" spacing={4} sx={ sx.header }>  
         <Image 
@@ -44,6 +40,7 @@ const Storefront = (props) => {
           <ProductCollection
             variant={"grid"}
             handle={storefront?.collection.handle}            
+            productUrl={`/storefronts/${store}/products`}
           />
         )}
       </Box> 

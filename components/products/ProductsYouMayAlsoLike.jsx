@@ -3,9 +3,9 @@ import { Typography } from "@mui/material"
 import { ProductGrid } from "components"
 import { useResponsive } from "hooks"
 
-const ProductYouMayAlsoLike = (props) => {
+const ProductsYouMayAlsoLike = (props) => {
 
-  const { products } = props || {}
+  const { products, productUrl } = props || {}
 
   const { isMobile } = useResponsive();
 
@@ -15,15 +15,16 @@ const ProductYouMayAlsoLike = (props) => {
       <Typography variant="h4" sx={ sx.title }>
         You May Also Like 
       </Typography>
-      <ProductGrid
+      <ProductGrid        
         variant={isMobile ? "carousel" : "grid"}
         products={products}
+        productUrl={productUrl}
       />
     </>
   )
 }
 
-export default ProductYouMayAlsoLike
+export default ProductsYouMayAlsoLike
 
 const sx = {
   title: {

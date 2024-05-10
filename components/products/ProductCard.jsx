@@ -5,7 +5,7 @@ import { getProductColors } from "utils";
 import { truncate, formatPriceRange } from "utils";
 import ColorOption from "components/variants/ColorOption";
 
-const ProductCard = ({ product, handleClick }) => {
+const ProductCard = ({ product, productUrl='/products' }) => {
   const [image, setImage] = useState(null);
   const [colors, setColors] = useState();
 
@@ -21,7 +21,7 @@ const ProductCard = ({ product, handleClick }) => {
 
   return (
     <Box sx={sx.root}>
-      <Link href={`/products/${product?.handle}`} underline="none">
+      <Link href={`${productUrl}/${product?.handle}`} underline="none">
       <CardActionArea          
         sx={sx.contentActionArea}
       >

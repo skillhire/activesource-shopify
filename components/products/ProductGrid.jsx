@@ -13,16 +13,12 @@ const ProductGrid = ({
   lg = 3,
   xl = 3,
   spacing = 1,
+  productUrl,
   ...props
 }) => {
+  
   const router = useRouter();
   const { trackProductClicked } = useSegment();
-
-  const handleClick = (product) => {
-    window.scrollTo({top: 0, behavior: 'smooth' });
-    trackProductClicked(product);
-    router.push(`/products/${product.handle}`);
-  };
 
   return (
     <Stack alignItems="center" py={2}>
@@ -31,7 +27,7 @@ const ProductGrid = ({
           !loading &&
           products.map((product) => (
             <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} key={product.id}>
-              <ProductCard product={product} handleClick={handleClick} />
+              <ProductCard product={product} productUrl={productUrl} />
             </Grid>
           ))}                  
       </Grid>

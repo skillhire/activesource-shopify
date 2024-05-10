@@ -20,17 +20,13 @@ const ProductCarousel = ({
   draggable = true,
   autoPlay = false,
   responsive = CAROUSEL_RESPONSIVE,
+  productUrl,
   styles,
 }) => {
   const router = useRouter();
   const { trackProductClicked } = useSegment();
 
   const { isMobile } = useResponsive();
-
-  const handleClick = (product) => {
-    trackProductClicked(product);
-    router.push(`/products/${product.handle}`);
-  };
 
   return (
     <Box sx={{ ...sx.root, ...styles }}>
@@ -53,7 +49,10 @@ const ProductCarousel = ({
         >
           {products.map((product) => (
             <Box sx={sx.item} key={product.id}>
-              <ProductCard product={product} handleClick={handleClick} />
+              <ProductCard 
+                product={product} 
+                productUrl={productUrl}
+              />
             </Box>
           ))}
         </Carousel>
