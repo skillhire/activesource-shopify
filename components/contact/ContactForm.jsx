@@ -1,11 +1,13 @@
 import React from "react";
-import { Box, Stack, TextField, InputLabel } from "@mui/material";
+import { Box, Stack, TextField, InputLabel, Typography } from "@mui/material";
 
-const EnterpriseContactForm = ({ contactInfo, handleChange }) => {
+const ContactForm = ({ contactInfo, handleChange }) => {
   return (
     <Stack>
       <Box>
-        <InputLabel sx={sx.fieldLabel} for="name">Your Name</InputLabel>
+        <InputLabel htmlFor="name">
+          <Typography variant="body2" color="text.primary" mb={1}>Your Name</Typography>
+        </InputLabel>
         <TextField
           sx={sx.field}
           fullWidth
@@ -20,7 +22,9 @@ const EnterpriseContactForm = ({ contactInfo, handleChange }) => {
         />
       </Box>
       <Box>
-        <InputLabel sx={sx.fieldLabel} for="email">Email Address</InputLabel>
+        <InputLabel htmlFor="email">
+          <Typography variant="body2" color="text.primary" mb={1}>Email Address</Typography>
+        </InputLabel>
         <TextField
           sx={sx.field}
           fullWidth
@@ -36,7 +40,9 @@ const EnterpriseContactForm = ({ contactInfo, handleChange }) => {
         />
       </Box>
       <Box>
-        <InputLabel sx={sx.fieldLabel} for="companyName">Company Name</InputLabel>
+        <InputLabel htmlFor="companyName">
+          <Typography variant="body2" color="text.primary" mb={1}>Company Name</Typography>
+        </InputLabel>
         <TextField
           sx={sx.field}
           fullWidth
@@ -54,15 +60,10 @@ const EnterpriseContactForm = ({ contactInfo, handleChange }) => {
   );
 };
 
-export default EnterpriseContactForm;
+export default ContactForm;
 
 const sx = {
   root: {},
-  fieldLabel: {
-    color: "text.primary",
-    fontSize: 16,
-    mb: 1,
-  },
   field: {
     mb: 3,
     "input": {

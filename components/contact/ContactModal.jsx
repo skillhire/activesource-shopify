@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, CircularProgress } from "@mui/material";
 import { Modal } from "components";
-import EnterpriseContactForm from "../enterprise/EnterpriseContactForm";
+import ContactForm from "./ContactForm";
 
 const DEFAULT_CONTACT_INFO = {
   name: "",
@@ -9,11 +9,14 @@ const DEFAULT_CONTACT_INFO = {
   companyName: "",
 };
 
-const ProductEnquireEnterpriseModal = (props) => {
+const ContactModal = (props) => {
   const {
+    title,
+    submitCTAText,
     open,
     handleClose,
     handleConfirm,
+    loading = false,
   } = props || {};
 
   const [contactInfo, setContactInfo] = useState(DEFAULT_CONTACT_INFO);
@@ -30,11 +33,13 @@ const ProductEnquireEnterpriseModal = (props) => {
           <Button
             size="medium"
             color="secondary"
-            onClick={handleConfirm}
+            onClick={() => handleConfirm(contactInfo)}
             variant="contained"
             sx={sx.confirmButton}
+            disabled={loading}
+            startIcon={loading && <CircularProgress size={20} sx={sx.loader} />}
           >
-            Enquire Now
+            {submitCTAText || "Submit"}
           </Button>
         </Box>
       }
@@ -42,9 +47,9 @@ const ProductEnquireEnterpriseModal = (props) => {
     >
       <Box sx={sx.content}>
         <Typography variant="h4" sx={sx.title}>
-          Enquire for Enterprise Products
+          {title || "Contact Us"}
         </Typography>
-        <EnterpriseContactForm
+        <ContactForm
           contactInfo={contactInfo}
           handleChange={updateContactInfo}
         />
@@ -53,7 +58,7 @@ const ProductEnquireEnterpriseModal = (props) => {
   );
 };
 
-export default ProductEnquireEnterpriseModal;
+export default ContactModal;
 
 const sx = {
   icon: {
@@ -62,20 +67,28 @@ const sx = {
     width: 32,
   },
   content: {
+    width: {
+      xs: "100%",
+      md: 576,
+    },
     px: {
       xs: 2,
-      sm: 6,
+      sm: 5,
     },
   },
   title: {
     textAlign: "center",
-    mb: 5.5,
+    mb: {
+      xs: 4,
+      sm: 6,
+      md: 8,
+    },
   },
   actions: {
     width: "100%",
     px: {
       xs: 2,
-      sm: 6,
+      sm: 5,
     },
   },
   confirmButton: {
