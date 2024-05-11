@@ -46,8 +46,8 @@ const Product = ({
   } = useContext(CustomizeContext)
 
   const { trackProductViewed } = useSegment()
-  const { notForSale } = { notForSale: true}
-  // const { notForSale } = useCustomization()
+  // const { notForSale } = { notForSale: true}
+  const { notForSale } = useCustomization()
   const { loading: emailLoading, sendContactEmail } = useContact()
 
   const [zoom, setZoom] = useState(false)  
