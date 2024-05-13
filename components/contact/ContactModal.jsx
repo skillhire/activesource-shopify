@@ -20,10 +20,11 @@ const ContactModal = (props) => {
   } = props || {};
 
   const [contactInfo, setContactInfo] = useState(DEFAULT_CONTACT_INFO);
-  const updateContactInfo = (field) => setContactInfo({
-    ...contactInfo,
-    [field.target.name]: field.target.value}
-  );
+  const updateContactInfo = (field) =>
+    setContactInfo({
+      ...contactInfo,
+      [field.target.name]: field.target.value,
+    });
 
   return (
     <Modal

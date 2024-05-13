@@ -1,27 +1,26 @@
-import React, { useEffect } from "react"
-import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles"
-import CssBaseline from "@mui/material/CssBaseline"
-import { CustomizeProvider, SegmentProvider, ShopProvider } from "context"
-import { theme } from "theme"
-import { AuthFromCookie } from "components"
-import { SEGMENT_WRITE_KEY } from "constants/shop"
-import { LocalizationProvider } from "@mui/x-date-pickers"
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment"
-import "react-multi-carousel/lib/styles.css"
-import "react-medium-image-zoom/dist/styles.css"
-import { useFacebookPixel } from "hooks"
+import React, { useEffect } from "react";
+import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { CustomizeProvider, SegmentProvider, ShopProvider } from "context";
+import { theme } from "theme";
+import { AuthFromCookie } from "components";
+import { SEGMENT_WRITE_KEY } from "constants/shop";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import "react-multi-carousel/lib/styles.css";
+import "react-medium-image-zoom/dist/styles.css";
+import { useFacebookPixel } from "hooks";
 
 export default function ShopJs({ Component, pageProps }) {
-
-  useFacebookPixel()
+  useFacebookPixel();
 
   useEffect(() => {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector("#jss-server-side")
+    const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles)
+      jssStyles.parentElement.removeChild(jssStyles);
     }
-  }, [])  
+  }, []);
 
   return (
     <StyledEngineProvider injectFirst>
@@ -39,5 +38,5 @@ export default function ShopJs({ Component, pageProps }) {
         </SegmentProvider>
       </ThemeProvider>
     </StyledEngineProvider>
-  )
+  );
 }

@@ -15,17 +15,18 @@ const SectionHeroPrimary = ({ home }) => {
     <Box sx={sx.root}>
       <Container maxWidth="lg">
         <Stack direction={{ sm: "row", xs: "column" }} spacing={1}>
-          <Stack spacing={2} sx={ sx.leftPanel}>
-            <Typography
-              variant="h2"
-              color="primary.contrastText"
-            >
+          <Stack spacing={2} sx={sx.leftPanel}>
+            <Typography variant="h2" color="primary.contrastText">
               {home?.title}
             </Typography>
             <Typography variant="body1" color="primary.contrastText">
               {home?.subtitle}
             </Typography>
-            <Typography variant="body2" color="primary.contrastText" sx={ sx.description }>
+            <Typography
+              variant="body2"
+              color="primary.contrastText"
+              sx={sx.description}
+            >
               {home?.description}
             </Typography>
             <Box pt={2}>
@@ -46,13 +47,13 @@ const SectionHeroPrimary = ({ home }) => {
               alt="Hero Image"
               priority
               layout="responsive"
-              style={{     
-                objectFit: 'contain',           
-                maxHeight: '500px'
-              }}           
+              style={{
+                objectFit: "contain",
+                maxHeight: "500px",
+              }}
             />
           </Box>
-        </Stack>        
+        </Stack>
       </Container>
     </Box>
   );
@@ -70,10 +71,10 @@ const sx = {
       xs: 6,
     },
     width: {
-      sm: '50%',
-      xs: '100%',
+      sm: "50%",
+      xs: "100%",
     },
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   rightPanel: {
     pb: {
@@ -82,12 +83,12 @@ const sx = {
     },
     flex: 1,
     width: {
-      sm: '50%',
-      xs: '100%',
+      sm: "50%",
+      xs: "100%",
     },
     minHeight: {
       sm: 550,
-      xs: 'none'
+      xs: "none",
     },
     width: "100%",
     height: "100%",
@@ -100,5 +101,5 @@ const sx = {
   },
   description: {
     whiteSpace: "pre-line",
-  }
+  },
 };

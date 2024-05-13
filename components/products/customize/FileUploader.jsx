@@ -1,11 +1,6 @@
 import React, { useRef, useState, useEffect, useMemo } from "react";
 import { useAlerts } from "hooks";
-import {
-  Button,
-  Stack,
-  Typography,
-  CircularProgress,
-} from "@mui/material";
+import { Button, Stack, Typography, CircularProgress } from "@mui/material";
 import { CloudUpload } from "@mui/icons-material";
 import { useCloudinary } from "hooks";
 import {
@@ -16,7 +11,13 @@ import {
 } from "constants/shop";
 import { getCookie, setCookie } from "cookies-next";
 
-const FileUploader = ({ label, disableLogo=false, name, handleUpload, ...props }) => {
+const FileUploader = ({
+  label,
+  disableLogo = false,
+  name,
+  handleUpload,
+  ...props
+}) => {
   const { showAlertError } = useAlerts();
 
   const ref = useRef();
@@ -56,11 +57,11 @@ const FileUploader = ({ label, disableLogo=false, name, handleUpload, ...props }
 
   useEffect(() => {
     let cookie = JSON.parse(getCookie("activesource") || "{}");
-    setFile(cookie[name]);    
+    setFile(cookie[name]);
   }, [name]);
 
-  if(disableLogo) return null;
-  return (    
+  if (disableLogo) return null;
+  return (
     <Stack spacing={1} sx={sx.container}>
       <Typography variant="subtitle1" sx={sx.title}>
         {label} Design
@@ -90,7 +91,8 @@ const FileUploader = ({ label, disableLogo=false, name, handleUpload, ...props }
         />
       </Stack>
       <Typography variant="overline">
-        <b>File requirements:</b> PNG format with transparency, less than 5Mb, 300 PPI resolution
+        <b>File requirements:</b> PNG format with transparency, less than 5Mb,
+        300 PPI resolution
       </Typography>
     </Stack>
   );
@@ -113,17 +115,17 @@ const sx = {
     minWidth: 176,
     maxwidth: 220,
     "&:hover": {
-      color: 'text.primary',
+      color: "text.primary",
       borderColor: "secondary.light",
       bgcolor: "secondary.light",
     },
   },
   activeButton: {
-    borderColor: 'secondary.light',
+    borderColor: "secondary.light",
     bgcolor: "secondary.light",
     "&:hover": {
       bgcolor: "secondary.light",
-      borderColor: 'secondary.light',
+      borderColor: "secondary.light",
     },
   },
 };

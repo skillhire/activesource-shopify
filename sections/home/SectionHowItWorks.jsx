@@ -19,7 +19,8 @@ import OrderProductIcon from "assets/cart-icon.svg";
 const ITEMS = [
   {
     title: "Pick a Product",
-    description: "Choose from our range of styles, sizes, and colors. We’ve curated the best-fitting, highest-quality apparel so you can be proud of what you offer your members.",
+    description:
+      "Choose from our range of styles, sizes, and colors. We’ve curated the best-fitting, highest-quality apparel so you can be proud of what you offer your members.",
     image: PickProductImage,
     icon: PickProductIcon,
   },
@@ -33,7 +34,7 @@ const ITEMS = [
   {
     title: "Order the Product",
     description:
-      'Once you click "order," your merch will ship in mere days. Congratulations! That new revenue stream you\'ve been wanting? It\'s yours.',
+      "Once you click \"order,\" your merch will ship in mere days. Congratulations! That new revenue stream you've been wanting? It's yours.",
     image: OrderProductImage,
     icon: OrderProductIcon,
   },
@@ -48,7 +49,8 @@ const SectionFeaturedCollection = () => {
           Launch your fitness apparel collection in 3 easy steps
         </Typography>
         <Typography variant="body1" maxWidth={700}>
-        You can be launched in five minutes or less. Just select your styles, upload your artwork, and get ready to profit.
+          You can be launched in five minutes or less. Just select your styles,
+          upload your artwork, and get ready to profit.
         </Typography>
       </Stack>
       <Stack>
@@ -96,8 +98,13 @@ const SectionFeaturedCollection = () => {
         })}
       </Stack>
       <Box sx={sx.buttonContainer}>
-        <Button sx={ sx.button } variant="contained" color="secondary" href="/collections/womens">
-          Get Started 
+        <Button
+          sx={sx.button}
+          variant="contained"
+          color="secondary"
+          href="/collections/womens"
+        >
+          Get Started
         </Button>
       </Box>
     </Container>
@@ -143,44 +150,44 @@ const sx = {
     alignItems: "center",
     flexDirection: {
       sm: "row",
-      xs: "column"
-    }
+      xs: "column",
+    },
   },
   itemContainerReversed: {
     flexDirection: {
       sm: "row-reverse",
-      xs: "column"
-    }
+      xs: "column",
+    },
   },
   item: {
     my: 5,
     px: {
       sm: 4,
-      xs: 0
+      xs: 0,
     },
     display: "flex",
-    flex: 1,    
+    flex: 1,
     textAlign: {
       sm: "left",
-      xs: "center"
+      xs: "center",
     },
     alignItems: {
       sm: "flex-start",
-      xs: "center"    
+      xs: "center",
     },
     justifyContent: {
       sm: "flex-start",
-      xs: "center"
-    },    
+      xs: "center",
+    },
   },
   buttonContainer: {
     mt: 4,
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
   },
   button: {
     width: 220,
     height: 64,
-    fontSize: 20
-  }
+    fontSize: 20,
+  },
 };

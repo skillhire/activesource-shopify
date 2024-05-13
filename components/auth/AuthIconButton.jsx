@@ -7,7 +7,8 @@ import { User } from "lucide-react";
 
 import { LOGIN_URL, ACCOUNT_SOURCE_URL } from "constants/navigation";
 
-const CartButton = () => {
+const CartButton = (props) => {
+  const { color = "white" } = props || {};
   const router = useRouter();
   const { accessToken } = useAuth();
 
@@ -22,7 +23,7 @@ const CartButton = () => {
       sx={sx.root}
       size="large"
     >
-      <User height={24} width={24} color="white" />
+      <User height={24} width={24} color={color} />
     </IconButton>
   );
 };

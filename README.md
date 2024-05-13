@@ -113,11 +113,11 @@ print_type should always be "DigitalPrint"
 
 file_extension should always be `png` to support transparencies.
 
-Note the "_" prefix is appended to hide the custom attribute from the Shopify Cart, and must be removed before the order is passed to Monster Digital.
+Note the "\_" prefix is appended to hide the custom attribute from the Shopify Cart, and must be removed before the order is passed to Monster Digital.
 
 ### DPI printer resolution
 
-DPI is a printer metric (dots per inch) that is stored as metadata in an image. We assume that all images will be printed at 300 DPI by assuming 300 PPI (pixels per inch) as a proxy. 
+DPI is a printer metric (dots per inch) that is stored as metadata in an image. We assume that all images will be printed at 300 DPI by assuming 300 PPI (pixels per inch) as a proxy.
 
 All metadata tags associated with DPI should be ignored.
 
@@ -132,4 +132,4 @@ In order to associate a placement image with a product color, we use a metaobjec
 - Front placement image
 - Back placement image
 
-Each product should also have a corresponding Color value in Shopify that matches the name field of the Color metaobject. This is necessary to generate a unique SKU for each product. 
+Each product should also have a corresponding Color value in Shopify that matches the name field of the Color metaobject. This is necessary to generate a unique SKU for each product.

@@ -12,10 +12,11 @@ const SectionFeaturedCollection = (props) => {
         <Box sx={sx.header}>
           <Box sx={sx.titleContainer}>
             <Typography variant="h4" sx={sx.title}>
-              Your Members Deserve The Best 
+              Your Members Deserve The Best
             </Typography>
             <Typography variant="body1" sx={sx.subtitle}>
-              We’ve curated a collection of high-quality and best-fitting on-trend apparel at wholesale prices. Choose yours today.
+              We’ve curated a collection of high-quality and best-fitting
+              on-trend apparel at wholesale prices. Choose yours today.
             </Typography>
           </Box>
           <Link
@@ -58,6 +59,6 @@ const sx = {
     whiteSpace: "nowrap",
   },
   titleContainer: {
-    maxWidth: '660px'
-  }
+    maxWidth: "660px",
+  },
 };

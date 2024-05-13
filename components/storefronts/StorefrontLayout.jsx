@@ -4,36 +4,20 @@ import { Box, Container } from "@mui/material";
 import StorefrontFooter from "./StorefrontFooter";
 import StorefrontHeader from "./StorefrontHeader";
 
-export default function Layout({
-  children,
-  storefront,  
-  ...props
-}) {
+export default function Layout({ children, storefront, ...props }) {
+  const { name, logo, direction } = storefront || {};
 
-  const { name, logo } = storefront || {}
-  
   return (
     <>
-      <MetaFields
-        title={name}
-      />
+      <MetaFields title={name} />
       <Alert />
       <Cart />
-      <StorefrontHeader  
-        logo={logo}
-        name={name}
-      />
-      <Box
-        sx={ sx.root}
-      >
-        <Box sx={ sx.container }>
-          <Container maxWidth={'lg'}>
-            {children}
-          </Container>
+      <StorefrontHeader storefront={storefront} />
+      <Box sx={sx.root}>
+        <Box sx={sx.container}>
+          <Container maxWidth={"lg"}>{children}</Container>
         </Box>
-        <StorefrontFooter 
-          name={ name }
-        />
+        <StorefrontFooter name={name} />
       </Box>
     </>
   );
@@ -49,7 +33,7 @@ const sx = {
   },
   footer: {},
   container: {
-    minHeight: 'calc(100vh - 164px)',
+    minHeight: "calc(100vh - 164px)",
     mt: {
       sm: "64px",
       xs: "50px",

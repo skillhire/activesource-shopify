@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link, Box, Button, CardActionArea, Typography, Stack } from "@mui/material";
+import {
+  Link,
+  Box,
+  Button,
+  CardActionArea,
+  Typography,
+  Stack,
+} from "@mui/material";
 import Image from "next/image";
 import { getProductColors } from "utils";
 import { truncate, formatPriceRange } from "utils";
 import ColorOption from "components/variants/ColorOption";
 
-const ProductCard = ({ product, productUrl='/products' }) => {
+const ProductCard = ({ product, productUrl = "/products" }) => {
   const [image, setImage] = useState(null);
   const [colors, setColors] = useState();
 
@@ -14,7 +21,7 @@ const ProductCard = ({ product, productUrl='/products' }) => {
   useEffect(() => {
     if (product) {
       setImage(product?.images?.edges[0]?.node?.url);
-      let formattedColors = getProductColors(product);      
+      let formattedColors = getProductColors(product);
       setColors(formattedColors);
     }
   }, [product]);
@@ -22,30 +29,28 @@ const ProductCard = ({ product, productUrl='/products' }) => {
   return (
     <Box sx={sx.root}>
       <Link href={`${productUrl}/${product?.handle}`} underline="none">
-      <CardActionArea          
-        sx={sx.contentActionArea}
-      >
-        {image && (
-          <Image
-            src={image}
-            alt={product.title}            
-            layout="fill"
-            style={{
-              objectFit: 'contain'
-            }}
-          />
-        )}
-      </CardActionArea>
+        <CardActionArea sx={sx.contentActionArea}>
+          {image && (
+            <Image
+              src={image}
+              alt={product.title}
+              layout="fill"
+              style={{
+                objectFit: "contain",
+              }}
+            />
+          )}
+        </CardActionArea>
       </Link>
-      <Stack px={2} py={2} spacing={0.5}>  
-        <Button 
+      <Stack px={2} py={2} spacing={0.5}>
+        <Button
           disableRipple
-          onClick={() => handleClick(product)} 
+          onClick={() => handleClick(product)}
           sx={sx.title}
-        >                
-          {truncate(product?.title)}          
+        >
+          {truncate(product?.title)}
         </Button>
-        <Box sx={ sx.colors }>
+        <Box sx={sx.colors}>
           {colors?.map((color, i) => (
             <ColorOption
               key={i}
@@ -58,7 +63,7 @@ const ProductCard = ({ product, productUrl='/products' }) => {
         {product?.options && product?.options[0].values.length > 0 && (
           <Typography variant="caption" color="textSecondary">
             {product.options[0].values.map((option, i) => (
-              <Box component="span" sx={sx.option}>
+              <Box key={i} component="span" sx={sx.option}>
                 {option}
                 {i < product.options[0].values.length - 1 && " - "}
               </Box>
@@ -92,17 +97,17 @@ const sx = {
     justifyContent: "space-between",
   },
   title: {
-    minHeight: '60px',
-    textAlign: 'left',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    p: 0,    
-    fontFamily: theme => theme.typography.subtitle1.fontFamily,
-    fontSize: theme => theme.typography.subtitle1.fontSize,
-    fontWeight: theme => theme.typography.subtitle1.fontWeight,
-    '&:hover': {
-      bgcolor: 'transparent'
-    }
+    minHeight: "60px",
+    textAlign: "left",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    p: 0,
+    fontFamily: (theme) => theme.typography.subtitle1.fontFamily,
+    fontSize: (theme) => theme.typography.subtitle1.fontSize,
+    fontWeight: (theme) => theme.typography.subtitle1.fontWeight,
+    "&:hover": {
+      bgcolor: "transparent",
+    },
   },
   contentActionArea: {
     cursor: "pointer",
@@ -110,7 +115,7 @@ const sx = {
     borderRadius: 0,
     height: {
       sm: 260,
-      xs: 200 
+      xs: 200,
     },
     ".MuiCardActionArea-focusHighlight": {
       background: "transparent",
@@ -120,11 +125,11 @@ const sx = {
     display: "inline",
   },
   colors: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    flexWrap: 'wrap',
-    height: '40px',
-    gap: '4px'
-  }
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    flexWrap: "wrap",
+    height: "40px",
+    gap: "4px",
+  },
 };

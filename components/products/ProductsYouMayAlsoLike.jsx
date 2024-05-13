@@ -1,34 +1,33 @@
-import React from "react"
-import { Typography } from "@mui/material"
-import { ProductGrid } from "components"
-import { useResponsive } from "hooks"
+import React from "react";
+import { Typography } from "@mui/material";
+import { ProductGrid } from "components";
+import { useResponsive } from "hooks";
 
 const ProductsYouMayAlsoLike = (props) => {
-
-  const { products, productUrl } = props || {}
+  const { products, productUrl } = props || {};
 
   const { isMobile } = useResponsive();
 
-  if(!products) return null;
-  return(
+  if (!products) return null;
+  return (
     <>
-      <Typography variant="h4" sx={ sx.title }>
-        You May Also Like 
+      <Typography variant="h4" sx={sx.title}>
+        You May Also Like
       </Typography>
-      <ProductGrid        
+      <ProductGrid
         variant={isMobile ? "carousel" : "grid"}
         products={products}
         productUrl={productUrl}
       />
     </>
-  )
-}
+  );
+};
 
-export default ProductsYouMayAlsoLike
+export default ProductsYouMayAlsoLike;
 
 const sx = {
   title: {
-    textAlign: 'center',
-    my: 2
-  }
-}
+    textAlign: "center",
+    my: 2,
+  },
+};

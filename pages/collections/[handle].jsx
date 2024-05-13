@@ -100,7 +100,7 @@ const Collection = () => {
           rowSpacing={{ xs: 3, sm: 3, md: 7 }}
           columnSpacing={{ xs: 3, sm: 3, md: 5 }}
         >
-          { products?.map((product, index) => (
+          {products?.map((product, index) => (
             <Grid item xs={6} sm={6} md={4} lg={4} key={index}>
               <ProductCard
                 product={product}
@@ -108,10 +108,10 @@ const Collection = () => {
               />
             </Grid>
           ))}
-          { loading && (
-            <Box sx={ sx.placeholder }>
+          {loading && (
+            <Box sx={sx.placeholder}>
               <CircularProgress disableShrink size={32} />
-            </Box> 
+            </Box>
           )}
         </Grid>
         {!loading && products?.length == 0 && (
@@ -125,7 +125,7 @@ const Collection = () => {
           handleSearch={() => handleSearch(cursor)}
         />
       </Box>
-      <Box mt={'100px'} />
+      <Box mt={"100px"} />
       <SectionEnterpriseSolutions />
     </CollectionLayout>
   );
@@ -146,7 +146,7 @@ const sx = {
     justifyContent: "center",
     alignItems: "center",
     minHeight: 400,
-    width: '100%',
-    height: '100%',
-  }
+    width: "100%",
+    height: "100%",
+  },
 };

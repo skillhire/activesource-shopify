@@ -55,17 +55,19 @@ export const shopifyResizeImage = (url, height, width) => {
 };
 
 // https://cloudinary.com/documentation/resizing_and_cropping
-export const cloudinaryResizeImage = (src, { width, height, transform = 'pad' }) => {
-	if (!src) return null
-	let index = src.indexOf('/upload') + 7 // 7 is number of chars in '/upload'
-	let params = [`/c_${transform}`]
-	if (width && width > 0) params.push(`w_${width}`)
-	if (height && height > 0) params.push(`h_${height}`)
-	let transformedUrl =
-		src.substring(0, index) + params.join(',') + src.substring(index)
-	return transformedUrl
-}
-
+export const cloudinaryResizeImage = (
+  src,
+  { width, height, transform = "pad" }
+) => {
+  if (!src) return null;
+  let index = src.indexOf("/upload") + 7; // 7 is number of chars in '/upload'
+  let params = [`/c_${transform}`];
+  if (width && width > 0) params.push(`w_${width}`);
+  if (height && height > 0) params.push(`h_${height}`);
+  let transformedUrl =
+    src.substring(0, index) + params.join(",") + src.substring(index);
+  return transformedUrl;
+};
 
 export const formatCurrency = (money, digits = 2) => {
   return new Intl.NumberFormat("en-US", {
@@ -130,8 +132,8 @@ export function stripParams(src) {
 
 export function getProductColors(product) {
   let _colors = product.metafields
-      .find((metafield) => metafield?.key === "colors")
-      ?.references.edges.map((e) => e.node);
+    .find((metafield) => metafield?.key === "colors")
+    ?.references.edges.map((e) => e.node);
   let formattedColors = _colors?.map((color) => ({
     id: color?.id,
     hex: getValue(color, "color"),
@@ -150,18 +152,18 @@ export function getProductColors(product) {
 
 export function dataURLtoFile(dataurl, filename) {
   // Split the data URL at the comma to separate the base64 encoding from the rest
-  let arr = dataurl.split(','), 
-      mime = arr[0].match(/:(.*?);/)[1], // Extract the mime type
-      bstr = atob(arr[1]), // Decode the base64 string
-      n = bstr.length, 
-      u8arr = new Uint8Array(n); // Create an 8-bit unsigned array
+  let arr = dataurl.split(","),
+    mime = arr[0].match(/:(.*?);/)[1], // Extract the mime type
+    bstr = atob(arr[1]), // Decode the base64 string
+    n = bstr.length,
+    u8arr = new Uint8Array(n); // Create an 8-bit unsigned array
   // Convert the decoded string into a character-coded array
-  while(n--){
-      u8arr[n] = bstr.charCodeAt(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
   }
-  // Create a Blob from the Uint8Array 
-  let file = new File([u8arr], filename, {type: mime});
+  // Create a Blob from the Uint8Array
+  let file = new File([u8arr], filename, { type: mime });
   // Generate an image URL from the file
-  //let url = URL.createObjectURL(file)    
-  return file
+  //let url = URL.createObjectURL(file)
+  return file;
 }

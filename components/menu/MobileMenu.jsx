@@ -5,11 +5,7 @@ import { ShopContext } from "context";
 import { useRouter } from "next/router";
 import { Close } from "@mui/icons-material";
 
-import {
-  MOBILE_MENU,
-  LOGGED_MENU,
-  UNLOGGED_MENU,
-} from "constants/navigation";
+import { MOBILE_MENU, LOGGED_MENU, UNLOGGED_MENU } from "constants/navigation";
 
 const MobileMenu = ({ isLogged }) => {
   const router = useRouter();

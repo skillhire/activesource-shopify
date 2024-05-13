@@ -16,7 +16,6 @@ const ProductGrid = ({
   productUrl,
   ...props
 }) => {
-  
   const router = useRouter();
   const { trackProductClicked } = useSegment();
 
@@ -29,11 +28,11 @@ const ProductGrid = ({
             <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} key={product.id}>
               <ProductCard product={product} productUrl={productUrl} />
             </Grid>
-          ))}                  
+          ))}
       </Grid>
-      { loading && (
-        <Box sx={ sx.loading }>
-          <CircularProgress disableShrink />  
+      {loading && (
+        <Box sx={sx.loading}>
+          <CircularProgress disableShrink />
         </Box>
       )}
     </Stack>
@@ -42,7 +41,6 @@ const ProductGrid = ({
 
 export default ProductGrid;
 
-
 const sx = {
   root: {},
   loading: {
@@ -50,5 +48,5 @@ const sx = {
     justifyContent: "center",
     alignItems: "center",
     height: "300px",
-  }
+  },
 };

@@ -1,45 +1,42 @@
-import React, { useEffect } from "react"
-import { useRouter } from "next/router"
-import {
-  StorefrontLayout,
-  PDP,  
-} from "components"
-import { useProducts, useStorefronts } from "hooks"
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { StorefrontLayout, PDP } from "components";
+import { useProducts, useStorefronts } from "hooks";
 
 const Product = () => {
-  const router = useRouter()
-  const { handle, store } = router.query
+  const router = useRouter();
+  const { handle, store } = router.query;
   const { storefront, fetchStorefront } = useStorefronts();
-  
+
   const { loading, product, recommendedProducts, images, fetchProduct } =
-    useProducts()
+    useProducts();
 
   useEffect(() => {
     if (handle) {
-      fetchProduct(handle)
+      fetchProduct(handle);
     }
-  }, [handle])
+  }, [handle]);
 
   useEffect(() => {
-    if(store){
-      fetchStorefront(store)
+    if (store) {
+      fetchStorefront(store);
     }
-  }, [store])
-  
-  if(!storefront) return null;
+  }, [store]);
+
+  if (!storefront) return null;
   return (
     <StorefrontLayout storefront={storefront}>
-      <PDP 
+      <PDP
         disableFileGuidelines
         loading={loading}
-        handle={handle} 
+        handle={handle}
         images={images}
-        product={ product }
-        recommendedProducts={ recommendedProducts }
+        product={product}
+        recommendedProducts={recommendedProducts}
         productUrl={`/storefronts/${store}/products`}
-      />      
+      />
     </StorefrontLayout>
-  )
-}
+  );
+};
 
-export default Product
+export default Product;

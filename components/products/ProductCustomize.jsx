@@ -1,14 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { CustomizeContext } from "context";
-import {
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { getMetaValue } from "utils";
 import { getCookie } from "cookies-next";
-import FileUploader from './customize/FileUploader';
-import PlacementButton from './customize/PlacementButton';
-import PlacementImage from './customize/PlacementImage';
+import FileUploader from "./customize/FileUploader";
+import PlacementButton from "./customize/PlacementButton";
+import PlacementImage from "./customize/PlacementImage";
 
 const ProductCustomize = ({
   product,
@@ -20,25 +17,25 @@ const ProductCustomize = ({
 }) => {
   const { customization, setCustomization } = useContext(CustomizeContext);
 
-  const hasBackPlacement = getMetaValue(product, "back_placement") == "true"
-  const hasFrontPlacement = getMetaValue(product, "front_placement") == "true"
+  const hasBackPlacement = getMetaValue(product, "back_placement") == "true";
+  const hasFrontPlacement = getMetaValue(product, "front_placement") == "true";
 
-  useEffect(() => {    
+  useEffect(() => {
     const cookie = JSON.parse(getCookie("activesource") || "{}");
     if (cookie?.front) {
       setCustomization({
         ...customization,
-        print_logo_1: cookie.front?.image,        
+        print_logo_1: cookie.front?.image,
       });
     }
     if (cookie?.back) {
       setCustomization({
         ...customization,
-        print_logo_2: cookie.back?.image,        
+        print_logo_2: cookie.back?.image,
       });
     }
   }, [product?.handle]);
-  
+
   const { disableLogo, disablePlacement } = useContext(CustomizeContext);
 
   return (
@@ -53,10 +50,10 @@ const ProductCustomize = ({
           />
           <FileUploader
             label={"Front"}
-            name={"front"}          
+            name={"front"}
             handleUpload={handleUpload}
-            disableLogo={disableLogo}          
-          />          
+            disableLogo={disableLogo}
+          />
         </>
       )}
 
@@ -73,11 +70,11 @@ const ProductCustomize = ({
             name={"back"}
             handleUpload={handleUpload}
             disableLogo={disableLogo}
-          />          
+          />
         </>
       )}
 
-      {(activeColor && (hasBackPlacement || hasFrontPlacement)) && (
+      {activeColor && (hasBackPlacement || hasFrontPlacement) && (
         <Stack sx={sx.container}>
           <Typography variant="subtitle1" sx={sx.title}>
             Preview
@@ -140,17 +137,17 @@ const sx = {
     minWidth: 176,
     maxwidth: 220,
     "&:hover": {
-      color: 'text.primary',
+      color: "text.primary",
       borderColor: "secondary.light",
       bgcolor: "secondary.light",
     },
   },
   active: {
-    borderColor: 'secondary.light',
+    borderColor: "secondary.light",
     bgcolor: "secondary.light",
     "&:hover": {
       bgcolor: "secondary.light",
-      borderColor: 'secondary.light',
+      borderColor: "secondary.light",
     },
   },
   overline: {

@@ -30,15 +30,18 @@ const Footer = ({ styles }) => {
             <Logo />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            
             <Grid container spacing={2}>
               {FOOTER_MENU.map((navItem) => (
-                <Grid item xs={6} sm={12} md={4}
+                <Grid
+                  item
+                  xs={6}
+                  sm={12}
+                  md={4}
                   key={navItem.label}
                   display="flex"
                 >
-                  <Box display="flex" >
-                    <List dense disablePadding sx={ sx.list }>
+                  <Box display="flex">
+                    <List dense disablePadding sx={sx.list}>
                       <ListItem disableGutters>
                         <ListItemText
                           primary={
@@ -51,7 +54,7 @@ const Footer = ({ styles }) => {
                             </Typography>
                           }
                         />
-                      </ListItem>                      
+                      </ListItem>
                       {navItem.submenu.map((menuItem, i) => (
                         <FooterMenuItem
                           key={i}
@@ -88,7 +91,7 @@ const Footer = ({ styles }) => {
                       {menuItem.label}
                     </Typography>
                   </Button>
-                  {i === 0 && <Box sx={ sx.divider} />}
+                  {i === 0 && <Box sx={sx.divider} />}
                 </>
               ))}
             </Box>
@@ -114,7 +117,7 @@ const sx = {
     textTransform: "capitalize",
   },
   list: {
-    mb: 8
+    mb: 8,
   },
   button: {
     p: 0,
@@ -125,15 +128,15 @@ const sx = {
     display: "flex",
     alignItems: {
       sm: "center",
-      xs: "flex-start"
+      xs: "flex-start",
     },
     justifyContent: {
       sm: "space-between",
-      xs: 'flex-start'
+      xs: "flex-start",
     },
     flexDirection: {
-      sm: 'row',
-      xs: 'column'
+      sm: "row",
+      xs: "column",
     },
     pt: { lg: 6, md: 6, sm: 4, xs: 3 },
     pb: { lg: 6, md: 6, sm: 4, xs: 4 },
@@ -155,10 +158,10 @@ const sx = {
     justifyContent: "flex-end",
     alignItems: "center",
     gap: "20px",
-  },  
+  },
   divider: {
-    height: '20px',
-    borderRight: '1px solid',
-    borderColor: 'common.white'
-  }
+    height: "20px",
+    borderRight: "1px solid",
+    borderColor: "common.white",
+  },
 };

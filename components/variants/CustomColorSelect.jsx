@@ -17,11 +17,11 @@ const CustomColorSelect = ({ colors, activeColor, handleClick, ...props }) => {
           />
         ))}
       </Box>
-      { activeColor && (
+      {activeColor && (
         <Typography variant="caption" sx={sx.colorLabel}>
           Color: {activeColor?.name}
         </Typography>
-      )}      
+      )}
     </Box>
   );
 };
@@ -43,7 +43,7 @@ const sx = {
     mb: 1,
   },
   colorLabel: {
-    mt: 1
+    mt: 1,
   },
   optionsContainer: {
     display: "flex",

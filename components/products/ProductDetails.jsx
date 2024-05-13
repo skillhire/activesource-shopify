@@ -30,7 +30,7 @@ const ProductDetails = ({
 
   useEffect(() => {
     if (product?.metafields?.length > 0) {
-      let formattedColors = getProductColors(product);      
+      let formattedColors = getProductColors(product);
       setColors(formattedColors);
     }
   }, [product]);

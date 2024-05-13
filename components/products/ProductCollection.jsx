@@ -8,7 +8,7 @@ const ProductCollection = ({
   perPage = 20,
   variant = "carousel",
   styles,
-  productUrl
+  productUrl,
 }) => {
   const { loading, error, collection, fetchCollection, products } =
     useCollections();
@@ -48,12 +48,12 @@ const ProductCollection = ({
 export default ProductCollection;
 
 const sx = {
-  root: { 
-    py: 2, 
-    width: "100%",    
+  root: {
+    py: 2,
+    width: "100%",
   },
   gridContainer: {
-    width: '100%',
-    margin: "0 auto", 
+    width: "100%",
+    margin: "0 auto",
   },
 };
