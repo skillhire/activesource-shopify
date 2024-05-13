@@ -14,10 +14,16 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap"
           />
-          <link rel="stylesheet" href="/fonts/fonts.css" />                    
+          <link rel="stylesheet" href="/fonts/fonts.css" />
           <script src="//embed.typeform.com/next/embed.js"></script>
-          <script async src="https://www.googletagmanager.com/gtag/js?id=Tag_ID"></script>
-          <script type="text/javascript" src="/scripts/google-analytics.js"></script>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=Tag_ID"
+          ></script>
+          <script
+            type="text/javascript"
+            src="/scripts/google-analytics.js"
+          ></script>
         </Head>
         <body>
           <Main />

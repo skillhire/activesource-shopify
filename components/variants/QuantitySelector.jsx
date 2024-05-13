@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, TextField } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
 
@@ -9,8 +9,7 @@ const QuantitySelector = ({
   styles,
   ...props
 }) => {
-  
-  let [text, setText] = useState(quantity)
+  let [text, setText] = useState(quantity);
 
   const addQuantity = () => {
     handleChange(quantity + 1);
@@ -23,16 +22,16 @@ const QuantitySelector = ({
   };
 
   const handleQtyChange = (ev) => {
-    let qty = parseInt(ev.target.value)
-    setText(ev.target.value)
-    if(!isNaN(qty) && qty >= 0) {
-      handleChange(qty)        
-    }        
-  }
+    let qty = parseInt(ev.target.value);
+    setText(ev.target.value);
+    if (!isNaN(qty) && qty >= 0) {
+      handleChange(qty);
+    }
+  };
 
   useEffect(() => {
-    setText(quantity)
-  }, [quantity])
+    setText(quantity);
+  }, [quantity]);
 
   return (
     <ButtonGroup
@@ -58,21 +57,21 @@ const QuantitySelector = ({
         }}
         size="small"
       >
-        <TextField  
+        <TextField
           value={text}
           variant="standard"
-          onChange={ handleQtyChange }
-          InputProps={{            
+          onChange={handleQtyChange}
+          InputProps={{
             disableUnderline: true,
-            inputProps: {              
-              style: { 
+            inputProps: {
+              style: {
                 fontSize: 16,
-                textAlign: 'center',
-                fontWeight: 500
+                textAlign: "center",
+                fontWeight: 500,
               },
-            }
+            },
           }}
-        />        
+        />
       </Button>
       <Button
         sx={{

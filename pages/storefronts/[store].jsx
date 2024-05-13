@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { useStorefronts } from "hooks";
-import { StorefrontCover, ProductCollection, StorefrontLayout } from "components";
+import {
+  StorefrontCover,
+  ProductCollection,
+  StorefrontLayout,
+} from "components";
 import { useRouter } from "next/router";
 import { Box } from "@mui/material";
 
@@ -16,24 +20,20 @@ const Storefront = (props) => {
     }
   }, [store]);
 
-  if(!storefront?.name) return null;
+  if (!storefront?.name) return null;
   return (
-    <StorefrontLayout
-      storefront={ storefront }
-    >
-      <StorefrontCover 
-        storefront={ storefront }
-      />      
-    <Box sx={ sx.collection }>
-      {storefront?.collection && (
-        <ProductCollection
-          variant={"grid"}
-          handle={storefront?.collection.handle}            
-          productUrl={`/storefronts/${store}/products`}
-        />
-      )}
-    </Box> 
-  </StorefrontLayout>
+    <StorefrontLayout storefront={storefront}>
+      <StorefrontCover storefront={storefront} />
+      <Box sx={sx.collection}>
+        {storefront?.collection && (
+          <ProductCollection
+            variant={"grid"}
+            handle={storefront?.collection.handle}
+            productUrl={`/storefronts/${store}/products`}
+          />
+        )}
+      </Box>
+    </StorefrontLayout>
   );
 };
 
@@ -41,6 +41,6 @@ export default Storefront;
 
 const sx = {
   collection: {
-    width: "100%"
-  }
-}
+    width: "100%",
+  },
+};

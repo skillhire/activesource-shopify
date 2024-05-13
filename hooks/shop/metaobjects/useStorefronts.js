@@ -27,7 +27,7 @@ const useStorefronts = () => {
         direction: getValue(metaobject, "direction"),
         logo: getImage(metaobject, "logo"),
         image: getImage(metaobject, "image"),
-        collection: getReference(metaobject, "collection")
+        collection: getReference(metaobject, "collection"),
       });
     }
   }, [metaobject]);

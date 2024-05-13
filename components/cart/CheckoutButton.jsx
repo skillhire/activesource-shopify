@@ -28,9 +28,7 @@ const CheckoutButton = ({ styles, ...props }) => {
         variant="contained"
         disabled={loading}
         size="large"
-        startIcon={
-          loading && <CircularProgress size={20} sx={sx.loader} />
-        }
+        startIcon={loading && <CircularProgress size={20} sx={sx.loader} />}
       >
         Checkout
       </Button>
@@ -46,6 +44,6 @@ const sx = {
     color: "common.white",
   },
   caption: {
-    textAlign: 'center'
-  }
+    textAlign: "center",
+  },
 };

@@ -1,14 +1,19 @@
 import React from "react";
-import {
-  Stack,
-  Typography,
-  CardActionArea,
-} from "@mui/material";
+import { Stack, Typography, CardActionArea } from "@mui/material";
 import Image from "next/image";
 
-const PlacementImage = ({ label, src, selected = false, name, handleClick }) => (
-  <Stack>    
-    <CardActionArea onClick={() => handleClick(src, name)} sx={sx.cardActionArea}>
+const PlacementImage = ({
+  label,
+  src,
+  selected = false,
+  name,
+  handleClick,
+}) => (
+  <Stack>
+    <CardActionArea
+      onClick={() => handleClick(src, name)}
+      sx={sx.cardActionArea}
+    >
       <Image
         src={src}
         width={100}

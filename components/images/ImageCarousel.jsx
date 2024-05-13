@@ -6,8 +6,8 @@ import Carousel from "react-multi-carousel";
 import { useClickOrDrag } from "hooks";
 import ImageCarouselDot from "./ImageCarouselDot";
 import Canvas from "./Canvas";
-import CarouselLeftArrow from "components/carousels/CarouselLeftArrow"
-import CarouselRightArrow from "components/carousels/CarouselRightArrow"
+import CarouselLeftArrow from "components/carousels/CarouselLeftArrow";
+import CarouselRightArrow from "components/carousels/CarouselRightArrow";
 
 const ImageCarousel = ({
   images,
@@ -18,9 +18,8 @@ const ImageCarousel = ({
   responsive = IMAGE_CAROUSEL_RESPONSIVE,
   ...props
 }) => {
-
   const { onMouseDown, onMouseUp } = useClickOrDrag({
-    onClick: () => (null),
+    onClick: () => null,
   });
 
   return (
@@ -40,8 +39,8 @@ const ImageCarousel = ({
           customRightArrow={<CarouselRightArrow />}
           customDot={<ImageCarouselDot numItems={images?.length} />}
         >
-          <Box sx={ sx.image }>
-            <CardActionArea 
+          <Box sx={sx.image}>
+            <CardActionArea
               disableRipple
               onMouseDown={onMouseDown}
               onMouseUp={onMouseUp}
@@ -52,28 +51,25 @@ const ImageCarousel = ({
           {images
             ?.filter((image) => image?.id !== activeImage?.id)
             ?.map((image) => (
-            <Box 
-              key={image?.id}
-              sx={ sx.image }
-            >
-              <CardActionArea    
-                disableRipple                           
-                onMouseDown={onMouseDown}
-                onMouseUp={onMouseUp}
-              >
-                <Image
-                  src={image.url}
-                  width={1600}
-                  height={1600}
-                  style={{
-                    objectFit: "contain",
-                  }}
-                  layout='responsive'
-                  alt={image?.altText}
-                />
-              </CardActionArea>
-            </Box>
-          ))}
+              <Box key={image?.id} sx={sx.image}>
+                <CardActionArea
+                  disableRipple
+                  onMouseDown={onMouseDown}
+                  onMouseUp={onMouseUp}
+                >
+                  <Image
+                    src={image.url}
+                    width={1600}
+                    height={1600}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                    layout="responsive"
+                    alt={image?.altText}
+                  />
+                </CardActionArea>
+              </Box>
+            ))}
         </Carousel>
       )}
     </Box>
@@ -90,7 +86,7 @@ const sx = {
     opacity: 1.0,
     color: "primary.main",
   },
-  image: {        
-    pb: 4
+  image: {
+    pb: 4,
   },
 };

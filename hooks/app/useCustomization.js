@@ -1,8 +1,7 @@
-import React, { useContext } from 'react' 
-import { CustomizeContext } from 'context'
+import React, { useContext } from "react";
+import { CustomizeContext } from "context";
 
 const useCustomization = () => {
-
   const {
     loading,
     setLoading,
@@ -39,7 +38,7 @@ const useCustomization = () => {
     setActivePlacement,
     customization,
     setCustomization,
-  }; 
-}
+  };
+};
 
-export default useCustomization 
+export default useCustomization;

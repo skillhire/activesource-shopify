@@ -4,7 +4,6 @@ import { Typography, Box, CardActionArea, Grid } from "@mui/material";
 import { PIXELS_PER_INCH } from "constants/shop";
 import Image from "next/image";
 
-
 const PlacementModal = ({
   open,
   handleClose,
@@ -33,22 +32,21 @@ const PlacementModal = ({
                   disableRipple
                   onClick={() => handleClick(p)}
                 >
-                  <Image 
-                    height={300} 
-                    width={300} 
-                    src={p?.previewSrc} 
+                  <Image
+                    height={300}
+                    width={300}
+                    src={p?.previewSrc}
                     layout="responsive"
                   />
-                  <Typography variant="button" sx={ sx.title }>
-                  {p.title}
-                </Typography>
-                <Typography variant="button">
-                  {p.dimensions}
-                </Typography>
-                <Typography color="secondary" variant="caption">
-                  {p.widthInches * PIXELS_PER_INCH }px x {p.heightInches * PIXELS_PER_INCH}px
-                </Typography>
-                </CardActionArea>                
+                  <Typography variant="button" sx={sx.title}>
+                    {p.title}
+                  </Typography>
+                  <Typography variant="button">{p.dimensions}</Typography>
+                  <Typography color="secondary" variant="caption">
+                    {p.widthInches * PIXELS_PER_INCH}px x{" "}
+                    {p.heightInches * PIXELS_PER_INCH}px
+                  </Typography>
+                </CardActionArea>
               </Box>
             </Grid>
           ))}
@@ -64,7 +62,7 @@ const sx = {
   button: {
     p: {
       sm: 2,
-      xs: 0
+      xs: 0,
     },
     width: "auto",
     display: "flex",
@@ -89,16 +87,16 @@ const sx = {
     minWidth: {
       sm: "180px",
       sx: "100px",
-    }
+    },
   },
   content: {
     p: {
       sm: 2,
-      xs: 0 
+      xs: 0,
     },
     width: "100%",
   },
   title: {
-    mt: 2
-  }
+    mt: 2,
+  },
 };

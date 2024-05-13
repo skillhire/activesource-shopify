@@ -39,7 +39,7 @@ export const ProductFragment = gql`
         ... on MediaImage {
           image {
             id
-            altText            
+            altText
             url
           }
         }
@@ -125,7 +125,7 @@ export const ProductFragment = gql`
                     title
                     image {
                       id
-                      url 
+                      url
                       altText
                     }
                     availableForSale

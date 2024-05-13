@@ -1,50 +1,48 @@
 import React from "react";
 import { Stack, Box, Typography } from "@mui/material";
-import Image from 'next/image'
+import Image from "next/image";
 
 const StorefrontCover = (props) => {
-  const  { storefront } = props || {};
-  const { direction='row' } = storefront || {};
+  const { storefront } = props || {};
+  const { direction = "row" } = storefront || {};
   return (
-      <Stack 
-        direction={{ 
-          sm: direction == 'row' ? 'row-reverse' : 'column',
-          xs: 'column'
+    <Stack
+      direction={{
+        sm: direction == "row" ? "row-reverse" : "column",
+        xs: "column",
+      }}
+      spacing={4}
+      sx={sx.header}
+    >
+      <Box
+        sx={{
+          ...sx.imageContainer,
+          width: direction == "row" ? 520 : "100%",
         }}
-        spacing={4} 
-        sx={ sx.header }
-      >  
-        <Box 
-          sx={{ 
-            ...sx.imageContainer,
-            width: direction == 'row' ? 520 : '100%',
+      >
+        <Image
+          src={storefront?.image}
+          height={direction == "row" ? 520 : 330}
+          width={direction == "row" ? 520 : 600}
+          style={{
+            width: "100%",
+            objectFit: "cover",
           }}
-        >
-          <Image 
-            src={ storefront?.image } 
-            height={direction == 'row' ? 520 : 330}
-            width={direction == 'row' ? 520 : 600}
-            style={{
-              width: '100%',
-              objectFit: 'cover',
-            }}
-          />
-        </Box>
-        <Stack 
-          direction="column" 
-          spacing={2}
-          sx={{ 
-            ...sx.content,
-            ...(direction == 'row' && sx.contentRow) 
-          }}                      
-        >
-        <Typography variant="h3">
-          { storefront?.title }
+        />
+      </Box>
+      <Stack
+        direction="column"
+        spacing={2}
+        sx={{
+          ...sx.content,
+          ...(direction == "row" && sx.contentRow),
+        }}
+      >
+        <Typography variant="h3">{storefront?.title}</Typography>
+        <Typography variant="body1" sx={sx.description}>
+          {storefront?.description}
         </Typography>
-        <Typography variant="body1" sx={ sx.description }>
-          { storefront?.description }
-        </Typography>
-      </Stack>        
+      </Stack>
     </Stack>
   );
 };
@@ -57,30 +55,29 @@ const sx = {
     pt: 6,
     diplay: "flex",
     alignItems: "center",
-    height: '100%'
+    height: "100%",
   },
-  description: {
-  },
+  description: {},
   imageContainer: {
-    width: '100%',
-    height: '100%'
+    width: "100%",
+    height: "100%",
   },
   content: {
     width: "100%",
     maxWidth: 600,
     pr: {
       sm: 4,
-      xs: 0
+      xs: 0,
     },
     alignItems: {
-      sm: 'center',
-      xs: 'center'
-    }
+      sm: "center",
+      xs: "center",
+    },
   },
   contentRow: {
     alignItems: {
-      sm: 'flex-start',
-      xs: 'center'
-    }
-  }  
-}
+      sm: "flex-start",
+      xs: "center",
+    },
+  },
+};

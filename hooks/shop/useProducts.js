@@ -89,11 +89,12 @@ const useProducts = () => {
 
   useEffect(() => {
     if (fetchProductResp?.data) {
-      setProduct(fetchProductResp?.data?.productByHandle);            
-      setRecommendedProducts(fetchProductResp?.data?.productByHandle
-        ?.metafields?.find((metafield) => metafield?.key == "recommended_products")
-        ?.references?.edges.map((e) => e.node)
-      )     
+      setProduct(fetchProductResp?.data?.productByHandle);
+      setRecommendedProducts(
+        fetchProductResp?.data?.productByHandle?.metafields
+          ?.find((metafield) => metafield?.key == "recommended_products")
+          ?.references?.edges.map((e) => e.node)
+      );
       setImages(
         fetchProductResp?.data?.productByHandle?.images?.edges.map(
           (e) => e.node

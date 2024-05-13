@@ -22,7 +22,7 @@ import Back5 from "assets/placements/back-05.svg";
 */
 
 export const HOODIE_PLACEMENTS = {
-  front: [    
+  front: [
     {
       id: "F02",
       code: "CF",
@@ -34,7 +34,7 @@ export const HOODIE_PLACEMENTS = {
       height: "40.61%",
       width: "56.86%",
       widthInches: 14,
-      heightInches: 10
+      heightInches: 10,
     },
     {
       id: "F03",
@@ -47,7 +47,7 @@ export const HOODIE_PLACEMENTS = {
       height: "16.25%",
       width: "56.86%",
       widthInches: 14,
-      heightInches: 4
+      heightInches: 4,
     },
     {
       id: "F04",
@@ -60,7 +60,7 @@ export const HOODIE_PLACEMENTS = {
       height: "10.15%",
       width: "56.86%",
       widthInches: 14,
-      heightInches: 2.5
+      heightInches: 2.5,
     },
     {
       id: "F05",
@@ -73,7 +73,7 @@ export const HOODIE_PLACEMENTS = {
       height: "8.12%",
       width: "56.86%",
       widthInches: 14,
-      heightInches: 2
+      heightInches: 2,
     },
     {
       id: "F06",
@@ -86,7 +86,7 @@ export const HOODIE_PLACEMENTS = {
       height: "4.06%",
       width: "56.86%",
       widthInches: 14,
-      heightInches: 1
+      heightInches: 1,
     },
     {
       id: "F07",
@@ -99,7 +99,7 @@ export const HOODIE_PLACEMENTS = {
       height: "18.28%",
       width: "18.28%",
       widthInches: 4.5,
-      heightInches: 4.5
+      heightInches: 4.5,
     },
     {
       id: "F08",
@@ -112,7 +112,7 @@ export const HOODIE_PLACEMENTS = {
       height: "14.21%",
       width: "14.21%",
       widthInches: 3.5,
-      heightInches: 3.5      
+      heightInches: 3.5,
     },
     {
       id: "F09",
@@ -125,7 +125,7 @@ export const HOODIE_PLACEMENTS = {
       height: "18.28%",
       width: "18.28%",
       widthInches: 4.5,
-      heightInches: 4.5
+      heightInches: 4.5,
     },
     {
       id: "F10",
@@ -138,7 +138,7 @@ export const HOODIE_PLACEMENTS = {
       height: "4.06%",
       width: "12.18%",
       widthInches: 3,
-      heightInches: 1
+      heightInches: 1,
     },
   ],
   back: [
@@ -153,7 +153,7 @@ export const HOODIE_PLACEMENTS = {
       height: "71.41%",
       width: "57.03%",
       widthInches: 14,
-      heightInches: 17.5
+      heightInches: 17.5,
     },
     {
       id: "B02",
@@ -166,7 +166,7 @@ export const HOODIE_PLACEMENTS = {
       height: "32.59%",
       width: "57.03%",
       widthInches: 14,
-      heightInches: 8
+      heightInches: 8,
     },
     {
       id: "B03",
@@ -179,7 +179,7 @@ export const HOODIE_PLACEMENTS = {
       height: "20.37%",
       width: "57.03%",
       widthInches: 14,
-      heightInches: 5
+      heightInches: 5,
     },
     {
       id: "B04",
@@ -192,7 +192,7 @@ export const HOODIE_PLACEMENTS = {
       height: "24.44%",
       width: "24.44%",
       widthInches: 6,
-      heightInches: 6
+      heightInches: 6,
     },
     {
       id: "B05",
@@ -205,7 +205,7 @@ export const HOODIE_PLACEMENTS = {
       height: "10.18%",
       width: "24.44%",
       widthInches: 6,
-      heightInches: 2.5
+      heightInches: 2.5,
     },
   ],
 };
@@ -224,13 +224,13 @@ export const SHIRT_PLACEMENTS = {
       height: "70.91%",
       width: "56.57%",
       widthInches: 14,
-      heightInches: 17.5
+      heightInches: 17.5,
     },
-    ...HOODIE_PLACEMENTS["front"]  
-  ]
-}
+    ...HOODIE_PLACEMENTS["front"],
+  ],
+};
 
-export const BAG_PLACEMENT = {  
+export const BAG_PLACEMENT = {
   id: "T01",
   code: "CF",
   top: "25.63%",
@@ -238,6 +238,5 @@ export const BAG_PLACEMENT = {
   height: "48.74%",
   width: "40.61%",
   widthInches: 10,
-  heightInches: 8
-}
-  
+  heightInches: 8,
+};

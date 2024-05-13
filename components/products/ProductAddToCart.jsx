@@ -16,7 +16,7 @@ const ProductAddToCart = ({
   };
 
   return (
-    <Stack spacing={1} direction="row" sx={ sx.root }>
+    <Stack spacing={1} direction="row" sx={sx.root}>
       <QuantitySelector
         quantity={quantity}
         handleChange={handleQuantityChange}
@@ -37,6 +37,6 @@ export default ProductAddToCart;
 const sx = {
   root: {
     mt: 2,
-    my: 3
-  }
-}
+    my: 3,
+  },
+};

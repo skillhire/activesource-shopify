@@ -23,7 +23,7 @@ const useVariants = ({ product, selectedOptions }) => {
   useEffect(() => {
     if (product?.variants?.edges?.length == 1) {
       setVariant(product.variants.edges[0].node);
-    }else{  
+    } else {
       setVariant(null);
     }
   }, [product]);

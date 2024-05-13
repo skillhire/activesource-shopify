@@ -1,12 +1,8 @@
-import { sendEmail } from "services/sendgrid"
-import { SENDGRID_TO_EMAIL, SENDGRID_FROM_EMAIL } from "constants/shop.js"
+import { sendEmail } from "services/sendgrid";
+import { SENDGRID_TO_EMAIL, SENDGRID_FROM_EMAIL } from "constants/shop.js";
 
 export default async (req, res) => {
-  const {
-    name,
-    email,
-    companyName,
-  } = req.body;
+  const { name, email, companyName } = req.body;
 
   if (!name || !email || !companyName) {
     return res.status(400).json({ message: "All fields are required." });
@@ -28,4 +24,4 @@ export default async (req, res) => {
       .status(500)
       .json({ message: `There was an error sending your message. ${err}` });
   }
-}
+};

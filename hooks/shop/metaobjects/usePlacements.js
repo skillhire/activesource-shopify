@@ -23,7 +23,7 @@ const usePlacement = () => {
     if (metaobject) {
       setPlacement({
         uid: getValue(metaobject, "uid"),
-        title: getValue(metaobject, "product_type"),        
+        title: getValue(metaobject, "product_type"),
         code: getValue(metaobject, "code"),
         dimensions: getValue(metaobject, "dimensions"),
         location: getValue(metaobject, "location"),
@@ -33,8 +33,8 @@ const usePlacement = () => {
         height: getValue(metaobject, "height"),
         image: getImage(metaobject, "image"),
         print_width: getValue(metaobject, "print_width"),
-        print_height: getValue(metaobject, "print_height")
-      })
+        print_height: getValue(metaobject, "print_height"),
+      });
     }
   }, [metaobject]);
 

@@ -3,8 +3,7 @@ import { ImageCarousel, ImageSlider } from "components";
 import { useCustomization } from "hooks";
 
 const ProductImages = ({ images, handleClick, ...props }) => {
-
-  const {activeImage} = useCustomization()
+  const { activeImage } = useCustomization();
 
   return (
     <Box sx={sx.root}>
@@ -22,7 +21,7 @@ const ProductImages = ({ images, handleClick, ...props }) => {
           handleClick={handleClick}
           activeImage={activeImage}
         />
-      </Hidden> 
+      </Hidden>
     </Box>
   );
 };
@@ -31,6 +30,6 @@ export default ProductImages;
 
 const sx = {
   root: {
-    width: '100%',
+    width: "100%",
   },
 };

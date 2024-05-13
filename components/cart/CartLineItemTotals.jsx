@@ -6,7 +6,7 @@ import { formatCurrency } from "utils";
 
 const CartLineItemTotals = () => {
   const { checkout, lineItemTotal } = useCheckout();
-  
+
   return (
     <Box width="100%" sx={sx.root}>
       <Stack direction="row" sx={sx.container}>

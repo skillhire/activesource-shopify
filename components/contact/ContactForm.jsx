@@ -6,7 +6,9 @@ const ContactForm = ({ contactInfo, handleChange }) => {
     <Stack>
       <Box>
         <InputLabel htmlFor="name">
-          <Typography variant="body2" color="text.primary" mb={1}>Your Name</Typography>
+          <Typography variant="body2" color="text.primary" mb={1}>
+            Your Name
+          </Typography>
         </InputLabel>
         <TextField
           sx={sx.field}
@@ -23,7 +25,9 @@ const ContactForm = ({ contactInfo, handleChange }) => {
       </Box>
       <Box>
         <InputLabel htmlFor="email">
-          <Typography variant="body2" color="text.primary" mb={1}>Email Address</Typography>
+          <Typography variant="body2" color="text.primary" mb={1}>
+            Email Address
+          </Typography>
         </InputLabel>
         <TextField
           sx={sx.field}
@@ -41,7 +45,9 @@ const ContactForm = ({ contactInfo, handleChange }) => {
       </Box>
       <Box>
         <InputLabel htmlFor="companyName">
-          <Typography variant="body2" color="text.primary" mb={1}>Company Name</Typography>
+          <Typography variant="body2" color="text.primary" mb={1}>
+            Company Name
+          </Typography>
         </InputLabel>
         <TextField
           sx={sx.field}
@@ -66,7 +72,7 @@ const sx = {
   root: {},
   field: {
     mb: 3,
-    "input": {
+    input: {
       fontSize: 16,
       height: 56,
       py: 0,

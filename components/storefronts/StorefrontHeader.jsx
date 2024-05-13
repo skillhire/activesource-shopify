@@ -12,11 +12,12 @@ const Header = ({ storefront, styles = {}, ...props }) => {
   };
 
   return (
-    <AppBar color='inherit' sx={sx.appBar} elevation={0}>
-      <StorefrontDesktopMenu 
+    <AppBar color="inherit" sx={sx.appBar} elevation={0}>
+      <StorefrontDesktopMenu
         name={name}
-        logo={ logo }
-        handleClick={handleClick} />
+        logo={logo}
+        handleClick={handleClick}
+      />
     </AppBar>
   );
 };
@@ -25,7 +26,7 @@ export default Header;
 
 const sx = {
   appBar: {
-    bgcolor: 'background.shade3',
+    bgcolor: "background.shade3",
     height: {
       sm: "64px",
       xs: "50px",

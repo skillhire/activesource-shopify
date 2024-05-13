@@ -21,7 +21,12 @@ const ImageGrid = ({
         ? images.map((image, i) => (
             <Grid item key={i} xs={xs} sm={sm} md={md} lg={lg}>
               <CardActionArea sx={sx.cardActionArea} onClick={() => onClick(i)}>
-                <Image src={image} width={itemWidth} height={itemWidth} alt={'Image'} />
+                <Image
+                  src={image}
+                  width={itemWidth}
+                  height={itemWidth}
+                  alt={"Image"}
+                />
               </CardActionArea>
             </Grid>
           ))

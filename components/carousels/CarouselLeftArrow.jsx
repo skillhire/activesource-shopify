@@ -4,13 +4,9 @@ import { ChevronLeft } from "lucide-react";
 
 const CarouselLeftArrow = ({ onClick, ...props }) => {
   return (
-    <IconButton
-      variant="contained"
-      sx={sx.button}
-      onClick={onClick}
-    >
-      <Image 
-        src={ ChevronLeftIcon?.src } 
+    <IconButton variant="contained" sx={sx.button} onClick={onClick}>
+      <Image
+        src={ChevronLeftIcon?.src}
         width={13}
         height={24}
         alt="left arrow"
@@ -20,8 +16,8 @@ const CarouselLeftArrow = ({ onClick, ...props }) => {
 };
 
 export default CarouselLeftArrow;
-import ChevronLeftIcon from 'assets/chevron-left.svg'
-import Image from 'next/image'
+import ChevronLeftIcon from "assets/chevron-left.svg";
+import Image from "next/image";
 
 const sx = {
   button: {
@@ -30,9 +26,9 @@ const sx = {
       backgroundColor: "transparent",
       position: "absolute",
       left: 4,
-      '&:hover': {
+      "&:hover": {
         backgroundColor: "transparent",
-      }
+      },
     },
   },
 };

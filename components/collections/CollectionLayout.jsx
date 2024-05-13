@@ -18,7 +18,8 @@ const CollectionLayout = ({ title, children, ...props }) => {
             <Stack spacing={4}>
               <Typography variant="h3">{title}</Typography>
               <Typography variant="body1">
-                Your branded apparel is just a few clicks away—select your products, upload your artwork, and finalize your order.
+                Your branded apparel is just a few clicks away—select your
+                products, upload your artwork, and finalize your order.
               </Typography>
               <Box sx={sx.mobileMenuItem}>
                 <LayoutMenuMobile items={COLLECTIONS_MENU} />

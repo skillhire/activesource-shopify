@@ -1,35 +1,32 @@
-import React, { useEffect } from "react"
-import { useRouter } from "next/router"
-import {
-  Layout,
-  PDP,  
-} from "components"
-import { useProducts } from "hooks"
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { Layout, PDP } from "components";
+import { useProducts } from "hooks";
 
 const Product = () => {
-  const router = useRouter()
-  const { handle } = router.query
+  const router = useRouter();
+  const { handle } = router.query;
 
   const { loading, product, recommendedProducts, images, fetchProduct } =
-    useProducts()
+    useProducts();
 
   useEffect(() => {
     if (handle) {
-      fetchProduct(handle)
+      fetchProduct(handle);
     }
-  }, [handle])
+  }, [handle]);
 
   return (
     <Layout metaTitle={product?.title} metaDescription={product?.description}>
-      <PDP 
+      <PDP
         loading={loading}
-        handle={handle} 
+        handle={handle}
         images={images}
-        product={ product }
-        recommendedProducts={ recommendedProducts }
-      />      
+        product={product}
+        recommendedProducts={recommendedProducts}
+      />
     </Layout>
-  )
-}
+  );
+};
 
-export default Product
+export default Product;
