@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react"
-import { useVariants, useSegment } from "hooks"
-import { Box, Container, Grid } from "@mui/material"
+import { useVariants, useSegment, useContact, useCustomization } from "hooks"
+import { Box, Container, Grid, Button, CircularProgress } from "@mui/material";
 import {
   ProductDetails,
   ProductImages,
@@ -17,6 +17,7 @@ import {
   HOODIE_PLACEMENTS,
   BAG_PLACEMENT 
 } from "constants/placements";
+import ContactModal from "../contact/ContactModal"
 
 const Product = ({ 
     loading,
@@ -45,6 +46,9 @@ const Product = ({
   } = useContext(CustomizeContext)
 
   const { trackProductViewed } = useSegment()
+  // const { notForSale } = { notForSale: true}
+  const { notForSale } = useCustomization()
+  const { loading: emailLoading, sendContactEmail } = useContact()
 
   const [zoom, setZoom] = useState(false)  
   const [placements, setPlacements] = useState(SHIRT_PLACEMENTS)
@@ -53,6 +57,7 @@ const Product = ({
 
   const [openModal, setOpenModal] = useState(false)
   const [frontOrBack, setFrontOrBack] = useState("front")
+  const [openContactModal, setOpenContactModal] = useState(false)
   
   const { 
     variant, 
@@ -212,6 +217,12 @@ const Product = ({
     setAddToCartDisabled(true)
   }
 
+  const handleContactSubmit = (data) => {
+    sendContactEmail(data)
+      .then((res) => setOpenContactModal(false))
+      .catch((error) => console.log(error))
+  }
+
   useEffect(() => {
     if (product?.handle) {      
       handleReset()      
@@ -346,22 +357,36 @@ const Product = ({
                 selectedOptions={selectedOptions}
                 handleColorClick={handleColorClick}
                 handleOptionChange={handleOptionChange}
-              />              
-              <ProductCustomize
-                product={product}
-                handleClick={handlePlacementClick}
-                activeImage={activeImage}
-                activeColor={activeColor}
-                setActiveColor={setActiveColor}
-                handleUpload={handleUpload}
-                handlePreviewClick={handlePreviewClick}
-              />                          
-              <ProductAddToCart
-                loading={loading}
-                product={product}
-                variant={variant}
-                addToCartDisabled={addToCartDisabled}
-              />              
+              />
+              { !notForSale &&
+                <>
+                  <ProductCustomize
+                    product={product}
+                    handleClick={handlePlacementClick}
+                    activeImage={activeImage}
+                    activeColor={activeColor}
+                    setActiveColor={setActiveColor}
+                    handleUpload={handleUpload}
+                    handlePreviewClick={handlePreviewClick}
+                  />
+                  <ProductAddToCart
+                    loading={loading}
+                    product={product}
+                    variant={variant}
+                    addToCartDisabled={addToCartDisabled}
+                  />
+                </>
+              }
+              { notForSale &&
+                <Button
+                  fullWidth
+                  color="secondary"
+                  onClick={() => setOpenContactModal(true)}
+                  variant="contained"
+                >
+                  Contact Us Now
+                </Button>
+              }
             </Grid>
             <Grid item xs={12}>
               <Box mt={4} />
@@ -387,6 +412,14 @@ const Product = ({
         activePlacement={activePlacement[frontOrBack]}                
         handleClick={handleSelectPlacement}
         placements={ placements }
+      />
+      <ContactModal
+        title="Enquire for Enterprise Products"
+        submitCTAText="Enquire Now"
+        open={openContactModal}
+        handleClose={() => setOpenContactModal(false)}
+        handleConfirm={handleContactSubmit}
+        loading={emailLoading}
       />
     </>
   )

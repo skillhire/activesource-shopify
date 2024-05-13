@@ -38,3 +38,4 @@ export { default as usePlacements } from "hooks/shop/metaobjects/usePlacements";
 export { default as useCanvas } from "hooks/app/useCanvas";
 export { default as useCustomization } from "hooks/app/useCustomization";
 export { default as useCloudinary } from "hooks/app/useCloudinary";
+export { default as useContact } from "hooks/app/useContact";
