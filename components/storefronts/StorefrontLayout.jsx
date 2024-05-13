@@ -10,7 +10,7 @@ export default function Layout({
   ...props
 }) {
 
-  const { name, logo } = storefront || {}
+  const { name, logo, direction } = storefront || {}
   
   return (
     <>
@@ -20,8 +20,7 @@ export default function Layout({
       <Alert />
       <Cart />
       <StorefrontHeader  
-        logo={logo}
-        name={name}
+        storefront={ storefront }
       />
       <Box
         sx={ sx.root}

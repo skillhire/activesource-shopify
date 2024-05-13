@@ -14,6 +14,7 @@ const CarouselRightArrow = ({ onClick, ...props }) => {
         src={ ChevronRightIcon?.src } 
         width={13}
         height={24}
+        alt="right arrow"
       />
     </IconButton>
   );

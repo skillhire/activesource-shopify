@@ -51,26 +51,27 @@ const AddToCartButton = ({
   const handleAddToCart = async () => {
     const disabled = handleAddToCartDisabled()
     let customAttributes = [
-      {key: "_print_sku", value: variant?.sku },
+      {key: "_print_sku", value: variant?.sku  || ''},
+      {key: "_print_substrate_id", value: customization?.sku || ''},
     ]
     if(customization?.print_preview_1){
       customAttributes = [
         ...customAttributes,          
-        {key: "_print_type_1", value: customization?.print_type_1},
-        {key: "_print_url_1", value: customization?.print_url_1},
-        {key: "_print_location_1", value: customization?.print_location_1},
-        {key: "_print_preview_1", value: customization?.print_preview_1},
-        {key: "_file_extension_1", value: customization?.file_extension_1},
+        {key: "_print_type_1", value: customization?.print_type_1 || ''},
+        {key: "_print_url_1", value: customization?.print_url_1 || ''},
+        {key: "_print_location_1", value: customization?.print_location_1 || ''},
+        {key: "_print_preview_1", value: customization?.print_preview_1 || ''},
+        {key: "_file_extension_1", value: customization?.file_extension_1 || ''},
       ]
     }
     if(customization?.print_preview_2){
       customAttributes = [
         ...customAttributes,          
-        {key: "_print_type_2", value: customization?.print_type_2},
-        {key: "_print_url_2", value: customization?.print_url_2},
-        {key: "_print_location_2", value: customization?.print_location_2},
-        {key: "_print_preview_2", value: customization?.print_preview_2},
-        {key: "_file_extension_2", value: customization?.file_extension_2}
+        {key: "_print_type_2", value: customization?.print_type_2 || ''},
+        {key: "_print_url_2", value: customization?.print_url_2 || ''},
+        {key: "_print_location_2", value: customization?.print_location_2 || ''},
+        {key: "_print_preview_2", value: customization?.print_preview_2 || ''},
+        {key: "_file_extension_2", value: customization?.file_extension_2 || ''}
       ]
     }
   
@@ -80,7 +81,7 @@ const AddToCartButton = ({
         quantity: quantity,
         customAttributes: customAttributes,        
       };                    
-      checkoutLineItemAdd(lineItem);
+      await checkoutLineItemAdd(lineItem);
       trackAddToCart({
         quantity: quantity,
         variant: variant,

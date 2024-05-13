@@ -58,7 +58,7 @@ const ProductCard = ({ product, productUrl='/products' }) => {
         {product?.options && product?.options[0].values.length > 0 && (
           <Typography variant="caption" color="textSecondary">
             {product.options[0].values.map((option, i) => (
-              <Box component="span" sx={sx.option}>
+              <Box key={i} component="span" sx={sx.option}>
                 {option}
                 {i < product.options[0].values.length - 1 && " - "}
               </Box>

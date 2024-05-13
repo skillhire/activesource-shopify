@@ -24,6 +24,7 @@ const useStorefronts = () => {
         name: getValue(metaobject, "name"),
         title: getValue(metaobject, "title"),
         description: getValue(metaobject, "description"),
+        direction: getValue(metaobject, "direction"),
         logo: getImage(metaobject, "logo"),
         image: getImage(metaobject, "image"),
         collection: getReference(metaobject, "collection")

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useStorefronts } from "hooks";
-import { ProductGrid, ProductCollection, StorefrontLayout } from "components";
+import { StorefrontCover, ProductCollection, StorefrontLayout } from "components";
 import { useRouter } from "next/router";
-import { Grid, Box, Stack, Typography } from "@mui/material";
-import Image from 'next/image'
+import { Box } from "@mui/material";
 
 const Storefront = (props) => {
   const router = useRouter();
@@ -17,51 +16,30 @@ const Storefront = (props) => {
     }
   }, [store]);
 
+  if(!storefront?.name) return null;
   return (
     <StorefrontLayout
       storefront={ storefront }
     >
-      <Stack direction="column" spacing={4} sx={ sx.header }>  
-        <Image 
-          src={ storefront?.image } 
-          height={200}
-          width={600}
-          layout="responsive"
+      <StorefrontCover 
+        storefront={ storefront }
+      />      
+    <Box sx={ sx.collection }>
+      {storefront?.collection && (
+        <ProductCollection
+          variant={"grid"}
+          handle={storefront?.collection.handle}            
+          productUrl={`/storefronts/${store}/products`}
         />
-        <Typography variant="h3">
-          { storefront?.title }
-        </Typography>
-        <Typography variant="body1" sx={ sx.description }>
-          { storefront?.description }
-        </Typography>        
-      </Stack>
-      <Box sx={ sx.collection }>
-        {storefront?.collection && (
-          <ProductCollection
-            variant={"grid"}
-            handle={storefront?.collection.handle}            
-            productUrl={`/storefronts/${store}/products`}
-          />
-        )}
-      </Box> 
-    </StorefrontLayout>
+      )}
+    </Box> 
+  </StorefrontLayout>
   );
 };
 
 export default Storefront;
 
 const sx = {
-  header: {
-    py: 4,
-    pt: 6,
-    diplay: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-  },
-  description: {
-    maxWidth: 600,
-  },
   collection: {
     width: "100%"
   }

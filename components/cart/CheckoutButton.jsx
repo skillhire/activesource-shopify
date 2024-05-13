@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useCheckout, useSegment } from "hooks";
-import PropTypes from "prop-types";
-import { Typography, Box, Button, CircularProgress } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 
 const CheckoutButton = ({ styles, ...props }) => {
   const [loading, setLoading] = useState(false);
@@ -29,8 +28,11 @@ const CheckoutButton = ({ styles, ...props }) => {
         variant="contained"
         disabled={loading}
         size="large"
+        startIcon={
+          loading && <CircularProgress size={20} sx={sx.loader} />
+        }
       >
-        {loading ? <CircularProgress size={20} sx={sx.loader} /> : "Checkout"}
+        Checkout
       </Button>
     </Box>
   );

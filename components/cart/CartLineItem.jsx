@@ -136,6 +136,7 @@ const CartLineItem = ({ lineItem }) => {
                 src={frontPreview} 
                 height={120} 
                 width={120} 
+                alt={product?.title}
                 style={styles.image} 
               />
             )}

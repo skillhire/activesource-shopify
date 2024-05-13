@@ -118,3 +118,4 @@ export { default as PDP } from "components/products/PDP";
 
 // Storefronts
 export { default as StorefrontLayout } from "components/storefronts/StorefrontLayout";
+export { default as StorefrontCover } from "components/storefronts/StorefrontCover";

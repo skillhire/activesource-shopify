@@ -13,6 +13,7 @@ const CarouselLeftArrow = ({ onClick, ...props }) => {
         src={ ChevronLeftIcon?.src } 
         width={13}
         height={24}
+        alt="left arrow"
       />
     </IconButton>
   );
