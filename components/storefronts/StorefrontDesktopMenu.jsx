@@ -96,6 +96,6 @@ const sx = {
       sm: "64px",
       xs: "50px",
     },
-    bgcolor: "transparent",
+    bgcolor: "transparent !important",
   },
 };

@@ -45,49 +45,65 @@ const AddToCartButton = ({
       disabled = true;
     }
     return disabled;
-  };
+  };  
 
   const handleAddToCart = async () => {
+
     const disabled = handleAddToCartDisabled();
+
+    const { 
+      print_type_1,
+      print_url_1,
+      print_location_1,
+      print_preview_1,
+      file_extension_1,
+      print_type_2,
+      print_url_2,
+      print_location_2,
+      print_preview_2,
+      file_extension_2,
+    } = customization || {}
+
+    
     let customAttributes = [
       { key: "_print_sku", value: variant?.sku || "" },
-      { key: "_print_substrate_id", value: customization?.sku || "" },
+      { key: "_print_substrate_id", value: variant?.sku || "" },
     ];
-    if (customization?.print_preview_1) {
+    if (print_preview_1 && print_url_1 && print_location_1) {
       customAttributes = [
         ...customAttributes,
-        { key: "_print_type_1", value: customization?.print_type_1 || "" },
-        { key: "_print_url_1", value: customization?.print_url_1 || "" },
+        { key: "_print_type_1", value: "DigitalPrint" },
+        { key: "_print_url_1", value: print_url_1 || "" },
         {
           key: "_print_location_1",
-          value: customization?.print_location_1 || "",
+          value: print_location_1 || "",
         },
         {
           key: "_print_preview_1",
-          value: customization?.print_preview_1 || "",
+          value: print_preview_1 || "",
         },
         {
           key: "_file_extension_1",
-          value: customization?.file_extension_1 || "",
+          value: "png",
         },
       ];
     }
-    if (customization?.print_preview_2) {
+    if (print_preview_2 && print_url_2 && print_location_2) {
       customAttributes = [
         ...customAttributes,
-        { key: "_print_type_2", value: customization?.print_type_2 || "" },
-        { key: "_print_url_2", value: customization?.print_url_2 || "" },
+        { key: "_print_type_2", value: "DigitalPrint" },
+        { key: "_print_url_2", value: print_url_2 || "" },
         {
           key: "_print_location_2",
-          value: customization?.print_location_2 || "",
+          value: print_location_2 || "",
         },
         {
           key: "_print_preview_2",
-          value: customization?.print_preview_2 || "",
+          value: print_preview_2 || "",
         },
         {
           key: "_file_extension_2",
-          value: customization?.file_extension_2 || "",
+          value: "png",
         },
       ];
     }
