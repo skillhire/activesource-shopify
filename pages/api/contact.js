@@ -2,13 +2,27 @@ import { sendEmail } from "services/sendgrid";
 import { SENDGRID_TO_EMAIL, SENDGRID_FROM_EMAIL } from "constants/shop.js";
 
 export default async (req, res) => {
-  const { name, email, companyName } = req.body;
+  const { name, email, companyName, product } = req.body;
 
-  if (!name || !email || !companyName) {
-    return res.status(400).json({ message: "All fields are required." });
+  let errors = null;
+  switch (true) {
+    case !name:
+      errors = { ...errors, name: "Name is required." };
+    case !companyName:
+      errors = { ...errors, company: "Company Name is required." };
+    case !product:
+      errors = { ...errors, product: "Product is required." };
+    case !email:
+      errors = { ...errors, email: "Email is required." };
+    case !/^\S+@\S+\.\S+$/.test(email):
+      errors = { ...errors, email: "Email is not valid." };
   }
 
-  const msg = `Name: ${name}\r\n Email: ${email}\r\n Company: ${companyName}`;
+  if (errors !== null) {
+    return res.status(400).json({ message: "Your information is not valid.", errors });
+  }
+
+  const msg = `Name: ${name}\r\n Email: ${email}\r\n Company: ${companyName}\r\n Product: ${product}`;
   const data = {
     to: SENDGRID_TO_EMAIL,
     from: SENDGRID_FROM_EMAIL,

@@ -41,9 +41,8 @@ const Product = ({
   } = useContext(CustomizeContext);
 
   const { trackProductViewed } = useSegment();
-  // const { notForSale } = { notForSale: true}
-  const { notForSale } = useCustomization();
-  const { loading: emailLoading, sendContactEmail } = useContact();
+  const { notForSale } = useCustomization()
+  const { loading: emailLoading, sendContactEmail, errors } = useContact()
 
   const [zoom, setZoom] = useState(false);
   const [placements, setPlacements] = useState(SHIRT_PLACEMENTS);
@@ -212,9 +211,9 @@ const Product = ({
   };
 
   const handleContactSubmit = (data) => {
-    sendContactEmail(data)
+    sendContactEmail({...data, product: product.onlineStoreUrl})
       .then((res) => setOpenContactModal(false))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error.message))
   };
 
   useEffect(() => {
@@ -413,6 +412,7 @@ const Product = ({
         handleClose={() => setOpenContactModal(false)}
         handleConfirm={handleContactSubmit}
         loading={emailLoading}
+        errors={errors}
       />
     </>
   );
