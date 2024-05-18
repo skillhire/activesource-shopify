@@ -3,6 +3,7 @@ import useMetaobject from "../useMetaobjects";
 
 const usePlacement = () => {
   const [placement, setPlacement] = useState();
+  const [activePlacements, setActivePlacements] = useState([]);
 
   const {
     getReference,
@@ -10,7 +11,9 @@ const usePlacement = () => {
     getValue,
     getImage,
     metaobject,
+    metaobjects,
     fetchMetaobject,
+    fetchMetaobjects,
     loading,
     error,
   } = useMetaobject();
@@ -18,31 +21,54 @@ const usePlacement = () => {
   const fetchPlacement = async (handle) => {
     await fetchMetaobject(handle, "placement", 1);
   };
+  
+  const fetchAllPlacements = async (product_type, warehouse) => {
+    await fetchMetaobjects("placement", {
+      product_type,
+    });
+  };
+
+
+  const getPlacement = (metaobject) => {
+    return {
+      id: getValue(metaobject, "uid"),
+      code: getValue(metaobject, "code"),
+      title: getValue(metaobject, "title"),
+      dimensions: getValue(metaobject, "dimensions"),
+      location: getValue(metaobject, "location"),
+      previewSrc: getImage(metaobject, "image"),
+      top: `${getValue(metaobject, "x_offset")}%`,
+      left: `${getValue(metaobject, "y_offset")}%`,
+      height: `${getValue(metaobject, "height")}%`,
+      width: `${getValue(metaobject, "width")}%`,
+      widthInches: Number(getValue(metaobject, "print_width")),
+      heightInches: Number(getValue(metaobject, "print_height")),
+    };
+  }
 
   useEffect(() => {
     if (metaobject) {
-      setPlacement({
-        uid: getValue(metaobject, "uid"),
-        title: getValue(metaobject, "product_type"),
-        code: getValue(metaobject, "code"),
-        dimensions: getValue(metaobject, "dimensions"),
-        location: getValue(metaobject, "location"),
-        y_offset: getValue(metaobject, "y_offset"),
-        x_offset: getValue(metaobject, "x_offset"),
-        width: getValue(metaobject, "width"),
-        height: getValue(metaobject, "height"),
-        image: getImage(metaobject, "image"),
-        print_width: getValue(metaobject, "print_width"),
-        print_height: getValue(metaobject, "print_height"),
-      });
+      setPlacement(getPlacement(metaobject));
     }
   }, [metaobject]);
+
+  useEffect(() => {
+    if (metaobjects) {
+      console.log("metaobjects", metaobjects);
+      const placements = metaobjects.map((p) => getPlacement(p));
+      const front = placements.filter((p) => p.location === "front");
+      const back = placements.filter((p) => p.location === "back");
+      setActivePlacements({ front, back });
+    }
+  }, [metaobjects]);
 
   return {
     loading,
     error,
     placement,
+    activePlacements,
     fetchPlacement,
+    fetchAllPlacements,
   };
 };
 

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useVariants, useSegment, useContact, useCustomization } from "hooks";
+import { useVariants, useSegment, useContact, useCustomization, usePlacements } from "hooks";
 import { Box, Container, Grid, Button, CircularProgress } from "@mui/material";
 import { ProductDetails, ProductImages, ProductTabs } from "components";
 import ProductCustomize from "components/products/ProductCustomize";
@@ -44,6 +44,7 @@ const Product = ({
   // const { notForSale } = { notForSale: true}
   const { notForSale } = useCustomization();
   const { loading: emailLoading, sendContactEmail } = useContact();
+  const { activePlacements, fetchAllPlacements } = usePlacements();
 
   const [zoom, setZoom] = useState(false);
   const [placements, setPlacements] = useState(SHIRT_PLACEMENTS);
@@ -301,12 +302,20 @@ const Product = ({
         print_placement_1: BAG_PLACEMENT,
       });
     }
-    if (product?.productType == "Hoodie") {
-      setPlacements(HOODIE_PLACEMENTS);
-    } else {
-      setPlacements(SHIRT_PLACEMENTS);
-    }
+    // if (product?.productType == "Hoodie") {
+    //   setPlacements(HOODIE_PLACEMENTS);
+    // } 
+    // else {
+    //   setPlacements(SHIRT_PLACEMENTS);
+    // }
+
+    fetchAllPlacements(product?.productType);
   }, [product?.productType]);
+
+  useEffect(() => {
+    console.log(activePlacements);
+    setPlacements(activePlacements);
+  }, [activePlacements]);
 
   useEffect(() => {
     if (product?.handle) {
