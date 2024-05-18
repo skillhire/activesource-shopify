@@ -16,10 +16,11 @@ const useContact = () => {
         showAlertSuccess("Your message has been sent!");
         return res.data;
       })
-      .catch((error) => {
-        setErrors(error);
-        showAlertError(error.response.data.message);
-        throw new Error(error.response.data.message);
+      .catch((errors) => {
+        console.log(errors.response.data);
+        setErrors(errors.response.data.errors);
+        showAlertError(errors.response.data.message);
+        throw new Error(errors.response.data);
       })
       .finally(() => {
         setLoading(false);
