@@ -41,7 +41,7 @@ const Product = ({
 
   const { trackProductViewed } = useSegment();
   const { notForSale } = useCustomization();
-  const { loading: emailLoading, sendContactEmail } = useContact();
+  const { loading: emailLoading, sendContactEmail, errors } = useContact();
   const { activePlacements, fetchAllPlacements, filterPlacements } = usePlacements();
 
   const [zoom, setZoom] = useState(false);
@@ -212,9 +212,9 @@ const Product = ({
   };
 
   const handleContactSubmit = (data) => {
-    sendContactEmail(data)
+    sendContactEmail({...data, product: product.onlineStoreUrl})
       .then((res) => setOpenContactModal(false))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error.message))
   };
 
   useEffect(() => {
@@ -422,6 +422,7 @@ const Product = ({
         handleClose={() => setOpenContactModal(false)}
         handleConfirm={handleContactSubmit}
         loading={emailLoading}
+        errors={errors}
       />
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Typography, CircularProgress } from "@mui/material";
 import { Modal } from "components";
 import ContactForm from "./ContactForm";
@@ -16,15 +16,22 @@ const ContactModal = (props) => {
     open,
     handleClose,
     handleConfirm,
+    errors = {},
     loading = false,
   } = props || {};
 
   const [contactInfo, setContactInfo] = useState(DEFAULT_CONTACT_INFO);
-  const updateContactInfo = (field) =>
+  const updateContactInfo = (field) => 
     setContactInfo({
       ...contactInfo,
       [field.target.name]: field.target.value,
     });
+
+  useEffect(() => {
+    if (!open) {
+      setContactInfo(DEFAULT_CONTACT_INFO);
+    }
+  }, [open]);
 
   return (
     <Modal
@@ -53,6 +60,7 @@ const ContactModal = (props) => {
         <ContactForm
           contactInfo={contactInfo}
           handleChange={updateContactInfo}
+          errors={errors}
         />
       </Box>
     </Modal>
