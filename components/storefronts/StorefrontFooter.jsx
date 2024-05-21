@@ -7,7 +7,8 @@ import {
   Container,
   Link,
 } from "@mui/material";
-import { Logo } from "components";
+import Image from "next/image";
+import LOGO from 'assets/powered-by-logo.svg'
 
 const StorefrontFooter = ({ name }) => {
   return (
@@ -20,10 +21,18 @@ const StorefrontFooter = ({ name }) => {
             </Typography>
           </Stack>
           <Stack direction="row" spacing={2} sx={sx.column2}>
-            <Typography variant="body2" color="primary.contrastText">
-              powered by
-            </Typography>
-            <Logo height={30} width={180} />
+            <Box sx={ sx.logo }>
+            <Image 
+              src={ LOGO }
+              width={240}
+              height={60}
+              alt="Powered by ActiveSource"
+              style={{
+                width: '100%',
+                objectFit: 'contain'
+              }}
+            />
+            </Box>
           </Stack>
           <Stack direction="row" sx={sx.column}>
             <Stack
@@ -82,4 +91,11 @@ const sx = {
     borderRight: "1px solid",
     borderColor: "common.white",
   },
+  logo: {
+    width: '230px',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 };

@@ -5,7 +5,8 @@ import typography from "theme/typography";
 import shape from "theme/shape";
 import { createTheme } from "@mui/material/styles";
 
-export const theme = createTheme({
+
+export const muiTheme = {
   breakpoints,
   palette,
   components,
@@ -17,4 +18,6 @@ export const theme = createTheme({
       elevation: 0,
     },
   },
-});
+}
+
+export const theme = createTheme(muiTheme);
