@@ -5,8 +5,6 @@ const usePlacement = () => {
   const [placement, setPlacement] = useState();
 
   const {
-    getReference,
-    getReferences,
     getValue,
     getImage,
     metaobject,
@@ -34,6 +32,8 @@ const usePlacement = () => {
         image: getImage(metaobject, "image"),
         print_width: getValue(metaobject, "print_width"),
         print_height: getValue(metaobject, "print_height"),
+        canvas_width: getValue(metaobject, "canvas_width"),
+        canvas_height: getValue(metaobject, "canvas_height"),
       });
     }
   }, [metaobject]);
