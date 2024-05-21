@@ -6,8 +6,6 @@ const usePlacements = () => {
   const [activePlacements, setActivePlacements] = useState([]);
 
   const {
-    getReference,
-    getReferences,
     getValue,
     getImage,
     metaobject,
@@ -63,7 +61,22 @@ const usePlacements = () => {
 
   useEffect(() => {
     if (metaobject) {
-      setPlacement(getPlacement(metaobject));
+      setPlacement({
+        uid: getValue(metaobject, "uid"),
+        title: getValue(metaobject, "product_type"),
+        code: getValue(metaobject, "code"),
+        dimensions: getValue(metaobject, "dimensions"),
+        location: getValue(metaobject, "location"),
+        y_offset: getValue(metaobject, "y_offset"),
+        x_offset: getValue(metaobject, "x_offset"),
+        width: getValue(metaobject, "width"),
+        height: getValue(metaobject, "height"),
+        image: getImage(metaobject, "image"),
+        print_width: getValue(metaobject, "print_width"),
+        print_height: getValue(metaobject, "print_height"),
+        canvas_width: getValue(metaobject, "canvas_width"),
+        canvas_height: getValue(metaobject, "canvas_height"),
+      });
     }
   }, [metaobject]);
 
