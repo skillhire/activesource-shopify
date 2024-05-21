@@ -142,6 +142,7 @@ export default AddToCartButton;
 
 const sx = {
   root: {
+    color: 'common.white',
     minWidth: 160,
     whiteSpace: "nowrap",
   },
