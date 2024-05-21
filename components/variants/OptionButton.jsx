@@ -26,9 +26,9 @@ export default OptionButton;
 const sx = {
   active: {
     color: 'secondary.contrastText',
-    bgcolor: "secondary.light",
+    bgcolor: "secondary.main",
     "&:hover": {
-      bgcolor: "secondary.light",
+      bgcolor: "secondary.main",
     },
   },
   button: {    

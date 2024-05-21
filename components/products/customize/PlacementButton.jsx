@@ -69,18 +69,18 @@ const sx = {
     maxwidth: 220,
     "&:hover": {
       color: 'secondary.contrastText',
-      borderColor: "secondary.light",
-      bgcolor: "secondary.light",
+      borderColor: "secondary.main",
+      bgcolor: "secondary.main",
     },
   },
   active: {
     color: 'secondary.contrastText',
-    borderColor: "secondary.light",
-    bgcolor: "secondary.light",
+    borderColor: "secondary.main",
+    bgcolor: "secondary.main",
     "&:hover": {
       color: 'secondary.contrastText',
-      bgcolor: "secondary.light",
-      borderColor: "secondary.light",
+      bgcolor: "secondary.main",
+      borderColor: "secondary.main",
     },
   },
   overline: {
