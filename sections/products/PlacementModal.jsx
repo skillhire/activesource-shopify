@@ -73,7 +73,7 @@ const sx = {
     flexDirection: "column",
   },
   active: {
-    bgcolor: "secondary.light",
+    bgcolor: "background.paper",
   },
   imageContainer: {
     display: "flex",

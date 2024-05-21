@@ -42,5 +42,6 @@ export default Storefront;
 const sx = {
   collection: {
     width: "100%",
+    py: 6,
   },
 };

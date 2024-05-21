@@ -38,8 +38,14 @@ const StorefrontCover = (props) => {
           ...(direction == "row" && sx.contentRow),
         }}
       >
-        <Typography variant="h3">{storefront?.title}</Typography>
-        <Typography variant="body1" sx={sx.description}>
+        <Typography 
+          variant="h3" 
+          sx={{ 
+            ...sx.title,
+            ...(direction == "row" && sx.titleRow),
+          }}
+        >{storefront?.title}</Typography>
+        <Typography variant="body2" sx={sx.description}>
           {storefront?.description}
         </Typography>
       </Stack>
@@ -64,7 +70,7 @@ const sx = {
   },
   content: {
     width: "100%",
-    maxWidth: 600,
+    maxWidth: 720,
     pr: {
       sm: 4,
       xs: 0,
@@ -75,9 +81,17 @@ const sx = {
     },
   },
   contentRow: {
+    maxWidth: 520,
+    pt: 4,
     alignItems: {
       sm: "flex-start",
       xs: "center",
     },
+  },
+  title: {
+    textAlign: "center",    
+  },
+  titleRow: {
+    textAlign: "left",
   },
 };

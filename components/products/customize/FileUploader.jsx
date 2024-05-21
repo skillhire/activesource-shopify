@@ -115,15 +115,17 @@ const sx = {
     minWidth: 176,
     maxwidth: 220,
     "&:hover": {
-      color: "text.primary",
+      color: 'secondary.contrastText',
       borderColor: "secondary.light",
       bgcolor: "secondary.light",
     },
   },
   activeButton: {
+    color: 'secondary.contrastText',
     borderColor: "secondary.light",
     bgcolor: "secondary.light",
     "&:hover": {
+      color: 'secondary.contrastText',
       bgcolor: "secondary.light",
       borderColor: "secondary.light",
     },
