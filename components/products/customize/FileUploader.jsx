@@ -116,18 +116,18 @@ const sx = {
     maxwidth: 220,
     "&:hover": {
       color: 'secondary.contrastText',
-      borderColor: "secondary.main",
-      bgcolor: "secondary.main",
+      borderColor: "secondary.light",
+      bgcolor: "secondary.light",
     },
   },
   activeButton: {
     color: 'secondary.contrastText',
-    borderColor: "secondary.main",
-    bgcolor: "secondary.main",
+    borderColor: "secondary.light",
+    bgcolor: "secondary.light",
     "&:hover": {
       color: 'secondary.contrastText',
-      bgcolor: "secondary.main",
-      borderColor: "secondary.main",
+      bgcolor: "secondary.light",
+      borderColor: "secondary.light",
     },
   },
 };

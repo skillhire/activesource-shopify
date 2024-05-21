@@ -23,6 +23,7 @@ const CheckoutButton = ({ styles, ...props }) => {
     <Box sx={sx.root}>
       <Button
         fullWidth
+        sx={sx.button}
         color="secondary"
         onClick={handleCheckoutClick}
         variant="contained"
@@ -40,6 +41,9 @@ export default CheckoutButton;
 
 const sx = {
   root: {},
+  button: {
+    color: 'common.white',
+  },
   loader: {
     color: "common.white",
   },
