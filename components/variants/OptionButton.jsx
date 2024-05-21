@@ -25,12 +25,13 @@ export default OptionButton;
 
 const sx = {
   active: {
+    color: 'secondary.contrastText',
     bgcolor: "secondary.light",
     "&:hover": {
       bgcolor: "secondary.light",
     },
   },
-  button: {
+  button: {    
     display: "flex",
     alignItems: "center",
     textAlign: "center",

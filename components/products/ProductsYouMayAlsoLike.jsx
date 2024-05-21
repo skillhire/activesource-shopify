@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import {Box, Typography } from "@mui/material";
 import { ProductGrid } from "components";
 import { useResponsive } from "hooks";
 
@@ -10,7 +10,7 @@ const ProductsYouMayAlsoLike = (props) => {
 
   if (!products) return null;
   return (
-    <>
+    <Box my={3}>
       <Typography variant="h4" sx={sx.title}>
         You May Also Like
       </Typography>
@@ -19,7 +19,7 @@ const ProductsYouMayAlsoLike = (props) => {
         products={products}
         productUrl={productUrl}
       />
-    </>
+    </Box>
   );
 };
 

@@ -3,23 +3,39 @@ import { Alert, Cart, MetaFields } from "components";
 import { Box, Container } from "@mui/material";
 import StorefrontFooter from "./StorefrontFooter";
 import StorefrontHeader from "./StorefrontHeader";
+import { ThemeProvider } from "@mui/material/styles";
+import { muiTheme } from "theme";
+import { createTheme } from "@mui/material/styles";
 
 export default function Layout({ children, storefront, ...props }) {
-  const { name, logo, direction } = storefront || {};
+  const { name } = storefront || {};
+
+  const customTheme = {
+    ...muiTheme,
+    palette: {
+      ...muiTheme.palette,
+      secondary: {
+        main: '#000000'
+      },
+    }
+  }
+
 
   return (
-    <>
-      <MetaFields title={name} />
-      <Alert />
-      <Cart />
-      <StorefrontHeader storefront={storefront} />
-      <Box sx={sx.root}>
-        <Box sx={sx.container}>
-          <Container maxWidth={"lg"}>{children}</Container>
+    <ThemeProvider 
+      theme={createTheme(customTheme)}
+    >
+        <MetaFields title={name} />
+        <Alert />
+        <Cart />
+        <StorefrontHeader storefront={storefront} />
+        <Box sx={sx.root}>
+          <Box sx={sx.container}>
+            <Container maxWidth={"lg"}>{children}</Container>
+          </Box>
+          <StorefrontFooter name={name} />
         </Box>
-        <StorefrontFooter name={name} />
-      </Box>
-    </>
+    </ThemeProvider>
   );
 }
 
@@ -39,6 +55,7 @@ const sx = {
       xs: "50px",
     },
     backgroundColor: "background.shade3",
+    pb: 6
   },
   disableScroll: {
     overflow: "hidden",
