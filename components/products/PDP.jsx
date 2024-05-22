@@ -302,11 +302,13 @@ const Product = ({
   }, [product?.productType]);
 
   useEffect(() => {
-    if (activePlacements.length && product && product.productType) {
-      const warehouse = getMetaValue(product, "warehouse");
+    const productType = product?.productType || "Shirt";
+    const warehouse = getMetaValue(product, "warehouse") || "monster";
+
+    if (activePlacements.length && productType) {
       const filteredPlacements = filterPlacements(
         activePlacements,
-        product.productType,
+        productType,
         warehouse
       );
       setPlacements(filteredPlacements);

@@ -51,8 +51,7 @@ const usePlacements = () => {
         if (warehouse && p.warehouse) {
           return p.warehouse === warehouse;
         }
-        // Change to false to prevent placements without warehouse to be included
-        return true;
+        return false;
       } );
     const front = filteredPlacements.filter((p) => p.location === "front");
     const back = filteredPlacements.filter((p) => p.location === "back");
