@@ -8,10 +8,6 @@ import ProductsYouMayAlsoLike from "components/products/ProductsYouMayAlsoLike";
 import { CustomizeContext } from "context";
 import PlacementModal from "sections/products/PlacementModal";
 import { getMetaValue, getProductColors } from "utils";
-import {
-  SHIRT_PLACEMENTS,
-  BAG_PLACEMENT,
-} from "constants/placements";
 import ContactModal from "../contact/ContactModal";
 
 const Product = ({
@@ -45,8 +41,7 @@ const Product = ({
   const { activePlacements, fetchAllPlacements, filterPlacements } = usePlacements();
 
   const [zoom, setZoom] = useState(false);
-  // SHIRT_PLACEMENTS is a fallback to the list of placements if the product does not have a product type
-  const [placements, setPlacements] = useState(SHIRT_PLACEMENTS);
+  const [placements, setPlacements] = useState({});
   const [selectedOptions, setSelectedOptions] = useState({});
   const [addToCartDisabled, setAddToCartDisabled] = useState(false);
 
@@ -292,13 +287,14 @@ const Product = ({
   // Auto-select placement for tote bags
   useEffect(() => {
     if (product?.productType == "Bag") {
+      const defaultPlacement = placements.front[0];
       setActivePlacement({
-        front: BAG_PLACEMENT,
+        front: [defaultPlacement],
       });
       setCustomization({
         ...customization,
-        print_location_1: BAG_PLACEMENT?.code,
-        print_placement_1: BAG_PLACEMENT,
+        print_location_1: defaultPlacement?.code,
+        print_placement_1: defaultPlacement,
       });
     }
 
