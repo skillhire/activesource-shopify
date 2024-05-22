@@ -30,12 +30,11 @@ const useMetaobjects = () => {
     return resp;
   };
 
-  const fetchMetaobjects = (type, options = {}, perPage = 250) => {
+  const fetchMetaobjects = (type, perPage = 250) => {
     let resp = fetchMetaobjectsQuery({
       variables: {
         first: perPage,
         type: type,
-        ...options,
       },
     });
     return resp || [];

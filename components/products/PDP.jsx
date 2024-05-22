@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useVariants, useSegment, useContact, useCustomization, usePlacements } from "hooks";
-import { Box, Container, Grid, Button, CircularProgress } from "@mui/material";
+import { Box, Container, Grid, Button } from "@mui/material";
 import { ProductDetails, ProductImages, ProductTabs } from "components";
 import ProductCustomize from "components/products/ProductCustomize";
 import ProductAddToCart from "components/products/ProductAddToCart";
@@ -10,7 +10,6 @@ import PlacementModal from "sections/products/PlacementModal";
 import { getMetaValue, getProductColors } from "utils";
 import {
   SHIRT_PLACEMENTS,
-  HOODIE_PLACEMENTS,
   BAG_PLACEMENT,
 } from "constants/placements";
 import ContactModal from "../contact/ContactModal";
@@ -41,12 +40,12 @@ const Product = ({
   } = useContext(CustomizeContext);
 
   const { trackProductViewed } = useSegment();
-  // const { notForSale } = { notForSale: true}
   const { notForSale } = useCustomization();
   const { loading: emailLoading, sendContactEmail } = useContact();
-  const { activePlacements, fetchAllPlacements } = usePlacements();
+  const { activePlacements, fetchAllPlacements, filterPlacements } = usePlacements();
 
   const [zoom, setZoom] = useState(false);
+  // SHIRT_PLACEMENTS is a fallback to the list of placements if the product does not have a product type
   const [placements, setPlacements] = useState(SHIRT_PLACEMENTS);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [addToCartDisabled, setAddToCartDisabled] = useState(false);
@@ -302,20 +301,21 @@ const Product = ({
         print_placement_1: BAG_PLACEMENT,
       });
     }
-    // if (product?.productType == "Hoodie") {
-    //   setPlacements(HOODIE_PLACEMENTS);
-    // } 
-    // else {
-    //   setPlacements(SHIRT_PLACEMENTS);
-    // }
 
-    fetchAllPlacements(product?.productType);
+    fetchAllPlacements();
   }, [product?.productType]);
 
   useEffect(() => {
-    console.log(activePlacements);
-    setPlacements(activePlacements);
-  }, [activePlacements]);
+    if (activePlacements.length && product && product.productType) {
+      const warehouse = getMetaValue(product, "warehouse");
+      const filteredPlacements = filterPlacements(
+        activePlacements,
+        product.productType,
+        warehouse
+      );
+      setPlacements(filteredPlacements);
+    }
+  }, [activePlacements, product]);
 
   useEffect(() => {
     if (product?.handle) {
