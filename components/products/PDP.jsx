@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useVariants, useSegment, useContact, useCustomization } from "hooks";
-import { Box, Container, Grid, Button, CircularProgress } from "@mui/material";
+import { useVariants, useSegment, useContact, useCustomization, usePlacements } from "hooks";
+import { Box, Container, Grid, Button } from "@mui/material";
 import { ProductDetails, ProductImages, ProductTabs } from "components";
 import ProductCustomize from "components/products/ProductCustomize";
 import ProductAddToCart from "components/products/ProductAddToCart";
@@ -8,11 +8,6 @@ import ProductsYouMayAlsoLike from "components/products/ProductsYouMayAlsoLike";
 import { CustomizeContext } from "context";
 import PlacementModal from "sections/products/PlacementModal";
 import { getMetaValue, getProductColors } from "utils";
-import {
-  SHIRT_PLACEMENTS,
-  HOODIE_PLACEMENTS,
-  BAG_PLACEMENT,
-} from "constants/placements";
 import ContactModal from "../contact/ContactModal";
 
 const Product = ({
@@ -41,11 +36,12 @@ const Product = ({
   } = useContext(CustomizeContext);
 
   const { trackProductViewed } = useSegment();
-  const { notForSale } = useCustomization()
-  const { loading: emailLoading, sendContactEmail, errors } = useContact()
+  const { notForSale } = useCustomization();
+  const { loading: emailLoading, sendContactEmail, errors } = useContact();
+  const { activePlacements, fetchAllPlacements, filterPlacements } = usePlacements();
 
   const [zoom, setZoom] = useState(false);
-  const [placements, setPlacements] = useState(SHIRT_PLACEMENTS);
+  const [placements, setPlacements] = useState({});
   const [selectedOptions, setSelectedOptions] = useState({});
   const [addToCartDisabled, setAddToCartDisabled] = useState(false);
 
@@ -291,21 +287,33 @@ const Product = ({
   // Auto-select placement for tote bags
   useEffect(() => {
     if (product?.productType == "Bag") {
+      const defaultPlacement = placements.front[0];
       setActivePlacement({
-        front: BAG_PLACEMENT,
+        front: [defaultPlacement],
       });
       setCustomization({
         ...customization,
-        print_location_1: BAG_PLACEMENT?.code,
-        print_placement_1: BAG_PLACEMENT,
+        print_location_1: defaultPlacement?.code,
+        print_placement_1: defaultPlacement,
       });
     }
-    if (product?.productType == "Hoodie") {
-      setPlacements(HOODIE_PLACEMENTS);
-    } else {
-      setPlacements(SHIRT_PLACEMENTS);
-    }
+
+    fetchAllPlacements();
   }, [product?.productType]);
+
+  useEffect(() => {
+    const productType = product?.productType || "Shirt";
+    const warehouse = getMetaValue(product, "warehouse") || "monster";
+
+    if (activePlacements.length && productType) {
+      const filteredPlacements = filterPlacements(
+        activePlacements,
+        productType,
+        warehouse
+      );
+      setPlacements(filteredPlacements);
+    }
+  }, [activePlacements, product]);
 
   useEffect(() => {
     if (product?.handle) {

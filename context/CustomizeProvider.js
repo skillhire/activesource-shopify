@@ -10,6 +10,7 @@ const CustomizeProvider = ({ children, ...rest }) => {
   const [disablePlacement, setDisablePlacement] = useState(false);
   const [notForSale, setNotForSale] = useState(false);
 
+  const [activePlacements, setActivePlacements] = useState([]);
   const [activePlacement, setActivePlacement] = useState({
     code: null,
     yPos: null, // Interger value in percentages
@@ -73,6 +74,8 @@ const CustomizeProvider = ({ children, ...rest }) => {
     setActiveImage,
     activePlacement,
     setActivePlacement,
+    activePlacements,
+    setActivePlacements,
     customization,
     setCustomization,
   };
