@@ -8,27 +8,38 @@ import {
   Stack,
 } from "@mui/material";
 import Image from "next/image";
-import { getProductColors } from "utils";
-import { truncate, formatPriceRange } from "utils";
+import {
+  getProductColors,
+  getMetaValue,
+  truncate,
+  formatPriceRange,
+} from "utils";
 import ColorOption from "components/variants/ColorOption";
+import ProductEnterpriseChip from "components/products/ProductEnterpriseChip";
 
 const ProductCard = ({ product, productUrl = "/products" }) => {
   const [image, setImage] = useState(null);
   const [colors, setColors] = useState();
+  const [isEnterprise, setIsEnterprise] = useState();
 
   const handleColorClick = (color) => null;
 
   useEffect(() => {
     if (product) {
       setImage(product?.images?.edges[0]?.node?.url);
+      let _isEnterprise = getMetaValue(product, "is_enterprise") == "true";
       let formattedColors = getProductColors(product);
       setColors(formattedColors);
+      setIsEnterprise(_isEnterprise);
     }
   }, [product]);
 
   return (
     <Box sx={sx.root}>
       <Link href={`${productUrl}/${product?.handle}`} underline="none">
+        {isEnterprise && <Box sx={sx.enterpriseChip}>
+          <ProductEnterpriseChip size="small" />
+        </Box>}
         <CardActionArea sx={sx.contentActionArea}>
           {image && (
             <Image
@@ -132,4 +143,10 @@ const sx = {
     height: "40px",
     gap: "4px",
   },
+  enterpriseChip: {
+    position: "absolute",
+    zIndex: 1,
+    mt: 1,
+    ml: 1
+  }
 };

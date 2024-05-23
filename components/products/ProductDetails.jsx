@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Stack, Typography } from "@mui/material";
-import { formatPriceRange } from "utils";
-import { VariantSelector } from "components";
+import { Stack, Typography, Chip, Box } from "@mui/material";
+import { formatPriceRange, getMetaValue, getProductColors } from "utils";
+import { VariantSelector, ProductEnterpriseChip } from "components";
 import CustomColorSelect from "components/variants/CustomColorSelect";
-import { getProductColors } from "utils";
 
 const ProductDetails = ({
   product,
@@ -18,6 +17,7 @@ const ProductDetails = ({
   const { minVariantPrice } = priceRange || {};
 
   const [price, setPrice] = useState();
+  const [isEnterprise, setIsEnterprise] = useState();
   const [colors, setColors] = useState([]);
 
   useEffect(() => {
@@ -31,7 +31,9 @@ const ProductDetails = ({
   useEffect(() => {
     if (product?.metafields?.length > 0) {
       let formattedColors = getProductColors(product);
+      let _isEnterprise = getMetaValue(product, "is_enterprise") == "true";
       setColors(formattedColors);
+      setIsEnterprise(_isEnterprise);
     }
   }, [product]);
 
@@ -39,6 +41,11 @@ const ProductDetails = ({
     <Stack spacing={2}>
       {product && (
         <>
+          {isEnterprise && (
+            <Box>
+              <ProductEnterpriseChip />
+            </Box>
+          )}
           <Typography variant="h4">{product?.title}</Typography>
           <Typography variant="button">
             {formatPriceRange(

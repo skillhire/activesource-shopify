@@ -266,6 +266,7 @@ const sx = {
     alignItems: "flex-start",
     maxHeight: "600px",
     maxWidth: "800px",
+    overflow: "hidden",
   },
   image: {
     position: "relative",
