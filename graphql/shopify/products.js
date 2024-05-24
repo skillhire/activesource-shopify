@@ -86,6 +86,7 @@ export const ProductFragment = gql`
                   { namespace: "custom", key: "back_placement" }
                   { namespace: "custom", key: "recommended_products" }
                   { namespace: "custom", key: "not_for_sale" }
+                  { namespace: "custom", key: "is_enterprise" }
                   { namespace: "custom", key: "disable_placements" }
                   { namespace: "custom", key: "disable_logo" }
                 ]

@@ -1,7 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useVariants, useSegment, useContact, useCustomization, usePlacements } from "hooks";
-import { Box, Container, Grid, Button } from "@mui/material";
-import { ProductDetails, ProductImages, ProductTabs } from "components";
+import { Box, Container, Grid, Button, CircularProgress } from "@mui/material";
+import {
+  ProductDetails,
+  ProductImages,
+  ProductTabs,
+  ProductContactSupport,
+  ProductEnquireBulkDiscount
+} from "components";
 import ProductCustomize from "components/products/ProductCustomize";
 import ProductAddToCart from "components/products/ProductAddToCart";
 import ProductsYouMayAlsoLike from "components/products/ProductsYouMayAlsoLike";
@@ -48,6 +54,7 @@ const Product = ({
   const [openModal, setOpenModal] = useState(false);
   const [frontOrBack, setFrontOrBack] = useState("front");
   const [openContactModal, setOpenContactModal] = useState(false);
+  const [contactModalTitle, setContactModalTitle] = useState("");
 
   const { variant, setVariant } = useVariants({
     product,
@@ -212,6 +219,11 @@ const Product = ({
       .catch((error) => console.log(error.message))
   };
 
+  const handleOpenContactModal = (title) => {
+    setContactModalTitle(title);
+    setOpenContactModal(true);
+  };
+
   useEffect(() => {
     if (product?.handle) {
       handleReset();
@@ -347,6 +359,9 @@ const Product = ({
                 zoom={zoom}
                 handleClose={handleClose}
               />
+              <Box sx={sx.contactSupportLabel}>
+                <ProductContactSupport handleButtonClick={() => handleOpenContactModal("Contact Support")} />
+              </Box>
             </Grid>
             <Grid item xs={12} md={5} lg={4}>
               <ProductDetails
@@ -375,13 +390,16 @@ const Product = ({
                     variant={variant}
                     addToCartDisabled={addToCartDisabled}
                   />
+                  <ProductEnquireBulkDiscount
+                    handleButtonClick={() => handleOpenContactModal("Enquire for Bulk Discount")}
+                  />
                 </>
               )}
               {notForSale && (
                 <Button
                   fullWidth
                   color="secondary"
-                  onClick={() => setOpenContactModal(true)}
+                  onClick={() => handleOpenContactModal("Enquire for Enterprise Products")}
                   variant="contained"
                 >
                   Contact Us Now
@@ -414,7 +432,7 @@ const Product = ({
         placements={placements}
       />
       <ContactModal
-        title="Enquire for Enterprise Products"
+        title={contactModalTitle}
         submitCTAText="Enquire Now"
         open={openContactModal}
         handleClose={() => setOpenContactModal(false)}
@@ -438,4 +456,10 @@ const sx = {
   title: {
     my: 2,
   },
+  contactSupportLabel: {
+    ml: {
+      xs: 0,
+      sm: "124px"
+    }
+  }
 };
