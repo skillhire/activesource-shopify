@@ -35,6 +35,7 @@ const PlacementModal = ({
                   <Image
                     height={300}
                     width={300}
+                    unoptimized
                     src={p?.previewSrc}
                     layout="responsive"
                   />
