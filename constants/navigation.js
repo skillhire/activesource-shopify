@@ -32,6 +32,12 @@ export const COLLECTIONS_MENU = [
     value: "/collections/accessories",
     divider: false,
   },
+  {
+    label: "Enterprise Products",
+    handle: "enterprise-products",
+    value: "/collections/enterprise-products",
+    divider: false,
+  },
 ];
 
 export const PRINTING_SUBMENU = [

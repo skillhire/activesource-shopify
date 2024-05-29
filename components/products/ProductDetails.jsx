@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Stack, Typography, Chip, Box } from "@mui/material";
-import { formatPriceRange, getMetaValue, getProductColors } from "utils";
+import { Stack, Typography, Box } from "@mui/material";
+import { formatPriceRange, formatCurrency, getMetaValue, getProductColors } from "utils";
 import { VariantSelector, ProductEnterpriseChip } from "components";
 import CustomColorSelect from "components/variants/CustomColorSelect";
 
@@ -48,10 +48,19 @@ const ProductDetails = ({
           )}
           <Typography variant="h4">{product?.title}</Typography>
           <Typography variant="button">
-            {formatPriceRange(
-              product.priceRange.minVariantPrice.amount,
-              product.priceRange.maxVariantPrice.amount
-            )}
+            {
+              isEnterprise ? (
+                <>
+                  From {' '}
+                  {formatCurrency(product.priceRange.minVariantPrice.amount)}
+                </>
+              ) : (
+                formatPriceRange(
+                  product.priceRange.minVariantPrice.amount,
+                  product.priceRange.maxVariantPrice.amount
+                )
+              )
+            }
           </Typography>
           <CustomColorSelect
             colors={colors}
