@@ -360,7 +360,7 @@ const Product = ({
                 handleClose={handleClose}
               />
               <Box sx={sx.contactSupportLabel}>
-                <ProductContactSupport handleButtonClick={() => handleOpenContactModal("Contact Support")} />
+                <ProductContactSupport />
               </Box>
             </Grid>
             <Grid item xs={12} md={5} lg={4}>
