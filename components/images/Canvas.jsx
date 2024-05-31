@@ -67,7 +67,17 @@ const Canvas = ({ enableZoom = false, ...props }) => {
     const height = parseInt(
       (parseFloat(placement.height) / 100) * IMAGE_HEIGHT
     );
-    return cloudinaryResizeImage(image, { width, height });
+    return cloudinaryResizeImage(image, { width, height, dpi: 300, rgb: true });
+  };
+
+  const resizeCloudinaryImageForStakes = (image, placement) => {
+    const imageWidth = placement.widthInches * PIXELS_PER_INCH;
+    const imageHeight = placement.heightInches * PIXELS_PER_INCH;
+    
+    const width = parseInt((parseFloat(placement.width)/100) * imageWidth);
+    const height = parseInt((parseFloat(placement.height)/100) * imageHeight);
+    
+    return cloudinaryResizeImage(image, { width, height, dpi: 300, rgb: true });
   };
 
   const resizeShopifyImage = (
@@ -82,6 +92,8 @@ const Canvas = ({ enableZoom = false, ...props }) => {
     return cloudinaryResizeImage(image, {
       width: widthInches * PIXELS_PER_INCH,
       height: heightInches * PIXELS_PER_INCH,
+      dpi: 300,
+      rgb: true
     });
   };
 
@@ -115,6 +127,45 @@ const Canvas = ({ enableZoom = false, ...props }) => {
     });
   };
 
+  const renderCanvasImageForStakes = async (
+    resizedImage,
+    placement = DEFAULT_PLACEMENT
+  ) => {
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.crossOrigin = "anonymous"; // Required to export canvas image
+      image.src = resizedImage;
+
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext("2d");
+      
+      const imageWidth = placement.widthInches * PIXELS_PER_INCH;
+      const imageHeight = placement.heightInches * PIXELS_PER_INCH;
+      ctx.canvas.width = imageWidth;
+      ctx.canvas.height = imageHeight;
+      
+      let imageSrc;
+      
+      image.onload = async () => {
+        const width = (parseFloat(placement.width) / 100) * imageWidth;
+        const height = (parseFloat(placement.height) / 100) * imageHeight;
+        const xPos = (parseFloat(placement.left) /100) * imageWidth;
+        const yPos = (parseFloat(placement.top) /100) * imageHeight;
+        ctx.drawImage(image, xPos, yPos, width, height);
+        imageSrc = canvas.toDataURL("image/png");
+        return resolve(imageSrc);
+      };
+    });
+  };
+
+  const clearCanvas = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.canvas.width = IMAGE_WIDTH;
+    ctx.canvas.height = IMAGE_HEIGHT;
+  };
+
   const renderCompositeImage = async (
     print_logo,
     print_background,
@@ -126,6 +177,7 @@ const Canvas = ({ enableZoom = false, ...props }) => {
     if (print_logo && print_logo && print_placement?.code) {
       setLoading(true);
 
+      clearCanvas();
       // First resize the images. We assume the background image is
       // a Shopify product image and the logo is a Cloudinary image.
       let backgroundSrc = resizeShopifyImage(print_background);
@@ -154,6 +206,23 @@ const Canvas = ({ enableZoom = false, ...props }) => {
           ...customization,
           print_url_2: printUrl,
           print_preview_2: previewUrl,
+        });
+      }
+
+      clearCanvas();
+      let logoSrcStakes = resizeCloudinaryImageForStakes(print_logo, print_placement);
+      let stakesPrintSrc = await renderCanvasImageForStakes(logoSrcStakes, print_placement);
+      let printUrlStakes = await handleUploadToCloudinary(stakesPrintSrc);
+      
+      if (isFront) {
+        setCustomization({
+          ...customization,
+          print_url_1_stakes: printUrlStakes,
+        });
+      } else {
+        setCustomization({
+          ...customization,
+          print_url_2_stakes: printUrlStakes,
         });
       }
       setTimeout(() => setLoading(false), 1500);

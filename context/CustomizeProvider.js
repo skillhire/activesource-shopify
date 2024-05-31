@@ -25,6 +25,7 @@ const CustomizeProvider = ({ children, ...rest }) => {
     print_sku: null,
     print_location_1: null, // Specific code for the warehous such as CF, FB
     print_url_1: null, // Scaled to print size logo URL
+    print_url_1_stakes: null, // Scaled to print size logo URL
     print_preview_1: null, // Logo + background preview image
     print_type_1: "DigitalPrint",
 
@@ -46,6 +47,7 @@ const CustomizeProvider = ({ children, ...rest }) => {
     print_location_2: null,
     print_preview_2: null, // The composite image of logo and background
     print_url_2: null, // The resized to print size logo URL
+    print_url_2_stakes: null, // The resized to print size logo URL
     print_type_2: "DigitalPrint",
     file_extension_2: "png",
     print_placement_2: {

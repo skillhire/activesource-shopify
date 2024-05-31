@@ -125,11 +125,13 @@ const Product = ({
     let {
       front_placement,
       print_url_1,
+      print_url_1_stakes,
       print_preview_1,
       print_location_1,
 
       back_placement,
       print_url_2,
+      print_url_2_stakes,
       print_preview_2,
       print_location_2,
     } = color || {};
@@ -139,12 +141,14 @@ const Product = ({
       print_background_1:
         front_placement || newCustomization?.print_background_1,
       print_url_1: print_url_1 || newCustomization?.print_url_1,
+      print_url_1_stakes: print_url_1_stakes || newCustomization?.print_url_1_stakes,
       print_preview_1: print_preview_1 || newCustomization?.print_preview_1,
       print_location_1: print_location_1 || newCustomization?.print_location_1,
 
       print_background_2:
         back_placement || newCustomization?.print_background_2,
       print_url_2: print_url_2 || newCustomization?.print_url_2,
+      print_url_2_stakes: print_url_2_stakes || newCustomization?.print_url_2_stakes,
       print_preview_2: print_preview_2 || newCustomization?.print_preview_2,
       print_location_2: print_location_2 || newCustomization?.print_location_2,
     };
@@ -299,14 +303,16 @@ const Product = ({
   // Auto-select placement for tote bags
   useEffect(() => {
     if (product?.productType == "Bag") {
-      const defaultPlacement = placements.front[0];
+      const defaultPlacementFront = placements.front[0];
+      const defaultPlacementBack = placements.back[0];
       setActivePlacement({
-        front: [defaultPlacement],
+        front: [defaultPlacementFront],
+        back: [defaultPlacementBack],
       });
       setCustomization({
         ...customization,
-        print_location_1: defaultPlacement?.code,
-        print_placement_1: defaultPlacement,
+        print_location_1: defaultPlacementFront?.code,
+        print_placement_1: defaultPlacementFront,
       });
     }
 
