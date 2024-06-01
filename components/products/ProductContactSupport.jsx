@@ -2,8 +2,14 @@ import React from "react";
 import Image from "next/image";
 import { Box, Link, Typography, IconButton } from "@mui/material";
 import HelpIcon from "assets/help-icon.svg";
+import { useRouter } from "next/router";
 
-const ProductContactSupport = ({handleButtonClick}) => {
+const ProductContactSupport = () => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/contact-us`);
+  };
   return (
     <Box sx={sx.root}>
       <IconButton disabled sx={sx.iconButton}>
@@ -18,7 +24,7 @@ const ProductContactSupport = ({handleButtonClick}) => {
       <Box>
         <Typography variant="body2" sx={sx.helpText}>
           Need help with designing, uploading your files or placements? {" "}
-          <Link color="secondary" variant="link" sx={sx.supportButton} onClick={handleButtonClick}>Contact Support</Link>
+          <Link color="secondary" variant="link" sx={sx.supportButton} onClick={handleClick}>Contact Support</Link>
         </Typography>
       </Box>
     </Box>
