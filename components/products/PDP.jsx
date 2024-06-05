@@ -384,7 +384,7 @@ const Product = ({
                 handleColorClick={handleColorClick}
                 handleOptionChange={handleOptionChange}
               />
-              {!notForSale || !isEnterprise && (
+              {!isEnterprise && !notForSale && (
                 <>
                   <ProductCustomize
                     product={product}

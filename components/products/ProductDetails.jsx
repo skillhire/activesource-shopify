@@ -68,7 +68,7 @@ const ProductDetails = ({
               )
             }
           </Typography>
-          {!notForSale || !isEnterprise && (
+          {!notForSale && !isEnterprise && (
             <>
               <CustomColorSelect
                 colors={colors}
