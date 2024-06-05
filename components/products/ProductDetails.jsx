@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { useCustomization } from "hooks";
 import { Stack, Typography, Box } from "@mui/material";
 import { formatPriceRange, formatCurrency, getMetaValue, getProductColors } from "utils";
 import { VariantSelector, ProductEnterpriseChip } from "components";
 import CustomColorSelect from "components/variants/CustomColorSelect";
+import { CustomizeContext } from "context";
 
 const ProductDetails = ({
   product,
@@ -19,6 +21,8 @@ const ProductDetails = ({
   const [price, setPrice] = useState();
   const [isEnterprise, setIsEnterprise] = useState();
   const [colors, setColors] = useState([]);
+  const { notForSale } = useCustomization();
+  const { setNotForSale } = useContext(CustomizeContext);
 
   useEffect(() => {
     if (variant) {
@@ -31,7 +35,9 @@ const ProductDetails = ({
   useEffect(() => {
     if (product?.metafields?.length > 0) {
       let formattedColors = getProductColors(product);
+      let _notForSale = getMetaValue(product, "not_for_sale") == "true";
       let _isEnterprise = getMetaValue(product, "is_enterprise") == "true";
+      setNotForSale(_notForSale);
       setColors(formattedColors);
       setIsEnterprise(_isEnterprise);
     }
@@ -62,17 +68,21 @@ const ProductDetails = ({
               )
             }
           </Typography>
-          <CustomColorSelect
-            colors={colors}
-            activeColor={activeColor}
-            handleClick={handleColorClick}
-            customAttributes={customAttributes}
-          />
-          <VariantSelector
-            handleChange={handleOptionChange}
-            selectedOptions={selectedOptions}
-            options={product?.options}
-          />
+          {!notForSale || !isEnterprise && (
+            <>
+              <CustomColorSelect
+                colors={colors}
+                activeColor={activeColor}
+                handleClick={handleColorClick}
+                customAttributes={customAttributes}
+              />
+              <VariantSelector
+                handleChange={handleOptionChange}
+                selectedOptions={selectedOptions}
+                options={product?.options}
+              />
+            </>
+          )}
         </>
       )}
     </Stack>

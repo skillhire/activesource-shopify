@@ -48,6 +48,7 @@ const Product = ({
 
   const [zoom, setZoom] = useState(false);
   const [placements, setPlacements] = useState({});
+  const [isEnterprise, setIsEnterprise] = useState();
   const [selectedOptions, setSelectedOptions] = useState({});
   const [addToCartDisabled, setAddToCartDisabled] = useState(false);
 
@@ -337,10 +338,12 @@ const Product = ({
     if (product?.handle) {
       let _notForSale = getMetaValue(product, "not_for_sale") == "true";
       let _disableLogo = getMetaValue(product, "disable_logo") == "true";
+      let _isEnterprise = getMetaValue(product, "is_enterprise") == "true";
       let _disablePlacement =
         getMetaValue(product, "disable_placement") == "true";
       setNotForSale(_notForSale);
       setDisableLogo(_disableLogo);
+      setIsEnterprise(_isEnterprise);
       setDisablePlacement(_disablePlacement);
     }
   }, [product?.handle]);
@@ -365,9 +368,11 @@ const Product = ({
                 zoom={zoom}
                 handleClose={handleClose}
               />
-              <Box sx={sx.contactSupportLabel}>
-                <ProductContactSupport />
-              </Box>
+              {!isEnterprise && (
+                <Box sx={sx.contactSupportLabel}>
+                  <ProductContactSupport />
+                </Box>
+              )}
             </Grid>
             <Grid item xs={12} md={5} lg={4}>
               <ProductDetails
@@ -379,7 +384,7 @@ const Product = ({
                 handleColorClick={handleColorClick}
                 handleOptionChange={handleOptionChange}
               />
-              {!notForSale && (
+              {!notForSale || !isEnterprise && (
                 <>
                   <ProductCustomize
                     product={product}
@@ -401,15 +406,17 @@ const Product = ({
                   />
                 </>
               )}
-              {notForSale && (
-                <Button
-                  fullWidth
-                  color="secondary"
-                  onClick={() => handleOpenContactModal("Enquire for Enterprise Products")}
-                  variant="contained"
-                >
-                  Contact Us Now
-                </Button>
+              {isEnterprise && (
+                <Box mt={8}>
+                  <Button
+                    fullWidth
+                    color="secondary"
+                    onClick={() => handleOpenContactModal("Enquire for Enterprise Products")}
+                    variant="contained"
+                  >
+                    Contact Us Now
+                  </Button>
+                </Box>
               )}
             </Grid>
             <Grid item xs={12}>
