@@ -22,18 +22,15 @@ const ProductCustomize = ({
 
   useEffect(() => {
     const cookie = JSON.parse(getCookie("activesource") || "{}");
-    if (cookie?.front) {
-      setCustomization({
-        ...customization,
-        print_logo_1: cookie.front?.image,
-      });
-    }
-    if (cookie?.back) {
-      setCustomization({
-        ...customization,
-        print_logo_2: cookie.back?.image,
-      });
-    }
+    setCustomization({
+      ...customization,
+      print_logo_1: cookie.front?.image
+        ? cookie.front?.image
+        : customization?.print_logo_1,
+      print_logo_2: cookie.back?.image
+        ? cookie.back?.image
+        : customization?.print_logo_2,
+    });
   }, [product?.handle]);
 
   const { disableLogo, disablePlacement } = useContext(CustomizeContext);
