@@ -33,11 +33,10 @@ const PlacementModal = ({
                   onClick={() => handleClick(p)}
                 >
                   <Image
-                    height={300}
-                    width={300}
+                    height={160}
+                    width={160}
                     unoptimized
                     src={p?.previewSrc}
-                    layout="responsive"
                   />
                   <Typography variant="button" sx={sx.title}>
                     {p.title}
