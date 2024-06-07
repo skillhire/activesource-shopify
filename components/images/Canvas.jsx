@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
 import { CustomizeContext } from "context";
-import { Box } from "@mui/material";
+import { Box, CircularProgress, Backdrop, Typography } from "@mui/material";
 import NextImage from "next/image";
 import {
   dataURLtoFile,
@@ -30,7 +30,7 @@ const DEFAULT_PLACEMENT = {
   printHeight: 15,
 };
 
-const CanvasImage = ({ src, loading }) => (
+const CanvasImage = ({ src }) => (
   <NextImage
     height={1600}
     width={1600}
@@ -73,7 +73,7 @@ const Canvas = ({ enableZoom = false, ...props }) => {
   const resizeCloudinaryImageForStakes = (image, placement) => {
     const imageWidth = placement.widthInches * PIXELS_PER_INCH;
     const imageHeight = placement.heightInches * PIXELS_PER_INCH;
-    
+
     const width = parseInt((parseFloat(placement.width)/100) * imageWidth);
     const height = parseInt((parseFloat(placement.height)/100) * imageHeight);
     
@@ -138,12 +138,12 @@ const Canvas = ({ enableZoom = false, ...props }) => {
 
       const canvas = canvasRef.current;
       const ctx = canvas?.getContext("2d");
-      
+
       const imageWidth = placement.widthInches * PIXELS_PER_INCH;
       const imageHeight = placement.heightInches * PIXELS_PER_INCH;
       ctx.canvas.width = imageWidth;
       ctx.canvas.height = imageHeight;
-      
+
       let imageSrc;
       
       image.onload = async () => {
@@ -195,37 +195,29 @@ const Canvas = ({ enableZoom = false, ...props }) => {
       const { printWidth, printHeight } = print_placement;
       let printUrl = resizePrintUrl(print_logo, printWidth, printHeight);
       setActiveImage({ url: previewUrl });
-      if (isFront) {
-        setCustomization({
-          ...customization,
-          print_url_1: printUrl,
-          print_preview_1: previewUrl,
-        });
-      } else {
-        setCustomization({
-          ...customization,
-          print_url_2: printUrl,
-          print_preview_2: previewUrl,
-        });
-      }
+      const customizationUpdate = isFront
+        ? { print_url_1: printUrl, print_preview_1: previewUrl }
+        : { print_url_2: printUrl, print_preview_2: previewUrl };
 
       clearCanvas();
       let logoSrcStakes = resizeCloudinaryImageForStakes(print_logo, print_placement);
       let stakesPrintSrc = await renderCanvasImageForStakes(logoSrcStakes, print_placement);
       let printUrlStakes = await handleUploadToCloudinary(stakesPrintSrc);
-      
+
       if (isFront) {
         setCustomization({
           ...customization,
+          ...customizationUpdate,
           print_url_1_stakes: printUrlStakes,
         });
       } else {
         setCustomization({
           ...customization,
+          ...customizationUpdate,
           print_url_2_stakes: printUrlStakes,
         });
       }
-      setTimeout(() => setLoading(false), 1500);
+      setLoading(false);
       return {
         printUrl,
         previewUrl,
@@ -291,12 +283,6 @@ const Canvas = ({ enableZoom = false, ...props }) => {
       print_placement_2,
       false
     );
-
-    renderCompositeImage(
-      customization?.print_logo_2,
-      customization?.print_background_2,
-      customization?.print_placement_2
-    );
   }, [
     customization?.print_placement_2,
     customization?.print_background_2,
@@ -305,6 +291,15 @@ const Canvas = ({ enableZoom = false, ...props }) => {
 
   return (
     <Box sx={sx.root}>
+      {loading && (
+        <Backdrop
+          sx={sx.loadingBackdrop}
+          open={true}
+        >
+          <CircularProgress color="inherit" />
+          <Typography marginTop={4}>Generating preview...</Typography>
+        </Backdrop>
+      )}
       {activeImage?.url && enableZoom && (
         <Zoom scale={4} IconUnzoom={Close}>
           <CanvasImage loading={loading} src={activeImage?.url} />
@@ -341,4 +336,10 @@ const sx = {
     position: "relative",
     objectFit: "contain",
   },
+  loadingBackdrop: {
+    color: '#fff',
+    zIndex: 10,
+    display: 'flex',
+    flexDirection: 'column'
+  }
 };

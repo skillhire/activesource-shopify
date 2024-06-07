@@ -80,18 +80,27 @@ const Product = ({
   const handlePreviewClick = (imgSrc, frontOrBack) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setFrontOrBack(frontOrBack);
+    let activePreview;
 
     if (frontOrBack == "front") {
+      activePreview = customization?.print_preview_1
+        ? customization?.print_preview_1
+        : imgSrc;
       setCustomization({
         ...customization,
         print_background_1: imgSrc,
       });
     } else if (frontOrBack == "back") {
+      activePreview = customization?.print_preview_2
+        ? customization?.print_preview_2
+        : imgSrc;
       setCustomization({
         ...customization,
         print_background_2: imgSrc,
       });
     }
+
+    setActiveImage({ url: activePreview });
   };
 
   const handleImageClick = (image) => {
@@ -287,6 +296,7 @@ const Product = ({
         setCustomization({
           ...customization,
           print_background_1: firstColor?.front_placement,
+          print_background_2: firstColor?.back_placement,
         });
       }
     }
@@ -304,8 +314,8 @@ const Product = ({
   // Auto-select placement for tote bags
   useEffect(() => {
     if (product?.productType == "Bag") {
-      const defaultPlacementFront = placements.front[0];
-      const defaultPlacementBack = placements.back[0];
+      const defaultPlacementFront = placements?.front[0];
+      const defaultPlacementBack = placements?.back[0];
       setActivePlacement({
         front: [defaultPlacementFront],
         back: [defaultPlacementBack],
@@ -355,6 +365,15 @@ const Product = ({
       trackProductViewed(product);
     }
   }, [product?.id]);
+
+  // These UseEffects were added for testing purposues
+  useEffect(() => {
+    console.log("print_url_1_stakes", customization?.print_url_1_stakes);
+  }, [customization?.print_url_1_stakes]);
+
+  useEffect(() => {
+    console.log("print_url_2_stakes", customization?.print_url_2_stakes);
+  }, [customization?.print_url_2_stakes]);
 
   return (
     <>
