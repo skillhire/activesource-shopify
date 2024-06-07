@@ -37,7 +37,6 @@ const PlacementModal = ({
                     width={160}
                     unoptimized
                     src={p?.previewSrc}
-                    // layout="responsive"
                   />
                   <Typography variant="button" sx={sx.title}>
                     {p.title}
