@@ -311,22 +311,7 @@ const Product = ({
     }
   }, [variant?.sku]);
 
-  // Auto-select placement for tote bags
   useEffect(() => {
-    if (product?.productType == "Bag") {
-      const defaultPlacementFront = placements?.front[0];
-      const defaultPlacementBack = placements?.back[0];
-      setActivePlacement({
-        front: [defaultPlacementFront],
-        back: [defaultPlacementBack],
-      });
-      setCustomization({
-        ...customization,
-        print_location_1: defaultPlacementFront?.code,
-        print_placement_1: defaultPlacementFront,
-      });
-    }
-
     fetchAllPlacements();
   }, [product?.productType]);
 
@@ -341,6 +326,20 @@ const Product = ({
         warehouse
       );
       setPlacements(filteredPlacements);
+      // Auto-select placement for tote bags
+      if(productType === "Bag") {
+        let colors = getProductColors(product);
+        let firstColor = colors[0];
+        setActiveImage({ url: firstColor?.front_placement });
+
+        const defaultPlacementFront = filteredPlacements.front[0];
+        setCustomization({
+          ...customization,
+          print_background_1: firstColor?.front_placement,
+          print_location_1: defaultPlacementFront?.code,
+          print_placement_1: defaultPlacementFront,
+        });
+      }
     }
   }, [activePlacements, product]);
 
