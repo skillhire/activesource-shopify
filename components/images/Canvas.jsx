@@ -261,12 +261,14 @@ const Canvas = ({ enableZoom = false, ...props }) => {
     const { print_logo_1, print_background_1, print_placement_1 } =
       customization || {};
 
-    renderCompositeImage(
-      print_logo_1,
-      print_background_1,
-      print_placement_1,
-      true
-    );
+    if (print_logo_1 && print_background_1 && print_placement_1) {
+      renderCompositeImage(
+        print_logo_1,
+        print_background_1,
+        print_placement_1,
+        true
+      );
+    }
   }, [
     customization?.print_background_1,
     customization?.print_placement_1,
@@ -277,12 +279,14 @@ const Canvas = ({ enableZoom = false, ...props }) => {
     const { print_logo_2, print_background_2, print_placement_2 } =
       customization || {};
 
-    renderCompositeImage(
-      print_logo_2,
-      print_background_2,
-      print_placement_2,
-      false
-    );
+    if (print_logo_2 && print_background_2 && print_placement_2) {
+      renderCompositeImage(
+        print_logo_2,
+        print_background_2,
+        print_placement_2,
+        false
+      );
+    }
   }, [
     customization?.print_placement_2,
     customization?.print_background_2,
