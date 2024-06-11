@@ -11,10 +11,11 @@ const VariantSelector = ({
 }) => {
   return (
     <Box sx={sx.root}>
-      {options.map((option) => {
+      {options.map((option, i) => {
         if (option?.name == "Color" || option?.name == "Title") return null;
         return (
           <VariantSelect
+            key={i}
             name={option?.name}
             option={option?.name}
             values={option?.values}

@@ -365,14 +365,21 @@ const Product = ({
     }
   }, [product?.id]);
 
+
+  const handleDebugConsole = () => {
+    const { 
+      print_logo_1, 
+      print_logo_2 
+    } = customization;
+    if(print_logo_1 || print_logo_2) {
+      console.log("Print", customization)
+    }
+  }
+
   // These UseEffects were added for testing purposues
   useEffect(() => {
-    console.log("print_url_1_stakes", customization?.print_url_1_stakes);
-  }, [customization?.print_url_1_stakes]);
-
-  useEffect(() => {
-    console.log("print_url_2_stakes", customization?.print_url_2_stakes);
-  }, [customization?.print_url_2_stakes]);
+    handleDebugConsole()
+  }, [customization]);
 
   return (
     <>
