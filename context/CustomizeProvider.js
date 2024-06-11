@@ -8,7 +8,6 @@ const CustomizeProvider = ({ children, ...rest }) => {
 
   const [disableLogo, setDisableLogo] = useState(false);
   const [disablePlacement, setDisablePlacement] = useState(false);
-  const [notForSale, setNotForSale] = useState(false);
 
   const [activePlacements, setActivePlacements] = useState([]);
   const [activePlacement, setActivePlacement] = useState({
@@ -68,8 +67,6 @@ const CustomizeProvider = ({ children, ...rest }) => {
     setDisableLogo,
     disablePlacement,
     setDisablePlacement,
-    notForSale,
-    setNotForSale,
     activeColor,
     setActiveColor,
     activeImage,

@@ -28,7 +28,6 @@ const Product = ({
   ...props
 }) => {
   const {
-    setNotForSale,
     setDisableLogo,
     setDisablePlacement,
     activeImage,
@@ -42,7 +41,6 @@ const Product = ({
   } = useContext(CustomizeContext);
 
   const { trackProductViewed } = useSegment();
-  const { notForSale } = useCustomization();
   const { loading: emailLoading, sendContactEmail, errors } = useContact();
   const { activePlacements, fetchAllPlacements, filterPlacements } = usePlacements();
 
@@ -345,12 +343,10 @@ const Product = ({
 
   useEffect(() => {
     if (product?.handle) {
-      let _notForSale = getMetaValue(product, "not_for_sale") == "true";
       let _disableLogo = getMetaValue(product, "disable_logo") == "true";
       let _isEnterprise = getMetaValue(product, "is_enterprise") == "true";
       let _disablePlacement =
         getMetaValue(product, "disable_placement") == "true";
-      setNotForSale(_notForSale);
       setDisableLogo(_disableLogo);
       setIsEnterprise(_isEnterprise);
       setDisablePlacement(_disablePlacement);
@@ -409,7 +405,7 @@ const Product = ({
                 handleColorClick={handleColorClick}
                 handleOptionChange={handleOptionChange}
               />
-              {!isEnterprise && !notForSale && (
+              {!isEnterprise && (
                 <>
                   <ProductCustomize
                     product={product}

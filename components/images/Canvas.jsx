@@ -71,8 +71,8 @@ const Canvas = ({ enableZoom = false, ...props }) => {
   };
 
   const resizeCloudinaryImageForStakes = (image, placement) => {
-    const imageWidth = placement.widthInches * PIXELS_PER_INCH;
-    const imageHeight = placement.heightInches * PIXELS_PER_INCH;
+    const imageWidth = placement.canvasWidth * PIXELS_PER_INCH;
+    const imageHeight = placement.canvasHeight * PIXELS_PER_INCH;
 
     const width = parseInt((parseFloat(placement.width)/100) * imageWidth);
     const height = parseInt((parseFloat(placement.height)/100) * imageHeight);
@@ -139,8 +139,8 @@ const Canvas = ({ enableZoom = false, ...props }) => {
       const canvas = canvasRef.current;
       const ctx = canvas?.getContext("2d");
 
-      const imageWidth = placement.widthInches * PIXELS_PER_INCH;
-      const imageHeight = placement.heightInches * PIXELS_PER_INCH;
+      const imageWidth = placement.canvasWidth * PIXELS_PER_INCH;
+      const imageHeight = placement.canvasHeight * PIXELS_PER_INCH;
       ctx.canvas.width = imageWidth;
       ctx.canvas.height = imageHeight;
 
@@ -203,6 +203,7 @@ const Canvas = ({ enableZoom = false, ...props }) => {
       let logoSrcStakes = resizeCloudinaryImageForStakes(print_logo, print_placement);
       let stakesPrintSrc = await renderCanvasImageForStakes(logoSrcStakes, print_placement);
       let printUrlStakes = await handleUploadToCloudinary(stakesPrintSrc);
+      printUrlStakes = resizeCloudinaryImageForStakes(printUrlStakes, print_placement);
 
       if (isFront) {
         setCustomization({

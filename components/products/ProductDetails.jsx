@@ -22,8 +22,6 @@ const ProductDetails = ({
   const [enterpriseProductDescription, setEnterpriseProductDescription] = useState();
   const [isEnterprise, setIsEnterprise] = useState();
   const [colors, setColors] = useState([]);
-  const { notForSale } = useCustomization();
-  const { setNotForSale } = useContext(CustomizeContext);
 
   useEffect(() => {
     if (variant) {
@@ -36,10 +34,8 @@ const ProductDetails = ({
   useEffect(() => {
     if (product?.metafields?.length > 0) {
       let formattedColors = getProductColors(product);
-      let _notForSale = getMetaValue(product, "not_for_sale") == "true";
       let _isEnterprise = getMetaValue(product, "is_enterprise") == "true";
       let _enterpriseProductDescription = getMetaValue(product, "enterprise_product_description");
-      setNotForSale(_notForSale);
       setColors(formattedColors);
       setIsEnterprise(_isEnterprise);
       setEnterpriseProductDescription(_enterpriseProductDescription);
@@ -72,7 +68,7 @@ const ProductDetails = ({
             }
           </Typography>
           {enterpriseProductDescription && <Typography variant="body2">{enterpriseProductDescription}</Typography>}
-          {!notForSale && !isEnterprise && (
+          {!isEnterprise && (
             <>
               <CustomColorSelect
                 colors={colors}
