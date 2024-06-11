@@ -81,9 +81,8 @@ const Footer = ({ styles }) => {
           <Box sx={sx.subfooterText}>
             <Box sx={sx.legalMenuItems}>
               {LEGAL_MENU.map((menuItem, i) => (
-                <>
+                <React.Fragment key={i}>
                   <Button
-                    key={i}
                     sx={sx.button}
                     onClick={() => handleClick(menuItem.value)}
                   >
@@ -92,7 +91,7 @@ const Footer = ({ styles }) => {
                     </Typography>
                   </Button>
                   {i === 0 && <Box sx={sx.divider} />}
-                </>
+                </React.Fragment>
               ))}
             </Box>
           </Box>
