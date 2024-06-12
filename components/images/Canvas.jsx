@@ -71,12 +71,13 @@ const Canvas = ({ enableZoom = false, ...props }) => {
   };
 
   const resizeCloudinaryImageForStakes = (image, placement) => {
-    const imageWidth = placement.canvasWidth * PIXELS_PER_INCH;
-    const imageHeight = placement.canvasHeight * PIXELS_PER_INCH;
+    const imageWidth = parseFloat(placement.canvasWidth) * PIXELS_PER_INCH;
+    // const imageHeight = parseFloat(placement.canvasHeight) * PIXELS_PER_INCH;
 
-    const width = parseInt((parseFloat(placement.width)/100) * imageWidth);
-    const height = parseInt((parseFloat(placement.height)/100) * imageHeight);
-    
+    // Using width for both width and height to avoid skewing the image
+    const width = parseInt((parseFloat(placement.width) / 100) * imageWidth);
+    const height = parseInt((parseFloat(placement.height) / 100) * imageWidth);
+
     return cloudinaryResizeImage(image, { width, height, dpi: 300, rgb: true });
   };
 
@@ -121,6 +122,9 @@ const Canvas = ({ enableZoom = false, ...props }) => {
         const xPos = (parseFloat(placement.left) / 100) * IMAGE_WIDTH;
         const yPos = (parseFloat(placement.top) / 100) * IMAGE_HEIGHT;
         ctx.drawImage(image, xPos, yPos, width, height);
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(xPos, yPos, width, height);
         imageSrc = canvas.toDataURL("image/png");
         return resolve(imageSrc);
       };
@@ -139,19 +143,28 @@ const Canvas = ({ enableZoom = false, ...props }) => {
       const canvas = canvasRef.current;
       const ctx = canvas?.getContext("2d");
 
-      const imageWidth = placement.canvasWidth * PIXELS_PER_INCH;
-      const imageHeight = placement.canvasHeight * PIXELS_PER_INCH;
+      const imageWidth = parseFloat(placement.canvasWidth) * PIXELS_PER_INCH;
+      const imageHeight = parseFloat(placement.canvasHeight) * PIXELS_PER_INCH;
+
+      const printWidth = placement.widthInches * PIXELS_PER_INCH;
+      const printHeight = placement.heightInches * PIXELS_PER_INCH;
+
       ctx.canvas.width = imageWidth;
       ctx.canvas.height = imageHeight;
 
       let imageSrc;
       
       image.onload = async () => {
-        const width = (parseFloat(placement.width) / 100) * imageWidth;
-        const height = (parseFloat(placement.height) / 100) * imageHeight;
-        const xPos = (parseFloat(placement.left) /100) * imageWidth;
-        const yPos = (parseFloat(placement.top) /100) * imageHeight;
+        const width = printWidth;
+        const height = printHeight;
+        const xPos = printWidth === imageWidth ? 0 : (parseFloat(placement.left) /100) * imageWidth;
+        const yPos = printHeight === imageHeight ? 0 : (parseFloat(placement.top) /100) * imageHeight;
         ctx.drawImage(image, xPos, yPos, width, height);
+        // stroke a black line around the image
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(xPos, yPos, width, height);
+
         imageSrc = canvas.toDataURL("image/png");
         return resolve(imageSrc);
       };
@@ -203,7 +216,8 @@ const Canvas = ({ enableZoom = false, ...props }) => {
       let logoSrcStakes = resizeCloudinaryImageForStakes(print_logo, print_placement);
       let stakesPrintSrc = await renderCanvasImageForStakes(logoSrcStakes, print_placement);
       let printUrlStakes = await handleUploadToCloudinary(stakesPrintSrc);
-      printUrlStakes = resizeCloudinaryImageForStakes(printUrlStakes, print_placement);
+      const { canvasWidth, canvasHeight } = print_placement;
+      printUrlStakes = resizePrintUrl(printUrlStakes, canvasWidth, canvasHeight);
 
       if (isFront) {
         setCustomization({
