@@ -122,9 +122,6 @@ const Canvas = ({ enableZoom = false, ...props }) => {
         const xPos = (parseFloat(placement.left) / 100) * IMAGE_WIDTH;
         const yPos = (parseFloat(placement.top) / 100) * IMAGE_HEIGHT;
         ctx.drawImage(image, xPos, yPos, width, height);
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 1;
-        ctx.strokeRect(xPos, yPos, width, height);
         imageSrc = canvas.toDataURL("image/png");
         return resolve(imageSrc);
       };
@@ -160,11 +157,6 @@ const Canvas = ({ enableZoom = false, ...props }) => {
         const xPos = printWidth === imageWidth ? 0 : (parseFloat(placement.left) /100) * imageWidth;
         const yPos = printHeight === imageHeight ? 0 : (parseFloat(placement.top) /100) * imageHeight;
         ctx.drawImage(image, xPos, yPos, width, height);
-        // stroke a black line around the image
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 1;
-        ctx.strokeRect(xPos, yPos, width, height);
-
         imageSrc = canvas.toDataURL("image/png");
         return resolve(imageSrc);
       };
