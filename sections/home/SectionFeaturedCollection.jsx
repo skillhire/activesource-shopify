@@ -29,6 +29,7 @@ const SectionFeaturedCollection = (props) => {
         </Box>
         {featuredCollection && (
           <ProductCollection
+            perPage={isMobile ? 4 : 48}
             variant={isMobile ? "grid" : "carousel"}
             handle={featuredCollection.handle}
             title={featuredCollection.title}

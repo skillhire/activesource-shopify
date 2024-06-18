@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 
 const ProductCollection = ({
   handle,
-  perPage = 20,
+  perPage = 48,
   variant = "carousel",
   styles,
   productUrl,
@@ -14,11 +14,13 @@ const ProductCollection = ({
     useCollections();
 
   useEffect(() => {
-    if (handle) {
-      fetchCollection(handle, perPage);
+    if (handle && perPage) {
+      fetchCollection(handle, {
+         first: perPage 
+      });
     }
-  }, [handle]);
-
+  }, [handle, perPage]);
+  
   return (
     <Box sx={{ ...sx.root, ...styles }}>
       {variant == "carousel" && (
@@ -36,7 +38,7 @@ const ProductCollection = ({
             rowSpacing={4}
             title={collection?.title}
             loading={loading}
-            products={products?.splice(0, 4)}
+            products={products}
             productUrl={productUrl}
           />
         )}
