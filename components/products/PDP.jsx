@@ -431,6 +431,7 @@ const Product = ({
                 <Box mt={8}>
                   <Button
                     fullWidth
+                    sx={ sx.contactUsButton }
                     color="secondary"
                     onClick={() => handleOpenContactModal("Enquire for Enterprise Products")}
                     variant="contained"
@@ -494,6 +495,12 @@ const sx = {
     ml: {
       xs: 0,
       sm: "124px"
+    }
+  },
+  contactUsButton: {
+    color: 'common.white',
+    '&:hover': {
+      color: 'common.white',
     }
   }
 };
