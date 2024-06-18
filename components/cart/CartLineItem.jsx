@@ -96,16 +96,18 @@ const CartLineItem = ({ lineItem }) => {
 
   useEffect(() => {
     if (customAttributes) {
-      setFrontPreview(
-        customAttributes.find(
-          (attribute) => attribute.key === "_print_preview_1"
-        )?.value
-      );
-      setBackPreview(
-        customAttributes.find(
-          (attribute) => attribute.key === "_print_preview_2"
-        )?.value
-      );
+      const frontPreviewUrl = customAttributes.find(
+        (attribute) => attribute.key === "_print_preview_1"
+      )?.value
+
+      const backPreviewUrl = customAttributes.find(
+        (attribute) => attribute.key === "_print_preview_2"
+      )?.value
+
+      console.log("PREVIEW", customAttributes, frontPreviewUrl)
+
+      setFrontPreview(frontPreviewUrl)
+      setBackPreview(backPreviewUrl)
     }
   }, [customAttributes]);
 
