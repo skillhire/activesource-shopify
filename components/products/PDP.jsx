@@ -444,8 +444,8 @@ const Product = ({
               <Box mt={4} />
               <ProductTabs
                 product={product}
-                disableShipping={disableShipping}
-                disableFileGuidelines={disableFileGuidelines}
+                disableShipping={isEnterprise ? true : disableShipping}
+                disableFileGuidelines={isEnterprise ? true : disableFileGuidelines}
               />
             </Grid>
             <Grid item xs={12}>
