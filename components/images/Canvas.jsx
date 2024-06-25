@@ -233,38 +233,6 @@ const Canvas = ({ enableZoom = false, ...props }) => {
     }
   };
 
-  // Generate the print logo
-  useEffect(() => {
-    const { print_logo_1, print_placement_1 } = customization || {};
-    if (print_logo_1 && print_placement_1) {
-      let printUrl = resizePrintUrl(
-        print_logo_1,
-        print_placement_1.widthInches,
-        print_placement_1.heightInches
-      );
-      setCustomization({
-        ...customization,
-        print_url_1: printUrl,
-      });
-    }
-  }, [customization?.print_logo_1, customization?.print_placement_1]);
-
-  // Generate the print logo
-  useEffect(() => {
-    const { print_logo_2, print_placement_2 } = customization || {};
-    if (print_logo_2 && print_placement_2) {
-      let printUrl = resizePrintUrl(
-        print_logo_2,
-        print_placement_2.printWidth,
-        print_placement_2.printHeight
-      );
-      setCustomization({
-        ...customization,
-        print_url_2: printUrl,
-      });
-    }
-  }, [customization?.print_logo_2, customization?.print_placement_2]);
-
   useEffect(() => {
     const { print_logo_1, print_background_1, print_placement_1 } =
       customization || {};
