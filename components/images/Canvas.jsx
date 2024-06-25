@@ -74,7 +74,6 @@ const Canvas = ({ enableZoom = false, ...props }) => {
     const imageWidth = parseFloat(placement.canvasWidth) * PIXELS_PER_INCH;
     // const imageHeight = parseFloat(placement.canvasHeight) * PIXELS_PER_INCH;
 
-    // Using width for both width and height to avoid skewing the image
     const width = parseInt((parseFloat(placement.width) / 100) * imageWidth);
     const height = parseInt((parseFloat(placement.height) / 100) * imageWidth);
 
@@ -196,10 +195,12 @@ const Canvas = ({ enableZoom = false, ...props }) => {
       // Upload the previewUrl to Cloudinary.
       let previewUrl = await handleUploadToCloudinary(imageSrc);
 
-      // Generate the printUrl last
-      const { printWidth, printHeight } = print_placement;
-      let printUrl = resizePrintUrl(print_logo, printWidth, printHeight);
+      // Set the active image to the previewUrl
       setActiveImage({ url: previewUrl });
+
+      // Generate the printUrl last
+      const { widthInches, heightInches } = print_placement;
+      let printUrl = resizePrintUrl(print_logo, widthInches, heightInches);
       const customizationUpdate = isFront
         ? { print_url_1: printUrl, print_preview_1: previewUrl }
         : { print_url_2: printUrl, print_preview_2: previewUrl };
@@ -238,8 +239,8 @@ const Canvas = ({ enableZoom = false, ...props }) => {
     if (print_logo_1 && print_placement_1) {
       let printUrl = resizePrintUrl(
         print_logo_1,
-        print_placement_1.printWidth,
-        print_placement_1.printHeight
+        print_placement_1.widthInches,
+        print_placement_1.heightInches
       );
       setCustomization({
         ...customization,

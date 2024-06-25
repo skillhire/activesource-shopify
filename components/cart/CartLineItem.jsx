@@ -104,8 +104,6 @@ const CartLineItem = ({ lineItem }) => {
         (attribute) => attribute.key === "_print_preview_2"
       )?.value
 
-      console.log("PREVIEW", customAttributes, frontPreviewUrl)
-
       setFrontPreview(frontPreviewUrl)
       setBackPreview(backPreviewUrl)
     }

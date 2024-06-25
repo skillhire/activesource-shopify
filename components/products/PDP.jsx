@@ -368,7 +368,7 @@ const Product = ({
       print_logo_2 
     } = customization;
     if(print_logo_1 || print_logo_2) {
-      console.log("Print", customization)
+      console.log("ActiveSource:", customization)
     }
   }
 
