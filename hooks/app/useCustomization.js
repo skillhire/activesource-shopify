@@ -5,6 +5,8 @@ const useCustomization = () => {
   const {
     loading,
     setLoading,
+    previewThumbnail,
+    setPreviewThumbnail,
     disableLogo,
     setDisableLogo,
     disablePlacement,

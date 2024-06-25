@@ -20,6 +20,8 @@ const CustomizeProvider = ({ children, ...rest }) => {
     printHeight: null,
   });
 
+  const [previewThumbnail, setPreviewThumbnail] = useState('')
+  
   const [customization, setCustomization] = useState({
     print_sku: null,
     print_location_1: null, // Specific code for the warehous such as CF, FB
@@ -63,6 +65,8 @@ const CustomizeProvider = ({ children, ...rest }) => {
   const value = {
     loading,
     setLoading,
+    previewThumbnail,
+    setPreviewThumbnail,
     disableLogo,
     setDisableLogo,
     disablePlacement,

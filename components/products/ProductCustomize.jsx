@@ -33,7 +33,11 @@ const ProductCustomize = ({
     });
   }, [product?.handle]);
 
-  const { disableLogo, disablePlacement } = useContext(CustomizeContext);
+  const { 
+    disableLogo, 
+    disablePlacement, 
+    previewThumbnail 
+  } = useContext(CustomizeContext);
 
   return (
     <Stack>
@@ -82,7 +86,7 @@ const ProductCustomize = ({
                 label="Front"
                 src={activeColor?.front_placement}
                 name="front"
-                selected={activeImage?.url === activeColor?.front_placement}
+                selected={previewThumbnail == 'front'}
                 handleClick={handlePreviewClick}
               />
             )}
@@ -90,7 +94,7 @@ const ProductCustomize = ({
               <PlacementImage
                 label="Back"
                 src={activeColor?.back_placement}
-                selected={activeImage?.url === activeColor?.back_placement}
+                selected={previewThumbnail == 'back'}
                 name="back"
                 handleClick={handlePreviewClick}
               />

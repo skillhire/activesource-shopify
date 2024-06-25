@@ -30,6 +30,7 @@ const Product = ({
   const {
     setDisableLogo,
     setDisablePlacement,
+    setPreviewThumbnail,
     activeImage,
     setActiveImage,
     activePlacement,
@@ -38,7 +39,7 @@ const Product = ({
     setActiveColor,
     customization,
     setCustomization,
-  } = useContext(CustomizeContext);
+  } = useContext(CustomizeContext);  
 
   const { trackProductViewed } = useSegment();
   const { loading: emailLoading, sendContactEmail, errors } = useContact();
@@ -80,6 +81,8 @@ const Product = ({
     setFrontOrBack(frontOrBack);
     let activePreview;
 
+    setPreviewThumbnail(frontOrBack)
+
     if (frontOrBack == "front") {
       activePreview = customization?.print_preview_1
         ? customization?.print_preview_1
@@ -102,6 +105,7 @@ const Product = ({
   };
 
   const handleImageClick = (image) => {
+    setPreviewThumbnail('')
     if (image?.url == activeImage?.url) {
       setZoom(true);
     } else {
