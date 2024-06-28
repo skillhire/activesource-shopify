@@ -43,6 +43,7 @@ const usePlacements = () => {
       heightInches: Number(getValue(metaobject, "print_height")),
       canvasWidth: Number(getValue(metaobject, "canvas_width")),
       canvasHeight: Number(getValue(metaobject, "canvas_height")),
+      canvasMargin: Number(getValue(metaobject, "canvas_margin"))
     };
   }
 

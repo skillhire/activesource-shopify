@@ -154,7 +154,7 @@ const Canvas = ({ enableZoom = false, ...props }) => {
 
       const canvasWidth = parseFloat(placement.canvasWidth) * PIXELS_PER_INCH;
       const canvasHeight = parseFloat(placement.canvasHeight) * PIXELS_PER_INCH;
-
+      const canvasMargin = parseFloat(placement.canvasMargin) * PIXELS_PER_INCH;
       const printWidth = placement.widthInches * PIXELS_PER_INCH;
       const printHeight = placement.heightInches * PIXELS_PER_INCH;
 
@@ -166,7 +166,7 @@ const Canvas = ({ enableZoom = false, ...props }) => {
       image.onload = async () => {
         const width = printWidth;
         const height = printHeight;
-        const xPos = printWidth === canvasWidth ? 0 : (parseFloat(placement.left) /100) * canvasWidth;
+        const xPos = canvasMargin || 0;
         const yPos = 0; // Place logo at the top of the canvas
         ctx.drawImage(image, xPos, yPos, width, height);
         imageSrc = canvas.toDataURL("image/png");
