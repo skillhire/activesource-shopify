@@ -67,7 +67,13 @@ const Canvas = ({ enableZoom = false, ...props }) => {
     const height = parseInt(
       (parseFloat(placement.height) / 100) * IMAGE_HEIGHT
     );
-    return cloudinaryResizeImage(image, { width, height, dpi: 300, rgb: true });
+    return cloudinaryResizeImage(image, { 
+      width, 
+      height, 
+      quality: 100, 
+      dpi: 300, 
+      rgb: true 
+    });
   };
 
   const resizeCloudinaryImageForStakes = (image, placement) => {
@@ -77,7 +83,13 @@ const Canvas = ({ enableZoom = false, ...props }) => {
     const width = parseInt((parseFloat(placement.width) / 100) * imageWidth);
     const height = parseInt((parseFloat(placement.height) / 100) * imageWidth);
 
-    return cloudinaryResizeImage(image, { width, height, dpi: 300, rgb: true });
+    return cloudinaryResizeImage(image, { 
+      width, 
+      height, 
+      quality: 100, 
+      dpi: 300, 
+      rgb: true 
+    });
   };
 
   const resizeShopifyImage = (
@@ -92,6 +104,7 @@ const Canvas = ({ enableZoom = false, ...props }) => {
     return cloudinaryResizeImage(image, {
       width: widthInches * PIXELS_PER_INCH,
       height: heightInches * PIXELS_PER_INCH,
+      quality: 100,
       dpi: 300,
       rgb: true
     });
@@ -139,22 +152,22 @@ const Canvas = ({ enableZoom = false, ...props }) => {
       const canvas = canvasRef.current;
       const ctx = canvas?.getContext("2d");
 
-      const imageWidth = parseFloat(placement.canvasWidth) * PIXELS_PER_INCH;
-      const imageHeight = parseFloat(placement.canvasHeight) * PIXELS_PER_INCH;
+      const canvasWidth = parseFloat(placement.canvasWidth) * PIXELS_PER_INCH;
+      const canvasHeight = parseFloat(placement.canvasHeight) * PIXELS_PER_INCH;
 
       const printWidth = placement.widthInches * PIXELS_PER_INCH;
       const printHeight = placement.heightInches * PIXELS_PER_INCH;
 
-      ctx.canvas.width = imageWidth;
-      ctx.canvas.height = imageHeight;
+      ctx.canvas.width = canvasWidth;
+      ctx.canvas.height = canvasHeight;
 
       let imageSrc;
       
       image.onload = async () => {
         const width = printWidth;
         const height = printHeight;
-        const xPos = printWidth === imageWidth ? 0 : (parseFloat(placement.left) /100) * imageWidth;
-        const yPos = printHeight === imageHeight ? 0 : (parseFloat(placement.top) /100) * imageHeight;
+        const xPos = printWidth === canvasWidth ? 0 : (parseFloat(placement.left) /100) * canvasWidth;
+        const yPos = 0; // Place logo at the top of the canvas
         ctx.drawImage(image, xPos, yPos, width, height);
         imageSrc = canvas.toDataURL("image/png");
         return resolve(imageSrc);

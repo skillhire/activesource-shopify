@@ -57,7 +57,7 @@ export const shopifyResizeImage = (url, height, width) => {
 // https://cloudinary.com/documentation/resizing_and_cropping
 export const cloudinaryResizeImage = (
   src,
-  { width, height, transform = "pad", dpi, rgb }
+  { width, height, transform = "pad", quality=100, dpi=300, rgb }
 ) => {
   if (!src) return null;
   let index = src.indexOf("/upload") + 7; // 7 is number of chars in '/upload'
@@ -65,6 +65,7 @@ export const cloudinaryResizeImage = (
   if (width && width > 0) params.push(`w_${width}`);
   if (height && height > 0) params.push(`h_${height}`);
   if (dpi && dpi > 0) params.push(`dn_${dpi}`);
+  if (quality && quality > 0) params.push(`q_${quality}`);
   if (rgb) params.push('cs_srgb');
   let transformedUrl =
     src.substring(0, index) + params.join(",") + src.substring(index);
