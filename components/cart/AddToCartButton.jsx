@@ -52,18 +52,14 @@ const AddToCartButton = ({
     const disabled = handleAddToCartDisabled();
 
     const { 
-      print_type_1,
       print_url_1,
       print_url_1_stakes,
       print_location_1,
       print_preview_1,
-      file_extension_1,
-      print_type_2,
       print_url_2,
       print_url_2_stakes,
       print_location_2,
       print_preview_2,
-      file_extension_2,
     } = customization || {}
 
 
@@ -71,6 +67,15 @@ const AddToCartButton = ({
       { key: "_print_sku", value: variant?.sku || "" },
       { key: "_print_substrate_id", value: variant?.sku || "" },
     ];
+
+    // Pass custom attributes used buy some warehouses
+    const color = variant?.selectedOptions?.find(o => o.name === 'Color')?.value;
+    customAttributes = [
+      ...customAttributes,
+      { key: "_brand", value: getMetaValue(product, 'brand') || '' },
+      { key: "_style", value: getMetaValue(product, 'style') || '' },      
+      { key: "_color", value: color || '' },
+    ]
 
     if (print_preview_1 && print_url_1 && print_location_1) {
       customAttributes = [

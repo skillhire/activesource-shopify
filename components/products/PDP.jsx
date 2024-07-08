@@ -350,7 +350,7 @@ const Product = ({
       let _disableLogo = getMetaValue(product, "disable_logo") == "true";
       let _isEnterprise = getMetaValue(product, "is_enterprise") == "true";
       let _disablePlacement =
-        getMetaValue(product, "disable_placement") == "true";
+      getMetaValue(product, "disable_placement") == "true";
       setDisableLogo(_disableLogo);
       setIsEnterprise(_isEnterprise);
       setDisablePlacement(_disablePlacement);
