@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server"
 
 export const config = {
 	matcher: [
@@ -28,7 +29,7 @@ export default async function middleware(req) {
 		hostname != 'localhost'
 
 	
-	let handle = hostname.split('.')[0].join('-')
+	let handle = hostname.split('.').join('-')
   
 	// process.env.NODE_ENV === "production" indicates that the app is deployed to a production environment
 	// process.env.VERCEL === "1" indicates that the app is deployed on Vercel
