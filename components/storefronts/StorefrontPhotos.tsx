@@ -50,6 +50,8 @@ const Photo = ({ photo, store }) => {
 
 const StorefrontFeaturedCollection = (props) => {
   
+  const MAX_PHOTOS = 8
+  
   const { storefront, photos, handleClick } = props || {}
   const router = useRouter();
   const { store } = router?.query;
@@ -58,7 +60,7 @@ const StorefrontFeaturedCollection = (props) => {
   const [activePhotos, setActivePhotos] = useState([])
   useEffect(() => {
     if(photos && !loadMore){
-      setActivePhotos(photos?.slice(0, 8))
+      setActivePhotos(photos?.slice(0, MAX_PHOTOS))
     }else{
       setActivePhotos(photos)
     }
@@ -88,7 +90,7 @@ const StorefrontFeaturedCollection = (props) => {
               justifyContent: 'center',            
             }}
           >
-            { loadMore == false && (
+            { (photos?.length > MAX_PHOTOS && loadMore == false) && (
               <Button 
                 variant="contained"
                 color="primary"
