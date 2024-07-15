@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useStorefronts } from "hooks";
+import React from "react";
 import {  
   ProductCollection,  
 } from "components";

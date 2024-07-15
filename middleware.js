@@ -17,9 +17,7 @@ export default async function middleware(req) {
 	let { pathname } = url
 
 	// Get hostname (e.g. vercel.com, test.vercel.app, etc.)
-	let hostname = req.headers.get('host') || ''
-	let subdomain = null
-  let handle;
+	let hostname = req.headers.get('host') || ''	
 	// Always remove port for dev environment
 	hostname = hostname.split(':')[0]
  
@@ -29,15 +27,14 @@ export default async function middleware(req) {
 		hostname != 'activesourcelab.com' &&
 		hostname != 'localhost'
 
-	// Example: my-subdomain.frontend.co
-	if (isCustomDomain) {
-		handle = hostname.split('.')[0].join('-')
-  }
+	
+	let handle = hostname.split('.')[0].join('-')
+  
 	// process.env.NODE_ENV === "production" indicates that the app is deployed to a production environment
 	// process.env.VERCEL === "1" indicates that the app is deployed on Vercel
 
 	//@ts-ignore
-	if (handle) {		
+	if (isCustomDomain && handle) {		
 		return NextResponse.rewrite(
 			new URL(`/storefronts/${handle}${pathname}`, req.url)
 		)
