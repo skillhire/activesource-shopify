@@ -15,8 +15,6 @@ import { CustomizeContext } from "context";
 import PlacementModal from "sections/products/PlacementModal";
 import { getMetaValue, getProductColors } from "utils";
 import ContactModal from "../contact/ContactModal";
-import ImagesIcon from 'assets/images-icon.svg';
-import Image from 'next/image';
 
 const Product = ({
   loading,
@@ -53,6 +51,7 @@ const Product = ({
   const [isEnterprise, setIsEnterprise] = useState();
   const [selectedOptions, setSelectedOptions] = useState({});
   const [addToCartDisabled, setAddToCartDisabled] = useState(false);
+  const [minQuantity, setMinQuantity] = useState(0);
 
   const [openModal, setOpenModal] = useState(false);
   const [frontOrBack, setFrontOrBack] = useState("front");
@@ -352,11 +351,13 @@ const Product = ({
     if (product?.handle) {
       let _disableLogo = getMetaValue(product, "disable_logo") == "true";
       let _isEnterprise = getMetaValue(product, "is_enterprise") == "true";
-      let _disablePlacement =
-      getMetaValue(product, "disable_placement") == "true";
+      let _disablePlacement = getMetaValue(product, "disable_placement") == "true";
+      let _minQuantity = parseInt(getMetaValue(product, "min_quantity") || 0);
+      console.log("product", product)
       setDisableLogo(_disableLogo);
       setIsEnterprise(_isEnterprise);
       setDisablePlacement(_disablePlacement);
+      setMinQuantity(_minQuantity);
     }
   }, [product?.handle]);
 
@@ -413,19 +414,7 @@ const Product = ({
                 handleOptionChange={handleOptionChange}
               />
               
-              { storefrontImagesUrl && (
-                <Box sx={ sx.storefrontImages }>
-                  <Link href={storefrontImagesUrl} target="_blank" variant="body2" color='brand.main'>
-                    Visit our Image Library to access artwork files to customize for your studio's merchandise.
-                  </Link>
-                  <Box sx={ sx.storefrontImage }>
-                    <Image src={ ImagesIcon } 
-                      width={32}
-                      height={32}
-                    />
-                  </Box>
-                </Box> 
-              )}
+              
               {!isEnterprise && (
                 <>
                   <ProductCustomize
@@ -436,12 +425,14 @@ const Product = ({
                     setActiveColor={setActiveColor}
                     handleUpload={handleUpload}
                     handlePreviewClick={handlePreviewClick}
+                    storefrontImagesUrl={storefrontImagesUrl}
                   />
                   <ProductAddToCart
                     loading={loading}
                     product={product}
                     variant={variant}
                     addToCartDisabled={addToCartDisabled}
+                    minQuantity={minQuantity}
                   />
                   <ProductEnquireBulkDiscount
                     handleButtonClick={() => handleOpenContactModal("Enquire for Bulk Discount")}
@@ -523,16 +514,5 @@ const sx = {
     '&:hover': {
       color: 'common.white',
     }
-  },
-  storefrontImages: {
-    border: '1px solid',
-    borderColor: 'brand.main',
-    bgcolor: 'brand.light',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    p: 2,
-    borderRadius: 1,
-    my: 2, 
-  },
+  },  
 };

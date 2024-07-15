@@ -3,7 +3,7 @@ import { Box, Link, Typography } from "@mui/material";
 
 const ProductEnquireBulkDiscount = ({handleButtonClick}) => {
   return (
-    <Box sx={sx.root} p={3}>
+    <Box sx={sx.root} p={3} my={2}>
       <Typography variant="body2" mb={1}>
         Ordering more than 48 pieces of the same style?
       </Typography>

@@ -31,6 +31,7 @@ export const ProductFragment = gql`
         { namespace: "custom", key: "enterprise_product_description" }
         { namespace: "custom", key: "disable_placement" }
         { namespace: "custom", key: "disable_logo" }
+        { namespace: "custom", key: "min_quantity" }
         { namespace: "custom", key: "brand" }
         { namespace: "custom", key: "style" }
       ]
@@ -91,6 +92,7 @@ export const ProductFragment = gql`
                   { namespace: "custom", key: "enterprise_product_description" }
                   { namespace: "custom", key: "disable_placements" }
                   { namespace: "custom", key: "disable_logo" }
+                  { namespace: "custom", key: "min_quantity" }
                   { namespace: "custom", key: "brand" }
                   { namespace: "custom", key: "style" }
                 ]

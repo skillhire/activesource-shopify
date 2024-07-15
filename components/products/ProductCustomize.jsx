@@ -6,6 +6,8 @@ import { getCookie } from "cookies-next";
 import FileUploader from "./customize/FileUploader";
 import PlacementButton from "./customize/PlacementButton";
 import PlacementImage from "./customize/PlacementImage";
+import ImagesIcon from 'assets/images-icon.svg';
+import Image from 'next/image';
 
 const ProductCustomize = ({
   product,
@@ -14,6 +16,7 @@ const ProductCustomize = ({
   handlePreviewClick,
   activeColor,
   activeImage,
+  storefrontImagesUrl
 }) => {
   const { customization, setCustomization } = useContext(CustomizeContext);
 
@@ -41,6 +44,20 @@ const ProductCustomize = ({
 
   return (
     <Stack>
+      { storefrontImagesUrl && (
+        <Box sx={ sx.storefrontImages }>
+          <Link href={storefrontImagesUrl} target="_blank" variant="body2" color='brand.main'>
+            Visit our Image Library to access artwork files to customize for your studio's merchandise.
+          </Link>
+          <Box sx={ sx.storefrontImage }>
+            <Image src={ ImagesIcon } 
+              width={32}
+              height={32}
+            />
+          </Box>
+        </Box> 
+      )}
+      
       {hasFrontPlacement && (
         <>
           <PlacementButton
@@ -159,5 +176,16 @@ const sx = {
     height: "20px",
     width: "20px",
     color: "text.primary",
+  },
+  storefrontImages: {
+    border: '1px solid',
+    borderColor: 'brand.main',
+    bgcolor: 'brand.light',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    p: 2,
+    borderRadius: 1,
+    my: 2, 
   },
 };
