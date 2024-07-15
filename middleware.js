@@ -19,31 +19,27 @@ export default async function middleware(req) {
 	// Get hostname (e.g. vercel.com, test.vercel.app, etc.)
 	let hostname = req.headers.get('host') || ''
 	let subdomain = null
-	let topLevelDomain = hostname?.split('.').slice(-2).join('.')
-
+  let handle;
 	// Always remove port for dev environment
 	hostname = hostname.split(':')[0]
-
+ 
 	const isCustomDomain =
-		hostname != 'www.activesourcelab.com' &&
+    hostname != 'www.activesourcelab.com' &&
+    hostname != 'staging.activesourcelab.com' &&		
 		hostname != 'activesourcelab.com' &&
 		hostname != 'localhost'
 
 	// Example: my-subdomain.frontend.co
-	if (isCustomDomain && topLevelDomain == 'activesourcelab.com') {
-		subdomain = hostname?.split('.')[0]
-	} else if (isCustomDomain) {
-		// www.mydomain.com -> mydomain-com.activesourcelab.com
-		subdomain = hostname
-	}
+	if (isCustomDomain) {
+		handle = hostname.split('.')[0].join('-')
+  }
 	// process.env.NODE_ENV === "production" indicates that the app is deployed to a production environment
 	// process.env.VERCEL === "1" indicates that the app is deployed on Vercel
 
 	//@ts-ignore
-	if (subdomain) {
-		let storefrontHandle = subdomain.replaceAll('.', '-')		
+	if (handle) {		
 		return NextResponse.rewrite(
-			new URL(`/storefronts/${storefrontHandle}${pathname}`, req.url)
+			new URL(`/storefronts/${handle}${pathname}`, req.url)
 		)
 	} else {
 		return NextResponse.next()
