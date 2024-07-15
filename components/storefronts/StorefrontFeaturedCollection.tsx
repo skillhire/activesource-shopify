@@ -51,8 +51,7 @@ export default StorefrontFeaturedCollection;
 
 const sx = {
   collection: {
-    width: "100%",
-    py: 6,
+    width: "100%",    
   },
   title: {
     textAlign: 'center'

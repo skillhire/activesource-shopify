@@ -13,6 +13,12 @@ export default {
     main: "#E7DBFF",
     contrastText: "#9C6CFF",
   },
+  brand: {
+    main: "#8044FD",
+    dark: "#9C6CFF",
+    light: "#E6DAFF",
+    contrastText: "#2E2E2E",
+  },
   tonalOffset: 0.2,
   error: {
     main: "#D32F2F",

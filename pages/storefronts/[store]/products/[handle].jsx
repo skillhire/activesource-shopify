@@ -34,6 +34,7 @@ const Product = () => {
         product={product}
         recommendedProducts={recommendedProducts}
         productUrl={`/storefronts/${store}/products`}
+        storefrontImagesUrl={ storefront?.imagesUrl }
       />
     </StorefrontLayout>
   );

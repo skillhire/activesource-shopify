@@ -41,6 +41,10 @@ module.exports = {
         source: "/placement-guide",
         destination: "/docs/placement-guide",
       },
+      { 
+        source: "/storefronts/:store/collections",
+        destination: "/storefronts/:store/collections/index",
+      }
     ];
   },
 };

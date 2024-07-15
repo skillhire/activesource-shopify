@@ -8,6 +8,7 @@ import {
   StorefrontPhotos,
   StorefrontLayout,
 } from "components";
+import { Stack } from "@mui/material";
 import { useRouter } from "next/router";
 
 const Storefront = (props) => {
@@ -17,7 +18,7 @@ const Storefront = (props) => {
   const { photos, storefront, fetchStorefront } = useStorefronts();
 
   const handleClick = () => {
-    router.push(`/storefronts/${store}/shop-all`);
+    router.push(`/storefronts/${store}/collections/${storefront?.collection?.handle}`);
   }
 
   useEffect(() => {
@@ -33,19 +34,14 @@ const Storefront = (props) => {
         storefront={storefront} 
         handleClick={handleClick}
       />
-      <StorefrontFeatures storefront={storefront} />
-      <StorefrontHowItWorks storefront={storefront} />
-      <StorefrontFeaturedCollection handleClick={handleClick} storefront={storefront} />      
-      <StorefrontPhotos photos={photos} storefront={storefront} />
+      <Stack direction="column" spacing={'100px'}>
+        <StorefrontFeatures storefront={storefront} />
+        <StorefrontHowItWorks storefront={storefront} />
+        <StorefrontFeaturedCollection handleClick={handleClick} storefront={storefront} />      
+        <StorefrontPhotos photos={photos} storefront={storefront} />
+      </Stack>
     </StorefrontLayout>
   );
 };
 
 export default Storefront;
-
-const sx = {
-  collection: {
-    width: "100%",
-    py: 6,
-  },
-};

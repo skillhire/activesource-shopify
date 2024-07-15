@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useVariants, useSegment, useContact, useCustomization, usePlacements } from "hooks";
-import { Box, Container, Grid, Button, CircularProgress } from "@mui/material";
+import { Box, Link, Container, Grid, Button, CircularProgress } from "@mui/material";
 import {
   ProductDetails,
   ProductImages,
@@ -15,6 +15,8 @@ import { CustomizeContext } from "context";
 import PlacementModal from "sections/products/PlacementModal";
 import { getMetaValue, getProductColors } from "utils";
 import ContactModal from "../contact/ContactModal";
+import ImagesIcon from 'assets/images-icon.svg';
+import Image from 'next/image';
 
 const Product = ({
   loading,
@@ -23,6 +25,7 @@ const Product = ({
   recommendedProducts,
   images,
   productUrl,
+  storefrontImagesUrl,
   disableShipping,
   disableFileGuidelines,
   ...props
@@ -409,6 +412,20 @@ const Product = ({
                 handleColorClick={handleColorClick}
                 handleOptionChange={handleOptionChange}
               />
+              
+              { storefrontImagesUrl && (
+                <Box sx={ sx.storefrontImages }>
+                  <Link href={storefrontImagesUrl} target="_blank" variant="body2" color='brand.main'>
+                    Visit our Image Library to access artwork files to customize for your studio's merchandise.
+                  </Link>
+                  <Box sx={ sx.storefrontImage }>
+                    <Image src={ ImagesIcon } 
+                      width={32}
+                      height={32}
+                    />
+                  </Box>
+                </Box> 
+              )}
               {!isEnterprise && (
                 <>
                   <ProductCustomize
@@ -506,5 +523,16 @@ const sx = {
     '&:hover': {
       color: 'common.white',
     }
-  }
+  },
+  storefrontImages: {
+    border: '1px solid',
+    borderColor: 'brand.main',
+    bgcolor: 'brand.light',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    p: 2,
+    borderRadius: 1,
+    my: 2, 
+  },
 };

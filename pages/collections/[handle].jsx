@@ -2,10 +2,10 @@ import React, { useState, useMemo, useEffect } from "react";
 import { Grid, Box, CircularProgress } from "@mui/material";
 import { useRouter } from "next/router";
 import {
+  Layout,
   CollectionLayout,
   ProductCard,
-  NoSearchResults,
-  SearchTags,
+  NoSearchResults,  
   LoadMore,
 } from "components";
 import { useCollections, useSegment } from "hooks";
@@ -19,17 +19,11 @@ const Collection = () => {
   const { handle } = router.query;
   const { trackProductList, trackProductClicked } = useSegment();
 
-  // Search options
-  const [materials, setMaterials] = useState([]);
-  const [priceRange, setPriceRange] = useState([
+  // Search options  
+  const priceRange = [
     PRICE_RANGE_MIN,
     PRICE_RANGE_MAX,
-  ]);
-
-  const handleClearAll = () => {
-    setMaterials([]);
-    setPriceRange([PRICE_RANGE_MIN, PRICE_RANGE_MAX]);
-  };
+  ];  
 
   const [sortBy, _setSortBy] = useState({
     label: "Collection",
@@ -92,8 +86,12 @@ const Collection = () => {
   }, [handle]);
 
   return (
-    <CollectionLayout title={currentCollection?.label}>
-      <SearchTags tags={materials} handleClearAll={handleClearAll} />
+    <Layout title={currentCollection?.label}>
+    <CollectionLayout       
+      title={currentCollection?.label}
+      description="Your branded apparel is just a few clicks away—select your products, upload your artwork, and finalize your order."
+      menuItems={ COLLECTIONS_MENU }
+    >
       <Box sx={sx.searchContainer}>
         <Grid
           container
@@ -128,6 +126,7 @@ const Collection = () => {
       <Box mt={"100px"} />
       <SectionEnterpriseSolutions />
     </CollectionLayout>
+    </Layout>
   );
 };
 

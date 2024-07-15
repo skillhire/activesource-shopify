@@ -82,8 +82,6 @@ export default StorefrontFeatures;
 
 const sx = {
   header: {
-    py: 4,
-    pt: 6,
     diplay: "flex",
     alignItems: "center",
     height: "100%",
