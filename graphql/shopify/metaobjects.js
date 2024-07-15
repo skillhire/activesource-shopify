@@ -82,6 +82,19 @@ const MetaobjectFragment = gql`
                 key
                 value
                 reference {
+                  ... on Product {
+                    handle 
+                    title 
+                    images(first: 5) {
+                      edges {
+                        node {
+                          id
+                          altText
+                          url
+                        }
+                      }
+                    }
+                  }                  
                   ... on MediaImage {
                     image {
                       ...ImageFragment

@@ -15,7 +15,7 @@ export default function Layout({ children, storefront, ...props }) {
     palette: {
       ...muiTheme.palette,
       secondary: {
-        main: '#000000'
+        main: storefront?.primary_color || '#000000'
       },
     }
   }
@@ -31,7 +31,9 @@ export default function Layout({ children, storefront, ...props }) {
         <StorefrontHeader storefront={storefront} />
         <Box sx={sx.root}>
           <Box sx={sx.container}>
-            <Container maxWidth={"lg"}>{children}</Container>
+            <Container maxWidth={"lg"}>
+              {children}
+            </Container>
           </Box>
           <StorefrontFooter name={name} />
         </Box>

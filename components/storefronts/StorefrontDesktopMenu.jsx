@@ -1,9 +1,9 @@
 import React from "react";
-import { Box, Typography, Hidden, Toolbar } from "@mui/material";
+import { Link, Box, Typography, Hidden, Toolbar } from "@mui/material";
 import { Logo, CartButton, AuthIconButton } from "components";
 import Image from "next/image";
 
-const DesktopMenu = ({ name, logo, handleClick, ...props }) => {
+const DesktopMenu = ({ name, logo, imagesUrl, handleClick, ...props }) => {
   return (
     <Toolbar sx={sx.toolbar}>
       <Hidden mdDown>
@@ -35,6 +35,11 @@ const DesktopMenu = ({ name, logo, handleClick, ...props }) => {
             )}
           </Box>
           <Box sx={sx.item}>
+            { imagesUrl && (
+              <Link variant="body2" color='text.primary' href={imagesUrl} target='_blank'>
+                Image Library 
+              </Link>
+            )}
             <AuthIconButton color="#222222" />
             <CartButton color="#222222" />
           </Box>

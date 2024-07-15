@@ -2,17 +2,23 @@ import React, { useEffect } from "react";
 import { useStorefronts } from "hooks";
 import {
   StorefrontCover,
-  ProductCollection,
+  StorefrontFeatures,
+  StorefrontFeaturedCollection,
+  StorefrontHowItWorks,  
+  StorefrontPhotos,
   StorefrontLayout,
 } from "components";
 import { useRouter } from "next/router";
-import { Box } from "@mui/material";
 
 const Storefront = (props) => {
   const router = useRouter();
   const { store } = router.query;
 
-  const { storefront, fetchStorefront } = useStorefronts();
+  const { photos, storefront, fetchStorefront } = useStorefronts();
+
+  const handleClick = () => {
+    router.push(`/storefronts/${store}/shop-all`);
+  }
 
   useEffect(() => {
     if (store) {
@@ -23,16 +29,14 @@ const Storefront = (props) => {
   if (!storefront?.name) return null;
   return (
     <StorefrontLayout storefront={storefront}>
-      <StorefrontCover storefront={storefront} />
-      <Box sx={sx.collection}>
-        {storefront?.collection && (
-          <ProductCollection
-            variant={"grid"}
-            handle={storefront?.collection.handle}
-            productUrl={`/storefronts/${store}/products`}
-          />
-        )}
-      </Box>
+      <StorefrontCover 
+        storefront={storefront} 
+        handleClick={handleClick}
+      />
+      <StorefrontFeatures storefront={storefront} />
+      <StorefrontHowItWorks storefront={storefront} />
+      <StorefrontFeaturedCollection handleClick={handleClick} storefront={storefront} />      
+      <StorefrontPhotos photos={photos} storefront={storefront} />
     </StorefrontLayout>
   );
 };

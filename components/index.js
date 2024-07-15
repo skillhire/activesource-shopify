@@ -122,3 +122,7 @@ export { default as PDP } from "components/products/PDP";
 // Storefronts
 export { default as StorefrontLayout } from "components/storefronts/StorefrontLayout";
 export { default as StorefrontCover } from "components/storefronts/StorefrontCover";
+export { default as StorefrontFeatures } from "components/storefronts/StorefrontFeatures";
+export { default as StorefrontFeaturedCollection } from "components/storefronts/StorefrontFeaturedCollection";
+export { default as StorefrontPhotos } from "components/storefronts/StorefrontPhotos";
+export { default as StorefrontHowItWorks } from "components/storefronts/StorefrontHowItWorks";

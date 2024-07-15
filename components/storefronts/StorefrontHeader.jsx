@@ -6,7 +6,8 @@ import StorefrontDesktopMenu from "./StorefrontDesktopMenu";
 const Header = ({ storefront, styles = {}, ...props }) => {
   const router = useRouter();
 
-  const { name, logo } = storefront || {};
+  const { name, logo, imagesUrl } = storefront || {};
+
   const handleClick = (path) => {
     router.push(path);
   };
@@ -16,6 +17,7 @@ const Header = ({ storefront, styles = {}, ...props }) => {
       <StorefrontDesktopMenu
         name={name}
         logo={logo}
+        imagesUrl={imagesUrl}
         handleClick={handleClick}
       />
     </AppBar>

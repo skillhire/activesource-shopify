@@ -3,9 +3,11 @@ import useMetaobject from "../useMetaobjects";
 
 const useStorefronts = () => {
   const [storefront, setStorefront] = useState();
-
+  const [photos, setPhotos] = useState([]);
+  
   const {
     getReference,
+    getReferences,
     getValue,
     getImage,
     metaobject,
@@ -27,14 +29,28 @@ const useStorefronts = () => {
         direction: getValue(metaobject, "direction"),
         logo: getImage(metaobject, "logo"),
         image: getImage(metaobject, "image"),
+        image2: getImage(metaobject, "image_2"),
         collection: getReference(metaobject, "collection"),
+        collections: getReferences(metaobject, "collections"),
+        imagesUrl: getValue(metaobject, "images_url"),
+        primaryColor: getValue(metaobject, "primary_color"),
       });
+
+      let _photos = getReferences(metaobject, "photos");
+      setPhotos(_photos.map((photo) => {
+        return {
+          image: getImage(photo, "image"),
+          product: getReference(photo, "product"),
+          url: getReference(photo, "url"),
+        };
+      }))       
     }
   }, [metaobject]);
 
   return {
     loading,
     error,
+    photos,  
     storefront,
     fetchStorefront,
   };

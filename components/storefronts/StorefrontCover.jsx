@@ -1,10 +1,11 @@
 import React from "react";
-import { Stack, Box, Typography } from "@mui/material";
+import { Stack, Button, Box, Typography } from "@mui/material";
 import Image from "next/image";
 
-const StorefrontCover = (props) => {
-  const { storefront } = props || {};
-  const { direction = "row" } = storefront || {};
+const StorefrontCover = (props) => {  
+  const { storefront, handleClick } = props || {};
+  const { direction = "row" } = storefront || {};  
+
   return (
     <Stack
       direction={{
@@ -14,6 +15,20 @@ const StorefrontCover = (props) => {
       spacing={4}
       sx={sx.header}
     >
+        <Typography 
+          variant="h3" 
+          sx={ sx.title }
+        >{storefront?.title}</Typography>
+        <Typography variant="body2" sx={sx.subtitle}>
+          {storefront?.description}
+        </Typography>
+        <Button 
+          variant="contained" 
+          color="primary" 
+          onClick={() => handleClick(`/storefronts/${storefront?.handle}/shop`)}
+        >
+          Shop Now
+        </Button>
       <Box
         sx={{
           ...sx.imageContainer,
@@ -30,25 +45,6 @@ const StorefrontCover = (props) => {
           }}
         />
       </Box>
-      <Stack
-        direction="column"
-        spacing={2}
-        sx={{
-          ...sx.content,
-          ...(direction == "row" && sx.contentRow),
-        }}
-      >
-        <Typography 
-          variant="h3" 
-          sx={{ 
-            ...sx.title,
-            ...(direction == "row" && sx.titleRow),
-          }}
-        >{storefront?.title}</Typography>
-        <Typography variant="body2" sx={sx.description}>
-          {storefront?.description}
-        </Typography>
-      </Stack>
     </Stack>
   );
 };
@@ -63,31 +59,17 @@ const sx = {
     alignItems: "center",
     height: "100%",
   },
+  subtitle: {
+    textAlign: "center",
+    maxWidth: 980
+  },
   description: {},
   imageContainer: {
     width: "100%",
     height: "100%",
-  },
-  content: {
-    width: "100%",
-    maxWidth: 720,
-    pr: {
-      sm: 4,
-      xs: 0,
-    },
-    alignItems: {
-      sm: "center",
-      xs: "center",
-    },
-  },
-  contentRow: {
-    maxWidth: 520,
-    pt: 4,
-    alignItems: {
-      sm: "flex-start",
-      xs: "center",
-    },
-  },
+    borderRadius: 2,        
+    overflow: "hidden",
+  },  
   title: {
     textAlign: "center",    
   },
