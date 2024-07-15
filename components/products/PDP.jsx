@@ -353,7 +353,6 @@ const Product = ({
       let _isEnterprise = getMetaValue(product, "is_enterprise") == "true";
       let _disablePlacement = getMetaValue(product, "disable_placement") == "true";
       let _minQuantity = parseInt(getMetaValue(product, "min_quantity") || 0);
-      console.log("product", product)
       setDisableLogo(_disableLogo);
       setIsEnterprise(_isEnterprise);
       setDisablePlacement(_disablePlacement);

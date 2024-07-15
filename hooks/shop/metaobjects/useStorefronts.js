@@ -34,6 +34,9 @@ const useStorefronts = () => {
         collections: getReferences(metaobject, "collections"),
         imagesUrl: getValue(metaobject, "images_url"),
         primaryColor: getValue(metaobject, "primary_color"),
+        disableFeatures: getValue(metaobject, "disable_features") == "true",
+        disableHowItWorks: getValue(metaobject, "disable_how_it_works") == "true",
+        disablePhotos: getValue(metaobject, "disable_photos") == "true",
       });
 
       let _photos = getReferences(metaobject, "photos");

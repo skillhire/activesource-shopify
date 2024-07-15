@@ -26,7 +26,7 @@ const Storefront = (props) => {
       fetchStorefront(store);
     }
   }, [store]);
-
+  
   if (!storefront?.name) return null;
   return (
     <StorefrontLayout storefront={storefront}>
@@ -35,10 +35,16 @@ const Storefront = (props) => {
         handleClick={handleClick}
       />
       <Stack direction="column" spacing={'100px'}>
-        <StorefrontFeatures storefront={storefront} />
-        <StorefrontHowItWorks storefront={storefront} />
+        { !storefront?.disableFeatures && (
+          <StorefrontFeatures storefront={storefront} />
+        )}
+        { !storefront?.disableHowItWorks && (
+          <StorefrontHowItWorks storefront={storefront} />
+        )}
         <StorefrontFeaturedCollection handleClick={handleClick} storefront={storefront} />      
-        <StorefrontPhotos photos={photos} storefront={storefront} />
+        { !storefront?.disablePhotos && (
+          <StorefrontPhotos photos={photos} storefront={storefront} />
+        )}
       </Stack>
     </StorefrontLayout>
   );
