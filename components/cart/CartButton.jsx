@@ -19,7 +19,7 @@ const CartButton = ({ color = "white", styles, ...props }) => {
       sx={{ ...sx.root, ...styles }}
       size="large"
     >
-      <Badge badgeContent={lineItemTotal} color="secondary">
+      <Badge badgeContent={lineItemTotal} color="primary">
         <ShoppingCart height={24} width={24} color={color} />
       </Badge>
     </IconButton>
