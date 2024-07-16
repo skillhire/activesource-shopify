@@ -48,7 +48,7 @@ const StorefrontFeatures = (props) => {
 
   return (    
     <Stack
-      direction={'row'}
+      direction={{ md: 'row', xs: 'column' }}
       spacing={0}
       sx={sx.container}
     >        
@@ -76,9 +76,9 @@ const StorefrontFeatures = (props) => {
       <Box sx={ sx.rightPanel }>
         <Image 
           src={ storefront?.image2 }
-          height={1200} 
-          width={1200}
-          layout='responsive'
+          height={620} 
+          width={620}
+          layout="responsive"
           style={{
             objectFit: 'cover'
           }}
@@ -97,13 +97,25 @@ const sx = {
     bgcolor: 'common.white',
     borderRadius: 2,
     overflow: "hidden",
+    maxHeight: {
+      md: "620px",      
+      xs: "auto",
+    }
+
   },
   leftPanel: {
-    p: 4,
+    px: 4,
+    py: 5,
   },
   rightPanel: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '100%',
-    maxWidth: '50%'
+    maxWidth: {
+      md: '50%',
+      xs: '100%',
+    }
   },
   subtitle: {
     textAlign: "center",

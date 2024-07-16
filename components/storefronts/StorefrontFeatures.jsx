@@ -47,7 +47,7 @@ const StorefrontFeatures = (props) => {
   return (    
     <Stack
       direction={'column'}
-      spacing={4}
+      spacing={2}
       sx={sx.header}
     >           
         <Typography 
@@ -65,6 +65,9 @@ const StorefrontFeatures = (props) => {
           xs: 'column'
         }}
         spacing={2}        
+        sx={{
+          pt: 3
+        }}
       >
         { FEATURED_ITEMS.map((item, index) => (
           <FeaturedItem 

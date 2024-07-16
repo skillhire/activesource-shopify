@@ -12,9 +12,10 @@ const StorefrontCover = (props) => {
         sm: direction == "row" ? "row-reverse" : "column",
         xs: "column",
       }}
-      spacing={4}
+      spacing={6}
       sx={sx.header}
     >
+      <Stack direction='column' spacing={2}>
         <Typography 
           variant="h3" 
           sx={ sx.title }
@@ -22,6 +23,7 @@ const StorefrontCover = (props) => {
         <Typography variant="body2" sx={sx.subtitle}>
           {storefront?.description}
         </Typography>
+        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
         <Button 
           variant="contained" 
           color="primary" 
@@ -29,6 +31,8 @@ const StorefrontCover = (props) => {
         >
           Shop Now
         </Button>
+        </Box>
+        </Stack>
       <Box
         sx={{
           ...sx.imageContainer,

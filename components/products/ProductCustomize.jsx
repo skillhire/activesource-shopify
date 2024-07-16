@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { CustomizeContext } from "context";
-import { Stack, Typography } from "@mui/material";
+import { Stack, Link, Box, Typography } from "@mui/material";
 import { getMetaValue } from "utils";
 import { getCookie } from "cookies-next";
 import FileUploader from "./customize/FileUploader";
@@ -15,7 +15,6 @@ const ProductCustomize = ({
   handleUpload,
   handlePreviewClick,
   activeColor,
-  activeImage,
   storefrontImagesUrl
 }) => {
   const { customization, setCustomization } = useContext(CustomizeContext);
