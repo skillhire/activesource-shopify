@@ -48,13 +48,13 @@ const StorefrontShopAll = (props) => {
   }, [store]);
 
   useEffect(() => {
-    if(storefront?.collections?.length > 0) {            
+    if(store && storefront?.collections?.length > 0) {            
       setMenuItems(storefront?.collections?.map((collection) => ({
         label: collection.title,
-        value: buildStorePath(store, `collections/${collection.handle}`),
+        value: buildStorePath(store, `/collections/${collection.handle}`),
       })));
     }
-  }, [storefront]);
+  }, [store, storefront]);
 
   useEffect(() => {
     if(handle){
