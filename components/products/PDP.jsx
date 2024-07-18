@@ -62,8 +62,15 @@ const Product = ({
 
   const { variant, setVariant } = useVariants({
     product,
-    selectedOptions,
+    selectedOptions,    
+    setSelectedOptions
   });
+
+  useEffect(() => {
+    if(variant){
+      console.log("Variant", variant)
+    }
+  }, [variant]);
 
   const handleUpload = async (image, frontOrBack) => {
     // Store the original logo files
@@ -229,7 +236,7 @@ const Product = ({
     });
     setActiveImage({ url: null });
     setSelectedOptions({});
-    setVariant(null);
+    setVariant(product?.variants?.edges?.[0]?.node);
     setAddToCartDisabled(true);
   };
 

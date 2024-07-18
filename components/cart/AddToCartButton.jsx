@@ -24,10 +24,6 @@ const AddToCartButton = ({
     const isFront = getMetaValue(product, "front_placement") == "true";
     let disabled = false;
 
-    if (!variant) {
-      showAlertError("Please select a size and color");
-      disabled = true;
-    }
     if (isFront && !customization?.print_url_1) {
       showAlertError("Please select a front logo");
       disabled = true;
@@ -50,7 +46,8 @@ const AddToCartButton = ({
   const handleAddToCart = async () => {
 
     const disabled = handleAddToCartDisabled();
-
+    variant = variant || product?.variants?.edges[0]?.node;
+    
     const { 
       print_url_1,
       print_url_1_stakes,

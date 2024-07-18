@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const useVariants = ({ product, selectedOptions }) => {
+const useVariants = ({ product, setSelectedOptions, selectedOptions }) => {
   const [variant, setVariant] = useState();
   const [variantImage, setVariantImage] = useState();
 
@@ -20,13 +20,17 @@ const useVariants = ({ product, selectedOptions }) => {
   }, [selectedOptions]);
 
   // Handle single variant
-  useEffect(() => {
-    if (product?.variants?.edges?.length == 1) {
-      setVariant(product.variants.edges[0].node);
-    } else {
-      setVariant(null);
+  useEffect(() => {    
+    if(product?.handle){
+      let _variant = product?.variants?.edges[0]?.node
+      let _selectedOptions = {
+        Color: _variant?.selectedOptions[0]?.value,
+        Size: _variant?.selectedOptions[1]?.value
+      }
+      setSelectedOptions(_selectedOptions);
+      setVariant(_variant);    
     }
-  }, [product]);
+  }, [product?.handle]);
 
   useEffect(() => {
     if (variant?.node?.image) {
