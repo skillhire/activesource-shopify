@@ -27,7 +27,7 @@ const StorefrontCover = (props) => {
         <Button 
           variant="contained" 
           color="primary" 
-          onClick={() => handleClick(`/storefronts/${storefront?.handle}/shop`)}
+          onClick={ handleClick }
         >
           Shop Now
         </Button>
