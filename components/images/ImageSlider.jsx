@@ -4,16 +4,9 @@ import Image from "next/image";
 import Canvas from "./Canvas";
 
 const Thumbnail = (props) => {
+  const { height, width, image, activeImage, handleClick } = props || {};
 
-  const {
-     height, 
-     width, 
-     image,
-     activeImage,
-     handleClick 
-    } = props || {}
-
-  return(
+  return (
     <CardActionArea
       key={image?.id}
       sx={{
@@ -29,13 +22,13 @@ const Thumbnail = (props) => {
         height={height}
         style={{
           position: "relative",
-          objectFit: "cover",            
+          objectFit: "cover",
         }}
         alt={image?.altText}
       />
     </CardActionArea>
-  )
-}
+  );
+};
 
 const ImageSlider = ({
   activeImage,
@@ -47,16 +40,13 @@ const ImageSlider = ({
   previewBack,
   ...props
 }) => {
-
   return (
     <Stack direction="row" spacing={3} sx={sx.root}>
-        <Stack direction="column" spacing={1}>
-          <Typography variant="button">
-            Product Photos 
-          </Typography>
-          <Stack sx={sx.thumbnails} spacing={1}>
+      <Stack direction="column" spacing={1}>
+        <Typography variant="button">Product Photos</Typography>
+        <Stack sx={sx.thumbnails} spacing={1}>
           {images?.map((image) => (
-            <Thumbnail 
+            <Thumbnail
               key={image.id}
               height={thumbnailSize}
               width={thumbnailSize}
@@ -65,12 +55,9 @@ const ImageSlider = ({
               handleClick={handleClick}
             />
           ))}
-        </Stack>      
+        </Stack>
       </Stack>
-      <Canvas 
-        enableZoom 
-        activeImage={activeImage} 
-      />      
+      <Canvas enableZoom />
     </Stack>
   );
 };
@@ -87,8 +74,8 @@ const sx = {
     },
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    mb: 4
-  },  
+    mb: 4,
+  },
   thumbnails: {
     width: {
       sm: 100,
@@ -116,18 +103,18 @@ const sx = {
     },
   },
   thumbnail: {
-    border: '1px solid',
+    border: "1px solid",
     borderColor: "transparent",
   },
   activeThumbnail: {
-    border: '1px solid',
+    border: "1px solid",
     borderColor: "primary.main",
   },
   cardActionArea: {
     p: 0,
     overflow: "hidden",
     height: 100,
-    width: 100
+    width: 100,
   },
   logo: {
     position: "absolute",

@@ -68,7 +68,10 @@ export { default as Placeholder } from "components/Placeholder";
 export { default as ProductCard } from "components/products/ProductCard";
 export { default as ProductCarousel } from "components/products/ProductCarousel";
 export { default as ProductCollection } from "components/products/ProductCollection";
+export { default as ProductContactSupport } from "components/products/ProductContactSupport";
 export { default as ProductDetails } from "components/products/ProductDetails";
+export { default as ProductEnquireBulkDiscount } from "components/products/ProductEnquireBulkDiscount";
+export { default as ProductEnterpriseChip } from "components/products/ProductEnterpriseChip";
 export { default as ProductGrid } from "components/products/ProductGrid";
 export { default as ProductImages } from "components/products/ProductImages";
 export { default as ProductTabs } from "components/products/ProductTabs";
@@ -114,3 +117,12 @@ export { default as LoadMore } from "components/search/LoadMore";
 export { default as NoSearchResults } from "components/search/NoSearchResults";
 export { default as PriceFilterButton } from "components/search/PriceFilterButton";
 export { default as SearchTags } from "components/search/SearchTags";
+export { default as PDP } from "components/products/PDP";
+
+// Storefronts
+export { default as StorefrontLayout } from "components/storefronts/StorefrontLayout";
+export { default as StorefrontCover } from "components/storefronts/StorefrontCover";
+export { default as StorefrontFeatures } from "components/storefronts/StorefrontFeatures";
+export { default as StorefrontFeaturedCollection } from "components/storefronts/StorefrontFeaturedCollection";
+export { default as StorefrontPhotos } from "components/storefronts/StorefrontPhotos";
+export { default as StorefrontHowItWorks } from "components/storefronts/StorefrontHowItWorks";

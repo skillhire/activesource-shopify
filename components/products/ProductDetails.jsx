@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Stack, Typography } from "@mui/material";
-import { formatPriceRange } from "utils";
-import { VariantSelector } from "components";
+import React, { useState, useContext, useEffect } from "react";
+import { useCustomization } from "hooks";
+import { Stack, Typography, Box } from "@mui/material";
+import { formatPriceRange, formatCurrency, getMetaValue, getProductColors } from "utils";
+import { VariantSelector, ProductEnterpriseChip } from "components";
 import CustomColorSelect from "components/variants/CustomColorSelect";
-import { getProductColors } from "utils";
+import { CustomizeContext } from "context";
 
 const ProductDetails = ({
   product,
@@ -18,6 +19,9 @@ const ProductDetails = ({
   const { minVariantPrice } = priceRange || {};
 
   const [price, setPrice] = useState();
+  const [enterpriseProductDescription, setEnterpriseProductDescription] = useState();
+  const [isEnterprise, setIsEnterprise] = useState();
+  const [brand, setBrand] = useState();
   const [colors, setColors] = useState([]);
 
   useEffect(() => {
@@ -30,8 +34,14 @@ const ProductDetails = ({
 
   useEffect(() => {
     if (product?.metafields?.length > 0) {
-      let formattedColors = getProductColors(product);      
+      let formattedColors = getProductColors(product);
+      let _isEnterprise = getMetaValue(product, "is_enterprise") == "true";
+      let _enterpriseProductDescription = getMetaValue(product, "enterprise_product_description");
+      let _brand = getMetaValue(product, "brand");
       setColors(formattedColors);
+      setIsEnterprise(_isEnterprise);
+      setBrand(_brand);
+      setEnterpriseProductDescription(_enterpriseProductDescription);
     }
   }, [product]);
 
@@ -39,24 +49,48 @@ const ProductDetails = ({
     <Stack spacing={2}>
       {product && (
         <>
+          {isEnterprise && (
+            <Box>
+              <ProductEnterpriseChip />
+            </Box>
+          )}
           <Typography variant="h4">{product?.title}</Typography>
+          { brand && (
+            <Typography variant="button">
+              Brand: { brand }
+            </Typography>
+          )}
           <Typography variant="button">
-            {formatPriceRange(
-              product.priceRange.minVariantPrice.amount,
-              product.priceRange.maxVariantPrice.amount
-            )}
+            {
+              isEnterprise ? (
+                <>
+                  From {' '}
+                  {formatCurrency(product.priceRange.minVariantPrice.amount)}
+                </>
+              ) : (
+                formatPriceRange(
+                  product.priceRange.minVariantPrice.amount,
+                  product.priceRange.maxVariantPrice.amount
+                )
+              )
+            }
           </Typography>
-          <CustomColorSelect
-            colors={colors}
-            activeColor={activeColor}
-            handleClick={handleColorClick}
-            customAttributes={customAttributes}
-          />
-          <VariantSelector
-            handleChange={handleOptionChange}
-            selectedOptions={selectedOptions}
-            options={product?.options}
-          />
+          {enterpriseProductDescription && <Typography variant="body2">{enterpriseProductDescription}</Typography>}
+          {!isEnterprise && (
+            <>
+              <CustomColorSelect
+                colors={colors}
+                activeColor={activeColor}
+                handleClick={handleColorClick}
+                customAttributes={customAttributes}
+              />
+              <VariantSelector
+                handleChange={handleOptionChange}
+                selectedOptions={selectedOptions}
+                options={product?.options}
+              />
+            </>
+          )}
         </>
       )}
     </Stack>

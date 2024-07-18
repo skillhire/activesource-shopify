@@ -1,175 +1,13 @@
-import React, { useRef, useState, useContext, useEffect, useMemo } from "react";
+import React, { useContext, useEffect } from "react";
 import { CustomizeContext } from "context";
-import { useAlerts } from "hooks";
-import {
-  Button,
-  Stack,
-  Typography,
-  CircularProgress,
-  CardActionArea,
-} from "@mui/material";
+import { Stack, Link, Box, Typography } from "@mui/material";
 import { getMetaValue } from "utils";
-import Image from "next/image";
-import { Link } from "@mui/material";
-import { CloudUpload } from "@mui/icons-material";
-import { useCloudinary } from "hooks";
-import {
-  MAX_FILE_SIZE,
-  CLOUDINARY_CLOUD_NAME,
-  CLOUDINARY_API_KEY,
-  CLOUDINARY_UPLOAD_PRESET,
-} from "constants/shop";
-import { getCookie, setCookie } from "cookies-next";
-
-const Thumbnail = ({ src, handleClick, selected = false, ...props }) => (
-  <CardActionArea onClick={handleClick} sx={sx.cardActionArea}>
-    <Image
-      src={src}
-      width={100}
-      height={100}
-      style={{
-        ...(selected && sx.activeThumbnail),
-        borderRadius: "8px",
-        backgroundColor: "white",
-        objectFit: "contain",
-      }}
-    />
-  </CardActionArea>
-);
-
-const ImagePreview = ({ label, src, selected = false, name, handleClick }) => (
-  <Stack>
-    <Thumbnail
-      selected={selected}
-      handleClick={() => handleClick(src, name)}
-      src={src}
-      alt="Product thumbnail"
-    />
-    <Typography variant="overline" sx={sx.overline}>
-      {label}
-    </Typography>
-  </Stack>
-);
-
-const FileUploader = ({ label, disablePlacement=false, name, handleClick, handleUpload, ...props }) => {
-  const { showAlertError } = useAlerts();
-
-  const ref = useRef();
-  const [file, setFile] = useState();
-  const { customization, setCustomization } = useContext(CustomizeContext);
-
-  const { loading, unsignedUpload } = useCloudinary({
-    cloudName: CLOUDINARY_CLOUD_NAME,
-    apiKey: CLOUDINARY_API_KEY,
-    uploadPreset: CLOUDINARY_UPLOAD_PRESET,
-  });
-
-  const fileInputClick = () => {
-    ref.current.click();
-  };
-
-  const handleChange = async (ev) => {
-    const { files } = ev.target;
-    const file = files[0];
-    if (file?.size > MAX_FILE_SIZE) {
-      showAlertError(
-        "File size is too big. Please upload a file less than 5Mb"
-      );
-      return;
-    }
-    const resp = await unsignedUpload(file);
-    const image = resp?.data?.secure_url;
-
-    let cookie = JSON.parse(getCookie("activesource") || "{}");
-    cookie[name] = {
-      name: file.name,
-      image: image,
-    };
-    setCookie("activesource", JSON.stringify(cookie));
-    setFile(file);
-    handleUpload(image, name);
-  };
-
-  useEffect(() => {
-    let cookie = JSON.parse(getCookie("activesource") || "{}");
-    setFile(cookie[name]);    
-    if(cookie[name]){
-      if(name === 'front'){
-        setCustomization({     
-          ...customization,               
-          print_logo_1: cookie.front.image 
-        })
-      }else if(name === 'back'){
-        setCustomization({ 
-          ...customization,         
-          print_logo_2: cookie.back.image 
-        })
-      }
-    }    
-  }, [name]);
-
-  return (
-    <>
-      { !disablePlacement && (
-      <Stack spacing={1} sx={sx.container}>
-        <Typography variant="subtitle1" sx={sx.title}>
-          {label} Placement
-        </Typography>
-        <Stack direction="row" spacing={1} sx={sx.row}>
-          <Button
-            onClick={() => handleClick(name)}
-            size="small"
-            variant="outlined"
-            sx={{
-              ...sx.button,
-              ...(customization[name] && sx.active),
-            }}
-          >
-            {customization[name]?.title
-              ? `${customization[name].title} (${customization[name]?.dimensions})`
-              : "Select Placement"}
-          </Button>
-        </Stack>
-        <Link variant="overline" color="text.secondary" href="/placement-guide" target="_blank">
-          Custom Placement
-        </Link>
-      </Stack>
-      )}
-      <Stack spacing={1} sx={sx.container}>
-        <Typography variant="subtitle1" sx={sx.title}>
-          {label} Design
-        </Typography>
-        <Stack direction="row" spacing={1} sx={sx.row}>
-          <Button
-            size="small"
-            variant="outlined"
-            sx={{
-              ...sx.button,
-              ...(file && sx.active),
-            }}
-            startIcon={<CloudUpload />}
-            endIcon={loading && <CircularProgress size={20} sx={sx.loading} />}
-            onClick={fileInputClick}
-          >
-            Choose file
-          </Button>
-          <Typography variant="caption">{file?.name}</Typography>
-          <input
-            type="file"
-            ref={ref}
-            accept="image/png"
-            hidden
-            name={name}
-            onChange={handleChange}
-          />
-        </Stack>
-        <Typography variant="overline">
-          <b>File requirements:</b> PNG format with transparency, less than 5Mb, 300 PPI resolution
-        </Typography>
-      </Stack>
-    </>
-  );
-};
+import { getCookie } from "cookies-next";
+import FileUploader from "./customize/FileUploader";
+import PlacementButton from "./customize/PlacementButton";
+import PlacementImage from "./customize/PlacementImage";
+import ImagesIcon from 'assets/images-icon.svg';
+import Image from 'next/image';
 
 const ProductCustomize = ({
   product,
@@ -177,68 +15,102 @@ const ProductCustomize = ({
   handleUpload,
   handlePreviewClick,
   activeColor,
-  activeImage,
+  storefrontImagesUrl
 }) => {
   const { customization, setCustomization } = useContext(CustomizeContext);
 
-  const isBack = getMetaValue(product, "back_placement")
-  const isFront = getMetaValue(product, "front_placement")
-  const isBag = product?.productType == "Bag"  
+  const hasBackPlacement = getMetaValue(product, "back_placement") == "true";
+  const hasFrontPlacement = getMetaValue(product, "front_placement") == "true";
 
   useEffect(() => {
     const cookie = JSON.parse(getCookie("activesource") || "{}");
-    if (cookie?.front || cookie?.back) {
-      setCustomization({
-        ...customization,
-        print_logo_1: cookie.front?.image,
-        print_logo_2: cookie.back?.image,
-      });
-    }
-  }, []);
+    setCustomization({
+      ...customization,
+      print_logo_1: cookie.front?.image
+        ? cookie.front?.image
+        : customization?.print_logo_1,
+      print_logo_2: cookie.back?.image
+        ? cookie.back?.image
+        : customization?.print_logo_2,
+    });
+  }, [product?.handle]);
 
-  //if (!activeColor) return null;
+  const { 
+    disableLogo, 
+    disablePlacement, 
+    previewThumbnail 
+  } = useContext(CustomizeContext);
 
   return (
     <Stack>
-      {isFront === "true" && (
-        <FileUploader
-          label={"Front"}
-          name={"front"}
-          handleClick={handleClick}
-          handleUpload={handleUpload}
-          disablePlacement={isBag}
-        />
+      { storefrontImagesUrl && (
+        <Box sx={ sx.storefrontImages }>
+          <Link href={storefrontImagesUrl} target="_blank" variant="body2" color='brand.main'>
+            Visit our Image Library to access artwork files to customize for your studio's merchandise.
+          </Link>
+          <Box sx={ sx.storefrontImage }>
+            <Image src={ ImagesIcon } 
+              width={32}
+              height={32}
+            />
+          </Box>
+        </Box> 
       )}
-      {isBack === "true" && (
-        <FileUploader
-          label={"Back"}
-          name={"back"}
-          handleClick={handleClick}
-          handleUpload={handleUpload}
-          disablePlacement={isBag}
-        />
+      
+      {hasFrontPlacement && (
+        <>
+          <PlacementButton
+            disablePlacement={disablePlacement}
+            label={"Front"}
+            name={"front"}
+            handleClick={handleClick}
+          />
+          <FileUploader
+            label={"Front"}
+            name={"front"}
+            handleUpload={handleUpload}
+            disableLogo={disableLogo}
+          />
+        </>
       )}
 
-      {(activeColor && (isFront === "true" || isBack === "true")) && (
+      {hasBackPlacement && (
+        <>
+          <PlacementButton
+            disablePlacement={disablePlacement}
+            label={"Back"}
+            name={"back"}
+            handleClick={handleClick}
+          />
+          <FileUploader
+            label={"Back"}
+            name={"back"}
+            handleUpload={handleUpload}
+            disableLogo={disableLogo}
+          />
+        </>
+      )}
+
+      {activeColor && (hasBackPlacement || hasFrontPlacement) && (
         <Stack sx={sx.container}>
           <Typography variant="subtitle1" sx={sx.title}>
             Preview
           </Typography>
           <Stack direction="row" spacing={2}>
-            {isFront === "true" && (
-              <ImagePreview
+            {hasFrontPlacement && (
+              <PlacementImage
                 label="Front"
                 src={activeColor?.front_placement}
                 name="front"
-                selected={activeImage?.url === activeColor?.front_placement}
+                selected={previewThumbnail == 'front'}
                 handleClick={handlePreviewClick}
               />
             )}
-            {isBack === "true" && (
-              <ImagePreview
+            {hasBackPlacement && (
+              <PlacementImage
                 label="Back"
                 src={activeColor?.back_placement}
-                selected={activeImage?.url === activeColor?.back_placement}
+                selected={previewThumbnail == 'back'}
                 name="back"
                 handleClick={handlePreviewClick}
               />
@@ -282,17 +154,17 @@ const sx = {
     minWidth: 176,
     maxwidth: 220,
     "&:hover": {
-      color: 'text.primary',
+      color: "text.primary",
       borderColor: "secondary.light",
       bgcolor: "secondary.light",
     },
   },
   active: {
-    borderColor: 'secondary.light',
+    borderColor: "secondary.light",
     bgcolor: "secondary.light",
     "&:hover": {
       bgcolor: "secondary.light",
-      borderColor: 'secondary.light',
+      borderColor: "secondary.light",
     },
   },
   overline: {
@@ -303,5 +175,16 @@ const sx = {
     height: "20px",
     width: "20px",
     color: "text.primary",
+  },
+  storefrontImages: {
+    border: '1px solid',
+    borderColor: 'brand.main',
+    bgcolor: 'brand.light',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    p: 2,
+    borderRadius: 1,
+    my: 2, 
   },
 };

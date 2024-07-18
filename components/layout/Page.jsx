@@ -5,8 +5,8 @@ import Image from "next/image";
 const Page = ({ title, subtitle, image, body, html = false, ...props }) => {
   return (
     <Box sx={sx.root}>
-      <Box sx={ sx.imageContainer }>
-        { image && (
+      <Box sx={sx.imageContainer}>
+        {image && (
           <Image
             src={image}
             width={1200}
@@ -14,7 +14,7 @@ const Page = ({ title, subtitle, image, body, html = false, ...props }) => {
             alt={title}
             style={{
               width: "100%",
-              objectFit: "cover"
+              objectFit: "cover",
             }}
             responsive
           />
@@ -23,14 +23,14 @@ const Page = ({ title, subtitle, image, body, html = false, ...props }) => {
       <Typography variant="h1" sx={sx.title}>
         {title}
       </Typography>
-      <Container maxWidth="sm" sx={ sx.container }>                
-        { html ? (
+      <Container maxWidth="sm" sx={sx.container}>
+        {html ? (
           <Typography
             variant="body2"
             sx={sx.text}
             dangerouslySetInnerHTML={{ __html: body }}
           />
-        ):(
+        ) : (
           <Typography variant="body2" sx={sx.text}>
             {body}
           </Typography>
@@ -47,28 +47,28 @@ const sx = {
     pb: 2,
   },
   title: {
-    position: 'absolute',
-    textAlign: 'center',
+    position: "absolute",
+    textAlign: "center",
     top: "260px",
     width: "100%",
-    color: "common.white"
+    color: "common.white",
   },
   text: {
     whiteSpace: "pre-wrap",
-    '& p': {
-      m: 'auto'
+    "& p": {
+      m: "auto",
     },
-    '& h2': {
-      lineHeight: '1.3em',
-    }
+    "& h2": {
+      lineHeight: "1.3em",
+    },
   },
   imageContainer: {
-    display: 'relative',
+    display: "relative",
     width: "100%",
     height: "472px",
-    mb: "200px"
+    mb: "200px",
   },
   container: {
-    mb: '200px'
-  }
+    mb: "200px",
+  },
 };

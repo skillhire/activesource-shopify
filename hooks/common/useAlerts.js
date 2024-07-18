@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { ShopContext } from "context";
 
 const useAlerts = (props) => {
-  const { setAlert } = useContext(ShopContext)
+  const { setAlert } = useContext(ShopContext);
 
   const showAlertError = (message) => setAlert({ message, variant: "error" });
   const showAlertWarning = (message) =>

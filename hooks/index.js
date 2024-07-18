@@ -30,8 +30,12 @@ export { default as useSegment } from "hooks/shop/addons/useSegment";
 // Shopify Metaobjects
 export { default as useHome } from "hooks/shop/metaobjects/useHome";
 export { default as usePage } from "hooks/shop/metaobjects/usePage";
+export { default as useStorefronts } from "hooks/shop/metaobjects/useStorefronts";
 export { default as useColors } from "hooks/shop/metaobjects/useColors";
+export { default as usePlacements } from "hooks/shop/metaobjects/usePlacements";
 
 // App
-export { default as useBitly } from "hooks/app/useBitly";
+export { default as useCanvas } from "hooks/app/useCanvas";
+export { default as useCustomization } from "hooks/app/useCustomization";
 export { default as useCloudinary } from "hooks/app/useCloudinary";
+export { default as useContact } from "hooks/app/useContact";

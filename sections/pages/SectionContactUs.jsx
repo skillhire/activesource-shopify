@@ -16,7 +16,9 @@ const SectionFeaturedSolutions = () => {
             Are you a volume customer who needs a custom solution?
           </Typography>
           <Typography variant="body1">
-            We can source and manufacture anything you need. Click the button below to speak to our representatives about custom sourcing, design, pricing, or production.
+            We can source and manufacture anything you need. Click the button
+            below to speak to our representatives about custom sourcing, design,
+            pricing, or production.
           </Typography>
           <Box pt={2}>
             <Button

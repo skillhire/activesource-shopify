@@ -17,7 +17,12 @@ const ShopifyPage = (props) => {
 
   return (
     <Layout>
-      <SimplePage html title={page?.title} body={page?.body} image={page?.image} />
+      <SimplePage
+        html
+        title={page?.title}
+        body={page?.body}
+        image={page?.image}
+      />
     </Layout>
   );
 };

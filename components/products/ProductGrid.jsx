@@ -1,8 +1,5 @@
-import PropTypes from "prop-types";
 import { Grid, Box, CircularProgress, Stack } from "@mui/material";
 import { ProductCard } from "components";
-import { useRouter } from "next/router";
-import { useSegment } from "hooks";
 
 const ProductGrid = ({
   products,
@@ -13,31 +10,22 @@ const ProductGrid = ({
   lg = 3,
   xl = 3,
   spacing = 1,
+  productUrl,
   ...props
 }) => {
-  const router = useRouter();
-  const { trackProductClicked } = useSegment();
-
-  const handleClick = (product) => {
-    window.scrollTo({top: 0, behavior: 'smooth' });
-    trackProductClicked(product);
-    router.push(`/products/${product.handle}`);
-  };
 
   return (
     <Stack alignItems="center" py={2}>
       <Grid container spacing={1} {...props}>
-        {products &&
-          !loading &&
-          products.map((product) => (
-            <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} key={product.id}>
-              <ProductCard product={product} handleClick={handleClick} />
-            </Grid>
-          ))}                  
+        {!loading && products?.map((product) => (
+          <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} key={product.id}>
+            <ProductCard product={product} productUrl={productUrl} />
+          </Grid>
+        ))}
       </Grid>
-      { loading && (
-        <Box sx={ sx.loading }>
-          <CircularProgress disableShrink />  
+      {loading && (
+        <Box sx={sx.loading}>
+          <CircularProgress disableShrink />
         </Box>
       )}
     </Stack>
@@ -46,7 +34,6 @@ const ProductGrid = ({
 
 export default ProductGrid;
 
-
 const sx = {
   root: {},
   loading: {
@@ -54,5 +41,5 @@ const sx = {
     justifyContent: "center",
     alignItems: "center",
     height: "300px",
-  }
+  },
 };

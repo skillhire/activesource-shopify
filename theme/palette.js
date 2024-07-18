@@ -7,11 +7,17 @@ export default {
     main: "#8044FD",
     dark: "#9C6CFF",
     light: "#C6AAFF",
-    contrastText: "#FFFFFF",
+    contrastText: "#2E2E2E",
   },
   tertiary: {
     main: "#E7DBFF",
     contrastText: "#9C6CFF",
+  },
+  brand: {
+    main: "#8044FD",
+    dark: "#9C6CFF",
+    light: "#E6DAFF",
+    contrastText: "#2E2E2E",
   },
   tonalOffset: 0.2,
   error: {
@@ -26,13 +32,14 @@ export default {
   link: "#2E2E2E",
   icon: "#2E2E2E",
   background: {
-    default: "#2E2E2E",
+    default: "#EFEFEF",
     paper: "#FFFFFF",
     shade1: "#2E2E2E",
     shade2: "#252525",
-    shade3: "#EFEFEF", 
-    shade4: '#EEE9FD',
-    shade5: '#D6D1E0',   
+    shade3: "#EFEFEF",
+    shade4: "#EEE9FD",
+    shade5: "#D6D1E0",
+    shade6: "#2E2E2E",
   },
   common: {
     success: "#2E7D32",

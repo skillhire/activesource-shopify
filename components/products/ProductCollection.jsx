@@ -1,24 +1,26 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import { useCollections } from "hooks";
 import { ProductCarousel, ProductGrid } from "components";
 import { Box } from "@mui/material";
 
 const ProductCollection = ({
   handle,
-  perPage = 20,
+  perPage = 48,
   variant = "carousel",
   styles,
+  productUrl,
 }) => {
   const { loading, error, collection, fetchCollection, products } =
     useCollections();
 
   useEffect(() => {
-    if (handle) {
-      fetchCollection(handle, perPage);
+    if (handle && perPage) {
+      fetchCollection(handle, {
+         first: perPage 
+      });
     }
-  }, [handle]);
-
+  }, [handle, perPage]);
+  
   return (
     <Box sx={{ ...sx.root, ...styles }}>
       {variant == "carousel" && (
@@ -26,6 +28,7 @@ const ProductCollection = ({
           title={collection?.title}
           loading={loading}
           products={products}
+          productUrl={productUrl}
         />
       )}
       <Box sx={sx.gridContainer}>
@@ -35,7 +38,8 @@ const ProductCollection = ({
             rowSpacing={4}
             title={collection?.title}
             loading={loading}
-            products={products?.splice(0, 4)}
+            products={products}
+            productUrl={productUrl}
           />
         )}
       </Box>
@@ -43,17 +47,15 @@ const ProductCollection = ({
   );
 };
 
-ProductCollection.propTypes = {
-  handle: PropTypes.string.isRequired,
-  products: PropTypes.array,
-  variant: PropTypes.oneOf(["carousel", "grid"]),
-  query: PropTypes.string,
-  styles: PropTypes.object,
-};
-
 export default ProductCollection;
 
 const sx = {
-  root: { py: 2 },
-  gridContainer: { margin: "0 auto", maxWidth: { xs: 265 } },
+  root: {
+    py: 2,
+    width: "100%",
+  },
+  gridContainer: {
+    width: "100%",
+    margin: "0 auto",
+  },
 };

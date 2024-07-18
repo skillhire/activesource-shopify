@@ -1,11 +1,7 @@
 import React from "react";
 import { useResponsive, useSegment } from "hooks";
 import { Box } from "@mui/material";
-import {
-  CarouselRightArrow,
-  CarouselLeftArrow,
-  ProductCard, 
-} from "components";
+import { CarouselRightArrow, CarouselLeftArrow, ProductCard } from "components";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { CAROUSEL_RESPONSIVE } from "constants/shop";
@@ -20,17 +16,13 @@ const ProductCarousel = ({
   draggable = true,
   autoPlay = false,
   responsive = CAROUSEL_RESPONSIVE,
+  productUrl,
   styles,
 }) => {
   const router = useRouter();
   const { trackProductClicked } = useSegment();
 
   const { isMobile } = useResponsive();
-
-  const handleClick = (product) => {
-    trackProductClicked(product);
-    router.push(`/products/${product.handle}`);
-  };
 
   return (
     <Box sx={{ ...sx.root, ...styles }}>
@@ -53,13 +45,13 @@ const ProductCarousel = ({
         >
           {products.map((product) => (
             <Box sx={sx.item} key={product.id}>
-              <ProductCard product={product} handleClick={handleClick} />
+              <ProductCard product={product} productUrl={productUrl} />
             </Box>
           ))}
         </Carousel>
       ) : (
-        <Box sx={ sx.loading }>
-          <CircularProgress disableShrink />  
+        <Box sx={sx.loading}>
+          <CircularProgress disableShrink />
         </Box>
       )}
     </Box>
@@ -86,5 +78,5 @@ const sx = {
     justifyContent: "center",
     alignItems: "center",
     height: "300px",
-  }
+  },
 };

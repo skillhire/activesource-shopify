@@ -12,7 +12,7 @@ module.exports = {
       {
         source: "/search",
         destination: "/search/all",
-      },      
+      },
       {
         source: "/about-us",
         destination: "/pages/about-us",
@@ -40,6 +40,10 @@ module.exports = {
       {
         source: "/placement-guide",
         destination: "/docs/placement-guide",
+      },
+      { 
+        source: "/storefronts/:store/collections",
+        destination: "/storefronts/:store/collections/index",
       }
     ];
   },

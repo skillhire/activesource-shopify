@@ -8,11 +8,11 @@ const ColorOption = ({
   ...props
 }) => {
   return (
-    <IconButton 
+    <IconButton
       sx={{
         ...sx.button,
         ...(activeColor?.name === color.name && sx.buttonSelected),
-      }} 
+      }}
       onClick={() => handleClick(color)}
     >
       <Box
@@ -52,7 +52,7 @@ const sx = {
     height: "24px",
     width: "24px",
     borderRadius: "100%",
-    border: '1px solid',
-    borderColor: 'grey.500'
+    border: "1px solid",
+    borderColor: "grey.500",
   },
 };

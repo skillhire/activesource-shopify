@@ -15,6 +15,12 @@ export const CLOUDINARY_CLOUD_NAME =
 export const CLOUDINARY_UPLOAD_PRESET =
   process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
 export const CLOUDINARY_API_KEY = process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY;
+export const SENDGRID_API_KEY = process.env.NEXT_PUBLIC_SENDGRID_API_KEY;
+export const SENDGRID_FROM_EMAIL =
+  process.env.NEXT_PUBLIC_SENDGRID_FROM_EMAIL ||
+  "info@em9212.activesourcelab.com";
+export const SENDGRID_TO_EMAIL =
+  process.env.NEXT_PUBLIC_SENDGRID_TO_EMAIL || "test_test@activesource.com";
 
 // Search defaults
 export const PER_PAGE = 50;
@@ -25,8 +31,8 @@ export const KAVIYO_LIST_ID = process.env.NEXT_PUBLIC_KAVIYO_LIST_ID;
 export const KLAVIYO_API_KEY = process.env.NEXT_PUBLIC_KLAVIYO_API_KEY;
 export const SEGMENT_WRITE_KEY = process.env.NEXT_PUBLIC_SEGMENT_WRITE_KEY;
 
-export const IMAGE_WIDTH = 1600
-export const IMAGE_HEIGHT = 1600
+export const IMAGE_WIDTH = 1600;
+export const IMAGE_HEIGHT = 1600;
 
 export const PIXELS_PER_INCH = 300;
 

@@ -25,6 +25,16 @@ export const ProductFragment = gql`
         { namespace: "custom", key: "front_placement" }
         { namespace: "custom", key: "back_placement" }
         { namespace: "custom", key: "recommended_products" }
+        { namespace: "custom", key: "product_type" }
+        { namespace: "custom", key: "warehouse" }
+        { namespace: "custom", key: "is_enterprise" }
+        { namespace: "custom", key: "enterprise_product_description" }
+        { namespace: "custom", key: "disable_placement" }
+        { namespace: "custom", key: "disable_logo" }
+        { namespace: "custom", key: "disable_bulk_order" }
+        { namespace: "custom", key: "min_quantity" }
+        { namespace: "custom", key: "brand" }
+        { namespace: "custom", key: "style" }
       ]
     ) {
       id
@@ -36,7 +46,7 @@ export const ProductFragment = gql`
         ... on MediaImage {
           image {
             id
-            altText            
+            altText
             url
           }
         }
@@ -79,6 +89,14 @@ export const ProductFragment = gql`
                   { namespace: "custom", key: "front_placement" }
                   { namespace: "custom", key: "back_placement" }
                   { namespace: "custom", key: "recommended_products" }
+                  { namespace: "custom", key: "is_enterprise" }
+                  { namespace: "custom", key: "enterprise_product_description" }
+                  { namespace: "custom", key: "disable_placements" }
+                  { namespace: "custom", key: "disable_logo" }
+                  { namespace: "custom", key: "disable_bulk_order" }
+                  { namespace: "custom", key: "min_quantity" }
+                  { namespace: "custom", key: "brand" }
+                  { namespace: "custom", key: "style" }
                 ]
               ) {
                 id
@@ -119,7 +137,7 @@ export const ProductFragment = gql`
                     title
                     image {
                       id
-                      url 
+                      url
                       altText
                     }
                     availableForSale

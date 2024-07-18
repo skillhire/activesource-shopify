@@ -96,23 +96,25 @@ const CartLineItem = ({ lineItem }) => {
 
   useEffect(() => {
     if (customAttributes) {
-      setFrontPreview(
-        customAttributes.find((attribute) => attribute.key === "_print_preview_1")?.value
-      );
-      setBackPreview(
-        customAttributes.find((attribute) => attribute.key === "_print_preview_2")?.value
-      );
+      const frontPreviewUrl = customAttributes.find(
+        (attribute) => attribute.key === "_print_preview_1"
+      )?.value
+
+      const backPreviewUrl = customAttributes.find(
+        (attribute) => attribute.key === "_print_preview_2"
+      )?.value
+
+      setFrontPreview(frontPreviewUrl)
+      setBackPreview(backPreviewUrl)
     }
   }, [customAttributes]);
 
   useEffect(() => {
     if (selectedOptions) {
-      const _color = selectedOptions.find(
-        (option) => option.name == "Color"
-      );
+      const _color = selectedOptions.find((option) => option.name == "Color");
       setColor(_color?.value);
     }
-  }, [selectedOptions])
+  }, [selectedOptions]);
 
   return (
     <Box sx={sx.root}>
@@ -122,7 +124,7 @@ const CartLineItem = ({ lineItem }) => {
           ...(loading && sx.loading),
         }}
         secondaryAction={
-          <Box sx={ sx.closeButton }>
+          <Box sx={sx.closeButton}>
             <IconButton>
               <Close onClick={handleRemoveLineItem} sx={sx.removeIcon} />
             </IconButton>
@@ -131,63 +133,68 @@ const CartLineItem = ({ lineItem }) => {
       >
         <ListItemButton sx={sx.listItemButton} disableRipple disableGutters>
           <ListItemIcon sx={sx.thumbnail}>
-            { frontPreview && (
-              <Image 
-                src={frontPreview} 
-                height={120} 
-                width={120} 
-                style={styles.image} 
+            {frontPreview && (
+              <Image
+                src={frontPreview}
+                height={120}
+                width={120}
+                alt={product?.title}
+                style={styles.image}
               />
             )}
           </ListItemIcon>
           <ListItemText
             sx={sx.text}
-            primary={              
-              <Typography
-                variant="subtitle2"
-                color="textPrimary"
-                sx={sx.line}
-              >
+            primary={
+              <Typography variant="subtitle2" color="textPrimary" sx={sx.line}>
                 {product?.title}
               </Typography>
             }
             secondary={
               <Stack direction="column">
-              {color && (
-                <Typography variant="overline" color="text">
-                  Color: {color}
-                </Typography>
-              )}
-              {size && (
-                <Typography variant="overline" color="text">
-                  Size: {size}
-                </Typography>
-              )}
-              <Stack direction="row" spacing={1} sx={sx.quantity}>
-                <QuantitySelector
-                  small
-                  quantity={quantity}
-                  handleChange={handleQuantityChange}
-                />
-                <Typography variant="button" color="textPrimary" sx={sx.line}>
-                  <Box>
-                    {amount == 0 ? "FREE" : formatCurrency(amount * quantity)}
-                  </Box>
-                </Typography>
+                {color && (
+                  <Typography variant="overline" color="text">
+                    Color: {color}
+                  </Typography>
+                )}
+                {size && (
+                  <Typography variant="overline" color="text">
+                    Size: {size}
+                  </Typography>
+                )}
+                <Stack direction="row" spacing={1} sx={sx.quantity}>
+                  <QuantitySelector
+                    small
+                    quantity={quantity}
+                    handleChange={handleQuantityChange}
+                  />
+                  <Typography variant="button" color="textPrimary" sx={sx.line}>
+                    <Box>
+                      {amount == 0 ? "FREE" : formatCurrency(amount * quantity)}
+                    </Box>
+                  </Typography>
+                </Stack>
               </Stack>
-            </Stack>
             }
           />
         </ListItemButton>
       </ListItem>
       <Stack direction="row" spacing={1}>
-        { frontPreview && (
-          <Link variant="link" onClick={() => handleClick(frontPreview)} sx={sx.link}>
+        {frontPreview && (
+          <Link
+            variant="link"
+            onClick={() => handleClick(frontPreview)}
+            sx={sx.link}
+          >
             <Typography variant="overline">Front</Typography>
           </Link>
         )}
-        { backPreview && (
-          <Link variant="link" onClick={() => handleClick(backPreview)} sx={sx.link}>
+        {backPreview && (
+          <Link
+            variant="link"
+            onClick={() => handleClick(backPreview)}
+            sx={sx.link}
+          >
             <Typography variant="overline">Back</Typography>
           </Link>
         )}
@@ -200,14 +207,14 @@ export default CartLineItem;
 
 const sx = {
   root: { p: 0 },
-  listItem: {    
+  listItem: {
     "&:not(:last-of-type)": {
       borderBottom: "1px solid",
       borderColor: "common.border",
     },
-    '.MuiListItemSecondaryAction-root': {
-      top: '20%'
-    }
+    ".MuiListItemSecondaryAction-root": {
+      top: "20%",
+    },
   },
   loading: { opacity: 0.6 },
   listItemButton: {

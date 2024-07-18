@@ -4,7 +4,7 @@ import { Badge, IconButton } from "@mui/material";
 import { ShopContext } from "context";
 import { ShoppingCart } from "lucide-react";
 
-const CartButton = ({ styles, ...props }) => {
+const CartButton = ({ color = "white", styles, ...props }) => {
   const { lineItemTotal, setMenuOpen, toggleCart } = useContext(ShopContext);
 
   const handleCartClick = () => {
@@ -19,8 +19,8 @@ const CartButton = ({ styles, ...props }) => {
       sx={{ ...sx.root, ...styles }}
       size="large"
     >
-      <Badge badgeContent={lineItemTotal} color="secondary">
-        <ShoppingCart height={24} width={24} color="white" />
+      <Badge badgeContent={lineItemTotal} color="primary">
+        <ShoppingCart height={24} width={24} color={color} />
       </Badge>
     </IconButton>
   );

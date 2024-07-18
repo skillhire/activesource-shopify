@@ -34,13 +34,22 @@ const Cart = ({ styles }) => {
         <Box sx={sx.stickyPanel}>
           <CartLineItemTotals />
           <CheckoutButton />
-          <Box sx={ sx.disclaimers }>
-          <Typography variant="caption" sx={sx.note}>
-            Taxes and shipping calculated at checkout
-          </Typography>
-          <Typography variant="caption" sx={sx.note}>
-            By proceeding to checkout, I acknowledge and agree to Active Source Lab's <Link href="/terms-of-service" target="_blank">Terms of Service</Link> and <Link href="/privacy-policy" target="_blank">Privacy Policy</Link>.
-          </Typography>
+          <Box sx={sx.disclaimers}>
+            <Typography variant="caption" sx={sx.note}>
+              Taxes and shipping calculated at checkout
+            </Typography>
+            <Typography variant="caption" sx={sx.note}>
+              By proceeding to checkout, I acknowledge and agree to Active
+              Source Lab's{" "}
+              <Link href="/terms-of-service" target="_blank">
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link href="/privacy-policy" target="_blank">
+                Privacy Policy
+              </Link>
+              .
+            </Typography>
           </Box>
         </Box>
       </Box>
@@ -104,10 +113,10 @@ const sx = {
   },
   disclaimers: {
     my: 2,
-    gap: '5px',
+    gap: "5px",
     width: "100%",
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
