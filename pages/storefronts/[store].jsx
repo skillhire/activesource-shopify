@@ -10,7 +10,7 @@ import {
 } from "components";
 import { Stack } from "@mui/material";
 import { useRouter } from "next/router";
-import { isCustomDomain } from "utils";
+import { buildStorePath } from "utils";
 
 const Storefront = (props) => {
   const router = useRouter();
@@ -19,13 +19,8 @@ const Storefront = (props) => {
   const { photos, storefront, fetchStorefront } = useStorefronts();
 
   const handleClick = () => {
-    // Test if the domain host is not activesourcelab.com
-    if(isCustomDomain()){
-      router.push(`/collections/${storefront?.collection?.handle}`);
-    }else{
-      router.push(`/storefronts/${store}/collections/${storefront?.collection?.handle}`);
-    }
-    
+    let url = `/collections/${storefront?.collection?.handle}`
+    router.push(buildStorePath(store, url));    
   }
 
   useEffect(() => {

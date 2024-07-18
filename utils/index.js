@@ -175,5 +175,13 @@ export function dataURLtoFile(dataurl, filename) {
 
 
 export const isCustomDomain = () => {
-  return window.location.host !== "activesourcelab.com";
+  return ![
+    "activesourcelab.com", 
+    "staging.activesourcelab.com", 
+    "localhost:3000"
+  ].includes(window.location.host);
+}
+
+export const buildStorePath = (store, path) => {
+  return isCustomDomain() ? path : `/storefronts/${store}${path}`;
 }

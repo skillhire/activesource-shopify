@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Button, Box, Typography } from "@mui/material";
+import { Stack, Container, Button, Box, Typography } from "@mui/material";
 import Image from "next/image";
 
 const StorefrontCover = (props) => {  
@@ -34,17 +34,16 @@ const StorefrontCover = (props) => {
         </Box>
         </Stack>
       <Box
-        sx={{
-          ...sx.imageContainer,
-          width: direction == "row" ? 520 : "100%",
-        }}
+        sx={ sx.imageContainer }
       >
         <Image
-          src={storefront?.image}
-          height={direction == "row" ? 520 : 330}
-          width={direction == "row" ? 520 : 600}
+          src={storefront?.image}          
+          height={540}
+          width={900}          
+          layout="responsive"
           style={{
             width: "100%",
+            height: '100%',
             objectFit: "cover",
           }}
         />
@@ -69,8 +68,8 @@ const sx = {
   },
   description: {},
   imageContainer: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: 540,
     borderRadius: 2,        
     overflow: "hidden",
   },  

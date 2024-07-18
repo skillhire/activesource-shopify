@@ -6,11 +6,16 @@ import StorefrontDesktopMenu from "./StorefrontDesktopMenu";
 const Header = ({ storefront, styles = {}, ...props }) => {
   const router = useRouter();
 
-  const { name, logo, imagesUrl } = storefront || {};
+  const { name, logo, url, imagesUrl } = storefront || {};
 
   const handleClick = (path) => {
     router.push(path);
   };
+
+  const handleLogoClick = () => {
+    router.push("/");
+  } 
+
 
   return (
     <AppBar color="inherit" sx={sx.appBar} elevation={0}>
@@ -19,6 +24,7 @@ const Header = ({ storefront, styles = {}, ...props }) => {
         logo={logo}
         imagesUrl={imagesUrl}
         handleClick={handleClick}
+        handleLogoClick={handleLogoClick}
       />
     </AppBar>
   );

@@ -1,9 +1,9 @@
 import React from "react";
-import { Link, Box, Typography, Hidden, Toolbar } from "@mui/material";
+import { Link, Button, Box, Typography, Hidden, Toolbar } from "@mui/material";
 import { Logo, CartButton, AuthIconButton } from "components";
 import Image from "next/image";
 
-const DesktopMenu = ({ name, logo, imagesUrl, handleClick, ...props }) => {
+const DesktopMenu = ({ name, logo, imagesUrl, handleClick, handleLogoClick, ...props }) => {
   return (
     <Toolbar sx={sx.toolbar}>
       <Hidden mdDown>
@@ -16,16 +16,22 @@ const DesktopMenu = ({ name, logo, imagesUrl, handleClick, ...props }) => {
                   width: 80,
                 }}
               >
-                <Image
-                  src={logo}
-                  layout="fill"
-                  alt="logo"
-                  style={{
-                    maxWidth: 300,
-                    width: '100%',
-                    objectFit: "contain",
-                  }}
-                />
+                <Button 
+                  disableRipple 
+                  sx={sx.logoButton} 
+                  onClick={handleLogoClick}
+                >
+                  <Image
+                    src={logo}
+                    layout="fill"
+                    alt="logo"
+                    style={{
+                      maxWidth: 300,
+                      width: '100%',
+                      objectFit: "contain",
+                    }}
+                  />
+                </Button>
               </Box>
             ) : (
               <Typography
@@ -106,4 +112,11 @@ const sx = {
     },
     bgcolor: "transparent !important",
   },
+  logoButton: {    
+    height: 60,
+    minWidth: 260,    
+    '&:hover': {
+      backgroundColor: 'transparent',
+    }
+  }
 };

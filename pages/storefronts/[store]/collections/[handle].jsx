@@ -11,7 +11,7 @@ import {
 } from "components";
 import { Box, Grid, CircularProgress, Button, Stack } from "@mui/material";
 import { useRouter } from "next/router";
-import { isCustomDomain } from "utils";
+import { buildStorePath } from "utils";
 
 const StorefrontShopAll = (props) => {
   const router = useRouter();
@@ -51,7 +51,7 @@ const StorefrontShopAll = (props) => {
     if(storefront?.collections?.length > 0) {            
       setMenuItems(storefront?.collections?.map((collection) => ({
         label: collection.title,
-        value: `/storefronts/${store}/collections/${collection.handle}`,
+        value: buildStorePath(store, `collections/${collection.handle}`),
       })));
     }
   }, [storefront]);
@@ -72,16 +72,13 @@ const StorefrontShopAll = (props) => {
       <Box sx={sx.searchContainer}>
         <Grid
           container
-          rowSpacing={{ xs: 3, sm: 3, md: 7 }}
-          columnSpacing={{ xs: 3, sm: 3, md: 5 }}
+          spacing={2}
         >
           {products?.map((product, index) => (
             <Grid item xs={6} sm={6} md={4} lg={4} key={index}>
               <ProductCard
                 product={product}                
-                productUrl={ 
-                  isCustomDomain() ? `/products` : `/storefronts/${store}/products`
-                  }
+                productUrl={ buildStorePath(store, `/products`)}
               />
             </Grid>
           ))}
