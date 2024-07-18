@@ -177,6 +177,7 @@ export function dataURLtoFile(dataurl, filename) {
 export const isCustomDomain = () => {
   return ![
     "activesourcelab.com", 
+    "www.activesourcelab.com",
     "staging.activesourcelab.com", 
     "localhost:3000"
   ].includes(window.location.host);
