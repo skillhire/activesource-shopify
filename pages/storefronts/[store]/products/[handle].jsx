@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { StorefrontLayout, PDP } from "components";
 import { useProducts, useStorefronts } from "hooks";
+import { isCustomDomain } from "utils";
 
 const Product = () => {
   const router = useRouter();
@@ -33,7 +34,9 @@ const Product = () => {
         images={images}
         product={product}
         recommendedProducts={recommendedProducts}
-        productUrl={`/products`}
+        productUrl={
+          isCustomDomain() ?  `/products` :  `/storefronts/${store}/products`
+        }
         storefrontImagesUrl={ storefront?.imagesUrl }
       />
     </StorefrontLayout>

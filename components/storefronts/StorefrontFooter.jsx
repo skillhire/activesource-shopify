@@ -22,7 +22,7 @@ const StorefrontFooter = ({ name }) => {
           </Stack>
           <Stack direction="row" spacing={2} sx={sx.column2}>
             <Box sx={ sx.logo }>
-              <Link href="/">
+              <Link href="https://www.activesourcelab.com">
                 <Image 
                   src={ LOGO }
                   width={240}

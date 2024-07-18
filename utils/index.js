@@ -172,3 +172,8 @@ export function dataURLtoFile(dataurl, filename) {
   //let url = URL.createObjectURL(file)
   return file;
 }
+
+
+export const isCustomDomain = () => {
+  return window.location.host !== "activesourcelab.com";
+}

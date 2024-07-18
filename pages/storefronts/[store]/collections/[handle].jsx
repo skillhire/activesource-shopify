@@ -11,6 +11,7 @@ import {
 } from "components";
 import { Box, Grid, CircularProgress, Button, Stack } from "@mui/material";
 import { useRouter } from "next/router";
+import { isCustomDomain } from "utils";
 
 const StorefrontShopAll = (props) => {
   const router = useRouter();
@@ -19,7 +20,6 @@ const StorefrontShopAll = (props) => {
 
   const { photos, storefront, fetchStorefront } = useStorefronts();
 
-  const [currentCollection, setCurrentCollection] = useState(null);
   const [menuItems, setMenuItems] = useState([]);
   
   const {
@@ -79,7 +79,9 @@ const StorefrontShopAll = (props) => {
             <Grid item xs={6} sm={6} md={4} lg={4} key={index}>
               <ProductCard
                 product={product}                
-                productUrl={`/products`}
+                productUrl={ 
+                  isCustomDomain() ? `/products` : `/storefronts/${store}/products`
+                  }
               />
             </Grid>
           ))}
