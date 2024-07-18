@@ -18,7 +18,7 @@ const Storefront = (props) => {
   const { photos, storefront, fetchStorefront } = useStorefronts();
 
   const handleClick = () => {
-    router.push(`/storefronts/${store}/collections/${storefront?.collection?.handle}`);
+    router.push(`/collections/${storefront?.collection?.handle}`);
   }
 
   useEffect(() => {
