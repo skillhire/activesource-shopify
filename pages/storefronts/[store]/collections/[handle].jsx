@@ -21,10 +21,6 @@ const StorefrontShopAll = (props) => {
 
   const [currentCollection, setCurrentCollection] = useState(null);
   const [menuItems, setMenuItems] = useState([]);
-
-  const handleProductClick = (product) => {
-    router.push(`/storefronts/${store}/products/${product?.handle}`);  
-  }
   
   const {
     loading,
@@ -83,7 +79,7 @@ const StorefrontShopAll = (props) => {
             <Grid item xs={6} sm={6} md={4} lg={4} key={index}>
               <ProductCard
                 product={product}                
-                productUrl={`/storefronts/${store}/products`}
+                productUrl={`/products`}
               />
             </Grid>
           ))}

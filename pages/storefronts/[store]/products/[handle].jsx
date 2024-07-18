@@ -33,7 +33,7 @@ const Product = () => {
         images={images}
         product={product}
         recommendedProducts={recommendedProducts}
-        productUrl={`/storefronts/${store}/products`}
+        productUrl={`/products`}
         storefrontImagesUrl={ storefront?.imagesUrl }
       />
     </StorefrontLayout>
