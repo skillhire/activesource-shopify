@@ -12,16 +12,19 @@ const DesktopMenu = ({ name, logo, imagesUrl, handleClick, ...props }) => {
             {logo ? (
               <Box
                 sx={{
-                  height: 30,
+                  height: 60,
                   width: 80,
                 }}
               >
                 <Image
                   src={logo}
-                  height={50}
-                  width={120}
-                  layout="responsive"
+                  layout="fill"
                   alt="logo"
+                  style={{
+                    maxWidth: 300,
+                    width: '100%',
+                    objectFit: "contain",
+                  }}
                 />
               </Box>
             ) : (
