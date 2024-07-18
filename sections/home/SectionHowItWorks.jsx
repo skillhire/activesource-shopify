@@ -186,6 +186,7 @@ const sx = {
     justifyContent: "center",
   },
   button: {
+    color: 'common.white',
     width: 220,
     height: 64,
     fontSize: 20,

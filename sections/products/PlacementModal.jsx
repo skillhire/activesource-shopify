@@ -17,7 +17,7 @@ const PlacementModal = ({
       title={`Select ${frontOrBack} placement`}
       open={open}
       handleClose={handleClose}
-      maxWidth="md"
+      maxWidth="md"      
     >
       <Box sx={sx.content}>
         <Grid container spacing={0.5}>
@@ -90,6 +90,10 @@ const sx = {
     },
   },
   content: {
+    minWidth: {
+      sm: '760px',
+      xs: '100%'
+    },   
     p: {
       sm: 2,
       xs: 0,

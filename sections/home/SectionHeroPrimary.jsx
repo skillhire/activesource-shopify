@@ -94,6 +94,7 @@ const sx = {
     height: "100%",
   },
   button: {
+    color: 'common.white',
     width: {
       sm: "auto",
       xs: "100%",

@@ -7,7 +7,7 @@ export default {
     main: "#8044FD",
     dark: "#9C6CFF",
     light: "#C6AAFF",
-    contrastText: "#FFFFFF",
+    contrastText: "#2E2E2E",
   },
   tertiary: {
     main: "#E7DBFF",
