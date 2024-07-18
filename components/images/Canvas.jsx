@@ -155,7 +155,6 @@ const Canvas = ({ enableZoom = false, ...props }) => {
       const canvasWidth = parseFloat(placement.canvasWidth) * PIXELS_PER_INCH;
       const canvasHeight = parseFloat(placement.canvasHeight) * PIXELS_PER_INCH;
       const canvasMargin = parseFloat(placement.canvasMargin) * PIXELS_PER_INCH;
-      console.log('canvasMargin', canvasMargin);
       const printWidth = placement.widthInches * PIXELS_PER_INCH;
       const printHeight = placement.heightInches * PIXELS_PER_INCH;
 
