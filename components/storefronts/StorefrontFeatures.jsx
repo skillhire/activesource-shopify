@@ -92,11 +92,11 @@ const sx = {
   },
   title: {
     textAlign: "center",
-    maxWidth: 960
+    maxWidth: 860
   },
   subtitle: {
     textAlign: "center",
-    maxWidth: 960
+    maxWidth: 860
   },
   description: {},
   imageContainer: {

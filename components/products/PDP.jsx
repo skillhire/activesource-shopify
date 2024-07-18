@@ -29,8 +29,10 @@ const Product = ({
   ...props
 }) => {
   const {
+    disableBulkOrder,
     setDisableLogo,
     setDisablePlacement,
+    setDisableBulkOrder,
     setPreviewThumbnail,
     activeImage,
     setActiveImage,
@@ -349,13 +351,15 @@ const Product = ({
 
   useEffect(() => {
     if (product?.handle) {
-      let _disableLogo = getMetaValue(product, "disable_logo") == "true";
-      let _isEnterprise = getMetaValue(product, "is_enterprise") == "true";
-      let _disablePlacement = getMetaValue(product, "disable_placement") == "true";
-      let _minQuantity = parseInt(getMetaValue(product, "min_quantity") || 0);
+      const _disableLogo = getMetaValue(product, "disable_logo") == "true";
+      const _isEnterprise = getMetaValue(product, "is_enterprise") == "true";
+      const _disablePlacement = getMetaValue(product, "disable_placement") == "true";
+      const _disableBulkOrder = getMetaValue(product, "disable_bulk_order") == "true";
+      const _minQuantity = parseInt(getMetaValue(product, "min_quantity") || 0);
       setDisableLogo(_disableLogo);
       setIsEnterprise(_isEnterprise);
       setDisablePlacement(_disablePlacement);
+      setDisableBulkOrder(_disableBulkOrder);
       setMinQuantity(_minQuantity);
     }
   }, [product?.handle]);
@@ -433,9 +437,11 @@ const Product = ({
                     addToCartDisabled={addToCartDisabled}
                     minQuantity={minQuantity}
                   />
-                  <ProductEnquireBulkDiscount
-                    handleButtonClick={() => handleOpenContactModal("Enquire for Bulk Discount")}
-                  />
+                  { !disableBulkOrder && (
+                    <ProductEnquireBulkDiscount
+                      handleButtonClick={() => handleOpenContactModal("Enquire for Bulk Discount")}
+                    />
+                  )}
                 </>
               )}
               {isEnterprise && (

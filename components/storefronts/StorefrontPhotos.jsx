@@ -12,7 +12,8 @@ const Photo = ({ photo, store }) => {
   }
 
   return(
-    <Box 
+    <Stack 
+      spacing={0.5} 
       sx={sx.photo}
     >
       <CardActionArea 
@@ -33,18 +34,18 @@ const Photo = ({ photo, store }) => {
       <Stack direction="row" spacing={1}>
         <Link 
           href={photo?.url}
-          variant="body2"
+          variant="overline"
         >
           Download Artwork 
         </Link>
         <Link 
-          variant="body2"
+          variant="overline"
           href={`/storefronts/${store}/products/${photo?.product?.handle}`}
         >
           View Product 
         </Link>
       </Stack>
-    </Box>
+    </Stack>
   )
 }
 

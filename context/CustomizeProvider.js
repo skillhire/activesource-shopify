@@ -8,6 +8,7 @@ const CustomizeProvider = ({ children, ...rest }) => {
 
   const [disableLogo, setDisableLogo] = useState(false);
   const [disablePlacement, setDisablePlacement] = useState(false);
+  const [disableBulkOrder, setDisableBulkOrder] = useState(false);
 
   const [activePlacements, setActivePlacements] = useState([]);
   const [activePlacement, setActivePlacement] = useState({
@@ -71,6 +72,8 @@ const CustomizeProvider = ({ children, ...rest }) => {
     setDisableLogo,
     disablePlacement,
     setDisablePlacement,
+    disableBulkOrder,
+    setDisableBulkOrder,
     activeColor,
     setActiveColor,
     activeImage,

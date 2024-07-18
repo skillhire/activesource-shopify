@@ -21,6 +21,7 @@ const ProductDetails = ({
   const [price, setPrice] = useState();
   const [enterpriseProductDescription, setEnterpriseProductDescription] = useState();
   const [isEnterprise, setIsEnterprise] = useState();
+  const [brand, setBrand] = useState();
   const [colors, setColors] = useState([]);
 
   useEffect(() => {
@@ -36,8 +37,10 @@ const ProductDetails = ({
       let formattedColors = getProductColors(product);
       let _isEnterprise = getMetaValue(product, "is_enterprise") == "true";
       let _enterpriseProductDescription = getMetaValue(product, "enterprise_product_description");
+      let _brand = getMetaValue(product, "brand");
       setColors(formattedColors);
       setIsEnterprise(_isEnterprise);
+      setBrand(_brand);
       setEnterpriseProductDescription(_enterpriseProductDescription);
     }
   }, [product]);
@@ -52,6 +55,11 @@ const ProductDetails = ({
             </Box>
           )}
           <Typography variant="h4">{product?.title}</Typography>
+          { brand && (
+            <Typography variant="button">
+              Brand: { brand }
+            </Typography>
+          )}
           <Typography variant="button">
             {
               isEnterprise ? (

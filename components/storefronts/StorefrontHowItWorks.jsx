@@ -98,14 +98,18 @@ const sx = {
     borderRadius: 2,
     overflow: "hidden",
     maxHeight: {
-      md: "620px",      
+      md: "660px",      
       xs: "auto",
     }
 
   },
   leftPanel: {
-    px: 4,
-    py: 5,
+    p: 5,
+    width: '100%',
+    maxWidth: {
+      md: '50%',
+      xs: '100%',
+    }
   },
   rightPanel: {
     display: 'flex',

@@ -45,7 +45,9 @@ const ProductCard = ({ product, productUrl = "/products" }) => {
             <Image
               src={image}
               alt={product.title}
-              layout="fill"
+              layout="responsive"
+              height={240} 
+              width={240}              
               style={{
                 objectFit: "contain",
               }}
@@ -105,7 +107,7 @@ const sx = {
     backgroundColor: "background.paper",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "space-between",    
   },
   title: {
     minHeight: "60px",
@@ -121,11 +123,13 @@ const sx = {
     },
   },
   contentActionArea: {
+    p: 0,
     cursor: "pointer",
     overflow: "hidden",
     borderRadius: 0,
-    height: {
-      sm: 260,
+    height: '100%',
+    minHeight: {
+      sm: 240,
       xs: 200,
     },
     ".MuiCardActionArea-focusHighlight": {
