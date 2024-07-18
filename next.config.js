@@ -44,6 +44,10 @@ module.exports = {
       { 
         source: "/storefronts/:store/collections",
         destination: "/storefronts/:store/collections/index",
+      },
+      { 
+        source: "/storefronts/:store/login",
+        destination: "/login"
       }
     ];
   },
