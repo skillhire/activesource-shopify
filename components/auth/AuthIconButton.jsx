@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { IconButton } from "@mui/material";
 import { useAuth } from "hooks";
 import { User } from "lucide-react";
-
 import { LOGIN_URL, ACCOUNT_SOURCE_URL } from "constants/navigation";
 
 const CartButton = (props) => {

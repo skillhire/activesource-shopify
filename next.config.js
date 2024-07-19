@@ -48,6 +48,22 @@ module.exports = {
       { 
         source: "/storefronts/:store/login",
         destination: "/login"
+      },
+      { 
+        source: "/storefronts/:store/signup",
+        destination: "/signup"
+      },
+      { 
+        source: "/storefronts/:store/account/me",
+        destination: "/account/me"
+      },
+      { 
+        source: "/storefronts/:store/terms-of-service",
+        destination: "/terms-of-service"
+      },
+      { 
+        source: "/storefronts/:store/privacy-policy",
+        destination: "/privacy-policy"
       }
     ];
   },

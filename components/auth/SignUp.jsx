@@ -76,6 +76,7 @@ export default SignUp;
 const sx = {
   button: {
     my: 2,
+    color: 'common.white'
   },
   progress: {
     color: "#fff",
