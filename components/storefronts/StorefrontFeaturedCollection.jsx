@@ -5,6 +5,7 @@ import {
 import { useRouter } from "next/router";
 import { Button, Box } from "@mui/material";
 import { Typography } from "@mui/material";
+import { buildStorePath } from "utils";
 
 const StorefrontFeaturedCollection = (props) => {
   
@@ -22,7 +23,7 @@ const StorefrontFeaturedCollection = (props) => {
           <ProductCollection
             variant={"grid"}
             handle={storefront?.collection.handle}
-            productUrl={`/storefronts/${store}/products`}
+            productUrl={buildStorePath(store, '/products')}
             perPage={8}
           />
           <Box 
