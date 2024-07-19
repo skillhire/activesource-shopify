@@ -69,7 +69,6 @@ const sx = {
   description: {},
   imageContainer: {
     width: '100%',
-    height: 540,
     borderRadius: 2,        
     overflow: "hidden",
   },  
