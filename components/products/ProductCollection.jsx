@@ -9,6 +9,7 @@ const ProductCollection = ({
   variant = "carousel",
   styles,
   productUrl,
+  xs=12
 }) => {
   const { loading, error, collection, fetchCollection, products } =
     useCollections();
@@ -34,7 +35,7 @@ const ProductCollection = ({
       <Box sx={sx.gridContainer}>
         {variant == "grid" && (
           <ProductGrid
-            xs={12}
+            xs={xs}
             rowSpacing={4}
             title={collection?.title}
             loading={loading}

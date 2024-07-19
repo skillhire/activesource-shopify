@@ -21,6 +21,7 @@ const StorefrontFeaturedCollection = (props) => {
             Featured Products 
           </Typography>
           <ProductCollection
+            xs={6}
             variant={"grid"}
             handle={storefront?.collection.handle}
             productUrl={buildStorePath(store, '/products')}

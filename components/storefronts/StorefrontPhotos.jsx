@@ -76,7 +76,7 @@ const StorefrontFeaturedCollection = (props) => {
           </Typography> 
           <Grid container spacing={0}>            
             { activePhotos?.map((photo, index) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+              <Grid item xs={6} sm={6} md={4} lg={3} key={index}>
                 <Photo               
                   photo={photo}
                   store={store}
@@ -117,12 +117,12 @@ const sx = {
   title: {
     textAlign: 'center'
   },
-  photo: {    
+  photo: {   
+    p: 2, 
     width: '100%',
     maxWidth: {
       sm: 265,    
       xs: "100%"
     },
-    mb: 2
   }
 };
