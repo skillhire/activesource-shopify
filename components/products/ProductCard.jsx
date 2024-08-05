@@ -67,6 +67,7 @@ const ProductCard = ({ product, productUrl = "/products" }) => {
           {colors?.map((color, i) => (
             <ColorOption
               key={i}
+              disableClick
               color={color}
               size={12}
               handleClick={handleColorClick}

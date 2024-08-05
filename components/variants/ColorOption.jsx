@@ -1,32 +1,44 @@
 import { IconButton, Box } from "@mui/material";
 
+const Color = ({ color, activeColor, size = 24 }) => {
+  return(
+    <Box
+      sx={{
+        ...sx.color,
+        ...(activeColor?.name === color.name && sx.selected),
+        height: `${size}px`,
+        width: `${size}px`,
+        bgcolor: color.hex,
+      }}
+      value={color.name}
+    />
+  )
+}
+
 const ColorOption = ({
   color,
   activeColor,
   handleClick,
   size = 24,
+  disableClick = false,
   ...props
 }) => {
   return (
-    <IconButton
-      sx={{
-        ...sx.button,
-        ...(activeColor?.name === color.name && sx.buttonSelected),
-      }}
-      onClick={() => handleClick(color)}
-    >
-      <Box
+    disableClick ? 
+      <Color size={size} color={color} /> : 
+      <IconButton
         sx={{
-          ...sx.color,
-          ...(activeColor?.name === color.name && sx.selected),
-          height: `${size}px`,
-          width: `${size}px`,
-          bgcolor: color.hex,
+          ...sx.button,
+          ...(activeColor?.name === color.name && sx.buttonSelected),
         }}
-        key={color.name}
-        value={color.name}
-      />
-    </IconButton>
+        onClick={() => handleClick(color)}
+      >
+        <Color 
+          size={size}
+          color={color}
+          activeColor={activeColor}
+        />
+      </IconButton>
   );
 };
 

@@ -64,7 +64,7 @@ const ProductDetails = ({
             {
               isEnterprise ? (
                 <>
-                  From {' '}
+                  Starting from {' '}
                   {formatCurrency(product.priceRange.minVariantPrice.amount)}
                 </>
               ) : (
@@ -75,7 +75,7 @@ const ProductDetails = ({
               )
             }
           </Typography>
-          {enterpriseProductDescription && <Typography variant="body2">{enterpriseProductDescription}</Typography>}
+          {enterpriseProductDescription && <Typography variant="body2" sx={ sx.text }>{enterpriseProductDescription}</Typography>}
           {!isEnterprise && (
             <>
               <CustomColorSelect
@@ -98,3 +98,9 @@ const ProductDetails = ({
 };
 
 export default ProductDetails;
+
+const sx = {
+  text: {
+    whiteSpace: "pre-wrap",
+  }
+}
