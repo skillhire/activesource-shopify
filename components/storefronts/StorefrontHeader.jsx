@@ -2,10 +2,10 @@ import React from "react";
 import { useRouter } from "next/router";
 import { AppBar } from "@mui/material";
 import StorefrontDesktopMenu from "./StorefrontDesktopMenu";
+import { buildStorePath } from "utils";
 
 const Header = ({ storefront, styles = {}, ...props }) => {
-  const router = useRouter();
-
+  const router = useRouter();  
   const { name, logo, url, imagesUrl } = storefront || {};
 
   const handleClick = (path) => {
@@ -16,6 +16,10 @@ const Header = ({ storefront, styles = {}, ...props }) => {
     router.push("/");
   } 
 
+  const shopAllUrl = () => {
+    let url = `/collections/${storefront?.collection?.handle}`
+    return buildStorePath(storefront?.handle, url)
+  }
 
   return (
     <AppBar color="inherit" sx={sx.appBar} elevation={0}>
@@ -23,6 +27,7 @@ const Header = ({ storefront, styles = {}, ...props }) => {
         name={name}
         logo={logo}
         imagesUrl={imagesUrl}
+        shopAllUrl={shopAllUrl()}
         handleClick={handleClick}
         handleLogoClick={handleLogoClick}
       />

@@ -66,12 +66,6 @@ const Product = ({
     setSelectedOptions
   });
 
-  useEffect(() => {
-    if(variant){
-      console.log("Variant", variant)
-    }
-  }, [variant]);
-
   const handleUpload = async (image, frontOrBack) => {
     // Store the original logo files
     if (frontOrBack == "front") {

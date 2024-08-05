@@ -22,7 +22,9 @@ const useStorefronts = () => {
 
   useEffect(() => {
     if (metaobject) {
+      console.log("METAOBJECT", metaobject);
       setStorefront({
+        handle: metaobject?.handle,
         name: getValue(metaobject, "name"),
         title: getValue(metaobject, "title"),
         description: getValue(metaobject, "description"),

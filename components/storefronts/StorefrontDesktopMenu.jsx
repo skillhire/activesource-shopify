@@ -1,9 +1,9 @@
 import React from "react";
-import { Link, Button, Box, Typography, Hidden, Toolbar } from "@mui/material";
-import { Logo, CartButton, AuthIconButton } from "components";
+import { Link, Button, Box, Typography, Hidden, Stack, Toolbar } from "@mui/material";
+import { CartButton, AuthIconButton } from "components";
 import Image from "next/image";
 
-const DesktopMenu = ({ name, logo, imagesUrl, handleClick, handleLogoClick, ...props }) => {
+const StorefrontDesktopMenu = ({ name, logo, imagesUrl, shopAllUrl, handleClick, handleLogoClick, ...props }) => {
   return (
     <Toolbar sx={sx.toolbar}>
       <Hidden mdDown>
@@ -44,11 +44,16 @@ const DesktopMenu = ({ name, logo, imagesUrl, handleClick, handleLogoClick, ...p
             )}
           </Box>
           <Box sx={sx.item}>
-            { imagesUrl && (
-              <Link variant="body2" color='text.primary' href={imagesUrl} target='_blank'>
-                Image Library 
+            <Stack direction="row" spacing={1}>
+              <Link variant="body2" color='text.primary' href={shopAllUrl} target='_blank'>
+                Shop All 
               </Link>
-            )}
+              { imagesUrl && (
+                <Link variant="body2" color='text.primary' href={imagesUrl} target='_blank'>
+                  Image Library 
+                </Link>
+              )}
+            </Stack>
             <AuthIconButton color="#222222" />
             <CartButton color="#222222" />
           </Box>
@@ -88,7 +93,7 @@ const DesktopMenu = ({ name, logo, imagesUrl, handleClick, handleLogoClick, ...p
   );
 };
 
-export default DesktopMenu;
+export default StorefrontDesktopMenu;
 
 const sx = {
   root: {
