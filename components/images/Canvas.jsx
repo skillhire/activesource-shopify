@@ -76,22 +76,6 @@ const Canvas = ({ enableZoom = false, ...props }) => {
     });
   };
 
-  const resizeCloudinaryImageForStakes = (image, placement) => {
-    const imageWidth = parseFloat(placement.canvasWidth) * PIXELS_PER_INCH;
-    // const imageHeight = parseFloat(placement.canvasHeight) * PIXELS_PER_INCH;
-
-    const width = parseInt((parseFloat(placement.width) / 100) * imageWidth);
-    const height = parseInt((parseFloat(placement.height) / 100) * imageWidth);
-
-    return cloudinaryResizeImage(image, { 
-      width, 
-      height, 
-      quality: 100, 
-      dpi: 300, 
-      rgb: true 
-    });
-  };
-
   const resizeShopifyImage = (
     image,
     height = IMAGE_HEIGHT,
@@ -167,7 +151,7 @@ const Canvas = ({ enableZoom = false, ...props }) => {
         const width = printWidth;
         const height = printHeight;
         const xPos = canvasMargin || 0;
-        const yPos = 0; // Place logo at the top of the canvas
+        const yPos = 0; // Always place logo at the top of the canvas
         ctx.drawImage(image, xPos, yPos, width, height);
         imageSrc = canvas.toDataURL("image/png");
         return resolve(imageSrc);
@@ -218,9 +202,8 @@ const Canvas = ({ enableZoom = false, ...props }) => {
         ? { print_url_1: printUrl, print_preview_1: previewUrl }
         : { print_url_2: printUrl, print_preview_2: previewUrl };
 
-      clearCanvas();
-      let logoSrcStakes = resizeCloudinaryImageForStakes(print_logo, print_placement);
-      let stakesPrintSrc = await renderCanvasImageForStakes(logoSrcStakes, print_placement);
+      clearCanvas();      
+      let stakesPrintSrc = await renderCanvasImageForStakes(printUrl, print_placement);
       let printUrlStakes = await handleUploadToCloudinary(stakesPrintSrc);
       const { canvasWidth, canvasHeight } = print_placement;
       printUrlStakes = resizePrintUrl(printUrlStakes, canvasWidth, canvasHeight);
