@@ -30,6 +30,26 @@ const DEFAULT_PLACEMENT = {
   printHeight: 15,
 };
 
+
+/* 
+  Placement data is stored in Shopify as a metaobject. 
+  We assume 300 DPI for print images.
+
+  Here are the definitions:
+
+  code - This is a simple unique identifier 
+  width - The width of the logo in percentage of the canvas width for the preview image only
+  height - The height of the logo in percentage of the canvas height for the preview image only
+  left - The left position of the logo in percentage of the canvas width for the preview image only
+  top - The top position of the logo in percentage of the canvas height for the preview image only
+
+  widthInches - The width of the print logo in inches for the print image. 
+  heightInches - The height of the print logo in inches for the print image. 
+  canvasWidth - The width of the canvas in inches for the print image. 
+  canvasHeight - The height of the canvas in inches for the print image.
+  canvasMargin - The left margin of the canvas in inches for the print image.    
+*/ 
+
 const CanvasImage = ({ src }) => (
   <NextImage
     height={1600}
