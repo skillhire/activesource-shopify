@@ -54,6 +54,14 @@ module.exports = {
         destination: "/signup"
       },
       { 
+        source: "/storefronts/:store/forgot-password",
+        destination: "/forgot-password"
+      },
+      { 
+        source: "/storefronts/:store/reset-password",
+        destination: "/reset-password"
+      },
+      { 
         source: "/storefronts/:store/account/me",
         destination: "/account/me"
       },
