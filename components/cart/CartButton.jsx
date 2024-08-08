@@ -17,7 +17,7 @@ const CartButton = ({ color = "white", styles, ...props }) => {
       color="primary"
       onClick={handleCartClick}
       sx={{ ...sx.root, ...styles }}
-      size="large"
+      size="medium"
     >
       <Badge badgeContent={lineItemTotal} color="primary">
         <ShoppingCart height={24} width={24} color={color} />

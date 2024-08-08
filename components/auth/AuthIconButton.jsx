@@ -20,7 +20,7 @@ const CartButton = (props) => {
       color="primary"
       onClick={handleUserClick}
       sx={sx.root}
-      size="large"
+      size="medium"
     >
       <User height={24} width={24} color={color} />
     </IconButton>
