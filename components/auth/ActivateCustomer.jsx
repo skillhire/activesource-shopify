@@ -77,6 +77,7 @@ const sx = {
   button: {
     my: 2,
     mt: 4,
+    color: 'common.white'
   },
   progress: {
     color: "#fff",
