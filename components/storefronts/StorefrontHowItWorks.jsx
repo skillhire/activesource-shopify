@@ -74,15 +74,17 @@ const StorefrontFeatures = (props) => {
         </Stack>        
       </Stack>
       <Box sx={ sx.rightPanel }>
-        <Image 
-          src={ storefront?.image2 }
-          height={620} 
-          width={620}
-          layout="responsive"
-          style={{
-            objectFit: 'cover'
-          }}
-        />
+        { storefront?.image2 && (
+          <Image 
+            src={ storefront?.image2 }
+            height={620} 
+            width={620}
+            layout="responsive"
+            style={{
+              objectFit: 'cover'
+            }}
+          />
+        )}
       </Box>
   </Stack>
   );

@@ -22,7 +22,6 @@ const useStorefronts = () => {
 
   useEffect(() => {
     if (metaobject) {
-      console.log("METAOBJECT", metaobject);
       setStorefront({
         handle: metaobject?.handle,
         name: getValue(metaobject, "name"),
@@ -42,13 +41,13 @@ const useStorefronts = () => {
       });
 
       let _photos = getReferences(metaobject, "photos");
-      setPhotos(_photos.map((photo) => {
+      setPhotos(_photos?.map((photo) => {
         return {
           image: getImage(photo, "image"),
           product: getReference(photo, "product"),
           url: getReference(photo, "url"),
         };
-      }))       
+      }) || [])       
     }
   }, [metaobject]);
 

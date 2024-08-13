@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Container, Button, Box, Typography } from "@mui/material";
+import { Stack, Button, Box, Typography } from "@mui/material";
 import Image from "next/image";
 
 const StorefrontCover = (props) => {  
@@ -8,10 +8,7 @@ const StorefrontCover = (props) => {
 
   return (
     <Stack
-      direction={{
-        sm: direction == "row" ? "row-reverse" : "column",
-        xs: "column",
-      }}
+      direction={'column'}
       spacing={6}
       sx={sx.header}
     >
@@ -33,21 +30,23 @@ const StorefrontCover = (props) => {
         </Button>
         </Box>
         </Stack>
-      <Box
-        sx={ sx.imageContainer }
-      >
-        <Image
-          src={storefront?.image}          
-          height={540}
-          width={900}          
-          layout="responsive"
-          style={{
-            width: "100%",
-            height: '100%',
-            objectFit: "cover",
-          }}
-        />
-      </Box>
+        { storefront?.image && (
+          <Box
+            sx={ sx.imageContainer }
+          >
+            <Image
+              src={storefront?.image}          
+              height={540}
+              width={900}          
+              layout="responsive"
+              style={{
+                width: "100%",
+                height: '100%',
+                objectFit: "cover",
+              }}
+            />
+          </Box>
+        )}
     </Stack>
   );
 };
