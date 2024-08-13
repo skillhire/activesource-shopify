@@ -1,5 +1,6 @@
 import { User, ShoppingCart, Send, MapPin } from "lucide-react";
 
+export const CLIENT_PROD_URL = "https://shop.activesourcelab.com";
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL;
 export const BITLY_ACCESS_TOKEN = process.env.NEXT_PUBLIC_BITLY_ACCESS_TOKEN;

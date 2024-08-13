@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import ActivateCustomerForm from "./ActivateCustomerForm";
+import { CLIENT_PROD_URL } from "constants/shop";
 
 const ActivateCustomer = ({ onSuccess }) => {
   const router = useRouter();
@@ -27,9 +28,10 @@ const ActivateCustomer = ({ onSuccess }) => {
   };
 
   const handleSubmit = async () => {
-    if (customer?.password && router?.query?.url) {
-      let resp = await activateByUrl(customer?.password, router.query.url);
-      if (resp?.data?.customerActivateByUrl?.customerAccessToken) {
+    const activationUrl =  CLIENT_PROD_URL + router.asPath;    
+    if (customer?.password && activationUrl) {
+      let resp = await activateByUrl(customer?.password, activationUrl);
+      if (resp?.customerActivateByUrl?.customerAccessToken) {
         showAlertSuccess("Your account has been successfully activated.");
         onSuccess();
       } else {
