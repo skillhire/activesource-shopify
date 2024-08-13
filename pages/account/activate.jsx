@@ -6,7 +6,7 @@ const Reset = () => {
   const router = useRouter();
 
   const handleSuccess = () => {
-    router.push(ACCOUNT_SOURCE_URL);
+    router.push('/login');
   };
 
   return (
