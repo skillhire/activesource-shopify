@@ -45,7 +45,7 @@ const StorefrontDesktopMenu = ({ name, logo, imagesUrl, shopAllUrl, handleClick,
           </Box>
           <Box sx={sx.item}>
             <Stack direction="row" spacing={2}>
-              <Link variant="body2" color='text.primary' href={shopAllUrl} target='_blank'>
+              <Link variant="body2" color='text.primary' href={shopAllUrl}>
                 Shop All 
               </Link>
               { imagesUrl && (
