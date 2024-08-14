@@ -4,7 +4,6 @@ import { Stack, Typography, Box } from "@mui/material";
 import { formatPriceRange, formatCurrency, getMetaValue, getProductColors } from "utils";
 import { VariantSelector, ProductEnterpriseChip } from "components";
 import CustomColorSelect from "components/variants/CustomColorSelect";
-import { CustomizeContext } from "context";
 
 const ProductDetails = ({
   product,

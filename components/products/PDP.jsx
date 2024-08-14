@@ -129,6 +129,10 @@ const Product = ({
     });
   };
 
+  useEffect(() => {
+    console.log("Selected Options", selectedOptions)
+  }, [selectedOptions])
+
   const handleColorClick = (color) => {
     setActiveColor(color);
     setActiveImage({
@@ -229,7 +233,6 @@ const Product = ({
       print_placement_1: null,
     });
     setActiveImage({ url: null });
-    setSelectedOptions({});
     setVariant(product?.variants?.edges?.[0]?.node);
     setAddToCartDisabled(true);
   };
@@ -250,48 +253,6 @@ const Product = ({
       handleReset();
     }
   }, [product?.handle]);
-
-  // Set values from encoded JWT URL param
-  useEffect(() => {
-    // Find the variant from the variantId
-    if (product?.variants && customization?.variantId) {
-      const selectedVariant = product?.variants?.edges?.find(
-        (v) => v?.node?.id?.split("/").pop() == customization?.variantId
-      );
-      if (selectedVariant?.node) {
-        setVariant(selectedVariant.node);
-      }
-
-      let selectedColor = selectedVariant?.node?.selectedOptions?.find(
-        (o) => o?.name == "Color"
-      )?.value;
-
-      let selectedSize = selectedVariant?.node?.selectedOptions?.find(
-        (o) => o?.name == "Size"
-      )?.value;
-
-      let newSelectedOptions = {
-        ...selectedOptions,
-      };
-
-      if (selectedColor) {
-        newSelectedOptions = {
-          ...newSelectedOptions,
-          Color: selectedColor,
-        };
-      }
-
-      if (selectedSize) {
-        newSelectedOptions = {
-          ...newSelectedOptions,
-          Size: selectedSize,
-        };
-      }
-
-      // Set the product selected options from Variant ID
-      setSelectedOptions(newSelectedOptions);
-    }
-  }, [product, customization?.variantId]);
 
   // Default select the first color option
   useEffect(() => {
@@ -367,7 +328,6 @@ const Product = ({
 
   useEffect(() => {
     // Reset the selected options values when the product changes
-    setSelectedOptions({});
     if (product?.id) {
       trackProductViewed(product);
     }
