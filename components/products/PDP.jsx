@@ -129,10 +129,6 @@ const Product = ({
     });
   };
 
-  useEffect(() => {
-    console.log("Selected Options", selectedOptions)
-  }, [selectedOptions])
-
   const handleColorClick = (color) => {
     setActiveColor(color);
     setActiveImage({

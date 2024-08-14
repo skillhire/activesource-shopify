@@ -32,7 +32,6 @@ const useVariants = ({ product, setSelectedOptions, selectedOptions }) => {
         Size: variantSize 
       }
       setVariant(_variant);
-      console.log("SELECTED", _selectedOptions)
       setSelectedOptions(_selectedOptions);
     }
   }, [product?.handle]);
