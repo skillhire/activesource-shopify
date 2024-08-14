@@ -376,9 +376,7 @@ const Product = ({
                 selectedOptions={selectedOptions}
                 handleColorClick={handleColorClick}
                 handleOptionChange={handleOptionChange}
-              />
-              
-              
+              />                            
               {!isEnterprise && (
                 <>
                   <ProductCustomize
