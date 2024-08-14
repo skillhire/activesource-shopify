@@ -19,7 +19,7 @@ const ProductAddToCart = ({
   };
 
   return (
-    <Stack spacing={3}>
+    <Stack spacing={3} mt={2}>
       <Stack spacing={1} direction="row" sx={sx.root}>
         <QuantitySelector
           quantity={quantity}
