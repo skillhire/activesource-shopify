@@ -1,10 +1,6 @@
 import PropTypes from "prop-types";
 import { useCheckout } from "hooks";
-import { Box, Button, Link, CircularProgress, Typography } from "@mui/material";
-
-import { Clear } from "@mui/icons-material";
-import { formatCurrency } from "utils";
-import { CartLineItemPrice } from "components";
+import { Box, Link, CircularProgress, Typography } from "@mui/material";
 
 const CartLineItemTotals = ({
   label,

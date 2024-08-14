@@ -247,24 +247,12 @@ const Product = ({
   useEffect(() => {
     if (product?.handle) {
       handleReset();
-    }
-  }, [product?.handle]);
-
-  // Default select the first color option
-  useEffect(() => {
-    if (product?.id) {
       let colors = getProductColors(product);
       if (colors.length > 0) {
-        let firstColor = colors[0];
-        handleColorClick(firstColor);
-        setCustomization({
-          ...customization,
-          print_background_1: firstColor?.front_placement,
-          print_background_2: firstColor?.back_placement,
-        });
+        handleColorClick(colors[0]);
       }
     }
-  }, [product?.id]);
+  }, [product?.handle]);
 
   useEffect(() => {
     if (variant?.sku) {

@@ -115,10 +115,11 @@ const useCheckout = (props) => {
 
   const checkoutFindOrCreate = async () => {
     let checkoutId = getCookie("shopifyCheckoutId");
-    if (checkoutId) {
+    if (checkoutId?.length > 0) {
       let resp = await checkoutFetchQuery({
-        variables: { id: checkoutId },
+        variables: { id: String(checkoutId) },
       });
+      console.log("checkoutFindOrCreate", resp);
       if (resp?.data?.node?.orderStatusUrl != null) {
         setCheckout(null);
         setCookie("shopifyCheckoutId", null);
