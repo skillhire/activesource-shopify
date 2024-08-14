@@ -119,7 +119,6 @@ const useCheckout = (props) => {
       let resp = await checkoutFetchQuery({
         variables: { id: String(checkoutId) },
       });
-      console.log("checkoutFindOrCreate", resp);
       if (resp?.data?.node?.orderStatusUrl != null) {
         setCheckout(null);
         setCookie("shopifyCheckoutId", null);
