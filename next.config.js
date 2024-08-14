@@ -72,7 +72,11 @@ module.exports = {
       { 
         source: "/storefronts/:store/privacy-policy",
         destination: "/privacy-policy"
-      }
+      },
+      { 
+        source: "/storefronts/:store/contact-us",
+        destination: "/contact-us"
+      },
     ];
   },
 };
