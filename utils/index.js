@@ -179,7 +179,8 @@ export const isCustomDomain = () => {
     "activesourcelab.com", 
     "www.activesourcelab.com",
     "staging.activesourcelab.com", 
-    "localhost:3000"
+    "localhost:3000",
+    "localhost:3001"
   ].includes(window.location.host);
 }
 
