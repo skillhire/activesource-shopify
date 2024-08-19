@@ -73,6 +73,7 @@ export { default as ProductDetails } from "components/products/ProductDetails";
 export { default as ProductEnquireBulkDiscount } from "components/products/ProductEnquireBulkDiscount";
 export { default as ProductEnterpriseChip } from "components/products/ProductEnterpriseChip";
 export { default as ProductGrid } from "components/products/ProductGrid";
+export { default as ProductNote } from "components/products/ProductNote";
 export { default as ProductImages } from "components/products/ProductImages";
 export { default as ProductTabs } from "components/products/ProductTabs";
 export { default as ProductRecommendations } from "components/products/ProductRecommendations";

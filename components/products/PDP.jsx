@@ -6,7 +6,8 @@ import {
   ProductImages,
   ProductTabs,
   ProductContactSupport,
-  ProductEnquireBulkDiscount
+  ProductEnquireBulkDiscount,
+  ProductNote
 } from "components";
 import ProductCustomize from "components/products/ProductCustomize";
 import ProductAddToCart from "components/products/ProductAddToCart";
@@ -54,6 +55,7 @@ const Product = ({
   const [selectedOptions, setSelectedOptions] = useState({});
   const [addToCartDisabled, setAddToCartDisabled] = useState(false);
   const [minQuantity, setMinQuantity] = useState(0);
+  const [note, setNote] = useState("");
 
   const [openModal, setOpenModal] = useState(false);
   const [frontOrBack, setFrontOrBack] = useState("front");
@@ -302,6 +304,8 @@ const Product = ({
       const _disablePlacement = getMetaValue(product, "disable_placement") == "true";
       const _disableBulkOrder = getMetaValue(product, "disable_bulk_order") == "true";
       const _minQuantity = parseInt(getMetaValue(product, "min_quantity") || 0);
+      const _note = getMetaValue(product, "note");
+      setNote(_note);
       setDisableLogo(_disableLogo);
       setIsEnterprise(_isEnterprise);
       setDisablePlacement(_disablePlacement);
@@ -380,6 +384,11 @@ const Product = ({
                     addToCartDisabled={addToCartDisabled}
                     minQuantity={minQuantity}
                   />
+                  { note?.length > 0 && (
+                    <ProductNote 
+                      note={note}
+                    />
+                  )}
                   { !disableBulkOrder && (
                     <ProductEnquireBulkDiscount
                       handleButtonClick={() => handleOpenContactModal("Enquire for Bulk Discount")}

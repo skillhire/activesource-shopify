@@ -13,7 +13,8 @@ const Header = ({ storefront, styles = {}, ...props }) => {
   };
 
   const handleLogoClick = () => {
-    router.push("/");
+    let url = buildStorePath(storefront?.handle, '/')
+    router.push(url);
   } 
 
   const shopAllUrl = () => {
