@@ -5,7 +5,7 @@ const ProductNote = (props) => {
   const { note } = props
   return(
     <Box py={2}>
-      <Typography variant="overline" color='text.primary'>
+      <Typography sx={ sx.text } variant="overline" color='text.primary'>
         {note}
       </Typography>
     </Box>
@@ -13,3 +13,10 @@ const ProductNote = (props) => {
 }
 
 export default ProductNote
+
+const sx = {
+  text: {
+    whiteSpace: 'pre-line'
+  }
+}
+  
