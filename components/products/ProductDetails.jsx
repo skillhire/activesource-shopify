@@ -60,19 +60,23 @@ const ProductDetails = ({
             </Typography>
           )}
           <Typography variant="button">
-            {
-              isEnterprise ? (
+            { isEnterprise && (
                 <>
                   Starting from {' '}
                   {formatCurrency(product.priceRange.minVariantPrice.amount)}
                 </>
-              ) : (
-                formatPriceRange(
-                  product.priceRange.minVariantPrice.amount,
-                  product.priceRange.maxVariantPrice.amount
-                )
+            )}
+              
+            { !isEnterprise && !variant && (
+              formatPriceRange(
+                product.priceRange.minVariantPrice.amount,
+                product.priceRange.maxVariantPrice.amount
               )
-            }
+            )}
+
+            { !isEnterprise && variant && (
+              formatCurrency(variant?.price?.amount)
+            )}
           </Typography>
           {enterpriseProductDescription && <Typography variant="body2" sx={ sx.text }>{enterpriseProductDescription}</Typography>}
           {!isEnterprise && (

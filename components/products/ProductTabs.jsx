@@ -40,30 +40,25 @@ const ProductTabs = ({
           {tab == 1 && (
             <>
               <Typography sx={sx.text} variant="body1">
-                All orders undergo manufacturing and processing within 3-5
-                business days.
+                All orders undergo manufacturing and processing within 5-7 business days.
                 <br />
                 <br />
                 We offer the following shipping options:
               </Typography>
               <List>
-                <ListItem disablePadding>
-                  <ListItemText
-                    primary={"• USPS Ground Advantage: 2-5 business days"}
-                  />
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemText
-                    primary={"• USPS Priority Mail® : 1-3 business days"}
-                  />
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemText
-                    primary={
-                      "• USPS Priority Mail Express®: Next-day to 2–day delivery service by 6 PM"
-                    }
-                  />
-                </ListItem>
+                {[
+                  'USPS Ground Advantage',
+                  'UPS® Ground',
+                  'UPS® Ground Saver',
+                  'UPS® Standard',
+                  'DHL Express Worldwide'
+                ].map((option, index) => (
+                  <ListItem key={index} disablePadding>
+                    <ListItemText
+                      primary={`• ${option}`}
+                    />
+                  </ListItem>  
+                ))}
               </List>
               <Typography sx={sx.text} variant="body1">
                 Please note that the suggested shipping windows mentioned above
