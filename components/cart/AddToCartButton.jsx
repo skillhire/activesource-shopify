@@ -48,6 +48,8 @@ const AddToCartButton = ({
     const disabled = handleAddToCartDisabled();
     variant = variant || product?.variants?.edges[0]?.node;
     
+    const warehouse = getMetaValue(product, 'warehouse');
+
     const { 
       print_url_1,
       print_url_1_stakes,
@@ -61,6 +63,7 @@ const AddToCartButton = ({
 
 
     let customAttributes = [
+      { key: "_warehouse", value: warehouse || "" },
       { key: "_print_sku", value: variant?.sku || "" },
       { key: "_print_substrate_id", value: variant?.sku || "" },
     ];
