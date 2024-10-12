@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { AppBar } from "@mui/material";
-import StorefrontDesktopMenu from "./StorefrontDesktopMenu";
+import StorefrontNavMenu from "./StorefrontNavMenu";
 import { buildStorePath } from "utils";
 
 const Header = ({ storefront, styles = {}, ...props }) => {
@@ -24,7 +24,7 @@ const Header = ({ storefront, styles = {}, ...props }) => {
 
   return (
     <AppBar color="inherit" sx={sx.appBar} elevation={0}>
-      <StorefrontDesktopMenu
+      <StorefrontNavMenu
         name={name}
         logo={logo}
         imagesUrl={imagesUrl}

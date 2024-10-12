@@ -70,6 +70,11 @@ const StorefrontDesktopMenu = ({ name, logo, imagesUrl, shopAllUrl, handleClick,
                 width: 80,
               }}
             >
+              <Button 
+                disableRipple 
+                sx={sx.logoButton} 
+                onClick={handleLogoClick}
+              >
               <Image
                 src={logo}
                 height={50}
@@ -77,6 +82,7 @@ const StorefrontDesktopMenu = ({ name, logo, imagesUrl, shopAllUrl, handleClick,
                 layout="responsive"
                 alt="logo"
               />
+              </Button>
             </Box>
           ) : (
             <Typography variant="h5" color="text.primary" sx={sx.title}>
