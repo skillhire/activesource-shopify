@@ -7,6 +7,7 @@ const CustomizeProvider = ({ children, ...rest }) => {
   const [activeImage, setActiveImage] = useState({ url: null });
 
   const [disableLogo, setDisableLogo] = useState(false);
+  const [disableSupport, setDisableSupport] = useState(false);
   const [disablePlacement, setDisablePlacement] = useState(false);
   const [disableBulkOrder, setDisableBulkOrder] = useState(false);
 
@@ -70,6 +71,8 @@ const CustomizeProvider = ({ children, ...rest }) => {
     setPreviewThumbnail,
     disableLogo,
     setDisableLogo,
+    disableSupport,
+    setDisableSupport,
     disablePlacement,
     setDisablePlacement,
     disableBulkOrder,

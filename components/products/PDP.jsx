@@ -30,8 +30,10 @@ const Product = ({
   ...props
 }) => {
   const {
-    disableBulkOrder,
+    disableSupport,
+    disableBulkOrder,    
     setDisableLogo,
+    setDisableSupport,
     setDisablePlacement,
     setDisableBulkOrder,
     setPreviewThumbnail,
@@ -303,12 +305,14 @@ const Product = ({
       const _isEnterprise = getMetaValue(product, "is_enterprise") == "true";
       const _disablePlacement = getMetaValue(product, "disable_placement") == "true";
       const _disableBulkOrder = getMetaValue(product, "disable_bulk_order") == "true";
+      const _disableSupport = getMetaValue(product, "disable_support") == "true";
       const _minQuantity = parseInt(getMetaValue(product, "min_quantity") || 0);
       const _note = getMetaValue(product, "note");
       setNote(_note);
       setDisableLogo(_disableLogo);
       setIsEnterprise(_isEnterprise);
       setDisablePlacement(_disablePlacement);
+      setDisableSupport(_disableSupport);
       setDisableBulkOrder(_disableBulkOrder);
       setMinQuantity(_minQuantity);
     }
@@ -349,7 +353,7 @@ const Product = ({
                 zoom={zoom}
                 handleClose={handleClose}
               />
-              {!isEnterprise && (
+              {!disableSupport && (
                 <Box sx={sx.contactSupportLabel}>
                   <ProductContactSupport />
                 </Box>
