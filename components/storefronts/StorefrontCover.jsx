@@ -63,7 +63,8 @@ const sx = {
   },
   subtitle: {
     textAlign: "center",
-    maxWidth: 980
+    maxWidth: 980,
+    whiteSpace: 'pre-line',
   },
   description: {},
   imageContainer: {
