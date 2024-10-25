@@ -13,10 +13,9 @@ const CartButton = ({ color = "white", styles, ...props }) => {
   };
 
   return (
-    <IconButton
-      color="primary"
+    <IconButton      
       onClick={handleCartClick}
-      sx={{ ...sx.root, ...styles }}
+      sx={ styles }
       size="medium"
     >
       <Badge badgeContent={lineItemTotal} color="primary">
@@ -31,7 +30,3 @@ CartButton.propTypes = {
 };
 
 export default CartButton;
-
-const sx = {
-  root: {},
-};

@@ -10,6 +10,7 @@ const AddToCartButton = ({
   variant,
   product,
   quantity,
+  notes,
   customAttributes, // customAttributes={key: value}
   ...props
 }) => {
@@ -63,6 +64,7 @@ const AddToCartButton = ({
 
 
     let customAttributes = [
+      { key: "_notes", value: notes || "" },
       { key: "_warehouse", value: warehouse || "" },
       { key: "_print_sku", value: variant?.sku || "" },
       { key: "_print_substrate_id", value: variant?.sku || "" },
