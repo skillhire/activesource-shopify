@@ -11,7 +11,7 @@ const ProductAddToCart = ({
   customAttributes = {},
   addToCartDisabled,
   enableNotes=false,
-  notesLabel='Add notes to your order',
+  notesDescription='Add notes to your order',
   minQuantity=0
 }) => {
 
@@ -32,8 +32,8 @@ const ProductAddToCart = ({
           <Typography variant="subtitle1">
             Customization
           </Typography>
-          <Typography variant="body2">
-            { notesLabel }
+          <Typography variant="body2" sx={ sx.text }>
+            { notesDescription }
           </Typography>
           <TextField 
             multiline 
@@ -41,6 +41,12 @@ const ProductAddToCart = ({
             fullWidth                        
             placeholder="Add notes to your order"
             onChange={ handleTextChange }
+            sx={{
+              '& .MuiInputBase-input': {
+                fontSize: '15px',
+                fontWeight: 400
+              },
+            }}
           />
         </Stack>
       )}
@@ -81,4 +87,7 @@ const sx = {
     mt: 2,
     my: 3,
   },
+  text: {
+    whiteSpace: "pre-wrap",
+  }
 };

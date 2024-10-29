@@ -59,7 +59,7 @@ const Product = ({
   const [minQuantity, setMinQuantity] = useState(0);
   const [note, setNote] = useState("");
   const [enableNotes, setEnableNotes] = useState(false);
-  const [notesLabel, setNotesLabel] = useState("");
+  const [notesDescription, setNotesLabel] = useState("");
 
   const [openModal, setOpenModal] = useState(false);
   const [frontOrBack, setFrontOrBack] = useState("front");
@@ -311,7 +311,7 @@ const Product = ({
       const _minQuantity = parseInt(getMetaValue(product, "min_quantity") || 0);
       const _note = getMetaValue(product, "note");
       const _enable_notes = getMetaValue(product, "enable_notes") == "true";
-      const _notes_label = getMetaValue(product, "notes_label");
+      const _notes_description = getMetaValue(product, "notes_description");
       setNote(_note);
       setDisableLogo(_disableLogo);
       setIsEnterprise(_isEnterprise);
@@ -320,7 +320,7 @@ const Product = ({
       setDisableBulkOrder(_disableBulkOrder);
       setMinQuantity(_minQuantity);
       setEnableNotes(_enable_notes);
-      setNotesLabel(_notes_label);
+      setNotesLabel(_notes_description);
     }
   }, [product?.handle]);
 
@@ -392,7 +392,7 @@ const Product = ({
                     product={product}
                     variant={variant}
                     enableNotes={enableNotes}
-                    notesLabel={notesLabel}
+                    notesDescription={notesDescription}
                     addToCartDisabled={addToCartDisabled}
                     minQuantity={minQuantity}
                   />

@@ -34,7 +34,7 @@ export const ProductFragment = gql`
         { namespace: "custom", key: "disable_bulk_order" }
         { namespace: "custom", key: "disable_support" }
         { namespace: "custom", key: "enable_notes" }
-        { namespace: "custom", key: "notes_label" }
+        { namespace: "custom", key: "notes_description" }
         { namespace: "custom", key: "min_quantity" }
         { namespace: "custom", key: "brand" }
         { namespace: "custom", key: "style" }
@@ -100,7 +100,7 @@ export const ProductFragment = gql`
                   { namespace: "custom", key: "disable_bulk_order" }
                   { namespace: "custom", key: "disable_support" }
                   { namespace: "custom", key: "enable_notes" }
-                  { namespace: "custom", key: "notes_label" }
+                  { namespace: "custom", key: "notes_description" }
                   { namespace: "custom", key: "min_quantity" }
                   { namespace: "custom", key: "brand" }
                   { namespace: "custom", key: "style" }
