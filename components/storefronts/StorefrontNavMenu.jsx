@@ -77,10 +77,13 @@ const StorefrontDesktopMenu = ({ name, logo, imagesUrl, shopAllUrl, handleClick,
               >
               <Image
                 src={logo}
-                height={50}
-                width={120}
-                layout="responsive"
+                layout="fill"
                 alt="logo"
+                style={{
+                  maxWidth: 120,
+                  width: '100%',
+                  objectFit: "contain",
+                }}
               />
               </Button>
             </Box>
