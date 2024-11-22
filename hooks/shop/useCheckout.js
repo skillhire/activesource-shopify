@@ -138,6 +138,14 @@ const useCheckout = (props) => {
     setLineItemTotal(total);
   };
 
+  // Dangersouly resets the cart
+  const checkoutReset = () => {
+    setCheckout(null);
+    setCookie("shopifyCheckoutId", null);
+    const variables = { input: {} };
+    checkoutCreateMutation({ variables });
+  }
+
   // Set discounts and discount error codes
   useEffect(() => {
     if (checkout?.discountApplications?.edges) {
@@ -290,6 +298,7 @@ const useCheckout = (props) => {
     checkoutDiscountCodeApply,
     checkoutDiscountCodeRemove,
     lineItemTotal,
+    checkoutReset
   };
 };
 

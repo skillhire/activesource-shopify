@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import { useSegment } from "hooks";
+import { useCheckout, useSegment } from "hooks";
 import { Box, Link, Drawer, IconButton, Typography } from "@mui/material";
 import { ShopContext } from "context";
 import { CartLineItems, CartLineItemTotals, CheckoutButton } from "components";
@@ -9,6 +9,13 @@ import { Close } from "@mui/icons-material";
 const Cart = ({ styles }) => {
   const { trackCartViewed } = useSegment();
   const { checkout, cartOpen, toggleCart } = useContext(ShopContext);
+
+  const { checkoutReset } = useCheckout()
+
+  const handleResetCart = (e) => {
+    e.preventDefault();
+    checkoutReset()
+  }
 
   useEffect(() => {
     if (cartOpen && checkout) {
@@ -49,6 +56,11 @@ const Cart = ({ styles }) => {
                 Privacy Policy
               </Link>
               .
+            </Typography>
+            <Typography variant="caption" sx={{ ...sx.note, pt: 1 }}>
+              Having technical trouble? <Link href="#" onClick={ handleResetCart }>
+                Reset your cart 
+              </Link>
             </Typography>
           </Box>
         </Box>
