@@ -13,7 +13,9 @@ export const CollectionFragment = gql`
       url
     }
     updatedAt
-    metafields(identifiers: []) {
+    metafields(identifiers: [
+      { namespace: "custom", key: "category" }
+     ]) {
       id
       key
       value

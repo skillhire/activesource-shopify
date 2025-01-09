@@ -5,7 +5,7 @@ import { Box, Stack, Container, Grid, Typography } from "@mui/material";
 const CollectionLayout = ({ 
   title, 
   description,
-  menuItems=[], 
+  menuItems={}, 
   children, 
   ...props 
 }) => {

@@ -17,15 +17,33 @@ const LayoutMenu = ({ items }) => {
 
   return (
     <List sx={sx.root}>
-      {items.map((item) => (
-        <ListItem key={item.label} disablePadding>
-          <ListItemButton onClick={() => handleClick(item.value)}>
-            <ListItemText
-              sx={sx.text}
-              primary={<Typography variant="listItem">{item.label}</Typography>}
-            />
-          </ListItemButton>
+      { Object.keys(items)?.map((category) => (
+        <>
+        <ListItem key={category} disablePadding>
+          <ListItemText   
+            primary={
+              <Typography 
+                sx={sx.text}
+                variant="overline"
+              >
+                {category}
+              </Typography>}
+          />
         </ListItem>
+        {items[category]?.map((item) => (
+          <ListItem key={item.label} disablePadding>
+            <ListItemButton sx={{ px: 0 }} onClick={() => handleClick(item.value)}>
+              <ListItemText
+                sx={sx.text}
+                primary={
+                  <Typography variant="button">
+                    {item.label}
+                  </Typography>}
+              />
+            </ListItemButton>
+          </ListItem>
+        ))}
+        </>
       ))}
     </List>
   );
@@ -36,6 +54,6 @@ export default LayoutMenu;
 const sx = {
   root: {},
   text: {
-    pr: 4,
+    px: 4,    
   },
 };

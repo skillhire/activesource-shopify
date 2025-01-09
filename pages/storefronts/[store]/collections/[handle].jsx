@@ -12,6 +12,7 @@ import {
 import { Box, Grid, CircularProgress, Button, Stack } from "@mui/material";
 import { useRouter } from "next/router";
 import { buildStorePath } from "utils";
+import { getMetaValue } from "utils";
 
 const StorefrontShopAll = (props) => {
   const router = useRouter();
@@ -51,10 +52,26 @@ const StorefrontShopAll = (props) => {
     if(store && storefront?.collections?.length > 0) {            
       setMenuItems(storefront?.collections?.map((collection) => ({
         label: collection.title,
+        category: getMetaValue(collection, "category") || 'Shop by Design',
         value: buildStorePath(store, `/collections/${collection.handle}`),
       })));
     }
   }, [store, storefront]);
+
+  const [groupedMenuItems, setGroupedMenuItems] = useState([]);
+
+  // Group menuItems by category 
+  useEffect(() => {
+    if(menuItems){
+      let grouped = menuItems.reduce((r, a) => {
+        r[a.category] = r[a.category] || [];
+        r[a.category].push(a);
+        return r;
+      }, {});
+      setGroupedMenuItems(grouped);
+    }
+    
+  }, [menuItems]);
 
   useEffect(() => {
     if(handle){
@@ -67,7 +84,7 @@ const StorefrontShopAll = (props) => {
     <StorefrontLayout storefront={storefront}>
       <CollectionLayout 
         title="Shop All"       
-        menuItems={ menuItems }
+        menuItems={ groupedMenuItems }
       >
       <Box sx={sx.searchContainer}>
         <Grid

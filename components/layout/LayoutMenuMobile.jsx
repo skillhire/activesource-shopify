@@ -18,18 +18,22 @@ const LayoutMenuMobile = ({ items }) => {
 
   return (
     <List component={Stack} direction="row" sx={sx.root}>
-      {items.map((item) => (
-        <ListItem key={item.label} disablePadding sx={sx.item}>
-          <ListItemButton
-            onClick={() => handleClick(item.value)}
-            sx={sx.button}
-          >
-            <ListItemText
-              primary={<Typography variant="listItem">{item.label}</Typography>}
-              sx={sx.text}
-            />
-          </ListItemButton>
-        </ListItem>
+      { Object.keys(items).map((category) => (
+        <>
+        { items[category].map((item) => (
+          <ListItem key={item.label} disablePadding sx={sx.item}>
+            <ListItemButton
+              onClick={() => handleClick(item.value)}
+              sx={sx.button}
+            >
+              <ListItemText
+                primary={<Typography variant="listItem">{item.label}</Typography>}
+                sx={sx.text}
+              />
+            </ListItemButton>
+          </ListItem>
+        ))}
+        </>
       ))}
     </List>
   );

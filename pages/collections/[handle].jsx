@@ -90,7 +90,7 @@ const Collection = () => {
     <CollectionLayout       
       title={currentCollection?.label}
       description="Your branded apparel is just a few clicks away—select your products, upload your artwork, and finalize your order."
-      menuItems={ COLLECTIONS_MENU }
+      menuItems={{ "Shop All": COLLECTIONS_MENU }}
     >
       <Box sx={sx.searchContainer}>
         <Grid
