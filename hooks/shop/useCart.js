@@ -225,7 +225,10 @@ const useCart = (props) => {
         input: {},
       },
     });
-    setCart(resp.data.cartCreate.cart);
+    if(resp?.data?.cartCreate?.cart){
+      localStorage.setItem("shopifyCartId", resp.data.cartCreate.cart.id);
+      setCart(resp.data.cartCreate.cart);
+    }
     return resp.data.cartCreate.cart;
   };
 
@@ -291,12 +294,8 @@ const useCart = (props) => {
     cartBuyerIdentityUpdateResp?.loading,
   ]);
 
-  const mounted = useRef(false)
-  useEffect(() => {      
-    if(mounted.current == false){      
-      mounted.current = true
-      cartFindOrCreate();
-    }
+  useEffect(() => {          
+    cartFindOrCreate();    
   }, []);
 
   return {
