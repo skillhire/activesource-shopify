@@ -40,9 +40,9 @@ const useSegment = () => {
     });
   };
 
-  const trackCartViewed = (checkout) => {
-    const products = checkout.lineItems.edges.map((line) => {
-      const variant = line?.node?.variant;
+  const trackCartViewed = (cart) => {
+    const products = cart.lines.edges.map((line) => {
+      const variant = line?.node?.merchandise;
       const product = variant?.product;
 
       return {
@@ -59,22 +59,24 @@ const useSegment = () => {
       };
     });
 
+    const total = Number(cart?.totalAmount?.amount) || 0
+  
     segment?.track("Cart Viewed", {
-      order_id: checkout.id,
+      order_id: cart.id,
       affiliation: "active-source-lab",
-      value: checkout?.totalPrice?.amount,
-      revenue: checkout?.totalPrice?.amount,
-      coupon: checkout.discountApplications.edges
+      value: total,
+      revenue: total,
+      coupon: cart.discountApplications.edges
         ?.map((e) => e?.node)
         .map((node) => node?.code)
         .join(", "),
-      currency: checkout?.cost?.totalAmount?.currencyCode,
+      currency: 'USD',
       products: products,
     });
   };
 
-  const trackCheckoutStarted = (checkout) => {
-    const products = checkout.lineItems.edges.map((line) => {
+  const trackCheckoutStarted = (cart) => {
+    const products = cart.lines.edges.map((line) => {
       const variant = line?.node?.variant;
       const product = variant?.product;
 
@@ -93,15 +95,12 @@ const useSegment = () => {
     });
 
     segment?.track("Checkout Started", {
-      order_id: checkout.id,
+      order_id: cart.id,
       affiliation: "active-source-lab",
-      value: checkout?.totalPrice?.amount,
-      revenue: checkout?.totalPrice?.amount,
-      coupon: checkout.discountApplications.edges
-        ?.map((e) => e?.node)
-        .map((node) => node?.code)
-        .join(", "),
-      currency: checkout?.cost?.totalAmount?.currencyCode,
+      value: cart?.totalPrice?.amount,
+      revenue: cart?.totalPrice?.amount,
+      coupon: [],
+      currency: cart?.cost?.totalAmount?.currencyCode,
       products: products,
     });
   };

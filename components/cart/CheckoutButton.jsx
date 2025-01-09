@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useCheckout, useSegment } from "hooks";
+import { useCart, useSegment } from "hooks";
 import { Box, Button, CircularProgress } from "@mui/material";
 
 const CheckoutButton = ({ styles, ...props }) => {
   const [loading, setLoading] = useState(false);
-  const { checkout } = useCheckout();
+  const { cart } = useCart();
 
   const { trackCheckoutStarted } = useSegment();
 
@@ -14,8 +14,8 @@ const CheckoutButton = ({ styles, ...props }) => {
   };
 
   const redirectToWebUrl = () => {
-    trackCheckoutStarted(checkout);
-    window.location = checkout.webUrl;
+    trackCheckoutStarted(cart);
+    window.location = cart.checkoutUrl;
     setLoading(false);
   };
 

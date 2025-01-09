@@ -18,7 +18,6 @@ export { default as CartButton } from "components/cart/CartButton";
 export { default as CartLineItem } from "components/cart/CartLineItem";
 export { default as CartLineItems } from "components/cart/CartLineItems";
 export { default as CartLineItemTotals } from "components/cart/CartLineItemTotals";
-export { default as CartLineItemPrice } from "components/cart/CartLineItemPrice";
 export { default as Carousel } from "components/carousels/Carousel";
 export { default as CarouselDot } from "components/carousels/CarouselDot";
 export { default as CarouselDotContrast } from "components/carousels/CarouselDotContrast";

@@ -10,7 +10,7 @@ export const CartFragment = gql`
         node {
           id
           quantity
-          customAttributes {
+          attributes {
             key
             value
           }
@@ -19,15 +19,15 @@ export const CartFragment = gql`
               id
               title
               sku
-              price {
-                amount
-                currencyCode
-              }
               image {
                 src
-                altText
-                width
-                height
+              }
+              price {
+                amount
+              }
+              selectedOptions {
+                name
+                value
               }
               product {
                 id
@@ -35,6 +35,22 @@ export const CartFragment = gql`
                 handle
                 productType
                 vendor
+                metafields(
+                  identifiers: [
+                    { namespace: "custom", key: "title" }
+                    { namespace: "custom", key: "style" }
+                    { namespace: "custom", key: "width_mm" }
+                    { namespace: "custom", key: "karat" }
+                    { namespace: "custom", key: "material" }
+                    { namespace: "custom", key: "finish" }
+                    { namespace: "custom", key: "is_try_on" }
+                    { namespace: "custom", key: "is_gemstone" }
+                    { namespace: "custom", key: "is_customization" }
+                  ]
+                ) {
+                  key
+                  value
+                }
               }
             }
           }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { ShopContext } from "context";
 import {
@@ -12,7 +12,7 @@ import {
 import { CART_DISCOUNT_CODE_UPDATE } from "graphql/shopify/discounts";
 
 const useCart = (props) => {
-  const { cart, setCart, setLineItemTotal } = useContext(ShopContext);
+  const { cart, setCart, lineItemTotal, setLineItemTotal } = useContext(ShopContext);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -52,8 +52,25 @@ const useCart = (props) => {
     }
   };
 
-  const cartLinesAdd = ({ variantId, quantity, sellingPlanId, attributes }) => {
-    cartLinesAddMutation({
+  const cartLinesAdd = async (lines) => {
+    let resp = await cartLinesAddMutation({
+      variables: {
+        cartId: cart?.id,
+        lines: lines,
+      },
+    });    
+    if(resp?.data?.cartLinesAdd?.cart){
+      setCart(resp?.data?.cartLinesAdd?.cart);    
+    }    
+    return resp?.data?.cartLinesAdd?.cart;
+  };
+
+  const cartLineAdd = async ({ variantId, quantity, sellingPlanId, attributes }) => {    
+
+    let customAttributes = attributes
+      ?.filter(({ key, value }) => key && value?.length > 0)
+
+    let resp = await cartLinesAddMutation({
       variables: {
         cartId: cart?.id,
         lines: [
@@ -61,30 +78,53 @@ const useCart = (props) => {
             merchandiseId: variantId,
             quantity: quantity,
             sellingPlanId: sellingPlanId,
-            attributes: attributes,
+            attributes: customAttributes
           },
         ],
       },
-    });
+    })
+    if(resp?.data?.cartLinesAdd?.cart){
+      setCart(resp?.data?.cartLinesAdd?.cart);    
+    }
+    return resp?.data?.cartLinesAdd?.cart;
   };
 
-  const cartLinesAddBulk = (lines) => {
-    cartLinesAddMutation({
+  const cartLinesAddBulk = async (lines) => {
+    let resp = await cartLinesAddMutation({
       variables: {
         cartId: cart?.id,
         lines: lines,
       },
     });
+    if(resp?.data?.cartLinesAdd?.cart){
+      setCart(resp?.data?.cartLinesAdd?.cart);    
+    }
+    return resp?.data?.cartLinesAdd?.cart;
   };
 
-  const cartLinesRemove = async (lineId) => {
+  const cartLinesRemove = async (lineIds) => {
+    let resp = await cartLinesRemoveMutation({
+      variables: {
+        cartId: cart?.id,
+        lineIds: lineIds,
+      },
+    });
+    if(resp?.data?.cartLinesRemove?.cart){
+      setCart(resp?.data?.cartLinesRemove?.cart);    
+    }    
+    return resp?.data?.cartLinesRemove?.cart;
+  };
+
+  const cartLineRemove = async (lineId) => {
     let resp = await cartLinesRemoveMutation({
       variables: {
         cartId: cart?.id,
         lineIds: [lineId],
       },
     });
-    setCart(resp?.data?.cartLinesRemove?.cart);
+    if(resp?.data?.cartLinesRemove?.cart){
+      setCart(resp?.data?.cartLinesRemove?.cart);
+    }
     return resp?.data?.cartLinesRemove?.cart;
   };
 
@@ -95,11 +135,26 @@ const useCart = (props) => {
         lineIds: lineIds,
       },
     });
-    setCart(resp?.data?.cartLinesRemove?.cart);
+    if(resp?.data?.cartLinesRemove?.cart){
+      setCart(resp?.data?.cartLinesRemove?.cart);
+    }
     return resp?.data?.cartLinesRemove?.cart;
   };
 
-  const cartLinesUpdate = async ({ lineId, variantId, quantity }) => {
+  const cartLinesUpdate = async (lines) => {
+    let resp = await cartLinesUpdateMutation({
+      variables: {
+        cartId: cart?.id,
+        lines: lines,
+      },
+    });
+    if(resp?.data?.cartLinesUpdate?.cart){
+      setCart(resp?.data?.cartLinesUpdate?.cart);
+    }
+    return resp?.data?.cartLinesUpdate?.cart;
+  };
+
+  const cartLineUpdate = async ({ lineId, variantId, quantity }) => {
     let resp = await cartLinesUpdateMutation({
       variables: {
         cartId: cart?.id,
@@ -112,7 +167,9 @@ const useCart = (props) => {
         ],
       },
     });
-    setCart(resp?.data?.cartLinesUpdate?.cart);
+    if(resp?.data?.cartLinesUpdate?.cart){
+      setCart(resp?.data?.cartLinesUpdate?.cart);
+    }
     return resp?.data?.cartLinesUpdate?.cart;
   };
 
@@ -142,7 +199,7 @@ const useCart = (props) => {
   };
 
   const cartFindOrCreate = async () => {
-    let cartId = localStorage.getItem("cart_id");
+    let cartId = await localStorage.getItem("shopifyCartId");
     let resp;
     if (cartId) {
       resp = await cartFetchQuery({
@@ -162,7 +219,7 @@ const useCart = (props) => {
   };
 
   const cartCreate = async () => {
-    localStorage.removeItem("cart_id");
+    localStorage.removeItem("shopifyCartId");
     const resp = await cartCreateMutation({
       variables: {
         input: {},
@@ -180,27 +237,13 @@ const useCart = (props) => {
     setLineItemTotal(total);
   };
 
-  useEffect(() => {
-    if (cartFetchResp?.data) {
-      setCart(cartFetchResp?.data?.node);
-    }
-  }, [cartFetchResp?.data]);
-
-  useEffect(() => {
-    if (cartCreateResp?.data) {
-      localStorage.setItem(
-        "cart_id",
-        cartCreateResp?.data?.cartCreate?.cart?.id
-      );
-      setCart(cartCreateResp?.data?.cartCreate?.cart);
-    }
-  }, [cartCreateResp?.data]);
-
-  useEffect(() => {
-    if (cartLinesAddResp?.data) {
-      setCart(cartLinesAddResp?.data?.cartLinesAdd?.cart);
-    }
-  }, [cartLinesAddResp?.data]);
+  // Dangersouly resets the cart
+  const cartReset = () => {
+    setCheckout(null);
+    setCookie("shopifyCartId", null);
+    const variables = { input: {} };
+    checkoutCreateMutation({ variables });
+  }
 
   useEffect(() => {
     if (cart) {
@@ -248,20 +291,33 @@ const useCart = (props) => {
     cartBuyerIdentityUpdateResp?.loading,
   ]);
 
+  const mounted = useRef(false)
+  useEffect(() => {      
+    if(mounted.current == false){      
+      mounted.current = true
+      cartFindOrCreate();
+    }
+  }, []);
+
   return {
     loading,
     error,
     cart,
     setCart,
+    cartReset,
     cartFind,
     cartFindOrCreate,
+    cartLineAdd,
     cartLinesAdd,
     cartLinesAddBulk,
+    cartLineRemove,
     cartLinesRemove,
     cartLinesRemoveBulk,
+    cartLineUpdate,
     cartLinesUpdate,
     cartDiscountCodesUpdate,
     cartBuyerIdentityUpdate,
+    lineItemTotal,
     updateLineTotal,
   };
 };

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useCheckout, useAlerts, useSegment } from "hooks";
+import { useCart, useAlerts, useSegment } from "hooks";
 import { Button, CircularProgress } from "@mui/material";
 import { CustomizeContext, ShopContext } from "context";
 import { getMetaValue } from "utils";
@@ -18,7 +18,7 @@ const AddToCartButton = ({
   const { showAlertError } = useAlerts();
   const { toggleCart } = useContext(ShopContext);
   const { customization } = useContext(CustomizeContext);
-  const { loading, checkoutLineItemAdd } = useCheckout();
+  const { loading, cartLineAdd } = useCart();
 
   const handleAddToCartDisabled = () => {
     const isBack = getMetaValue(product, "back_placement") == "true";
@@ -109,7 +109,7 @@ const AddToCartButton = ({
 
     if (print_preview_2 && print_url_2 && print_location_2) {
       customAttributes = [
-        ...customAttributes,
+      ...customAttributes,
         { key: "_print_type_2", value: "DigitalPrint" },
         { key: "_print_url_2", value: print_url_2 || "" },
         { key: "_print_url_2_stakes", value: print_url_2_stakes || "" },
@@ -135,9 +135,9 @@ const AddToCartButton = ({
       let lineItem = {
         variantId: variant?.id,
         quantity: quantity,
-        customAttributes: customAttributes,
+        attributes: customAttributes,
       };
-      await checkoutLineItemAdd(lineItem);
+      await cartLineAdd(lineItem);
       trackAddToCart({
         quantity: quantity,
         variant: variant,

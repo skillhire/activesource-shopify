@@ -8,7 +8,7 @@ const ShopProvider = ({ children, ...rest }) => {
 
   const [accessToken, setAccessToken] = useState();
   const [alert, setAlert] = useState({});
-  const [checkout, setCheckout] = useState();
+  const [cart, setCart] = useState();
   const [customer, setCustomer] = useState();
   const [expiresAt, setExpiresAt] = useState();
   const [loading, setLoading] = useState(false);
@@ -54,8 +54,8 @@ const ShopProvider = ({ children, ...rest }) => {
     setMenuOpen,
     toggleMenu,
 
-    checkout,
-    setCheckout,
+    cart,
+    setCart,
     lineItemTotal,
     setLineItemTotal,
   };

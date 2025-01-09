@@ -1,22 +1,27 @@
 import React from "react";
-import { useCheckout } from "hooks";
+import { useCart } from "hooks";
 import PropTypes from "prop-types";
 import { Box, Stack, Typography } from "@mui/material";
 import { formatCurrency } from "utils";
 
 const CartLineItemTotals = () => {
-  const { checkout, lineItemTotal } = useCheckout();
+  const { cart } = useCart();
+
+	const subtotal = Number(cart?.cost?.subtotalAmount?.amount) || 0
+	const tax = Number(cart?.totalTaxAmount?.amount) || 0
+	const total = Number(cart?.totalAmount?.amount) || 0
+	const discounts = Number(cart?.discountAllocation?.amount) || 0
 
   return (
     <Box width="100%" sx={sx.root}>
       <Stack direction="row" sx={sx.container}>
         <Typography variant="body1" sx={sx.label}>
-          Total ({lineItemTotal} item{lineItemTotal > 1 ? "s" : ""}):
+          Total:
         </Typography>
         <>&nbsp;</>
         <Typography variant="body1">
-          {checkout && formatCurrency(checkout.lineItemsSubtotalPrice?.amount)}
-          {!checkout && "$0"}
+          {cart && formatCurrency(subtotal)}
+          {!cart && "$0"}
         </Typography>
       </Stack>
     </Box>

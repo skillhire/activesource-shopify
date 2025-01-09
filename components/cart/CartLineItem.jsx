@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { ShopContext } from "context";
-import { useCheckout, useSegment } from "hooks";
+import { useCart, useSegment } from "hooks";
 import {
   Box,
   Link,
@@ -22,10 +22,12 @@ import QuantitySelector from "components/variants/QuantitySelector";
 const CartLineItem = ({ lineItem }) => {
   const router = useRouter();
   const { trackAddToCart, trackRemoveFromCart } = useSegment();
-  const { loading, checkoutLineItemsUpdate, checkoutLineItemRemove } =
-    useCheckout();
+  
+  const { loading, cartLinesUpdate, cartLineRemove } =
+    useCart();
+
   const { setCartOpen } = useContext(ShopContext);
-  const { id, quantity, variant, customAttributes } = lineItem || {};
+  const { id, quantity, merchandise: variant, attributes: customAttributes } = lineItem || {};
 
   const {
     product,
@@ -46,9 +48,9 @@ const CartLineItem = ({ lineItem }) => {
     let newLineItem = {
       id,
       quantity: newQuantity,
-      variantId: variant.id,
+      merchandiseId: variant.id,
     };
-    await checkoutLineItemsUpdate([newLineItem]);
+    await cartLinesUpdate([newLineItem]);
     let diff = newQuantity - quantity;
     if (diff > 0) {
       trackAddToCart({
@@ -67,7 +69,7 @@ const CartLineItem = ({ lineItem }) => {
 
   const handleRemoveLineItem = async (event) => {
     event.stopPropagation();
-    await checkoutLineItemRemove(id);
+    await cartLineRemove(id);
 
     trackRemoveFromCart({
       quantity,
@@ -87,7 +89,7 @@ const CartLineItem = ({ lineItem }) => {
 
   useEffect(() => {
     if (variant) {
-      const _size = variant.selectedOptions.find(
+      const _size = variant?.selectedOptions?.find(
         (option) => option.name == "Size"
       );
       setSize(_size?.value);

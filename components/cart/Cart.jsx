@@ -1,27 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import { useCheckout, useSegment } from "hooks";
+import { useCart, useSegment } from "hooks";
 import { Box, Link, Drawer, IconButton, Typography } from "@mui/material";
 import { ShopContext } from "context";
 import { CartLineItems, CartLineItemTotals, CheckoutButton } from "components";
 import { Close } from "@mui/icons-material";
 
 const Cart = ({ styles }) => {
-  const { trackCartViewed } = useSegment();
-  const { checkout, cartOpen, toggleCart } = useContext(ShopContext);
+  const { cart, cartOpen, toggleCart } = useContext(ShopContext);
 
-  const { checkoutReset } = useCheckout()
+  const { cartReset } = useCart()
 
   const handleResetCart = (e) => {
     e.preventDefault();
-    checkoutReset()
+    cartReset()
   }
-
-  useEffect(() => {
-    if (cartOpen && checkout) {
-      trackCartViewed(checkout);
-    }
-  }, [cartOpen, checkout]);
 
   return (
     <Drawer
