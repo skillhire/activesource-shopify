@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Stack, Typography, TextField } from "@mui/material";
+import { Stack, Box, Typography, TextField } from "@mui/material";
 import { AddToCartButton } from "components";
 import QuantitySelector from "components/variants/QuantitySelector";
 import Image from "next/image";
-import InfoIcon from 'assets/info-icon.svg';
+import TShirtIcon from 'assets/t-shirt-icon.svg';
 
 const ProductAddToCart = ({
   product,
@@ -64,18 +64,28 @@ const ProductAddToCart = ({
           customAttributes={customAttributes}
         />      
       </Stack>
-    { minQuantity > 0 && (
-      <Stack direction="row" spacing={2}>
-        <Image 
-          src={ InfoIcon } 
-          height={32}
-          width={32}
-        />
-        <Typography variant="body2">
-          { minQuantity } pieces minimum per style, sizes may vary.
-        </Typography>
-      </Stack>
-    )}
+      { minQuantity > 0 && (
+      <Box sx={ sx.minOrderQuantity }>
+        <Stack direction="column" spacing={1}>
+          <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
+            <Image 
+              src={ TShirtIcon } 
+              height={24}
+              width={24}
+            />
+            <Typography variant="body1" color='secondary'>
+              x {minQuantity}
+            </Typography>
+          </Stack>
+          <Typography variant="subtitle2" color='text.primary'>
+            Minimum Order Requirement
+          </Typography>
+          <Typography variant="body2" sx={ sx.text }>
+            {minQuantity}-piece minimum per style. Sizes may vary, but color and artwork must be the same.
+          </Typography>
+        </Stack> 
+      </Box>
+      )}
     </Stack>
   );
 };
@@ -89,5 +99,10 @@ const sx = {
   },
   text: {
     whiteSpace: "pre-wrap",
+  },
+  minOrderQuantity: {
+    p: 2,
+    backgroundColor: 'brand.light',
+    borderRadius: 3,
   }
 };
