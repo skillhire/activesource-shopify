@@ -67,13 +67,13 @@ const ProductAddToCart = ({
       { minQuantity > 0 && (
       <Box sx={ sx.minOrderQuantity }>
         <Stack direction="column" spacing={1}>
-          <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
+          <Stack direction="row" spacing={0} sx={{ alignItems: 'center' }}>
             <Image 
               src={ TShirtIcon } 
               height={24}
               width={24}
             />
-            <Typography variant="body1" color='secondary'>
+            <Typography variant="body1" color='secondary.main'>
               x {minQuantity}
             </Typography>
           </Stack>
