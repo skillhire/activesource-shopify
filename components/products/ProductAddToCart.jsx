@@ -73,7 +73,7 @@ const ProductAddToCart = ({
               height={24}
               width={24}
             />
-            <Typography variant="body1" color='secondary.main' sx={{ ml: 0.5 }}>
+            <Typography variant="body1" color='brand.main' sx={{ ml: 0.5 }}>
               x {minQuantity}
             </Typography>
           </Stack>
