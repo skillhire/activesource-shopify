@@ -10,7 +10,7 @@ export const ProductFragment = gql`
     descriptionHtml
     handle
     id
-    images(first: 250) {
+    images(first: 50) {
       edges {
         node {
           id
@@ -21,8 +21,6 @@ export const ProductFragment = gql`
     }
     metafields(
       identifiers: [
-        { namespace: "custom", key: "front_placement" }
-        { namespace: "custom", key: "back_placement" }
         { namespace: "custom", key: "recommended_products" }
         { namespace: "custom", key: "product_type" }
         { namespace: "custom", key: "warehouse" }
@@ -60,7 +58,7 @@ export const ProductFragment = gql`
           availableForSale
         }
       }
-      references(first: 250) {
+      references(first: 100) {
         edges {
           node {
             ... on Product {
@@ -88,7 +86,6 @@ export const ProductFragment = gql`
               }
               metafields(
                 identifiers: [
-                  { namespace: "custom", key: "colors" }
                   { namespace: "custom", key: "front_placement" }
                   { namespace: "custom", key: "back_placement" }
                   { namespace: "custom", key: "recommended_products" }
@@ -111,7 +108,7 @@ export const ProductFragment = gql`
                 value
                 namespace
                 description
-                references(first: 250) {
+                references(first: 100) {
                   edges {
                     node {
                       ... on Metaobject {
