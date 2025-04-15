@@ -133,5 +133,3 @@ In order to associate a placement image with a product color, we use a metaobjec
 - Back placement image
 
 Each product should also have a corresponding Color value in Shopify that matches the name field of the Color metaobject. This is necessary to generate a unique SKU for each product.
-
-###
