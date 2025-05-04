@@ -57,7 +57,7 @@ const StorefrontFeatures = (props) => {
           variant="h3" 
           sx={ sx.title }
         >
-          Custom Merchandize in 3 Easy Steps
+          Custom Merchandise in 3 Easy Steps
         </Typography>
         <Stack
           direction={'column'}
