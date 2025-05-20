@@ -43,7 +43,7 @@ const StorefrontFeatures = (props) => {
   const FEATURED_ITEMS = [
     { icon: Step1, title: 'Pick a Product', subtitle: "Choose from our range of styles, sizes, and colors. We’ve curated the best-fitting, highest-quality apparel so you can be proud of what you offer your members." },
     { icon: Step2, title: 'Customize Your Design', subtitle: "Download curated artwork from image library and customise them for your studio. With 15 different placements and full-color printing, there's virtually no limit on what you can create. Go from generic to “wow!” in just two clicks." },
-    { icon: Step3, title: 'Order the Product', subtitle: "Once you click \"order,\" your merch will ship in 1-2 weeks. Congratulations! That custom studio-branded merchandise you've been wanting? It's yours." },
+    { icon: Step3, title: 'Order the Product', subtitle: "Once you click \"order,\" your merch will ship in approximately 14 business days. Congratulations! That custom studio-branded merchandise you've been wanting? It's yours." },
   ]
 
   return (    
@@ -57,7 +57,7 @@ const StorefrontFeatures = (props) => {
           variant="h3" 
           sx={ sx.title }
         >
-          Custom Merchandize in 3 Easy Steps
+          Custom Merchandise in 3 Easy Steps
         </Typography>
         <Stack
           direction={'column'}
