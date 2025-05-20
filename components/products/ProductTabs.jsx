@@ -40,34 +40,11 @@ const ProductTabs = ({
           {tab == 1 && (
             <>
               <Typography sx={sx.text} variant="body1">
-                All orders undergo manufacturing and processing within 5-7 business days.
-                <br />
-                <br />
-                We offer the following shipping options:
-              </Typography>
-              <List>
-                {[
-                  'USPS Ground Advantage',
-                  'UPS® Ground',
-                  'UPS® Ground Saver',
-                  'UPS® Standard',
-                  'DHL Express Worldwide'
-                ].map((option, index) => (
-                  <ListItem key={index} disablePadding>
-                    <ListItemText
-                      primary={`• ${option}`}
-                    />
-                  </ListItem>  
-                ))}
-              </List>
-              <Typography sx={sx.text} variant="body1">
-                Please note that the suggested shipping windows mentioned above
-                do not include the initial 3-5 business days required for
-                manufacturing and processing.
+                All orders undergo manufacturing and processing within 10-12 business days (Monday-Friday). Please note that orders are not manufactured or shipped on weekends or holidays.
                 <br />
                 <br />
                 For more detailed information, please visit our{" "}
-                <Link href="/pages/shipping">Shipping page</Link>.
+                <Link href="https://www.activesourcelab.com/pages/shipping">Shipping page</Link>.
               </Typography>
             </>
           )}
