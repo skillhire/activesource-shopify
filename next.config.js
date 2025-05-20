@@ -77,6 +77,10 @@ module.exports = {
         source: "/storefronts/:store/contact-us",
         destination: "/contact-us"
       },
+      { 
+        source: "/storefronts/:store/pages/shipping",
+        destination: "/pages/shipping"
+      },
     ];
   },
 };
