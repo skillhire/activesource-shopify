@@ -13,7 +13,7 @@ const OrderItem = ({ styles, order, handleClick, ...props }) => {
             alt={order?.name}
             height={62}
             width={62}
-            src={product.node?.variant?.image?.url}
+            src={product.node?.variant?.image?.src}
             style={sx.image}
           />
           <Typography variant="subtitle1">{product.node?.title}</Typography>

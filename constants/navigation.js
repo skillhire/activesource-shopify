@@ -145,10 +145,10 @@ export const LEGAL_MENU = [
   { label: "Terms of Service", value: "/terms-of-service", divider: false },
 ];
 
-export const ACCOUNT_MENU = [
+export const ACCOUNT_MENU = { "My Account" : [
   { label: "My Account", value: ACCOUNT_SOURCE_URL, divider: false },
   { label: "Order History", value: "/account/orders", divider: false },
-];
+]}
 
 export const LOGGED_MENU = [
   {

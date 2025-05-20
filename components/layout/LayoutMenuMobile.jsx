@@ -20,7 +20,7 @@ const LayoutMenuMobile = ({ items }) => {
     <List component={Stack} direction="row" sx={sx.root}>
       { Object.keys(items).map((category) => (
         <>
-        { items[category].map((item) => (
+        { Array.isArray(items[category]) && items[category].map((item) => (
           <ListItem key={item.label} disablePadding sx={sx.item}>
             <ListItemButton
               onClick={() => handleClick(item.value)}
