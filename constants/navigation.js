@@ -9,6 +9,12 @@ export const ACCOUNT_SOURCE_URL = "/account/me";
 
 export const COLLECTIONS_MENU = [
   {
+    label: "Ascolour Exclusive", 
+    handle: "ascolour-exclusive",
+    value: "/collections/ascolour-exclusive",
+    divider: false,
+  },
+  {
     label: "Women's clothing",
     handle: "womens",
     value: "/collections/womens",
