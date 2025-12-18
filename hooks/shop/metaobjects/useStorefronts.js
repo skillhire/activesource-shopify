@@ -38,6 +38,7 @@ const useStorefronts = () => {
         disableFeatures: getValue(metaobject, "disable_features") == "true",
         disableHowItWorks: getValue(metaobject, "disable_how_it_works") == "true",
         disablePhotos: getValue(metaobject, "disable_photos") == "true",
+        password: getValue(metaobject, "password"),
       });
 
       let _photos = getReferences(metaobject, "photos");
