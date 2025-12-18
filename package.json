@@ -8,8 +8,8 @@
     "start": "next start",
     "prettier": "npx prettier --write ."
   },
-  "engine": {
-    "node": 18
+  "engines": {
+    "node": "24.x"
   },
   "dependencies": {
     "@apollo/client": "^3.11.4",
