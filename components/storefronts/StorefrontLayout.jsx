@@ -41,7 +41,7 @@ export default function Layout({ children, storefront, ...props }) {
     }
   };
 
-  const showPasswordModal = password && !accessGranted;
+  const showPasswordModal = password?.trim() && !accessGranted;
 
   const customTheme = {
     ...muiTheme,
@@ -70,7 +70,7 @@ export default function Layout({ children, storefront, ...props }) {
               Password Required
             </Typography>
             <Typography variant="body2" sx={{ mb: 2 }}>
-              Please enter the password to access this storefront.
+              Please enter your password to access the storefront. If you are a franchisee and need further assistance please reach out to your Active Source Lab support team.
             </Typography>
             <TextField
               fullWidth
